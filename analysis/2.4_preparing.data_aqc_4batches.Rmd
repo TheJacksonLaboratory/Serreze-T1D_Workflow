@@ -1,0 +1,45 @@
+---
+title: "Preparing data for QTL Analysis"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+```
+
+### Preparing Files
+```{r genoprobs, include=TRUE}
+
+load("data/gm_allqc_4.batches.RData")
+
+gm_allqc
+
+pr <- calc_genoprob(gm_allqc)
+
+saveRDS(pr, file = "data/serreze_probs_allqc.rds")
+
+```
