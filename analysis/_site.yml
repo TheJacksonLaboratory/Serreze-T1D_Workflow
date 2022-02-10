@@ -1,7 +1,7 @@
-name: "Serreze-T1D_Workflow"
+name: Serreze T1D Workflow
 output_dir: ../docs
 navbar:
-  title: "Serreze-T1D_Workflow"
+  title: Serreze T1D Workflow
   left:
   - text: Home
     href: index.html
@@ -9,9 +9,13 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow
 output:
   workflowr::wflow_html:
     toc: yes
-    toc_float: yes
-    theme: cosmo
+    toc_float: no
+    theme: spacelab
     highlight: textmate
