@@ -1,11 +1,113 @@
 ---
-title: "Home"
+title: "Serreze Workflow"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
-    toc: false
+    toc: true
 editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+library(data.table) 
+library(tidyr)
+library(mclust)
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(tibble)
+library(ggplot2)
+library(broman)
+library(qtl2)
+library(qtlcharts)
+library(ggrepel)
+library(dplyr)
+library(readxl) 
+
+options(stringsAsFactors = FALSE)
+
+```
+
+### **Neogen Files At A Glance** [Total Samples: 192]
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
+  + [Total Samples: 24](0.1_samples_batch_20201209.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210527
+  + [Total Samples: 72](0.1_samples_batch_20210527.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210909
+  + [Total Samples: 72](0.1_samples_batch_20210909.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20211101
+  + [Total Samples: 24](0.1_samples_batch_20211101.html)
+* [Preparing files for QC/Haplotype Phasing](0.1.1_preparing.data_bqc_4batches.html)
+
+
+### **Haplotype Phasing**
+* [Figures](0.2_haplotype_comparison_bqc_4batches.html)
+
+### **1. Experiment Design**
+
+```{r chapter1, eval=TRUE}
+
+gm <- read_cross2("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/gm.json")
+#gm
+
+#gmap <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Pinkney/scripts/gmap.csv")
+#pmap <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Pinkney/scripts/pmap.csv")
+#phenos <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Pinkney/scripts/pheno.csv")
+genos <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/sample_geno.csv")
+#covars <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Pinkney/scripts/pheno_covar.csv")
+
+design = matrix(ncol=8, nrow=1, dimnames = list("",c("abbreviations for strains:","type of cross:","number of mice phenotyped:","total number of mice phenotypes:","phenotypes:","number of mice:","number of markers:","covariates:")))
+design[1,1] <- "AB: het; AA: hom"
+design[1,2] <- "Backcross"
+design[1,3] <- nrow(gm$pheno)
+design[1,4] <- "2 [1 binary/1 quantiative]"
+design[1,5] <- "diabetic status/group [binary] & age of onset [continuous]"
+design[1,6] <- ncol(genos)
+design[1,7] <- nrow(genos)
+design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"]")
+
+design <- t(design)
+#design <- as.data.frame(design)
+#design$category <- rownames(design)
+#rownames <- NULL
+
+design[] %>%
+  kable(escape = F,align = c("lr")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, width = "5cms", bold=TRUE)  %>%
+  column_spec(2, width = "1cms") 
+
+```
+
+### **2. Genotype QC**
+* Step 1: Sample QC 
+  + [3 batches](2.1_sample_bqc_3.batches.html)
+  + [4 batches](2.1_sample_bqc_4.batches.html)
+* Step 2: SNP QC (Monomorphic, Genotype Error & Missing Data)
+  + [4 batches](2.2.1_snp_qc_4.batches.html)
+* [Step 3: Preparing Files for QTL Analysis](2.4_preparing.data_aqc_4batches.html)
+
+
+### **3. Phenotype QC**
+* Phenotypes
+  + [continuous](3.1_phenotype.qc.html)
+
+### **4. QTL Analysis**
+* binary phenotpe
+  + [ICI vs EOI](4.1.1_qtl.analysis_binary_ici.vs.eoi.html)
+  + [ICI vs PBS](4.1.1_qtl.analysis_binary_ici.vs.pbs.html)
+* continious phenotype
+  + ICI vs EOI
+    + [age-of-onset](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
+    + [ranknorm age-of-onset](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
+  + ICI vs PBS
+    + [age-of-onset](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
+    + [ranknorm age-of-onset](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
+

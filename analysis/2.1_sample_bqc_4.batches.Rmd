@@ -1,0 +1,566 @@
+---
+title: "Step 1: Sample QC [4.batches]"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+filepathp = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/'
+filepaths = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output/'
+#setwd(filepaths)
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+#libraries
+library(broman)
+library(qtl2)
+library(qtlcharts)
+library(ggplot2)
+library(ggrepel)
+#library(DOQTL)
+library(mclust)
+#source("code/reconst_utils.R")
+library("kableExtra")
+library("knitr")
+library("fst")
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(rhdf5)
+library(ggplot2)
+library(readxl) 
+
+```
+This script is running genotype QC on raw data (with some outcomes already seen in the [project at a glace](summary.html)). Here, we first load the R/qtl2 package and the data.
+We’ll also load the R/broman package for some utilities and plotting functions, and R/qtlcharts for interactive graphs.
+
+We will follow the steps by `Karl Broman` found [here](https://kbroman.org/qtl2/assets/vignettes/do_diagnostics.html)
+
+### Loading Project
+```{r generate json file for all batches, eval=TRUE}
+
+
+gm <- get(load("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/gm_serreze.192.RData"))
+gm
+
+sample_file <- dir(path = filepaths, pattern = "^DODB_*", full.names = TRUE)
+samples <- read.csv(sample_file)
+all.equal(as.character(ind_ids(gm)), as.character(samples$Original.Mouse.ID))
+
+````
+
+### Missing Data
+```{r Missing data per sample, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+percent_missing <- n_missing(gm, "ind", "prop")*100
+
+#labels <- paste0(as.character(do.call(rbind.data.frame, strsplit(names(percent_missing), "_"))[,7]), " (", round(percent_missing,2), "%)")
+labels <- paste0(names(percent_missing), " (", round(percent_missing,2), "%)")
+iplot(seq_along(percent_missing), percent_missing, indID=labels,
+      chartOpts=list(xlab="Mouse", ylab="Percent missing genotype data",
+                     ylim=c(0, 70)))
+
+#save into pdf
+pdf(file = "output/Percent_missing_genotype_data_4.batches.pdf", width = 20, height = 20)
+#labels <- as.character(do.call(rbind.data.frame, strsplit(names(totxo), "V01_"))[,2])
+#labels <- as.character(do.call(rbind.data.frame, strsplit(ind_ids(gm), "_"))[,7])
+#labels <- paste0(names(percent_missing), " (", round(percent_missing,2), "%)")
+labels <- ind_ids(gm)
+labels[percent_missing < 10] = ""
+# Change point shapes and colors
+p <- ggplot(data = data.frame(Mouse=seq_along(percent_missing),  
+                         Percent_missing_genotype_data = percent_missing,
+                         batch = factor(as.character(do.call(rbind.data.frame, strsplit(as.character(samples$Unique.Sample.ID), "_"))[,6]))
+                         #batch = factor(as.character(do.call(rbind.data.frame, strsplit(as.character(samples$Directory), "_"))[,5]))
+                         ), 
+        aes(x=Mouse, y=Percent_missing_genotype_data, color = batch)) +
+        geom_point() +
+        geom_hline(yintercept=10, linetype="solid", color = "red") +
+        geom_text_repel(aes(label=labels), vjust = 0, nudge_y = 0.01, show.legend = FALSE, size=3) +
+        theme(text = element_text(size = 10))
+p
+
+dev.off()
+
+p
+
+save(percent_missing,file = "data/percent_missing_id_4.batches.RData")
+
+gm.covar = data.frame(id=rownames(gm$covar),gm$covar)
+qc_info_cr <- merge(gm.covar,
+                  data.frame(id = names(percent_missing),percent_missing = percent_missing,stringsAsFactors = F),by = "id")
+bad.sample.cr <- qc_info_cr[qc_info_cr$percent_missing >= 10,]
+
+```
+
+
+```{r high missing table, echo=FALSE}
+
+rownames(bad.sample.cr) <- NULL
+bad.sample.cr[] <- lapply(bad.sample.cr, as.character)
+#bad.sample.cr$Neogen_Sample_ID <- sapply(strsplit(as.character(bad.sample.cr$id),'_',fixed=T),function(x) x[6])
+bad.sample.cr$Sample_ID <- bad.sample.cr$id
+
+bad.sample.cr[c("Sample_ID","percent_missing")] %>%
+  kable(escape = F,align = c("ccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F) #%>%
+  #column_spec(1:3, width = "5cm") 
+
+```
+
+```{r removing bad samples CR, include=FALSE}
+
+##removing bad samples
+#gm <- gm[paste0("-",as.character(bad.sample.cr$id)),]#
+
+#gm
+
+```
+
+### Sex
+```{r Sexes, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+hdf5_filename <- dir(path = filepaths, pattern = "^hdf5_*", full.names = TRUE)
+snps_file <- "/Users/corneb/Documents/MyJax/CS/Projects/support.files/MUGAarrays/UWisc/gm_uwisc_v1.csv"
+snps <- read.csv(snps_file)
+
+snps <- snps[snps$unique == TRUE, ]
+#snps <- snps[snps$chr %in% c(1:19, "X"), ]
+snps$chr <- sub("^chr", "", snps$chr)  ###remove prefix "chr"
+colnames(snps)[colnames(snps)=="bp_mm10"] <- "pos" 
+colnames(snps)[colnames(snps)=="cM_cox"] <- "cM"
+snps <- snps %>% drop_na(chr, marker) 
+snps$pos <- snps$pos * 1e-6
+rownames(snps) <- snps$marker
+colnames(snps)[1:4] <- c("marker", "chr", "pos", "pos") 
+
+#  g <- h5read(hdf5_filename, "G")
+#  g <- do.call(cbind, g)
+x <- h5read(hdf5_filename, "X") # X channel intensities
+x <- do.call(cbind, x)
+y <- h5read(hdf5_filename, "Y") # Y channel intensities
+y <- do.call(cbind, y)
+rn <- h5read(hdf5_filename, "rownames")[[1]]  # markers 
+cn <- h5read(hdf5_filename, "colnames")  # samples
+cn <- do.call(c, cn)
+# dimnames(g) <- list(rn, cn)
+dimnames(x) <- list(rn, cn)
+dimnames(y) <- list(rn, cn)
+#cr <- colMeans(g != "--") # Call rate for each sample avg 0.95
+#  sex <- determine_sex(x = x, y = y, markers = snps)$se
+
+markers <- snps
+
+chrx <- markers$marker[which(markers$chr == "X")]
+chry <- markers$marker[which(markers$chr == "Y")]
+#x[chrx,ind_ids(gm)]
+
+chrx_int <- colMeans(x[chrx,as.character(ind_ids(gm))] + y[chrx,as.character(ind_ids(gm))], na.rm = T)
+chry_int <- colMeans(x[chry,as.character(ind_ids(gm))] + y[chry,as.character(ind_ids(gm))], na.rm = T)
+
+all.equal(as.character(ind_ids(gm)), as.character(samples$Original.Mouse.ID))
+
+#sex order
+samples$Sex <- 'F'
+sex <- samples$Sex
+
+
+point_colors <- as.character( brocolors("web")[c("green", "purple")] )
+percent_missing <- n_missing(gm, summary="proportion")*100
+labels <- paste0(names(chrx_int), " (", round(percent_missing), "%)")
+iplot( chrx_int,  chry_int, group=sex, indID=labels,
+      chartOpts=list(pointcolor=point_colors, pointsize=4,
+                     xlab="Average X chr intensity", ylab="Average Y chr intensity"))
+```
+
+For figures above and below, those labelled as female in metadata given, are coloured `green`, with those labelled as male are coloured as `purple`. The above is an interactive scatterplot of the average SNP intensity on the Y chromosome versus the average SNP intensity on the X chromosome.
+
+
+```{r Sexes p2, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+phetX <- rowSums(gm$geno$X == 2)/rowSums(gm$geno$X != 0)
+phetX <- phetX[as.character(ind_ids(gm)) %in% names(chrx_int)]
+names(phetX) <- as.character(ind_ids(gm))
+iplot(chrx_int, phetX, group=sex, indID=labels,
+      chartOpts=list(pointcolor=point_colors, pointsize=4,
+                     xlab="Average X chr intensity", ylab="Proportion het on X chr"))
+```
+
+In the above scatterplot, we show the proportion of hets vs the average intensity for the X chromosome SNPs. In calculating the proportion of heterozygous genotypes for the individuals, we look at X chromosome genotypes equal to 2 which corresponds to the heterozygote) relative to not being 0 (which is used to encode missing genotypes). The genotypes are arranged with rows being individuals and columns being markers. 
+
+The following are the mice that have had sex incorrectly assigned:
+
+```{r sex diff table, echo=FALSE, include=FALSE}
+
+#bad.sample.sex <- subset(samples, (samples$Inferred.Sex == substring(samples$Sex, 1, 1)) | is.na(substring(samples$Sex, 1, 1)))
+#bad.sample.sex$Sex[is.na(bad.sample.sex$Sex)] <- '--'
+#bad.sample.sex$Neogen_Sample_ID <- sapply(strsplit(as.character(bad.sample.sex$Unique.Sample.ID),'_',fixed=T),function(x) x[7])
+#bad.sample.sex$Sample_ID <- bad.sample.sex$Unique.Sample.ID
+#rownames(bad.sample.sex) <- NULL
+
+#bad.sample.sex[c("Neogen_Sample_ID","Genoprobs_Sample_ID","Sex","Inferred.Sex")] %>%
+#  kable(escape = F,align = c("ccc"),linesep ="\\hline") %>%
+#  kable_styling(full_width = F) %>%
+#  kable_styling("striped", full_width = F) %>%
+#  column_spec(1:4, width = "5cm") 
+
+```
+
+### Sample Duplicates
+```{r Sample duplicates}
+
+cg <- compare_geno(gm, cores=10)
+summary.cg <- summary(cg)
+```
+```{r Sample duplicates table, echo=FALSE, include=FALSE}
+rownames(summary.cg) <- NULL
+summary.cg$iid1 <- summary.cg$ind1
+summary.cg$iid2 <- summary.cg$ind2
+summary.cg$pc.miss.ind1 <- percent_missing[match(summary.cg$ind1, names(percent_missing))]
+summary.cg$pc.miss.ind2 <- percent_missing[match(summary.cg$ind2, names(percent_missing))]
+
+#summary.cg$iid1 <- summary.cg$ind1
+#summary.cg$iid2 <- summary.cg$ind2
+
+#summary.cg[c(9,1,11,10,2,12,3:6)] %>%
+#  kable(escape = F,align = c("llcccccc"),linesep ="\\hline") %>%
+#  kable_styling(full_width = F) %>%
+#  kable_styling("striped", full_width = F) %>%
+#  column_spec(1:8, width = "5cm") 
+
+```
+
+Here is a histogram of the proportion of matching genotypes. The tick marks below the histogram indicate individual pairs.
+
+```{r Sample duplicates figures}
+save(summary.cg,file = "data/summary.cg_4.batches.RData")
+
+pdf(file = "output/Proportion_matching_genotypes_before_removal_of_bad_samples_4.batches.pdf", width = 20, height = 20) 
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(cg[upper.tri(cg)], breaks=seq(0, 1, length=201),
+     main="", yaxt="n", ylab="", xlab="Proportion matching genotypes")
+rug(cg[upper.tri(cg)])
+dev.off()
+
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(cg[upper.tri(cg)], breaks=seq(0, 1, length=201),
+     main="", yaxt="n", ylab="", xlab="Proportion matching genotypes")
+rug(cg[upper.tri(cg)])
+
+```
+
+```{r Sample duplicates 2 figures, include=TRUE}
+
+cgsub <- cg[percent_missing < 10, percent_missing < 10]
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(cgsub[upper.tri(cgsub)], breaks=seq(0, 1, length=201),
+     main="", yaxt="n", ylab="", xlab="Proportion matching genotypes [percent missing < 10%]")
+rug(cgsub[upper.tri(cgsub)])
+
+```
+
+```{r top 20 high missing rate, include = FALSE}
+##show top 20 samples with missing genotypes
+#percent_missing <- n_missing(gm, "ind", "prop")*100
+#round(sort(percent_missing, decreasing=TRUE)[1:20], 1)  
+```
+
+```{r removing duplicate samples, include=FALSE}
+#removing duplcate pairs
+
+#pheno_file_nick <- dir(path = filepathp, pattern = "*_pheno.csv+$", full.names = TRUE)
+#pheno.pi <- read.csv(pheno_file_nick)
+
+#master <- as.data.frame(read_excel("/Users/corneb/Documents/MyJax/CS/Projects/Simon.John.Tolman/Data/meta.data/inventory_file.xlsx", sheet = "inventory_file"))
+
+#sample_file <- dir(path = filepaths, pattern = "^DODB_*", full.names = TRUE)
+#samples <- read.csv(sample_file)
+
+#project <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Simon.John.Tolman/haplo.reconst/2020-11-09/all.samples/all.samples/project.csv", as.is=T)
+#project$dir2 <- sapply(strsplit(project$dir,'/',fixed=T),function(x) x[7])
+
+#inventory <- master[master$"Sample ID...4" %in% samples$Original.Mouse.ID,]
+#invent.dir2 <- merge(inventory,project, by.x=c("Directory"), by.y=c("dir2"), all=T)
+#invent.dodb <- merge(invent.dir2,samples, by.x=c("Directory","Sample ID...4"), by.y=c("Directory","Original.Mouse.ID"),all=T)
+
+#gm.pheno1 <- merge(invent.dodb,pheno.pi, by.x=c("Sample ID...5"), by.y=c("Mouse.ID"), all.x=T)
+#gm.pheno <- gm.pheno1[c("Correct.Mouse.ID","Unique.Sample.ID","Unique Sample ID","Sample ID...4","Sample ID...5","Directory",
+#                     "Sex.x","Sex.y","Sex","Inferred.Sex","Birth Date","DOB","DO Generation","DO.Mother.Generation","DO.Generation","Strain.x","Strain.y",
+#                     "Lmx1b allele","Lmx1b.allele","Lmx1b Genotype","Lmx1b.Genotype","Parental.Strain.GigaMUGA.ID","Parental Strain GigaMUGA ID",
+#                     "Run.Date","Geneseek.Sample.ID","Include","cr","Max_IOP")]
+
+#summary.cg$Name.ind1 <- as.character(do.call(rbind.data.frame, strsplit(as.character(summary.cg$ind1), "_"))[,6])
+#summary.cg$Name.ind2 <- as.character(do.call(rbind.data.frame, strsplit(as.character(summary.cg$ind2), "_"))[,6])
+summary.cg$Name.ind1 <- summary.cg$ind1
+summary.cg$Name.ind2 <- summary.cg$ind2
+summary.cg$miss.ind1 <- percent_missing[match(summary.cg$ind1, names(percent_missing))]
+summary.cg$miss.ind2 <- percent_missing[match(summary.cg$ind2, names(percent_missing))]
+#summary.cg$phen.ind1 <- gm.pheno$Max_IOP[match(summary.cg$ind1, gm.pheno$Unique.Sample.ID)]
+#summary.cg$phen.ind2 <- gm.pheno$Max_IOP[match(summary.cg$ind2, gm.pheno$Unique.Sample.ID)]
+summary.cg$remove.id <- ifelse((summary.cg$miss.ind1 > summary.cg$miss.ind2), summary.cg$ind1, summary.cg$ind2)
+#summary.cg$remove.id.p1 <- ifelse(is.na(summary.cg$phen.ind1) & (is.na(summary.cg$phen.ind1) | !is.na(summary.cg$phen.ind1)), summary.cg$ind1, '')
+#summary.cg$remove.id.p2 <- ifelse(is.na(summary.cg$phen.ind2) & (is.na(summary.cg$phen.ind1) | !is.na(summary.cg$phen.ind1)), summary.cg$ind2, '')
+#remove.IDs <- rbind(summary.cg$remove.id.m[-1],summary.cg$remove.id.p1[-1],summary.cg$remove.id.p2[-1])
+summary.cg$remove.id  
+
+#qc_info$remove.id.duplicated <- ifelse(qc_info$id %in% summary.cg$remove.id, TRUE,FALSE)
+
+#bad.sample.cr.dup <- NULL
+
+#bad.sample.cr.dup$id <- c("Univ_of_Penn_Thaiss_MURMUGV01_20200130_9_A6",#
+#                      "Univ_of_Penn_Thiass_MURGIGV01_20200226_90_C12", 
+#                      "Univ_of_Penn_Thaiss_MURMUGV01_20200130_109_G2",
+#                      "Univ_of_Penn_Thaiss_MURMUGV01_20200130_111_B3",
+#                      "Univ_of_Penn_Thaiss_MURMUGV01_20200130_110_H5",
+#                      "Univ_of_Penn_Thaiss_MURMUGV01_20200130_112_F5")
+
+#gm <- gm[paste0("-",as.character(bad.sample.cr.dup$id)),]
+
+#gm
+
+#percent_missing <- n_missing(gm, "ind", "prop")*100
+#round(sort(percent_missing, decreasing=TRUE)[1:19], 1)
+
+```
+
+### Array Intensities
+```{r Array intensities, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+#load the intensities.fst_4.batches.RData
+#load("data/intensities.fst_4.batches.RData")
+
+xn <- x[,as.character(ind_ids(gm))]
+xn <- xn[snps$marker,]
+xnm <- rownames(xn)
+
+yn <- y[,as.character(ind_ids(gm))]
+yn <- yn[snps$marker,]
+
+# bring together in one matrix
+result <- cbind(snp=rep(snps$marker, 2),
+                channel=rep(c("x", "y"), each=length(snps$marker)),
+                as.data.frame(rbind(xn, yn)))
+rownames(result) <- 1:nrow(result)
+
+# bring SNP rows together
+result <- result[as.numeric(t(cbind(seq_along(snps$marker), seq_along(snps$marker)+length(snps$marker)))),]
+rownames(result) <- 1:nrow(result)
+
+#load the intensities.fst_4.batches.RData
+#load("data/heh/intensities.fst_4.batches.RData")
+#X and Y channel
+X <- result[result$channel == "x",]
+rownames(X) <- X$snp
+X <- X[,c(-1,-2)]
+
+Y <- result[result$channel == "y",]
+rownames(Y) <- Y$snp
+Y <- Y[,c(-1,-2)]
+
+int <- result
+
+#int <- result
+
+#rm(result)
+int <- int[seq(1, nrow(int), by=2),-(1:2)] + int[-seq(1, nrow(int), by=2),-(1:2)]
+int <- int[,intersect(as.character(ind_ids(gm)), colnames(int))]
+names(percent_missing) <- as.character(names(percent_missing))
+n <- names(sort(percent_missing[intersect(as.character(ind_ids(gm)), colnames(int))], decreasing=TRUE))
+iboxplot(log10(t(int[,n])+1), orderByMedian=FALSE, chartOpts=list(ylab="log10(SNP intensity + 1)"))
+
+```
+In the above plot, distributions of array intensities (after a log10(x+1) transformation) are displayed. 
+
+The arrays are sorted by the proportion of missing genotype data for the sample, and the curves connect various quantiles of the intensities.
+
+```{r Array intensities percentile figure, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+qu <- apply(int, 2, quantile, c(0.01, 0.99), na.rm=TRUE)
+group <- (percent_missing >= 19.97) + (percent_missing > 5) + (percent_missing > 2) + 1
+labels <- paste0(colnames(qu), " (", round(percent_missing), "%)")
+iplot(qu[1,], qu[2,], indID=labels, group=group,
+      chartOpts=list(xlab="1 %ile of array intensities",
+                     ylab="99 %ile of array intensities",
+                     pointcolor=c("#ccc", "slateblue", "Orchid", "#ff851b")))
+```
+For this particular set of arrays, a plot of the 1 %ile vs the 99 %ile is quite revealing. In the following, the orange points are those with > 20% missing genotypes, the pink points are the samples with 5-20% missing genotypes, and the blue points are the samples with 2-5% missing genotypes.
+
+
+### Genotyping Error LOD Scores
+```{r  Genotyping error LOD scores, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+load("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/e.RData")
+errors_ind <- rowSums(e>2)[rownames(gm$covar)]/n_typed(gm)*100
+lab <- paste0(as.character(names(errors_ind)), " (", myround(percent_missing[as.character(rownames(gm$covar))],1), "%)")
+iplot(seq_along(errors_ind), errors_ind, indID=lab,
+      chartOpts=list(xlab="Mouse", ylab="Percent genotyping errors", ylim=c(0, 15),
+                     axispos=list(xtitle=25, ytitle=50, xlabel=5, ylabel=5)))
+save(errors_ind, file = "data/errors_ind_4.batches.RData")
+
+```
+
+### Removing Samples
+```{r removing samples }
+
+##percent missing
+gm.covar = data.frame(id=as.character(rownames(gm$covar)),gm$covar)
+qc_info <- merge(gm.covar,
+                  data.frame(id = names(percent_missing),percent_missing = percent_missing,stringsAsFactors = F),by = "id")
+
+#missing sex
+#qc_info$sex.match <- ifelse(qc_info$sexp == qc_info$sex, TRUE, FALSE)
+rownames(samples) <- as.character(samples$Original.Mouse.ID)
+samples <- samples[as.character(qc_info$id),]
+#samples$Unique.Sample.ID <- as.character(samples$Unique.Sample.ID)
+all.equal(as.character(qc_info$id), as.character(samples$Original.Mouse.ID))
+qc_info$sex.match <- ifelse(samples$Inferred.Sex == substring(samples$Sex, 1, 1), TRUE, FALSE)
+
+#genotype errors
+qc_info <- merge(qc_info,
+                 data.frame(id = as.character(names(errors_ind)),
+                            genotype_erros = errors_ind,stringsAsFactors = F),by = "id")
+
+##duplicated id to be remove
+qc_info$duplicate.id <- ifelse(qc_info$id %in% as.character(summary.cg$remove.id), TRUE,FALSE)
+
+#bad.sample <- qc_info[qc_info$generation ==1 | qc_info$Number_crossovers <= 200 | qc_info$Number_crossovers >=1000 | qc_info$percent_missing >= 10 | qc_info$genotype_erros >= 1 | qc_info$remove.id.duplicated == TRUE,]
+bad.sample <- qc_info[qc_info$percent_missing >= 10 | qc_info$genotype_erros >= 8,]
+
+save(qc_info, bad.sample, file = "data/qc_info_bad_sample_4.batches.RData")
+
+gm_samqc <- gm[paste0("-",as.character(bad.sample$id.1)),]
+
+gm_samqc
+
+save(gm_samqc, file = "data/gm_samqc_4.batches.RData")
+
+# update other stuff
+e <- e[ind_ids(gm_samqc),]
+#g <- g[ind_ids(gm_samqc),]
+#snpg <- snpg[ind_ids(gm_samqc),]
+
+#save(e,g,snpg, file = "data/e_g_snpg_samqc_4.batches.RData")
+save(e, file = "data/e_snpg_samqc_4.batches.RData")
+
+```
+
+Here is the list of samples that were removed:
+
+```{r removing table, echo=FALSE}
+
+removed.ids <- bad.sample[c(2)]
+names(removed.ids) <- "Sample_ID"
+#removed.ids$Neogen_Sample_ID <-  as.character(do.call(rbind.data.frame, strsplit(as.character(removed.ids$Genoprobs_Sample_ID), "_"))[,7])
+
+rownames(removed.ids) <- NULL
+
+removed.ids %>%
+  kable(escape = F,align = c("c"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F) 
+
+```
+
+Below is a table summarising the problematic samples found throughout QC. These include the following:
+
++ no_pheno == sample does not have a phenotype (if applicable)
++ high_miss == sample has higher than 10% missing genotypes 
++ diff_sex == sample has sex mismatch
++ high_geno_errors == Sample has geno errors above 10%
++ dublicate_ID == sample was duplicated (or highly concordant)
+
+**NB:** For duplcate pairs, the one that was chosen to be removed was the one that had a higher missing rate
+
+```{r removing samples table, echo=FALSE}
+
+
+#pheno_file_nick <- dir(path = filepathp, pattern = "*_pheno.csv+$", full.names = TRUE)
+#gm.pheno <- read.csv(pheno_file_nick)
+#gm.pheno$id <-  gm.pheno$Unique.Sample.ID
+#qc_info <- merge(qc_info,gm.pheno,by = "id",all.x=T)
+
+#bad.sample <- qc_info[qc_info$ngen ==1 | qc_info$Number_crossovers <= 200 | qc_info$Number_crossovers >=1000 | qc_info$percent_missing >= 10 | qc_info$genotype_erros >= 1 | qc_info$remove.id.duplicated == TRUE | is.na(qc_info$Time_min)==TRUE | is.na(qc_info$Distance_m)==TRUE | is.na(qc_info$Energy_J)==TRUE,]
+
+ind1<-summary.cg[c("ind1","iid1")]
+names(ind1) <- c("iid","id")
+ind2<-summary.cg[c("ind2","iid2")]
+names(ind2) <- c("iid","id")
+dup.IDS <- rbind(ind1, ind2)
+dup.IDS <-dup.IDS[!duplicated(dup.IDS),]
+dup.IDS$duplicated <- "TRUE"
+
+bad.sample <- merge(qc_info,dup.IDS,by=c("id"),all=T)
+bad.sample[is.na(bad.sample)] <- ""
+
+bad <- NULL
+#bad$Mouse_ID <- bad.sample$"Sample ID...5"
+#bad<-as.data.frame(bad)
+#bad$Neogen_Sample_ID <- bad.sample$"Sample ID...4"
+bad$Sample_ID <- as.character(bad.sample$id.1)
+#bad$Neogen_Sample_ID <- as.character(do.call(rbind.data.frame, strsplit(as.character(bad$Genoprobs_Sample_ID), "_"))[,7])
+#bad$Unique_Sample_ID <- bad.sample$id
+#bad$no_pheno <- ifelse(is.na(bad.sample$Max_IOP)==TRUE, 'XX', '')
+bad$high_miss <- ifelse(bad.sample$percent_missing >= 10, 'XX', '')
+bad$diff_sex <- ''
+#bad$high_xo <- ifelse(bad.sample$Number_crossovers <= 200 | bad.sample$Number_crossovers >=1000, 'XX', '')
+#bad$DO.Generation <- ifelse(bad.sample$generation ==1, 'XX', '')
+bad$high_geno.errors <- ifelse(bad.sample$genotype_erros >= 10, 'XX', '')
+bad$highly_concordant <- ifelse(bad.sample$duplicated == TRUE, 'XX', '')
+bad[is.na(bad)] <- ""
+bad[bad=='NA'] <- ""
+df <- do.call(cbind, bad)
+bad <- as.data.frame(df)
+
+badind <- subset(bad, 
+         #bad$no_pheno == 'XX'|
+         bad$high_miss == 'XX'|
+         bad$diff_sex == 'XX'|  
+#         bad$high_xo == 'XX'|
+         bad$high_geno.errors == 'XX'|
+#         bad$DO.Generation == 'XX'|
+         bad$highly_concordant == 'XX')
+
+
+#badind <- bad[bad$no_pheno == 'XX',]
+
+badind[] <- lapply(badind, as.character)
+#badind$Thaiss_ID <- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, "--", bad$Thaiss_ID)
+
+rownames(badind) <- NULL
+
+badind[c(1:5)] %>% 
+   mutate(
+     #no_pheno = ifelse(no_pheno == 'XX',
+     #             cell_spec(no_pheno, color = 'green',background = 'green'),
+     #             ''),
+     high_miss = ifelse(high_miss == 'XX',
+                  cell_spec(high_miss, color = 'red',background = 'red'),
+                  ''),
+     diff_sex = ifelse(diff_sex == 'XX',
+                  cell_spec(diff_sex, color = 'blue',background = 'blue'),
+                  ''),
+#     high_xo = ifelse(high_xo == 'XX',
+#                  cell_spec(high_xo, color = 'purple',background = 'purple'),
+#                  ''),
+     high_geno.errors = ifelse(high_geno.errors == 'XX',
+                  cell_spec(high_geno.errors, color = 'pink',background = 'pink'),
+                  ''),
+#     DO.Generation = ifelse(DO.Generation == 'XX',
+#                  cell_spec(DO.Generation, color = 'lightgreen',background = 'lightgreen'),
+#                  ''),
+     highly_concordant = ifelse(highly_concordant == 'XX',
+                  cell_spec(highly_concordant, color = 'orange',background = 'orange'),
+                  '')
+     ) %>%
+   kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+   kable_styling("striped", full_width = F) %>%
+   #column_spec(2:6, width = "3cm") %>%
+   column_spec(1, width = "5cm")
+
+```
+

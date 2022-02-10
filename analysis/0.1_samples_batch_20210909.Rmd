@@ -1,0 +1,211 @@
+---
+title: "Samples [Batch: MURGIGV01_20210909]"
+author: "Belinda Cornes"
+date: "2021-09-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(tibble)
+
+
+filepathg = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/Neogen/The_Jackson_Lab_Serreze_MURGIGV01_20210909/'
+filepaths = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output/'
+filepathp = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/'
+
+report_file <- dir(path = filepathg, pattern = "_FinalReport.zip$", full.names = TRUE)
+sample_file <- dir(path = filepaths, pattern = "^DODB_*", full.names = TRUE)
+pheno_file <- dir(path = filepathp, pattern = "GM_covar.csv", full.names = TRUE)
+
+report_file_hdr <- unlist(strsplit(report_file, split = "/"))
+report_file_hdr <- report_file_hdr[length(report_file_hdr)]
+
+header <- read.table(unz(report_file, sub(pattern = "zip$", replacement = "txt", report_file_hdr)), 
+                      sep = "\t", skip = 1, nrows = 2)
+report <- fread(paste("unzip -cq", report_file),
+                 skip = 9, showProgress = TRUE, sep = "\t")
+#samples <- fread(paste0("unzip -cq ",  sample_file))
+colnames(report) <- gsub(" |-", "_", colnames(report))
+
+geno <- report %>%
+    select(Sample_ID, SNP_Name, Allele1___Forward, Allele2___Forward) %>%
+    mutate(Sample_ID = factor(Sample_ID, levels = unique(report$Sample_ID))) %>%
+    unite(genotype, c("Allele1___Forward", "Allele2___Forward"), sep = "") %>%
+    spread(Sample_ID, genotype)
+ 
+pheno <- read.csv(pheno_file)
+pheno$indexp <- 1:nrow(pheno)
+samples <- read.csv(sample_file, colClasses=c("character"))
+samples$indexs <- 1:nrow(samples)
+samphen <- merge(samples,pheno, by.x=c("Original.Mouse.ID"), by.y=c("id"), all.x=T)
+#samphen <- samples
+
+genon <- geno[c(2:length(geno))]
+
+library(tibble)
+
+summaryInfo <- list()
+for(i in (1:length(genon))){
+#for(i in 100){
+  tot <- as.data.frame(t(table(genon[,i])))
+  tot <- t(tot[c(2:3)])
+  tot <- data.frame(tot)
+  names(tot) <- tot[1,]
+  tot <- tot[-1,]
+  names(tot)[1] <- c("Missing")
+  rownames(tot) <- 1:nrow(tot)
+  cols <- c(0,0,0,0,0,0,0,0,0,0,0,0,0)
+  names(cols) <- c("Missing","AA","AC","AG","AT","CC","CG","GC","GG","TA","TC","TG","TT")
+  totn <- add_column(tot, !!!cols[setdiff(names(cols), names(tot))])
+  total <- data.frame(colSums(genon[i] != "--"))
+  names(total) <- c("Total_Genotyped")
+  sample <- data.frame(paste(names(genon[i])))
+  names(sample) <- c("Neogen_Sample_ID")
+  totall <- cbind(sample,totn,total)
+  totall$Percent_Genotyped <- paste0(format(100*(round((total[1]/nrow(genon)), digits = 4)), nsmall = 2),"%")
+  totall$MURGIGV01_SNP.Count <- as.numeric(as.character(totall$Missing)) + as.numeric(totall$Total_Genotyped)
+
+  #sample Information
+  totphensam <- merge(totall, samphen, by.x=c("Neogen_Sample_ID"), by.y=c("Original.Mouse.ID")) 
+  #totphensam$Thaiss_ID <- ifelse((totphensam$Thaiss.ID == '995' | totphensam$Thaiss.ID == '996' | 
+  #                              totphensam$Thaiss.ID == '997' | totphensam$Thaiss.ID == '998' | 
+  #                              totphensam$Thaiss.ID == '999'), '--',totphensam$Thaiss.ID  )
+
+  #totphensam$Time_min <- ifelse(totphensam$Time_.min. == 'NA' , '--',totphensam$Time_.min. )
+  #totphensam$Distance_m <- ifelse(totphensam$Distance_.m. == 'NA' , '--',totphensam$Distance_.m. )
+  #totphensam$Energy_J <- ifelse(totphensam$Energy_.J. == 'NA' , '--',totphensam$Energy_.J. )
+    
+  #finalsum <- cbind(totphensam[c(41,1)],
+  #                 totphensam[c("Missing","AA","AC","AG","AT","CC","CG","GC","GG","TA","TC","TG","TT")],
+  #                 totphensam[c(15,16,24:26,22,33:34,23,42:44,29:30,36)])
+
+  finalsum <- totphensam
+
+  names(finalsum)[22] <- c("Provided.Sex")
+  #finalsum$Sex_Pheno <- replace(finalsum$Sex_Geno, finalsum$Sex_Pheno == '', '--')
+  #finalsum$Sex_Geno <- replace(finalsum$Sex_Geno, finalsum$Sex_Geno == '', '--')
+  summaryInfo[[i]] <- finalsum
+}
+
+summary <- do.call(rbind, summaryInfo)
+
+summary$Provided.Sex <- 'F'
+#summary$Sex_Geno <- replace(summary$Sex_Geno, summary$Sex_Geno == '', '--')
+summary[is.na(summary)] <- '--'
+#summary <- summary[order(summary$indexp),]
+#names(summary)[21] <- c("DO.Generation")
+
+which(summary$cr <.90)
+#[1]  14  38  77  78 116 122 130 132 135
+
+#substring(summary$Provided.Sex, 1, 1)
+## [1] "h"
+#substring(summary$Provided.Sex, 2)
+## [1] "ello stackoverflow"
+
+which(substring(summary$Provided.Sex, 1, 1) != summary$Inferred.Sex)
+#3   8  21  38  59  62  64  70  72  89  93 105 109 152 175 187 191
+
+#summary$DO.Generation <- ifelse(summary$Neogen_Sample_ID %in% control.mice, "--",summary$DO.Generation)
+summary$DO.Generation <- '--'
+
+```
+
+### Genotype Summary by Sample
+```{r plot table genotype summary}
+
+rownames(summary) <- NULL
+
+summary[c(1:17,31)] %>%
+  kable(escape = F,align = c("ccccccccccccccccc"),linesep ="\\hline") %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(3:15, width = "5cms") 
+```
+
+### Gender Summary by Sample
+```{r plot table gender summary}
+
+summary[c(1,22,23)] %>%
+  kable(escape = F,align = c("ccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F) %>%
+  column_spec(1:3, width = "3cm") %>%
+  row_spec(1:72 ,color= "white",background = "blue") 
+
+#3   8  21  38  59  62  64  70  72  89  93 105 109 152 175 187 191
+
+```
+
+### Phenotype Summary by Sample
+```{r plot table phenotype summary}
+
+summary[c(1,35:38)] %>%
+  kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F) %>%
+  column_spec(1:3, width = "3cm") #%>%
+  #row_spec(197 ,color= "white",background = "green")
+
+```
+
+
+### All Problematic Samples
+```{r plot table all problematic samples}
+
+dis <- NULL
+#dis$Original.Mouse.ID <- summary$Original.Mouse.ID
+dis$Neogen_Sample_ID <- summary$Neogen_Sample_ID
+#dis$Mouse.ID <- summary$Mouse.ID
+dis$no_pheno <- ifelse(summary$group == '--', 'XX', '')
+dis$low_call.rate <- ifelse(summary$cr <.90, 'XX', '')
+dis$different_sex <- ifelse(substring(summary$Provided.Sex, 1, 1) != summary$Inferred.Sex, 'XX', '')
+
+dis <- data.frame(dis)
+disind <- subset(dis, dis$different_sex =="XX" | dis$low_call.rate == 'XX')
+
+#disind[] %>% 
+#   mutate(
+#     possible_duplicate = ifelse(possible_duplicate == 'XX',
+#                  cell_spec(possible_duplicate, color = 'orange',background = 'orange'),
+#                  ''),
+#     low_call.rate = ifelse(low_call.rate == 'XX',
+#                  cell_spec(low_call.rate, color = 'red',background = 'red'),
+#                  ''),
+#     different_sex = ifelse(different_sex == 'XX',
+#                  cell_spec(different_sex, color = 'blue',background = 'blue'),
+#                  '')
+#     ) %>%
+#   kable(escape = F,align = c("cccc"),linesep ="\\hline") %>%
+#   kable_styling("striped", full_width = F) %>%
+#   column_spec(1:5, width = "3cm") 
+
+disind[] %>% 
+   mutate(
+     no_pheno = ifelse(no_pheno == 'XX',
+                  cell_spec(no_pheno, color = 'green',background = 'green'),
+                  ''),
+     low_call.rate = ifelse(low_call.rate == 'XX',
+                  cell_spec(low_call.rate, color = 'red',background = 'red'),
+                  ''),
+     different_sex = ifelse(different_sex == 'XX',
+                  cell_spec(different_sex, color = 'blue',background = 'blue'),
+                  ''),
+     ) %>%
+   kable(escape = F,align = c("ccc"),linesep ="\\hline") %>%
+   kable_styling("striped", full_width = F) %>%
+   column_spec(1:4, width = "3cm") 
+
+```
