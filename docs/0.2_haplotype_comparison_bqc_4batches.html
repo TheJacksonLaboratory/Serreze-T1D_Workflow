@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2022-02-10" />
+
+<title>Haplotype Phasing Before QC</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze T1D Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Haplotype Phasing Before QC</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2022-02-10</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#loading-project">Loading Project</a></li>
+<li><a href="#plots">Plots</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-02-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongd199bd4"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> d199bd4 </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongd199bd4" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version d199bd4. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_4batches.Rmd
+    Untracked:  analysis/2.1_sample_bqc_3.batches.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_4batches.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.Rmd
+    Untracked:  data/GM_covar.csv
+    Untracked:  data/bad_markers_all_4.batches.RData
+    Untracked:  data/covar_cleaned_ici.vs.eoi.csv
+    Untracked:  data/covar_cleaned_ici.vs.pbs.csv
+    Untracked:  data/e.RData
+    Untracked:  data/e_snpg_samqc_4.batches.RData
+    Untracked:  data/e_snpg_samqc_4.batches_bc.RData
+    Untracked:  data/errors_ind_4.batches.RData
+    Untracked:  data/errors_ind_4.batches_bc.RData
+    Untracked:  data/genetic_map.csv
+    Untracked:  data/genotype_errors_marker_4.batches.RData
+    Untracked:  data/genotype_freq_marker_4.batches.RData
+    Untracked:  data/gm_allqc_4.batches.RData
+    Untracked:  data/gm_samqc_3.batches.RData
+    Untracked:  data/gm_samqc_4.batches.RData
+    Untracked:  data/gm_samqc_4.batches_bc.RData
+    Untracked:  data/gm_serreze.192.RData
+    Untracked:  data/percent_missing_id_3.batches.RData
+    Untracked:  data/percent_missing_id_4.batches.RData
+    Untracked:  data/percent_missing_id_4.batches_bc.RData
+    Untracked:  data/percent_missing_marker_4.batches.RData
+    Untracked:  data/pheno.csv
+    Untracked:  data/physical_map.csv
+    Untracked:  data/qc_info_bad_sample_3.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches_bc.RData
+    Untracked:  data/sample_geno.csv
+    Untracked:  data/sample_geno_bc.csv
+    Untracked:  data/serreze_probs.rds
+    Untracked:  data/serreze_probs_allqc.rds
+    Untracked:  data/summary.cg_3.batches.RData
+    Untracked:  data/summary.cg_4.batches.RData
+    Untracked:  data/summary.cg_4.batches_bc.RData
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/0.2_haplotype_comparison_bqc_4batches.Rmd</code>) and HTML (<code>docs/0.2_haplotype_comparison_bqc_4batches.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+d199bd4
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-02-10
+</td>
+<td>
+QC analysis
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="loading-project" class="section level3">
+<h3>Loading Project</h3>
+<pre class="r"><code>#gm &lt;- read_cross2(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Oconnor/genoprobs/3.batches/all.samples/qtl2/gm_sorted.json&quot;)
+
+gm &lt;- get(load(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/gm_serreze.192.RData&quot;))
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               192
+No. genotyped individuals       192
+No. phenotyped individuals      192
+No. with both geno &amp; pheno      192
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                133716
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+10159 10172  7987  7736  7778  7911  7548  6561  6823  6472  7276  6226  6177 
+   14    15    16    17    18    19     X 
+ 6082  5421  5075  5161  4682  3612  4857 </code></pre>
+<pre class="r"><code>apr &lt;- readRDS(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/probs_8state.rds&quot;)
+pr &lt;- readRDS(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/probs_36state.rds&quot;)
+mice &lt;- ind_ids(gm)
+micelg &lt;- as.data.frame(mice)
+#micelg$miceids &lt;- sapply(strsplit(as.character(micelg$mice),&#39;_&#39;,fixed=T),function(x) x[6])
+#micelg &lt;- micelg[order(micelg$miceids),]
+#micelg &lt;- micelg[order(micelg$mice),]
+#mice &lt;- micelg$mice
+micedf &lt;- as.data.frame(micelg)
+#mice &lt;- micedf$micelg
+names(micedf) &lt;- c(&quot;mice&quot;)
+#micedf$original.mouse.id &lt;- sapply(strsplit(as.character(micedf$mice),&#39;_&#39;,fixed=T),function(x) x[6])
+
+sample_file &lt;- dir(path = &quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output/&quot;, pattern = &quot;^DODB_*&quot;, full.names = TRUE)
+samples &lt;- read.csv(sample_file)
+micedf$index &lt;- 1:nrow(micedf)
+#all.equal(as.character(ind_ids(gm)), as.character(samples$Original.Mouse.ID))
+micesamp &lt;- merge(micedf, samples, by.x=c(&quot;mice&quot;), by.y=c(&quot;Original.Mouse.ID&quot;), all=T)
+micesamp &lt;- micesamp[order(micesamp$index),]
+micesamp &lt;- micesamp[c(&quot;mice&quot;,&quot;Unique.Sample.ID&quot;)]</code></pre>
+</div>
+<div id="plots" class="section level3">
+<h3>Plots</h3>
+<pre class="r"><code>for(rn in 1:nrow(micesamp)){
+
+    #print(i)
+    newdf &lt;- micesamp[rn,]
+    mouse.id &lt;- newdf$mice
+    batch &lt;- sapply(strsplit(as.character(newdf$Unique.Sample.ID),&#39;_&#39;,fixed=T),function(x) x[6])
+    #mouse.id &lt;- i
+    #print(mouse.id)
+    #print(newdf$Unique.Sample.ID)
+    i = mouse.id
+
+    gmi &lt;- gm[i, ] 
+    #map &lt;- insert_pseudomarkers(gmi$gmap, step=1)
+    #pr.new &lt;- calc_genoprob(gmi, gmi$gmap, error_prob=0.002)
+    #ap &lt;- genoprob_to_alleleprob(pr)
+    #apr.new &lt;- apr[i,]
+    pr.new &lt;- pr[i,]
+
+    # infer genotypes, as those with maximal marginal probability
+    #m &lt;- maxmarg(apr.new, minprob = 0.5)
+    #m &lt;- maxmarg(pr.new, minprob = 0.5)
+    m &lt;- maxmarg(pr.new)
+
+    # guess phase
+    ph &lt;- guess_phase(gmi, m)
+
+    # plot phased genotypes
+    #plot_onegeno(m, gmi$gmap, main = paste0(mouse.id,&quot; (batch date: &quot;, batch,&quot;) [genoprobs;m]&quot;),  shift=TRUE, col=c(&quot;#1111FF&quot;, &quot;#888888&quot;))
+    plot_onegeno(ph, gmi$gmap, main = paste0(mouse.id,&quot; (batch date: &quot;, batch,&quot;) [genoprobs]&quot;),  shift=TRUE, col=c(&quot;#1111FF&quot;, &quot;#888888&quot;))
+}</code></pre>
+<p><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-12.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-15.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-16.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-18.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-19.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-20.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-21.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-22.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-23.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-24.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-25.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-26.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-27.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-28.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-29.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-30.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-31.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-32.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-33.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-34.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-35.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-36.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-37.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-38.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-39.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-40.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-41.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-42.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-43.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-44.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-45.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-46.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-47.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-48.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-49.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-50.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-51.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-52.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-53.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-54.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-55.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-56.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-57.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-58.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-59.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-60.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-61.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-62.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-63.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-64.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-65.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-66.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-67.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-68.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-69.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-70.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-71.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-72.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-73.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-74.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-75.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-76.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-77.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-78.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-79.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-80.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-81.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-82.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-83.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-84.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-85.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-86.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-87.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-88.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-89.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-90.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-91.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-92.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-93.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-94.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-95.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-96.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-97.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-98.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-99.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-100.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-101.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-102.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-103.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-104.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-105.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-106.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-107.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-108.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-109.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-110.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-111.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-112.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-113.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-114.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-115.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-116.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-117.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-118.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-119.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-120.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-121.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-122.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-123.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-124.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-125.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-126.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-127.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-128.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-129.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-130.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-131.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-132.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-133.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-134.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-135.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-136.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-137.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-138.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-139.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-140.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-141.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-142.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-143.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-144.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-145.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-146.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-147.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-148.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-149.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-150.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-151.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-152.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-153.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-154.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-155.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-156.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-157.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-158.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-159.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-160.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-161.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-162.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-163.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-164.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-165.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-166.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-167.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-168.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-169.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-170.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-171.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-172.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-173.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-174.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-175.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-176.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-177.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-178.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-179.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-180.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-181.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-182.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-183.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-184.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-185.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-186.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-187.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-188.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-189.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-190.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-191.png" width="672" style="display: block; margin: auto;" /><img src="figure/0.2_haplotype_comparison_bqc_4batches.Rmd/phased%20b6%20plots-192.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] qtl2_0.22       broman_0.70-4   workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.7        knitr_1.33        whisker_0.4       magrittr_2.0.1   
+ [5] bit_4.0.4         R6_2.5.0          rlang_0.4.11      fastmap_1.1.0    
+ [9] highr_0.9         blob_1.2.1        stringr_1.4.0     tools_3.6.2      
+[13] parallel_3.6.2    data.table_1.14.0 xfun_0.24         DBI_1.1.1        
+[17] git2r_0.26.1      htmltools_0.5.1.1 bit64_4.0.5       yaml_2.2.1       
+[21] digest_0.6.27     rprojroot_1.3-2   assertthat_0.2.1  later_1.0.0      
+[25] vctrs_0.3.8       promises_1.1.0    fs_1.4.1          cachem_1.0.5     
+[29] memoise_2.0.0     glue_1.4.2        evaluate_0.14     RSQLite_2.2.7    
+[33] rmarkdown_2.1     stringi_1.7.2     compiler_3.6.2    backports_1.2.1  
+[37] httpuv_1.5.2     </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

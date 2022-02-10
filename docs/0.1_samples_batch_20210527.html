@@ -1,0 +1,7717 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2021-09-15" />
+
+<title>Samples [Batch: MURGIGV01_20210527]</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze T1D Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Samples [Batch: MURGIGV01_20210527]</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2021-09-15</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#genotype-summary-by-sample">Genotype Summary by Sample</a></li>
+<li><a href="#gender-summary-by-sample">Gender Summary by Sample</a></li>
+<li><a href="#phenotype-summary-by-sample">Phenotype Summary by Sample</a></li>
+<li><a href="#all-problematic-samples">All Problematic Samples</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-02-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongd199bd4"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> d199bd4 </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongd199bd4" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version d199bd4. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_4batches.Rmd
+    Untracked:  analysis/2.1_sample_bqc_3.batches.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_4batches.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.Rmd
+    Untracked:  data/GM_covar.csv
+    Untracked:  data/bad_markers_all_4.batches.RData
+    Untracked:  data/covar_cleaned_ici.vs.eoi.csv
+    Untracked:  data/covar_cleaned_ici.vs.pbs.csv
+    Untracked:  data/e.RData
+    Untracked:  data/e_snpg_samqc_4.batches.RData
+    Untracked:  data/e_snpg_samqc_4.batches_bc.RData
+    Untracked:  data/errors_ind_4.batches.RData
+    Untracked:  data/errors_ind_4.batches_bc.RData
+    Untracked:  data/genetic_map.csv
+    Untracked:  data/genotype_errors_marker_4.batches.RData
+    Untracked:  data/genotype_freq_marker_4.batches.RData
+    Untracked:  data/gm_allqc_4.batches.RData
+    Untracked:  data/gm_samqc_3.batches.RData
+    Untracked:  data/gm_samqc_4.batches.RData
+    Untracked:  data/gm_samqc_4.batches_bc.RData
+    Untracked:  data/gm_serreze.192.RData
+    Untracked:  data/percent_missing_id_3.batches.RData
+    Untracked:  data/percent_missing_id_4.batches.RData
+    Untracked:  data/percent_missing_id_4.batches_bc.RData
+    Untracked:  data/percent_missing_marker_4.batches.RData
+    Untracked:  data/pheno.csv
+    Untracked:  data/physical_map.csv
+    Untracked:  data/qc_info_bad_sample_3.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches_bc.RData
+    Untracked:  data/sample_geno.csv
+    Untracked:  data/sample_geno_bc.csv
+    Untracked:  data/serreze_probs.rds
+    Untracked:  data/serreze_probs_allqc.rds
+    Untracked:  data/summary.cg_3.batches.RData
+    Untracked:  data/summary.cg_4.batches.RData
+    Untracked:  data/summary.cg_4.batches_bc.RData
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/0.1_samples_batch_20210527.Rmd</code>) and HTML (<code>docs/0.1_samples_batch_20210527.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+d199bd4
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-02-10
+</td>
+<td>
+QC analysis
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="genotype-summary-by-sample" class="section level3">
+<h3>Genotype Summary by Sample</h3>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Missing
+</th>
+<th style="text-align:center;">
+AA
+</th>
+<th style="text-align:center;">
+AC
+</th>
+<th style="text-align:center;">
+AG
+</th>
+<th style="text-align:center;">
+AT
+</th>
+<th style="text-align:center;">
+CC
+</th>
+<th style="text-align:center;">
+CG
+</th>
+<th style="text-align:center;">
+GC
+</th>
+<th style="text-align:center;">
+GG
+</th>
+<th style="text-align:center;">
+TA
+</th>
+<th style="text-align:center;">
+TC
+</th>
+<th style="text-align:center;">
+TG
+</th>
+<th style="text-align:center;">
+TT
+</th>
+<th style="text-align:center;">
+Total_Genotyped
+</th>
+<th style="text-align:center;">
+Percent_Genotyped
+</th>
+<th style="text-align:center;">
+MURGIGV01_SNP.Count
+</th>
+<th style="text-align:center;">
+cr
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+NG00205-PBS
+</td>
+<td style="text-align:center;">
+9843
+</td>
+<td style="text-align:center;width: 5cms; ">
+28794
+</td>
+<td style="text-align:center;width: 5cms; ">
+1617
+</td>
+<td style="text-align:center;width: 5cms; ">
+6791
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29496
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+29812
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6702
+</td>
+<td style="text-align:center;width: 5cms; ">
+1600
+</td>
+<td style="text-align:center;width: 5cms; ">
+28590
+</td>
+<td style="text-align:center;width: 5cms; ">
+133416
+</td>
+<td style="text-align:center;">
+93.13%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.931292274830901
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: red !important;">
+NG00686-PBS
+</td>
+<td style="text-align:center;color: white !important;background-color: red !important;">
+14726
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+26500
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+2034
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+8688
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+7
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+26988
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+6
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+4
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+27506
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+3
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+8760
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+1961
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+26076
+</td>
+<td style="text-align:center;width: 5cms; color: white !important;background-color: red !important;">
+128533
+</td>
+<td style="text-align:center;color: white !important;background-color: red !important;">
+89.72%
+</td>
+<td style="text-align:center;color: white !important;background-color: red !important;">
+143259
+</td>
+<td style="text-align:center;color: white !important;background-color: red !important;">
+0.897207156269414
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00779-ICI
+</td>
+<td style="text-align:center;">
+5230
+</td>
+<td style="text-align:center;width: 5cms; ">
+31232
+</td>
+<td style="text-align:center;width: 5cms; ">
+1077
+</td>
+<td style="text-align:center;width: 5cms; ">
+4492
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+32257
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+32538
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4357
+</td>
+<td style="text-align:center;width: 5cms; ">
+1067
+</td>
+<td style="text-align:center;width: 5cms; ">
+30988
+</td>
+<td style="text-align:center;width: 5cms; ">
+138029
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963492695048828
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00305-EOI
+</td>
+<td style="text-align:center;">
+5276
+</td>
+<td style="text-align:center;width: 5cms; ">
+29979
+</td>
+<td style="text-align:center;width: 5cms; ">
+1539
+</td>
+<td style="text-align:center;width: 5cms; ">
+6385
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31019
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31373
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6322
+</td>
+<td style="text-align:center;width: 5cms; ">
+1553
+</td>
+<td style="text-align:center;width: 5cms; ">
+29802
+</td>
+<td style="text-align:center;width: 5cms; ">
+137983
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963171598293999
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG01034-ICI
+</td>
+<td style="text-align:center;">
+14236
+</td>
+<td style="text-align:center;width: 5cms; ">
+25997
+</td>
+<td style="text-align:center;width: 5cms; ">
+1846
+</td>
+<td style="text-align:center;width: 5cms; ">
+8284
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+28478
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+28938
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8177
+</td>
+<td style="text-align:center;width: 5cms; ">
+1790
+</td>
+<td style="text-align:center;width: 5cms; ">
+25488
+</td>
+<td style="text-align:center;width: 5cms; ">
+129023
+</td>
+<td style="text-align:center;">
+90.06%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.900627534744763
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00499-EOI
+</td>
+<td style="text-align:center;">
+12769
+</td>
+<td style="text-align:center;width: 5cms; ">
+26332
+</td>
+<td style="text-align:center;width: 5cms; ">
+1833
+</td>
+<td style="text-align:center;width: 5cms; ">
+8470
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+28741
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29094
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8338
+</td>
+<td style="text-align:center;width: 5cms; ">
+1748
+</td>
+<td style="text-align:center;width: 5cms; ">
+25911
+</td>
+<td style="text-align:center;width: 5cms; ">
+130490
+</td>
+<td style="text-align:center;">
+91.09%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.910867729078103
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00246-PBS
+</td>
+<td style="text-align:center;">
+5230
+</td>
+<td style="text-align:center;width: 5cms; ">
+30749
+</td>
+<td style="text-align:center;width: 5cms; ">
+1348
+</td>
+<td style="text-align:center;width: 5cms; ">
+5260
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31628
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+32015
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5295
+</td>
+<td style="text-align:center;width: 5cms; ">
+1241
+</td>
+<td style="text-align:center;width: 5cms; ">
+30474
+</td>
+<td style="text-align:center;width: 5cms; ">
+138029
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963492695048828
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00241-ICI
+</td>
+<td style="text-align:center;">
+5246
+</td>
+<td style="text-align:center;width: 5cms; ">
+30140
+</td>
+<td style="text-align:center;width: 5cms; ">
+1521
+</td>
+<td style="text-align:center;width: 5cms; ">
+6274
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+31099
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31402
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6196
+</td>
+<td style="text-align:center;width: 5cms; ">
+1426
+</td>
+<td style="text-align:center;width: 5cms; ">
+29933
+</td>
+<td style="text-align:center;width: 5cms; ">
+138013
+</td>
+<td style="text-align:center;">
+96.34%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963381009221061
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00796-ICI
+</td>
+<td style="text-align:center;">
+6562
+</td>
+<td style="text-align:center;width: 5cms; ">
+27873
+</td>
+<td style="text-align:center;width: 5cms; ">
+2198
+</td>
+<td style="text-align:center;width: 5cms; ">
+9230
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+29124
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29437
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+9092
+</td>
+<td style="text-align:center;width: 5cms; ">
+2138
+</td>
+<td style="text-align:center;width: 5cms; ">
+27576
+</td>
+<td style="text-align:center;width: 5cms; ">
+136697
+</td>
+<td style="text-align:center;">
+95.42%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.954194849887267
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00309-EOI
+</td>
+<td style="text-align:center;">
+8459
+</td>
+<td style="text-align:center;width: 5cms; ">
+28070
+</td>
+<td style="text-align:center;width: 5cms; ">
+1940
+</td>
+<td style="text-align:center;width: 5cms; ">
+8167
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29314
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+29620
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+8023
+</td>
+<td style="text-align:center;width: 5cms; ">
+1859
+</td>
+<td style="text-align:center;width: 5cms; ">
+27791
+</td>
+<td style="text-align:center;width: 5cms; ">
+134800
+</td>
+<td style="text-align:center;">
+94.10%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.940953098932702
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00872-ICI
+</td>
+<td style="text-align:center;">
+5276
+</td>
+<td style="text-align:center;width: 5cms; ">
+29474
+</td>
+<td style="text-align:center;width: 5cms; ">
+1835
+</td>
+<td style="text-align:center;width: 5cms; ">
+7305
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30418
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30688
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7208
+</td>
+<td style="text-align:center;width: 5cms; ">
+1720
+</td>
+<td style="text-align:center;width: 5cms; ">
+29307
+</td>
+<td style="text-align:center;width: 5cms; ">
+137983
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963171598293999
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00530-EOI
+</td>
+<td style="text-align:center;">
+5327
+</td>
+<td style="text-align:center;width: 5cms; ">
+29967
+</td>
+<td style="text-align:center;width: 5cms; ">
+1656
+</td>
+<td style="text-align:center;width: 5cms; ">
+6495
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30887
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31189
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6354
+</td>
+<td style="text-align:center;width: 5cms; ">
+1587
+</td>
+<td style="text-align:center;width: 5cms; ">
+29780
+</td>
+<td style="text-align:center;width: 5cms; ">
+137932
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962815599717993
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00290-PBS
+</td>
+<td style="text-align:center;">
+5210
+</td>
+<td style="text-align:center;width: 5cms; ">
+30287
+</td>
+<td style="text-align:center;width: 5cms; ">
+1467
+</td>
+<td style="text-align:center;width: 5cms; ">
+6098
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31213
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31492
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6099
+</td>
+<td style="text-align:center;width: 5cms; ">
+1453
+</td>
+<td style="text-align:center;width: 5cms; ">
+29921
+</td>
+<td style="text-align:center;width: 5cms; ">
+138049
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963632302333536
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00249-ICI
+</td>
+<td style="text-align:center;">
+5260
+</td>
+<td style="text-align:center;width: 5cms; ">
+29579
+</td>
+<td style="text-align:center;width: 5cms; ">
+1733
+</td>
+<td style="text-align:center;width: 5cms; ">
+7071
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30641
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30929
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6961
+</td>
+<td style="text-align:center;width: 5cms; ">
+1647
+</td>
+<td style="text-align:center;width: 5cms; ">
+29418
+</td>
+<td style="text-align:center;width: 5cms; ">
+137999
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963283284121765
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00797-ICI
+</td>
+<td style="text-align:center;">
+5187
+</td>
+<td style="text-align:center;width: 5cms; ">
+28824
+</td>
+<td style="text-align:center;width: 5cms; ">
+1973
+</td>
+<td style="text-align:center;width: 5cms; ">
+8357
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+29937
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30182
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+8124
+</td>
+<td style="text-align:center;width: 5cms; ">
+1967
+</td>
+<td style="text-align:center;width: 5cms; ">
+28682
+</td>
+<td style="text-align:center;width: 5cms; ">
+138072
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96379285071095
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00310-EOI
+</td>
+<td style="text-align:center;">
+5166
+</td>
+<td style="text-align:center;width: 5cms; ">
+29231
+</td>
+<td style="text-align:center;width: 5cms; ">
+1842
+</td>
+<td style="text-align:center;width: 5cms; ">
+7760
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30194
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30486
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7597
+</td>
+<td style="text-align:center;width: 5cms; ">
+1831
+</td>
+<td style="text-align:center;width: 5cms; ">
+29137
+</td>
+<td style="text-align:center;width: 5cms; ">
+138093
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963939438359894
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00974-ICI
+</td>
+<td style="text-align:center;">
+5168
+</td>
+<td style="text-align:center;width: 5cms; ">
+28670
+</td>
+<td style="text-align:center;width: 5cms; ">
+2083
+</td>
+<td style="text-align:center;width: 5cms; ">
+8654
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+29676
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+29967
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8489
+</td>
+<td style="text-align:center;width: 5cms; ">
+2022
+</td>
+<td style="text-align:center;width: 5cms; ">
+28503
+</td>
+<td style="text-align:center;width: 5cms; ">
+138091
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963925477631423
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00532-EOI
+</td>
+<td style="text-align:center;">
+5148
+</td>
+<td style="text-align:center;width: 5cms; ">
+29807
+</td>
+<td style="text-align:center;width: 5cms; ">
+1692
+</td>
+<td style="text-align:center;width: 5cms; ">
+6771
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30747
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31123
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+6710
+</td>
+<td style="text-align:center;width: 5cms; ">
+1634
+</td>
+<td style="text-align:center;width: 5cms; ">
+29610
+</td>
+<td style="text-align:center;width: 5cms; ">
+138111
+</td>
+<td style="text-align:center;">
+96.41%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964065084916131
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00298-PBS
+</td>
+<td style="text-align:center;">
+5164
+</td>
+<td style="text-align:center;width: 5cms; ">
+28947
+</td>
+<td style="text-align:center;width: 5cms; ">
+1968
+</td>
+<td style="text-align:center;width: 5cms; ">
+8048
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+30123
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30373
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7932
+</td>
+<td style="text-align:center;width: 5cms; ">
+1881
+</td>
+<td style="text-align:center;width: 5cms; ">
+28800
+</td>
+<td style="text-align:center;width: 5cms; ">
+138095
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963953399088364
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00494-ICI
+</td>
+<td style="text-align:center;">
+5209
+</td>
+<td style="text-align:center;width: 5cms; ">
+30027
+</td>
+<td style="text-align:center;width: 5cms; ">
+1516
+</td>
+<td style="text-align:center;width: 5cms; ">
+6303
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31172
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31480
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6215
+</td>
+<td style="text-align:center;width: 5cms; ">
+1483
+</td>
+<td style="text-align:center;width: 5cms; ">
+29838
+</td>
+<td style="text-align:center;width: 5cms; ">
+138050
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963639282697771
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00877-ICI
+</td>
+<td style="text-align:center;">
+5176
+</td>
+<td style="text-align:center;width: 5cms; ">
+30273
+</td>
+<td style="text-align:center;width: 5cms; ">
+1418
+</td>
+<td style="text-align:center;width: 5cms; ">
+5914
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+31394
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31682
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5910
+</td>
+<td style="text-align:center;width: 5cms; ">
+1413
+</td>
+<td style="text-align:center;width: 5cms; ">
+30056
+</td>
+<td style="text-align:center;width: 5cms; ">
+138083
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96386963471754
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00324-EOI
+</td>
+<td style="text-align:center;">
+5164
+</td>
+<td style="text-align:center;width: 5cms; ">
+29631
+</td>
+<td style="text-align:center;width: 5cms; ">
+1667
+</td>
+<td style="text-align:center;width: 5cms; ">
+7068
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30757
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+30946
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6955
+</td>
+<td style="text-align:center;width: 5cms; ">
+1698
+</td>
+<td style="text-align:center;width: 5cms; ">
+29360
+</td>
+<td style="text-align:center;width: 5cms; ">
+138095
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963953399088364
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00923-ICI
+</td>
+<td style="text-align:center;">
+5180
+</td>
+<td style="text-align:center;width: 5cms; ">
+31047
+</td>
+<td style="text-align:center;width: 5cms; ">
+1247
+</td>
+<td style="text-align:center;width: 5cms; ">
+4920
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31906
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32190
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+4915
+</td>
+<td style="text-align:center;width: 5cms; ">
+1193
+</td>
+<td style="text-align:center;width: 5cms; ">
+30643
+</td>
+<td style="text-align:center;width: 5cms; ">
+138079
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963841713260598
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00534-EOI
+</td>
+<td style="text-align:center;">
+5204
+</td>
+<td style="text-align:center;width: 5cms; ">
+29082
+</td>
+<td style="text-align:center;width: 5cms; ">
+1921
+</td>
+<td style="text-align:center;width: 5cms; ">
+7806
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30130
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30487
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7643
+</td>
+<td style="text-align:center;width: 5cms; ">
+1853
+</td>
+<td style="text-align:center;width: 5cms; ">
+29110
+</td>
+<td style="text-align:center;width: 5cms; ">
+138055
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963674184518948
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00432-PBS
+</td>
+<td style="text-align:center;">
+5106
+</td>
+<td style="text-align:center;width: 5cms; ">
+29579
+</td>
+<td style="text-align:center;width: 5cms; ">
+1767
+</td>
+<td style="text-align:center;width: 5cms; ">
+7159
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30578
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30886
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7138
+</td>
+<td style="text-align:center;width: 5cms; ">
+1732
+</td>
+<td style="text-align:center;width: 5cms; ">
+29290
+</td>
+<td style="text-align:center;width: 5cms; ">
+138153
+</td>
+<td style="text-align:center;">
+96.44%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964358260214018
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00498-ICI
+</td>
+<td style="text-align:center;">
+5158
+</td>
+<td style="text-align:center;width: 5cms; ">
+28447
+</td>
+<td style="text-align:center;width: 5cms; ">
+2213
+</td>
+<td style="text-align:center;width: 5cms; ">
+9004
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29441
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29737
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8827
+</td>
+<td style="text-align:center;width: 5cms; ">
+2149
+</td>
+<td style="text-align:center;width: 5cms; ">
+28261
+</td>
+<td style="text-align:center;width: 5cms; ">
+138101
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963995281273777
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00852-ICI
+</td>
+<td style="text-align:center;">
+5178
+</td>
+<td style="text-align:center;width: 5cms; ">
+30443
+</td>
+<td style="text-align:center;width: 5cms; ">
+1390
+</td>
+<td style="text-align:center;width: 5cms; ">
+5758
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31522
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31771
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5541
+</td>
+<td style="text-align:center;width: 5cms; ">
+1337
+</td>
+<td style="text-align:center;width: 5cms; ">
+30298
+</td>
+<td style="text-align:center;width: 5cms; ">
+138081
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963855673989069
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00316-EOI
+</td>
+<td style="text-align:center;">
+5176
+</td>
+<td style="text-align:center;width: 5cms; ">
+29512
+</td>
+<td style="text-align:center;width: 5cms; ">
+1790
+</td>
+<td style="text-align:center;width: 5cms; ">
+7208
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30437
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30844
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7162
+</td>
+<td style="text-align:center;width: 5cms; ">
+1758
+</td>
+<td style="text-align:center;width: 5cms; ">
+29357
+</td>
+<td style="text-align:center;width: 5cms; ">
+138083
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96386963471754
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00920-ICI
+</td>
+<td style="text-align:center;">
+12058
+</td>
+<td style="text-align:center;width: 5cms; ">
+28463
+</td>
+<td style="text-align:center;width: 5cms; ">
+1335
+</td>
+<td style="text-align:center;width: 5cms; ">
+5965
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29863
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30349
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5774
+</td>
+<td style="text-align:center;width: 5cms; ">
+1325
+</td>
+<td style="text-align:center;width: 5cms; ">
+28111
+</td>
+<td style="text-align:center;width: 5cms; ">
+131201
+</td>
+<td style="text-align:center;">
+91.58%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.915830768049477
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00525-EOI
+</td>
+<td style="text-align:center;">
+12088
+</td>
+<td style="text-align:center;width: 5cms; ">
+27448
+</td>
+<td style="text-align:center;width: 5cms; ">
+1903
+</td>
+<td style="text-align:center;width: 5cms; ">
+8181
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+28124
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+28497
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+8051
+</td>
+<td style="text-align:center;width: 5cms; ">
+1829
+</td>
+<td style="text-align:center;width: 5cms; ">
+27123
+</td>
+<td style="text-align:center;width: 5cms; ">
+131171
+</td>
+<td style="text-align:center;">
+91.56%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.915621357122415
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00507-PBS
+</td>
+<td style="text-align:center;">
+10241
+</td>
+<td style="text-align:center;width: 5cms; ">
+27798
+</td>
+<td style="text-align:center;width: 5cms; ">
+1758
+</td>
+<td style="text-align:center;width: 5cms; ">
+7543
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+29375
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29810
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7623
+</td>
+<td style="text-align:center;width: 5cms; ">
+1762
+</td>
+<td style="text-align:center;width: 5cms; ">
+27326
+</td>
+<td style="text-align:center;width: 5cms; ">
+133018
+</td>
+<td style="text-align:center;">
+92.85%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.928514089865209
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00524-ICI
+</td>
+<td style="text-align:center;">
+13335
+</td>
+<td style="text-align:center;width: 5cms; ">
+26576
+</td>
+<td style="text-align:center;width: 5cms; ">
+1945
+</td>
+<td style="text-align:center;width: 5cms; ">
+8361
+</td>
+<td style="text-align:center;width: 5cms; ">
+13
+</td>
+<td style="text-align:center;width: 5cms; ">
+28000
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+28580
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+8336
+</td>
+<td style="text-align:center;width: 5cms; ">
+1872
+</td>
+<td style="text-align:center;width: 5cms; ">
+26226
+</td>
+<td style="text-align:center;width: 5cms; ">
+129924
+</td>
+<td style="text-align:center;">
+90.69%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.906916842920864
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00242-EOI
+</td>
+<td style="text-align:center;">
+5336
+</td>
+<td style="text-align:center;width: 5cms; ">
+28978
+</td>
+<td style="text-align:center;width: 5cms; ">
+1902
+</td>
+<td style="text-align:center;width: 5cms; ">
+8079
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29933
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30242
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8048
+</td>
+<td style="text-align:center;width: 5cms; ">
+1893
+</td>
+<td style="text-align:center;width: 5cms; ">
+28827
+</td>
+<td style="text-align:center;width: 5cms; ">
+137923
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962752776439875
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00327-EOI
+</td>
+<td style="text-align:center;">
+5364
+</td>
+<td style="text-align:center;width: 5cms; ">
+28374
+</td>
+<td style="text-align:center;width: 5cms; ">
+2140
+</td>
+<td style="text-align:center;width: 5cms; ">
+9034
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29436
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29699
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+8802
+</td>
+<td style="text-align:center;width: 5cms; ">
+2107
+</td>
+<td style="text-align:center;width: 5cms; ">
+28285
+</td>
+<td style="text-align:center;width: 5cms; ">
+137895
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962557326241283
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00922-ICI
+</td>
+<td style="text-align:center;">
+5200
+</td>
+<td style="text-align:center;width: 5cms; ">
+31491
+</td>
+<td style="text-align:center;width: 5cms; ">
+954
+</td>
+<td style="text-align:center;width: 5cms; ">
+4190
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+32419
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+32705
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+4042
+</td>
+<td style="text-align:center;width: 5cms; ">
+975
+</td>
+<td style="text-align:center;width: 5cms; ">
+31265
+</td>
+<td style="text-align:center;width: 5cms; ">
+138059
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96370210597589
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00527-EOI
+</td>
+<td style="text-align:center;">
+6810
+</td>
+<td style="text-align:center;width: 5cms; ">
+28669
+</td>
+<td style="text-align:center;width: 5cms; ">
+1871
+</td>
+<td style="text-align:center;width: 5cms; ">
+7610
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+29992
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30390
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7436
+</td>
+<td style="text-align:center;width: 5cms; ">
+1798
+</td>
+<td style="text-align:center;width: 5cms; ">
+28666
+</td>
+<td style="text-align:center;width: 5cms; ">
+136449
+</td>
+<td style="text-align:center;">
+95.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.952463719556886
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00538-PBS
+</td>
+<td style="text-align:center;">
+5304
+</td>
+<td style="text-align:center;width: 5cms; ">
+32202
+</td>
+<td style="text-align:center;width: 5cms; ">
+766
+</td>
+<td style="text-align:center;width: 5cms; ">
+2988
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+33070
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+33407
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+2865
+</td>
+<td style="text-align:center;width: 5cms; ">
+680
+</td>
+<td style="text-align:center;width: 5cms; ">
+31966
+</td>
+<td style="text-align:center;width: 5cms; ">
+137955
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962976148095408
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00551-ICI
+</td>
+<td style="text-align:center;">
+5270
+</td>
+<td style="text-align:center;width: 5cms; ">
+29395
+</td>
+<td style="text-align:center;width: 5cms; ">
+1821
+</td>
+<td style="text-align:center;width: 5cms; ">
+7450
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30371
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30657
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7305
+</td>
+<td style="text-align:center;width: 5cms; ">
+1750
+</td>
+<td style="text-align:center;width: 5cms; ">
+29213
+</td>
+<td style="text-align:center;width: 5cms; ">
+137989
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963213480479411
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00218-EOI
+</td>
+<td style="text-align:center;">
+5163
+</td>
+<td style="text-align:center;width: 5cms; ">
+30305
+</td>
+<td style="text-align:center;width: 5cms; ">
+1456
+</td>
+<td style="text-align:center;width: 5cms; ">
+5983
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31385
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31621
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5734
+</td>
+<td style="text-align:center;width: 5cms; ">
+1417
+</td>
+<td style="text-align:center;width: 5cms; ">
+30174
+</td>
+<td style="text-align:center;width: 5cms; ">
+138096
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.9639603794526
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00351-EOI
+</td>
+<td style="text-align:center;">
+5200
+</td>
+<td style="text-align:center;width: 5cms; ">
+29791
+</td>
+<td style="text-align:center;width: 5cms; ">
+1622
+</td>
+<td style="text-align:center;width: 5cms; ">
+6881
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30871
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31077
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6597
+</td>
+<td style="text-align:center;width: 5cms; ">
+1568
+</td>
+<td style="text-align:center;width: 5cms; ">
+29630
+</td>
+<td style="text-align:center;width: 5cms; ">
+138059
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96370210597589
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00985-ICI
+</td>
+<td style="text-align:center;">
+5212
+</td>
+<td style="text-align:center;width: 5cms; ">
+29908
+</td>
+<td style="text-align:center;width: 5cms; ">
+1661
+</td>
+<td style="text-align:center;width: 5cms; ">
+6646
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30869
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31166
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6487
+</td>
+<td style="text-align:center;width: 5cms; ">
+1557
+</td>
+<td style="text-align:center;width: 5cms; ">
+29730
+</td>
+<td style="text-align:center;width: 5cms; ">
+138047
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963618341605065
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00565-EOI
+</td>
+<td style="text-align:center;">
+5205
+</td>
+<td style="text-align:center;width: 5cms; ">
+28993
+</td>
+<td style="text-align:center;width: 5cms; ">
+2023
+</td>
+<td style="text-align:center;width: 5cms; ">
+8148
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29944
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30214
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7959
+</td>
+<td style="text-align:center;width: 5cms; ">
+1948
+</td>
+<td style="text-align:center;width: 5cms; ">
+28802
+</td>
+<td style="text-align:center;width: 5cms; ">
+138054
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963667204154713
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00548-PBS
+</td>
+<td style="text-align:center;">
+5120
+</td>
+<td style="text-align:center;width: 5cms; ">
+29142
+</td>
+<td style="text-align:center;width: 5cms; ">
+1963
+</td>
+<td style="text-align:center;width: 5cms; ">
+7886
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30130
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30392
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7759
+</td>
+<td style="text-align:center;width: 5cms; ">
+1923
+</td>
+<td style="text-align:center;width: 5cms; ">
+28920
+</td>
+<td style="text-align:center;width: 5cms; ">
+138139
+</td>
+<td style="text-align:center;">
+96.43%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964260535114722
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00577-ICI
+</td>
+<td style="text-align:center;">
+5186
+</td>
+<td style="text-align:center;width: 5cms; ">
+30883
+</td>
+<td style="text-align:center;width: 5cms; ">
+1208
+</td>
+<td style="text-align:center;width: 5cms; ">
+5097
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31842
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32148
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4995
+</td>
+<td style="text-align:center;width: 5cms; ">
+1209
+</td>
+<td style="text-align:center;width: 5cms; ">
+30667
+</td>
+<td style="text-align:center;width: 5cms; ">
+138073
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963799831075186
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00269-EOI
+</td>
+<td style="text-align:center;">
+5204
+</td>
+<td style="text-align:center;width: 5cms; ">
+30406
+</td>
+<td style="text-align:center;width: 5cms; ">
+1447
+</td>
+<td style="text-align:center;width: 5cms; ">
+5743
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31393
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31724
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5646
+</td>
+<td style="text-align:center;width: 5cms; ">
+1429
+</td>
+<td style="text-align:center;width: 5cms; ">
+30256
+</td>
+<td style="text-align:center;width: 5cms; ">
+138055
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963674184518948
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00388-EOI
+</td>
+<td style="text-align:center;">
+5260
+</td>
+<td style="text-align:center;width: 5cms; ">
+29601
+</td>
+<td style="text-align:center;width: 5cms; ">
+1702
+</td>
+<td style="text-align:center;width: 5cms; ">
+7122
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+30602
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30870
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6950
+</td>
+<td style="text-align:center;width: 5cms; ">
+1684
+</td>
+<td style="text-align:center;width: 5cms; ">
+29442
+</td>
+<td style="text-align:center;width: 5cms; ">
+137999
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963283284121765
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG01021-ICI
+</td>
+<td style="text-align:center;">
+5110
+</td>
+<td style="text-align:center;width: 5cms; ">
+29281
+</td>
+<td style="text-align:center;width: 5cms; ">
+1855
+</td>
+<td style="text-align:center;width: 5cms; ">
+7546
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30378
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30687
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7414
+</td>
+<td style="text-align:center;width: 5cms; ">
+1820
+</td>
+<td style="text-align:center;width: 5cms; ">
+29143
+</td>
+<td style="text-align:center;width: 5cms; ">
+138149
+</td>
+<td style="text-align:center;">
+96.43%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964330338757076
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00566-EOI
+</td>
+<td style="text-align:center;">
+5138
+</td>
+<td style="text-align:center;width: 5cms; ">
+29554
+</td>
+<td style="text-align:center;width: 5cms; ">
+1788
+</td>
+<td style="text-align:center;width: 5cms; ">
+7208
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30548
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30829
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7135
+</td>
+<td style="text-align:center;width: 5cms; ">
+1741
+</td>
+<td style="text-align:center;width: 5cms; ">
+29300
+</td>
+<td style="text-align:center;width: 5cms; ">
+138121
+</td>
+<td style="text-align:center;">
+96.41%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964134888558485
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00561-PBS
+</td>
+<td style="text-align:center;">
+5129
+</td>
+<td style="text-align:center;width: 5cms; ">
+28584
+</td>
+<td style="text-align:center;width: 5cms; ">
+2112
+</td>
+<td style="text-align:center;width: 5cms; ">
+8771
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29716
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+29972
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8493
+</td>
+<td style="text-align:center;width: 5cms; ">
+1992
+</td>
+<td style="text-align:center;width: 5cms; ">
+28470
+</td>
+<td style="text-align:center;width: 5cms; ">
+138130
+</td>
+<td style="text-align:center;">
+96.42%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964197711836604
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00630-ICI
+</td>
+<td style="text-align:center;">
+5117
+</td>
+<td style="text-align:center;width: 5cms; ">
+28555
+</td>
+<td style="text-align:center;width: 5cms; ">
+2147
+</td>
+<td style="text-align:center;width: 5cms; ">
+8910
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29525
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29789
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8820
+</td>
+<td style="text-align:center;width: 5cms; ">
+2093
+</td>
+<td style="text-align:center;width: 5cms; ">
+28281
+</td>
+<td style="text-align:center;width: 5cms; ">
+138142
+</td>
+<td style="text-align:center;">
+96.43%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964281476207429
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00293-EOI
+</td>
+<td style="text-align:center;">
+5610
+</td>
+<td style="text-align:center;width: 5cms; ">
+29109
+</td>
+<td style="text-align:center;width: 5cms; ">
+1929
+</td>
+<td style="text-align:center;width: 5cms; ">
+7804
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30012
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30367
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7682
+</td>
+<td style="text-align:center;width: 5cms; ">
+1823
+</td>
+<td style="text-align:center;width: 5cms; ">
+28902
+</td>
+<td style="text-align:center;width: 5cms; ">
+137649
+</td>
+<td style="text-align:center;">
+96.08%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960840156639373
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00389-EOI
+</td>
+<td style="text-align:center;">
+5591
+</td>
+<td style="text-align:center;width: 5cms; ">
+29987
+</td>
+<td style="text-align:center;width: 5cms; ">
+1606
+</td>
+<td style="text-align:center;width: 5cms; ">
+6306
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30924
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31308
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6241
+</td>
+<td style="text-align:center;width: 5cms; ">
+1510
+</td>
+<td style="text-align:center;width: 5cms; ">
+29769
+</td>
+<td style="text-align:center;width: 5cms; ">
+137668
+</td>
+<td style="text-align:center;">
+96.10%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960972783559846
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG01022-ICI
+</td>
+<td style="text-align:center;">
+5366
+</td>
+<td style="text-align:center;width: 5cms; ">
+30340
+</td>
+<td style="text-align:center;width: 5cms; ">
+1441
+</td>
+<td style="text-align:center;width: 5cms; ">
+5824
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+31249
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31660
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5869
+</td>
+<td style="text-align:center;width: 5cms; ">
+1364
+</td>
+<td style="text-align:center;width: 5cms; ">
+30124
+</td>
+<td style="text-align:center;width: 5cms; ">
+137893
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962543365512812
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00567-EOI
+</td>
+<td style="text-align:center;">
+5605
+</td>
+<td style="text-align:center;width: 5cms; ">
+29877
+</td>
+<td style="text-align:center;width: 5cms; ">
+1612
+</td>
+<td style="text-align:center;width: 5cms; ">
+6513
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31007
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+31194
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6327
+</td>
+<td style="text-align:center;width: 5cms; ">
+1546
+</td>
+<td style="text-align:center;width: 5cms; ">
+29564
+</td>
+<td style="text-align:center;width: 5cms; ">
+137654
+</td>
+<td style="text-align:center;">
+96.09%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96087505846055
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00586-PBS
+</td>
+<td style="text-align:center;">
+5186
+</td>
+<td style="text-align:center;width: 5cms; ">
+30218
+</td>
+<td style="text-align:center;width: 5cms; ">
+1457
+</td>
+<td style="text-align:center;width: 5cms; ">
+6073
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31295
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31616
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5860
+</td>
+<td style="text-align:center;width: 5cms; ">
+1440
+</td>
+<td style="text-align:center;width: 5cms; ">
+30099
+</td>
+<td style="text-align:center;width: 5cms; ">
+138073
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963799831075186
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00662-ICI
+</td>
+<td style="text-align:center;">
+5213
+</td>
+<td style="text-align:center;width: 5cms; ">
+29817
+</td>
+<td style="text-align:center;width: 5cms; ">
+1643
+</td>
+<td style="text-align:center;width: 5cms; ">
+6763
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30759
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31090
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6733
+</td>
+<td style="text-align:center;width: 5cms; ">
+1603
+</td>
+<td style="text-align:center;width: 5cms; ">
+29616
+</td>
+<td style="text-align:center;width: 5cms; ">
+138046
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96361136124083
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00294-EOI
+</td>
+<td style="text-align:center;">
+5169
+</td>
+<td style="text-align:center;width: 5cms; ">
+30425
+</td>
+<td style="text-align:center;width: 5cms; ">
+1439
+</td>
+<td style="text-align:center;width: 5cms; ">
+5829
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31417
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31689
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5693
+</td>
+<td style="text-align:center;width: 5cms; ">
+1370
+</td>
+<td style="text-align:center;width: 5cms; ">
+30208
+</td>
+<td style="text-align:center;width: 5cms; ">
+138090
+</td>
+<td style="text-align:center;">
+96.39%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963918497267187
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00396-EOI
+</td>
+<td style="text-align:center;">
+5123
+</td>
+<td style="text-align:center;width: 5cms; ">
+29140
+</td>
+<td style="text-align:center;width: 5cms; ">
+1940
+</td>
+<td style="text-align:center;width: 5cms; ">
+7919
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30150
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30380
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7710
+</td>
+<td style="text-align:center;width: 5cms; ">
+1884
+</td>
+<td style="text-align:center;width: 5cms; ">
+28997
+</td>
+<td style="text-align:center;width: 5cms; ">
+138136
+</td>
+<td style="text-align:center;">
+96.42%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964239594022016
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00971-ICI
+</td>
+<td style="text-align:center;">
+5277
+</td>
+<td style="text-align:center;width: 5cms; ">
+30778
+</td>
+<td style="text-align:center;width: 5cms; ">
+1302
+</td>
+<td style="text-align:center;width: 5cms; ">
+5157
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31727
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+32083
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5125
+</td>
+<td style="text-align:center;width: 5cms; ">
+1264
+</td>
+<td style="text-align:center;width: 5cms; ">
+30524
+</td>
+<td style="text-align:center;width: 5cms; ">
+137982
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963164617929764
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00647-PBS
+</td>
+<td style="text-align:center;">
+5226
+</td>
+<td style="text-align:center;width: 5cms; ">
+30241
+</td>
+<td style="text-align:center;width: 5cms; ">
+1422
+</td>
+<td style="text-align:center;width: 5cms; ">
+6085
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31324
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31511
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6035
+</td>
+<td style="text-align:center;width: 5cms; ">
+1483
+</td>
+<td style="text-align:center;width: 5cms; ">
+29918
+</td>
+<td style="text-align:center;width: 5cms; ">
+138033
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963520616505769
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00606-PBS
+</td>
+<td style="text-align:center;">
+5284
+</td>
+<td style="text-align:center;width: 5cms; ">
+29618
+</td>
+<td style="text-align:center;width: 5cms; ">
+1673
+</td>
+<td style="text-align:center;width: 5cms; ">
+7128
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30593
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30878
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+6981
+</td>
+<td style="text-align:center;width: 5cms; ">
+1591
+</td>
+<td style="text-align:center;width: 5cms; ">
+29485
+</td>
+<td style="text-align:center;width: 5cms; ">
+137975
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963115755380116
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00698-ICI
+</td>
+<td style="text-align:center;">
+5421
+</td>
+<td style="text-align:center;width: 5cms; ">
+30449
+</td>
+<td style="text-align:center;width: 5cms; ">
+1355
+</td>
+<td style="text-align:center;width: 5cms; ">
+5596
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31497
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31764
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5532
+</td>
+<td style="text-align:center;width: 5cms; ">
+1391
+</td>
+<td style="text-align:center;width: 5cms; ">
+30243
+</td>
+<td style="text-align:center;width: 5cms; ">
+137838
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962159445479865
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00296-EOI
+</td>
+<td style="text-align:center;">
+5157
+</td>
+<td style="text-align:center;width: 5cms; ">
+29445
+</td>
+<td style="text-align:center;width: 5cms; ">
+1770
+</td>
+<td style="text-align:center;width: 5cms; ">
+7328
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30557
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30827
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+7108
+</td>
+<td style="text-align:center;width: 5cms; ">
+1665
+</td>
+<td style="text-align:center;width: 5cms; ">
+29381
+</td>
+<td style="text-align:center;width: 5cms; ">
+138102
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964002261638012
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00450-EOI
+</td>
+<td style="text-align:center;">
+5210
+</td>
+<td style="text-align:center;width: 5cms; ">
+29508
+</td>
+<td style="text-align:center;width: 5cms; ">
+1812
+</td>
+<td style="text-align:center;width: 5cms; ">
+7250
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30444
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30806
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7145
+</td>
+<td style="text-align:center;width: 5cms; ">
+1708
+</td>
+<td style="text-align:center;width: 5cms; ">
+29350
+</td>
+<td style="text-align:center;width: 5cms; ">
+138049
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963632302333536
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00959-ICI
+</td>
+<td style="text-align:center;">
+5164
+</td>
+<td style="text-align:center;width: 5cms; ">
+30975
+</td>
+<td style="text-align:center;width: 5cms; ">
+1227
+</td>
+<td style="text-align:center;width: 5cms; ">
+4906
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31946
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32260
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+4849
+</td>
+<td style="text-align:center;width: 5cms; ">
+1194
+</td>
+<td style="text-align:center;width: 5cms; ">
+30720
+</td>
+<td style="text-align:center;width: 5cms; ">
+138095
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963953399088364
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00673-PBS
+</td>
+<td style="text-align:center;">
+5246
+</td>
+<td style="text-align:center;width: 5cms; ">
+29331
+</td>
+<td style="text-align:center;width: 5cms; ">
+1860
+</td>
+<td style="text-align:center;width: 5cms; ">
+7491
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30355
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30678
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7361
+</td>
+<td style="text-align:center;width: 5cms; ">
+1805
+</td>
+<td style="text-align:center;width: 5cms; ">
+29113
+</td>
+<td style="text-align:center;width: 5cms; ">
+138013
+</td>
+<td style="text-align:center;">
+96.34%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963381009221061
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00638-PBS
+</td>
+<td style="text-align:center;">
+5188
+</td>
+<td style="text-align:center;width: 5cms; ">
+29878
+</td>
+<td style="text-align:center;width: 5cms; ">
+1631
+</td>
+<td style="text-align:center;width: 5cms; ">
+6651
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30895
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31200
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+6465
+</td>
+<td style="text-align:center;width: 5cms; ">
+1620
+</td>
+<td style="text-align:center;width: 5cms; ">
+29702
+</td>
+<td style="text-align:center;width: 5cms; ">
+138071
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963785870346715
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00777-ICI
+</td>
+<td style="text-align:center;">
+5301
+</td>
+<td style="text-align:center;width: 5cms; ">
+31057
+</td>
+<td style="text-align:center;width: 5cms; ">
+1169
+</td>
+<td style="text-align:center;width: 5cms; ">
+4677
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+32077
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+32380
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4566
+</td>
+<td style="text-align:center;width: 5cms; ">
+1112
+</td>
+<td style="text-align:center;width: 5cms; ">
+30900
+</td>
+<td style="text-align:center;width: 5cms; ">
+137958
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962997089188114
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00302-EOI
+</td>
+<td style="text-align:center;">
+5200
+</td>
+<td style="text-align:center;width: 5cms; ">
+30021
+</td>
+<td style="text-align:center;width: 5cms; ">
+1614
+</td>
+<td style="text-align:center;width: 5cms; ">
+6437
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+31035
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31337
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+6273
+</td>
+<td style="text-align:center;width: 5cms; ">
+1503
+</td>
+<td style="text-align:center;width: 5cms; ">
+29815
+</td>
+<td style="text-align:center;width: 5cms; ">
+138059
+</td>
+<td style="text-align:center;">
+96.37%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96370210597589
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00451-EOI
+</td>
+<td style="text-align:center;">
+5157
+</td>
+<td style="text-align:center;width: 5cms; ">
+30022
+</td>
+<td style="text-align:center;width: 5cms; ">
+1503
+</td>
+<td style="text-align:center;width: 5cms; ">
+6530
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31068
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31301
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6354
+</td>
+<td style="text-align:center;width: 5cms; ">
+1462
+</td>
+<td style="text-align:center;width: 5cms; ">
+29845
+</td>
+<td style="text-align:center;width: 5cms; ">
+138102
+</td>
+<td style="text-align:center;">
+96.40%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.964002261638012
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00497-EOI
+</td>
+<td style="text-align:center;">
+7275
+</td>
+<td style="text-align:center;width: 5cms; ">
+27786
+</td>
+<td style="text-align:center;width: 5cms; ">
+2184
+</td>
+<td style="text-align:center;width: 5cms; ">
+9180
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+28838
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29220
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+9162
+</td>
+<td style="text-align:center;width: 5cms; ">
+2069
+</td>
+<td style="text-align:center;width: 5cms; ">
+27519
+</td>
+<td style="text-align:center;width: 5cms; ">
+135984
+</td>
+<td style="text-align:center;">
+94.92%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.949217850187423
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+NG00674-PBS
+</td>
+<td style="text-align:center;">
+8000
+</td>
+<td style="text-align:center;width: 5cms; ">
+29314
+</td>
+<td style="text-align:center;width: 5cms; ">
+1583
+</td>
+<td style="text-align:center;width: 5cms; ">
+6401
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30311
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30736
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6358
+</td>
+<td style="text-align:center;width: 5cms; ">
+1527
+</td>
+<td style="text-align:center;width: 5cms; ">
+29007
+</td>
+<td style="text-align:center;width: 5cms; ">
+135259
+</td>
+<td style="text-align:center;">
+94.42%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.944157086116754
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gender-summary-by-sample" class="section level3">
+<h3>Gender Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Provided.Sex
+</th>
+<th style="text-align:center;">
+Inferred.Sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00205-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00686-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00779-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00305-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG01034-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00499-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00246-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00241-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00796-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00309-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00872-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00530-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00290-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00249-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00797-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00310-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00974-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00532-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00298-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00494-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00877-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00324-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00923-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00534-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00432-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00498-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00852-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00316-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00920-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00525-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00507-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00524-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00242-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00327-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00922-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00527-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00538-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00551-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00218-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00351-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00985-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00565-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00548-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00577-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00269-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00388-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG01021-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00566-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00561-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00630-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00293-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00389-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG01022-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00567-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00586-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00662-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00294-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00396-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00971-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00647-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00606-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00698-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00296-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00450-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00959-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00673-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00638-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00777-ICI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00302-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00451-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00497-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+NG00674-PBS
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="phenotype-summary-by-sample" class="section level3">
+<h3>Phenotype Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+group
+</th>
+<th style="text-align:center;">
+diabetic.status
+</th>
+<th style="text-align:center;">
+strain
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00205-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+34.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00686-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+15.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00779-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00305-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01034-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00499-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00246-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+16.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00241-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00796-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+13.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00309-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00872-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+13.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00530-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00290-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+28.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00249-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00797-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00310-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00974-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00532-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00298-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+25.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00494-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00877-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.3
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00324-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00923-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00534-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00432-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+17.3
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00498-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+13.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00852-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00316-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00920-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00525-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00507-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+18.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00524-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00242-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00327-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00922-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00527-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00538-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+21.3
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00551-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+13.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00218-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00351-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00985-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00565-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00548-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+25.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00577-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.6
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00269-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00388-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01021-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+11.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00566-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00561-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+32.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00630-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00293-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00389-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01022-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00567-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00586-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+16.6
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00662-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+12.7
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00294-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00396-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00971-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+13.4
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00647-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+35.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00606-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+35.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00698-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.9
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00296-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00450-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00959-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.6
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00673-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+39.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00638-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+20.3
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00777-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+14.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+ICI
+</td>
+<td style="text-align:center;">
+T1D &lt;17
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00302-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00451-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00497-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+0.0
+</td>
+<td style="text-align:center;width: 3cm; ">
+EOI
+</td>
+<td style="text-align:center;">
+ICI-No Diabetes
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00674-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+38.1
+</td>
+<td style="text-align:center;width: 3cm; ">
+PBS
+</td>
+<td style="text-align:center;">
+Spont. T1D
+</td>
+<td style="text-align:center;">
+(F1 x NOD)BC1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-problematic-samples" class="section level3">
+<h3>All Problematic Samples</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+no_pheno
+</th>
+<th style="text-align:center;">
+low_call.rate
+</th>
+<th style="text-align:center;">
+different_sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00205-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00686-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: red !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">XX</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00779-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00305-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01034-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00499-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00246-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00241-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00796-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00309-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00872-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00530-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00290-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00249-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00797-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00310-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00974-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00532-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00298-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00494-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00877-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00324-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00923-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00534-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00432-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00498-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00852-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00316-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00920-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00525-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00507-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00524-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00242-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00327-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00922-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00527-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00538-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00551-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00218-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00351-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00985-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00565-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00548-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00577-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00269-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00388-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01021-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00566-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00561-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00630-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00293-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00389-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG01022-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00567-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00586-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00662-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00294-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00396-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00971-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00647-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00606-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00698-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00296-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00450-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00959-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00673-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00638-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00777-ICI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00302-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00451-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00497-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+NG00674-PBS
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tibble_3.1.2      readxl_1.3.1      cluster_2.1.0     dplyr_0.8.5      
+ [5] optparse_1.6.6    rhdf5_2.28.1      mclust_5.4.6      tidyr_1.0.2      
+ [9] data.table_1.14.0 knitr_1.33        kableExtra_1.1.0  workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.0.0  xfun_0.24         purrr_0.3.4       colorspace_2.0-2 
+ [5] vctrs_0.3.8       htmltools_0.5.1.1 getopt_1.20.3     viridisLite_0.4.0
+ [9] yaml_2.2.1        utf8_1.2.1        rlang_0.4.11      later_1.0.0      
+[13] pillar_1.6.1      glue_1.4.2        lifecycle_1.0.0   stringr_1.4.0    
+[17] cellranger_1.1.0  munsell_0.5.0     rvest_0.3.5       evaluate_0.14    
+[21] httpuv_1.5.2      fansi_0.5.0       Rcpp_1.0.7        readr_1.3.1      
+[25] promises_1.1.0    scales_1.1.1      backports_1.2.1   webshot_0.5.2    
+[29] fs_1.4.1          hms_0.5.3         digest_0.6.27     stringi_1.7.2    
+[33] rprojroot_1.3-2   tools_3.6.2       magrittr_2.0.1    crayon_1.4.1     
+[37] whisker_0.4       pkgconfig_2.0.3   ellipsis_0.3.2    xml2_1.3.1       
+[41] assertthat_0.2.1  rmarkdown_2.1     httr_1.4.1        rstudioapi_0.13  
+[45] Rhdf5lib_1.6.3    R6_2.5.0          git2r_0.26.1      compiler_3.6.2   </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
