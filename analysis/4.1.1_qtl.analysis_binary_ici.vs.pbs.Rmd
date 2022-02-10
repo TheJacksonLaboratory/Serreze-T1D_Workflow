@@ -35,7 +35,7 @@ setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1
 
 We will load the data and subset indivials out that are in the groups of interest.  We will create a binary phenotype from this  (PBS ==0, ICI == 1).
 
-```{r data, echo=TRUE, results="asis"}
+```{r data, echo=TRUE}
 
 load("data/gm_allqc_4.batches.RData")
 
@@ -90,7 +90,7 @@ The table shows the estimated significance thresholds from permutation test.
 
 We also looked at the kinship to see how correlated each sample is. Kinship values between pairs of samples range between 0 (no relationship) and 1.0 (completely identical). The darker the colour the more indentical the pairs are.
 
-```{r permutation, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+```{r permutation, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
 
 Xcovar <- get_x_covar(gm)
 #addcovar = model.matrix(~Sex, data = covars)[,-1]
@@ -122,7 +122,7 @@ summary_table[c(3,1:2)] %>%
 
 The figures below show QTL maps for each phenotype
 
-```{r Genome-wide scan, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+```{r Genome-wide scan, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
 
 out <- scan1(pr.qc, gm$covar["ICI.vs.PBS"], Xcovar=Xcovar, model="binary")
 
@@ -154,7 +154,7 @@ plot_lod(out,gm$gmap)
 
 The table below shows QTL peaks associated with the phenotype. We use the 95% threshold from the permutations to find peaks. 
 
-```{r LOD peaks, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+```{r LOD peaks, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
 
 peaks<-find_peaks(out, gm$gmap, threshold=3.0, drop=1.5)
 
