@@ -111,14 +111,14 @@ design[] %>%
   + ICI vs EOI
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
       + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
   + ICI vs PBS
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
       + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
