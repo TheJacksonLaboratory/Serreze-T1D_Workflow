@@ -1,0 +1,639 @@
+---
+title: "QTL Analysis - age of onset [ICI vs EOI]"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+```
+
+## Loading Data
+
+```{r data, echo=TRUE}
+
+load("data/gm_allqc_4.batches.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+#pr <- readRDS("data/serreze_probs_allqc.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+##extracting animals with ici and eoi group status
+miceinfo <- gm$covar[gm$covar$group == "EOI" | gm$covar$group == "ICI",]
+table(miceinfo$group)
+mice.ids <- rownames(miceinfo)
+
+gm <- gm[mice.ids]
+gm
+table(gm$covar$group)
+
+#pr.qc <- pr
+#for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+#bin_pheno <- NULL
+#bin_pheno$EOI <- ifelse(gm$covar$group == "EOI", 1, 0)
+#bin_pheno$ICI <- ifelse(gm$covar$group == "ICI", 1, 0)
+#bin_pheno <- as.data.frame(bin_pheno)
+#rownames(bin_pheno) <- rownames(gm$covar)
+
+covars <- read_csv("data/covar_cleaned_ici.vs.eoi.csv")
+nrow(covars)
+table(covars$group)
+
+query_variants <- create_variant_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/cc_variants.sqlite")
+query_genes <- create_gene_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/mouse_genes_mgi.sqlite")
+
+
+##dropping monomorphic markers within the dataset
+
+g <- do.call("cbind", gm$geno)
+
+gf_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+#gn_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))))
+
+gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
+
+count <- rowSums(gf_mar <=0.05)
+low_freq_df <- merge(as.data.frame(gf_mar),as.data.frame(count), by="row.names",all=T)
+low_freq_df[is.na(low_freq_df)] <- ''
+low_freq_df <- low_freq_df[low_freq_df$count == 1,]
+rownames(low_freq_df) <- low_freq_df$Row.names
+
+low_freq <- find_markerpos(gm, rownames(low_freq_df))
+low_freq$id <- rownames(low_freq)
+
+nrow(low_freq)
+
+low_freq_bad <- merge(low_freq,low_freq_df, by="row.names",all=T)
+names(low_freq_bad)[1] <- c("marker")
+
+gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
+MAF <- apply(gf_mar, 1, function(x) min(x))
+MAF <- as.data.frame(MAF)
+MAF$index <- 1:nrow(gf_mar)
+gf_mar_maf <- merge(gf_mar,as.data.frame(MAF), by="row.names")
+gf_mar_maf <- gf_mar_maf[order(gf_mar_maf$index),]
+
+gfmar <- NULL
+gfmar$gfmar_mar_0 <- sum(gf_mar_maf$MAF==0)
+gfmar$gfmar_mar_1 <- sum(gf_mar_maf$MAF< 0.01)
+gfmar$gfmar_mar_5 <- sum(gf_mar_maf$MAF< 0.05)
+gfmar$gfmar_mar_10 <- sum(gf_mar_maf$MAF< 0.10)
+gfmar$gfmar_mar_15 <- sum(gf_mar_maf$MAF< 0.15)
+gfmar$gfmar_mar_25 <- sum(gf_mar_maf$MAF< 0.25)
+gfmar$gfmar_mar_50 <- sum(gf_mar_maf$MAF< 0.50)
+gfmar$total_snps <- nrow(as.data.frame(gf_mar_maf))
+
+gfmar <- t(as.data.frame(gfmar))
+gfmar <- as.data.frame(gfmar)
+gfmar$count <- gfmar$V1
+
+gfmar[c(2)] %>%
+  kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F)  %>%
+  row_spec(8 ,bold=T,color= "white",background = "black")
+
+gm_qc <- drop_markers(gm, low_freq_bad$marker)
+gm_qc <- drop_nullmarkers(gm_qc)
+ 
+gm = gm_qc
+gm
+
+markers <- marker_names(gm)
+gmapdf <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/genetic_map.csv")
+pmapdf <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/physical_map.csv")
+mapdf <- merge(gmapdf,pmapdf, by=c("marker","chr"), all=T)
+rownames(mapdf) <- mapdf$marker
+mapdf <- mapdf[markers,]
+names(mapdf) <- c('marker','chr','gmapdf','pmapdf')
+mapdf <- mapdf[!duplicated(mapdf[c(2:3)]),]
+
+pr.qc <- calc_genoprob(gm)
+
+```
+
+## Genome-wide scan
+
+```{r permutation prelim, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+
+covars$age.of.onset <- as.numeric(covars$age.of.onset)
+Xcovar <- get_x_covar(gm)
+addcovar = model.matrix(~ICI.vs.EOI, data = covars)[,-1]
+#addcovar.i = model.matrix(~ICI.vs.EOI, data = covars)[,-1]
+
+K <- calc_kinship(pr.qc, type = "loco")
+#heatmap(K[[1]])
+K.overall <- calc_kinship(pr.qc, type = "overall")
+#heatmap(K.overall)
+kinship <- calc_kinship(pr.qc)
+heatmap(kinship)
+
+```
+
+
+### No additive covariates
+
+```{r permutation, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+
+operm <- scan1perm(pr.qc, covars["age.of.onset"], model="normal", n_perm=10, perm_Xsp=TRUE, chr_lengths=chr_lengths(gm$gmap))
+
+summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+names(summary_table) <- c("autosomes","X")
+summary_table$significance.level <- rownames(summary_table)
+
+rownames(summary_table) <- NULL
+
+summary_table[c(3,1:2)] %>%
+  kable(escape = F,align = c("ccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+
+#summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+
+plot_lod<-function(out,map){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/",colnames(out)[i],  "_lod.png"))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx <- maxlod(out) # overall maximum LOD score
+    plot(out, gm$gmap, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
+    legend("topright", lwd=2, colnames(out)[i], bg="gray90")
+    title(main = paste0(colnames(out)[i]," - ICI vs. EOI (no covariates)"))
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col="red")
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste("p=", row.names(summary_table)[j]))
+    #}
+    #dev.off()
+  }
+}
+
+
+print("with normal kinship")
+outk <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", kinship=kinship)
+
+plot_lod(outk,gm$gmap)
+
+
+print("with loco kinship")
+out <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", kinship=K)
+
+plot_lod(out,gm$gmap)
+
+peaks<-find_peaks(out, gm$gmap, threshold=2.5, drop=1.5)
+
+rownames(peaks) <- NULL
+peaks[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+peaks_mbl <- list()
+#corresponding info in Mb
+for(i in 1:nrow(peaks)){
+  lodindex <- peaks$lodindex[i]
+  lodcolumn <- peaks$lodcolumn[i]
+  chr <- as.character(peaks$chr[i])
+  lod <- peaks$lod[i]
+  pos <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$pos[i] & mapdf$chr == peaks$chr[i])]
+  ci_lo <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_lo[i] & mapdf$chr == peaks$chr[i])]
+  ci_hi <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_hi[i] & mapdf$chr == peaks$chr[i])]
+  peaks_mb=cbind(lodindex, lodcolumn, chr, pos, lod, ci_lo, ci_hi)
+  peaks_mbl[[i]] <- peaks_mb
+}
+peaks_mba <- do.call(rbind, peaks_mbl)
+peaks_mba <- as.data.frame(peaks_mba)
+#peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")] <- sapply(peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")], as.numeric)
+
+rownames(peaks_mba) <- NULL
+peaks_mba[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+for (i in 1:nrow(peaks)){
+#for (i in 1:1){
+  #Plot 1
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
+  #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
+  #par(mar=c(4.1, 4.1, 1.5, 0.6))
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
+  ##dev.off()
+
+  chr = peaks$chr[i]
+
+# Plot 2
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar)
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], Xcovar=Xcovar)
+  coeff <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], kinship=K[[chr]])
+  blup <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], kinship=K[[chr]])
+
+  #plot_coef(coeff, 
+  #     gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1coeff])")
+  #     )
+
+  plot_coef(blup, 
+       gm$gmap[chr], columns=1:2,
+       bgcolor="gray95", legend="bottomleft", 
+       main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1blup])")
+       )
+  #last_coef <- unclass(coeff)[nrow(coeff),1:3]
+  #for(t in seq(along=last_coef))
+  #axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+ # Plot 3
+  #c2effB <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], model="binary", contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  #c2effBb <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]],Xcovar=Xcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  #plot(c2effB, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  #plot(c2effBb, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  ##last_coef <- unclass(c2effB)[nrow(c2effB),2:3] # last two coefficients
+  ##for(t in seq(along=last_coef))
+  ##  axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+  #Table 1
+  chr = peaks_mba$chr[i]
+  start=as.numeric(peaks_mba$ci_lo[i])
+  end=as.numeric(peaks_mba$ci_hi[i])
+
+  genesgss = query_genes(chr, start, end)
+
+  rownames(genesgss) <- NULL
+  genesgss$strand_old = genesgss$strand
+  genesgss$strand[genesgss$strand=="+"] <- "positive"
+  genesgss$strand[genesgss$strand=="-"] <- "negative"
+
+
+  print(kable(genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")], "html") %>% kable_styling("striped", full_width = T))
+
+  
+}
+
+
+```
+
+### Additive covariates
+```{r permutationa, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+
+operm <- scan1perm(pr.qc, covars["age.of.onset"], model="normal", addcovar=addcovar, n_perm=10, perm_Xsp=TRUE, chr_lengths=chr_lengths(gm$gmap))
+
+summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+names(summary_table) <- c("autosomes","X")
+summary_table$significance.level <- rownames(summary_table)
+
+rownames(summary_table) <- NULL
+
+summary_table[c(3,1:2)] %>%
+  kable(escape = F,align = c("ccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+
+#summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+
+plot_lod<-function(out,map){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/",colnames(out)[i],  "_lod.png"))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx <- maxlod(out) # overall maximum LOD score
+    plot(out, gm$gmap, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
+    legend("topright", lwd=2, colnames(out)[i], bg="gray90")
+    title(main = paste0(colnames(out)[i]," - ICI vs. EOI (with additive covariates)"))
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col="red")
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste("p=", row.names(summary_table)[j]))
+    #}
+    #dev.off()
+  }
+}
+
+
+print("with normal kinship")
+outka <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=kinship)
+
+plot_lod(outka,gm$gmap)
+
+print("with loco kinship")
+outa <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=K)
+
+plot_lod(outa,gm$gmap)
+
+out = outa
+
+peaks<-find_peaks(out, gm$gmap, threshold=1.5, drop=1.5)
+
+rownames(peaks) <- NULL
+peaks[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+peaks_mbl <- list()
+#corresponding info in Mb
+for(i in 1:nrow(peaks)){
+  lodindex <- peaks$lodindex[i]
+  lodcolumn <- peaks$lodcolumn[i]
+  chr <- as.character(peaks$chr[i])
+  lod <- peaks$lod[i]
+  pos <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$pos[i] & mapdf$chr == peaks$chr[i])]
+  ci_lo <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_lo[i] & mapdf$chr == peaks$chr[i])]
+  ci_hi <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_hi[i] & mapdf$chr == peaks$chr[i])]
+  peaks_mb=cbind(lodindex, lodcolumn, chr, pos, lod, ci_lo, ci_hi)
+  peaks_mbl[[i]] <- peaks_mb
+}
+peaks_mba <- do.call(rbind, peaks_mbl)
+peaks_mba <- as.data.frame(peaks_mba)
+#peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")] <- sapply(peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")], as.numeric)
+
+rownames(peaks_mba) <- NULL
+peaks_mba[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+for (i in 1:nrow(peaks)){
+#for (i in 1:1){
+  #Plot 1
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
+  #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
+  #par(mar=c(4.1, 4.1, 1.5, 0.6))
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
+  ##dev.off()
+
+  chr = peaks$chr[i]
+
+# Plot 2
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar)
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], Xcovar=Xcovar)
+  coeff <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], addcovar=addcovar, kinship=K[[chr]])
+  blup <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], addcovar=addcovar, kinship=K[[chr]])
+
+  #plot_coef(coeff, 
+  #     gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1coeff])")
+  #     )
+
+  plot_coef(blup, 
+       gm$gmap[chr], columns=1:2,
+       bgcolor="gray95", legend="bottomleft", 
+       main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1blup])")
+       )
+  #last_coef <- unclass(coeff)[nrow(coeff),1:3]
+  #for(t in seq(along=last_coef))
+  #axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+ # Plot 3
+  #c2effB <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], model="binary", contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  #c2effBb <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]],Xcovar=Xcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  #plot(c2effB, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  #plot(c2effBb, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  ##last_coef <- unclass(c2effB)[nrow(c2effB),2:3] # last two coefficients
+  ##for(t in seq(along=last_coef))
+  ##  axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+  #Table 1
+  chr = peaks_mba$chr[i]
+  start=as.numeric(peaks_mba$ci_lo[i])
+  end=as.numeric(peaks_mba$ci_hi[i])
+
+  genesgss = query_genes(chr, start, end)
+
+  rownames(genesgss) <- NULL
+  genesgss$strand_old = genesgss$strand
+  genesgss$strand[genesgss$strand=="+"] <- "positive"
+  genesgss$strand[genesgss$strand=="-"] <- "negative"
+
+  print(kable(genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")], "html") %>% kable_styling("striped", full_width = T))
+
+  
+}
+
+
+```
+
+### Interactive term 
+
+```{r permutationi, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE, results="asis"}
+
+operm <- scan1perm(pr.qc, covars["age.of.onset"], model="normal", addcovar=addcovar, intcovar=addcovar, n_perm=10, perm_Xsp=TRUE, chr_lengths=chr_lengths(gm$gmap))
+
+summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+names(summary_table) <- c("autosomes","X")
+summary_table$significance.level <- rownames(summary_table)
+
+rownames(summary_table) <- NULL
+
+summary_table[c(3,1:2)] %>%
+  kable(escape = F,align = c("ccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+
+#summary_table<-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+
+plot_lod<-function(out,map){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/",colnames(out)[i],  "_lod.png"))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx <- maxlod(out) # overall maximum LOD score
+    plot(out, gm$gmap, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
+    legend("topright", lwd=2, colnames(out)[i], bg="gray90")
+    title(main = paste0(colnames(out)[i]," - ICI vs. EOI (with interactive)"))
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col="red")
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste("p=", row.names(summary_table)[j]))
+    #}
+    #dev.off()
+  }
+}
+
+
+print("with normal kinship")
+outki <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=kinship)
+
+#plot_lod(outki,gm$gmap)
+
+outk.new <- outki-outka
+
+plot_lod(outk.new,gm$gmap)
+
+print("with loco kinship")
+outi <- scan1(pr.qc, covars["age.of.onset"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=K)
+
+#plot_lod(outi,gm$gmap)
+
+out.new <- outi-outa
+
+plot_lod(out.new,gm$gmap)
+
+out = out.new
+
+peaks<-find_peaks(out, gm$gmap, threshold=1.0, drop=1.5)
+
+rownames(peaks) <- NULL
+peaks[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+peaks_mbl <- list()
+#corresponding info in Mb
+for(i in 1:nrow(peaks)){
+  lodindex <- peaks$lodindex[i]
+  lodcolumn <- peaks$lodcolumn[i]
+  chr <- as.character(peaks$chr[i])
+  lod <- peaks$lod[i]
+  pos <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$pos[i] & mapdf$chr == peaks$chr[i])]
+  ci_lo <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_lo[i] & mapdf$chr == peaks$chr[i])]
+  ci_hi <- mapdf$pmapdf[which(mapdf$gmapdf == peaks$ci_hi[i] & mapdf$chr == peaks$chr[i])]
+  peaks_mb=cbind(lodindex, lodcolumn, chr, pos, lod, ci_lo, ci_hi)
+  peaks_mbl[[i]] <- peaks_mb
+}
+peaks_mba <- do.call(rbind, peaks_mbl)
+peaks_mba <- as.data.frame(peaks_mba)
+#peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")] <- sapply(peaks_mba[,c("chr", "pos", "lod", "ci_lo", "ci_hi")], as.numeric)
+
+rownames(peaks_mba) <- NULL
+peaks_mba[] %>%
+  kable(escape = F,align = c("ccccccc")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, bold=TRUE)
+
+for (i in 1:nrow(peaks)){
+#for (i in 1:1){
+  #Plot 1
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
+  #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
+  #par(mar=c(4.1, 4.1, 1.5, 0.6))
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
+  ##dev.off()
+
+  chr = peaks$chr[i]
+
+# Plot 2
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar)
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], Xcovar=Xcovar)
+  coeff <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], addcovar=addcovar, intcovar=addcovar, kinship=K[[chr]])
+  blup <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], addcovar=addcovar, kinship=K[[chr]])
+
+  #plot_coef(coeff, 
+  #     gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1coeff])")
+  #     )
+
+  plot_coef(blup, 
+       gm$gmap[chr], columns=1:2,
+       bgcolor="gray95", legend="bottomleft", 
+       main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i]," [scan1blup])")
+       )
+  #last_coef <- unclass(coeff)[nrow(coeff),1:3]
+  #for(t in seq(along=last_coef))
+  #axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+ # Plot 3
+  #c2effB <- scan1coef(pr.qc[,chr], covars[peaks$lodcolumn[i]], model="binary", contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  #c2effBb <- scan1blup(pr.qc[,chr], covars[peaks$lodcolumn[i]], contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]],Xcovar=Xcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  #plot(c2effB, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  #plot(c2effBb, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  ##last_coef <- unclass(c2effB)[nrow(c2effB),2:3] # last two coefficients
+  ##for(t in seq(along=last_coef))
+  ##  axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+  #Table 1
+  chr = peaks_mba$chr[i]
+  start=as.numeric(peaks_mba$ci_lo[i])
+  end=as.numeric(peaks_mba$ci_hi[i])
+
+  genesgss = query_genes(chr, start, end)
+
+  rownames(genesgss) <- NULL
+  genesgss$strand_old = genesgss$strand
+  genesgss$strand[genesgss$strand=="+"] <- "positive"
+  genesgss$strand[genesgss$strand=="-"] <- "negative"
+
+  print(kable(genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")], "html") %>% kable_styling("striped", full_width = T))
+
+
+}
+
+```
