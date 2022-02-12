@@ -74,7 +74,7 @@ gf_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
 
 gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
 
-count <- rowSums(gf_mar ==0)
+count <- rowSums(gf_mar <=0.05)
 low_freq_df <- merge(as.data.frame(gf_mar),as.data.frame(count), by="row.names",all=T)
 low_freq_df[is.na(low_freq_df)] <- ''
 low_freq_df <- low_freq_df[low_freq_df$count == 1,]
@@ -208,7 +208,7 @@ The table below shows QTL peaks associated with the phenotype. We use the 95% th
 
 ```{r LOD peaks, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
 
-peaks<-find_peaks(out, gm$gmap, threshold=2.5, drop=1.5)
+peaks<-find_peaks(out, gm$gmap, threshold=1.5, drop=1.5)
 
 rownames(peaks) <- NULL
 peaks[] %>%

@@ -71,7 +71,7 @@ design[1,4] <- "2 [1 binary/1 quantiative]"
 design[1,5] <- "diabetic status/group [binary] & age of onset [continuous]"
 design[1,6] <- ncol(genos)
 design[1,7] <- nrow(genos)
-design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] (not uses as all females; binary diabetic status for continous traits")
+design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] (sex not used as all females); binary diabetic status for continous traits")
 
 design <- t(design)
 #design <- as.data.frame(design)
@@ -103,23 +103,23 @@ design[] %>%
 * binary phenotpe
   + ICI vs EOI
     + [All markers](4.1.1_qtl.analysis_binary_ici.vs.eoi.html)
-    + [Missing & Monomorphic markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc.html)
+    + [Missing & Low Frequency markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc.html)
   + ICI vs PBS
     + [All markers](4.1.1_qtl.analysis_binary_ici.vs.pbs.html)
-    + [Missing & Monomorphic markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc.html)
+    + [Missing & Low Frequency markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc.html)
 * continious phenotype
   + ICI vs EOI
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
+      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
   + ICI vs PBS
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
+      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
-      + [Missing & Monomorphic markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
 
