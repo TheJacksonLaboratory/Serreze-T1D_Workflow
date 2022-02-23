@@ -115,24 +115,24 @@ design[] %>%
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
       + Missing & Low Frequency markers removed
-        + [Original Informtaion](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
+        + [Original Information](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
         + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.html)
         + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
       + Missing & Low Frequency markers removed
-        + [Original Informtaion](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+        + [Original Information & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
         + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected.html)
   + ICI vs PBS
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
       + Missing & Low Frequency markers removed
-        + [Original Informtaion](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
+        + [Original Information](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
         + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.html)
         + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
       + Missing & Low Frequency markers removed
-        + [Original Informtaion & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+        + [Original Information & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
         + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
 
