@@ -133,6 +133,6 @@ design[] %>%
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
       + Missing & Low Frequency markers removed
-        + [Original Informtaion](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+        + [Original Informtaion & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
         + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
 
