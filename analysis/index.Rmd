@@ -48,7 +48,8 @@ options(stringsAsFactors = FALSE)
 
 
 ### **Haplotype Phasing**
-* [Figures](0.2_haplotype_comparison_bqc_4batches.html)
+* [no minimum probability set](0.2_haplotype_comparison_bqc_4batches.html)
+* [minimum probability set for estimation of genotypes](0.2_haplotype_comparison_bqc_4batches_minprob.html)
 
 ### **1. Experiment Design**
 
@@ -97,7 +98,9 @@ design[] %>%
 
 ### **3. Phenotype QC**
 * Phenotypes
-  + [continuous](3.1_phenotype.qc.html)
+  + continuous
+    + [Original Information](3.1_phenotype.qc.html)
+    + [Correct Information](3.1_phenotype.qc_corrected.html)
 
 ### **4. QTL Analysis**
 * binary phenotpe
@@ -111,15 +114,25 @@ design[] %>%
   + ICI vs EOI
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
-      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
+      + [Missing & Low Frequency markers removed]
+        + [Original Informtaion](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
+        + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.html)
+        + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
-      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+      + Missing & Low Frequency markers removed
+        + [Original Informtaion](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+        + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected.html)
   + ICI vs PBS
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
-      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
+      + Missing & Low Frequency markers removed
+        + [Original Informtaion](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
+        + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.html)
+        + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
-      + [Missing & Low Frequency markers removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+      + Missing & Low Frequency markers removed
+        + [Original Informtaion](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+        + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
 
