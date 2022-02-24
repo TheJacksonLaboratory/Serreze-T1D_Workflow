@@ -41,7 +41,7 @@ load("data/gm_allqc_4.batches.RData")
 gm=gm_allqc
 gm
 
-pr <- readRDS("data/serreze_probs_allqc.rds")
+#pr <- readRDS("data/serreze_probs_allqc.rds")
 #pr <- readRDS("data/serreze_probs.rds")
 
 ##extracting animals with ici and pbs group status
@@ -71,9 +71,8 @@ gm <- gm[covars$Mouse.ID]
 gm
 table(gm$covar$group)
 
-pr.qc.ids <- pr
-for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
-
+#pr.qc.ids <- pr
+#for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
 
 query_variants <- create_variant_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/cc_variants.sqlite")
 query_genes <- create_gene_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/mouse_genes_mgi.sqlite")
@@ -81,16 +80,12 @@ query_genes <- create_gene_query_func("/Users/corneb/Documents/MyJax/CS/Projects
 
 ##dropping monomorphic markers within the dataset
 
-#g <- do.call("cbind", gm$geno)
+g <- do.call("cbind", gm$geno)
 
-#gf_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gf_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
 #gn_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))))
 
-gf_mar_probs <- calc_geno_freq(pr.qc.ids, by = "marker", omit_x = FALSE)
-#gn_mar_probs <- calc_geno_freq(probs, by = "individual", omit_x = FALSE)
-
-#gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
-gf_mar <- rbind(gf_mar_probs$A[,1:2], gf_mar_probs$X[,1:2])
+gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
 
 count <- rowSums(gf_mar <=0.05)
 low_freq_df <- merge(as.data.frame(gf_mar),as.data.frame(count), by="row.names",all=T)
@@ -260,16 +255,15 @@ peaks_mba[] %>%
 for (i in 1:nrow(peaks)){
 #for (i in 1:1){
   #Plot 1
-  #marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
-  g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
-  #gp <- g[,marker]
-  #gp[gp==1] <- "AA"
-  #gp[gp==2] <- "AB"
-  #gp[gp==0] <- NA
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
   #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
   #par(mar=c(4.1, 4.1, 1.5, 0.6))
-  plot_pxg(g, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
-  #plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
   title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
   ##dev.off()
 
@@ -425,16 +419,15 @@ peaks_mba[] %>%
 for (i in 1:nrow(peaks)){
 #for (i in 1:1){
   #Plot 1
-  #marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
-  g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
-  #gp <- g[,marker]
-  #gp[gp==1] <- "AA"
-  #gp[gp==2] <- "AB"
-  #gp[gp==0] <- NA
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
   #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
   #par(mar=c(4.1, 4.1, 1.5, 0.6))
-  plot_pxg(g, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
-  #plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
   title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
   ##dev.off()
 
@@ -600,16 +593,15 @@ peaks_mba[] %>%
 for (i in 1:nrow(peaks)){
 #for (i in 1:1){
   #Plot 1
-  #marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
-  g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
-  #gp <- g[,marker]
-  #gp[gp==1] <- "AA"
-  #gp[gp==2] <- "AB"
-  #gp[gp==0] <- NA
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
   #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
   #par(mar=c(4.1, 4.1, 1.5, 0.6))
-  plot_pxg(g, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
-  #plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  plot_pxg(gp, covars[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
   title(main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")"), line=0.2)
   ##dev.off()
 
