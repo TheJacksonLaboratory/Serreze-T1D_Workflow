@@ -94,13 +94,16 @@ design[] %>%
 * Step 2: SNP QC (Monomorphic, Genotype Error & Missing Data)
   + [4 batches](2.2.1_snp_qc_4.batches.html)
 * [Step 3: Preparing Files for QTL Analysis](2.4_preparing.data_aqc_4batches.html)
+* Disproportionate markers (after removal of missing and low frequency markers)
+  + [ICI vs EOI](genotype.frequencies_ici.vs.eoi.html)
+  + [ICI vs PBS](genotype.frequencies_ici.vs.pbs.html)
 
 
 ### **3. Phenotype QC**
 * Phenotypes
   + continuous
-    + [Original Information](3.1_phenotype.qc.html)
-    + [Correct Information](3.1_phenotype.qc_corrected.html)
+    + [Original Phenotypes](3.1_phenotype.qc.html)
+    + [Correct Phenotypes](3.1_phenotype.qc_corrected.html)
 
 ### **4. QTL Analysis**
 * binary phenotpe
@@ -115,24 +118,32 @@ design[] %>%
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.eoi.html)
       + Missing & Low Frequency markers removed
-        + [Original Information](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
-        + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.html)
-        + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned.html)
+        + [Original Phenotypes](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc.html)
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.html)
+        + [Correct Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned.html)
+      + Additional disproportionate markers removed
+        + [Correct Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi.html)
       + Missing & Low Frequency markers removed
-        + [Original Information & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
-        + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected.html)
+        + [Original Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc.html)
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected.html)
+      + Additional disproportionate markers removed
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis.html)
   + ICI vs PBS
     + age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
       + Missing & Low Frequency markers removed
-        + [Original Information](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
-        + [Correct Information](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.html)
-        + [Correct Information & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned.html)
+        + [Original Phenotypes](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc.html)
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.html)
+        + [Correct Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned.html)
+      + Additional disproportionate markers removed
+        + [Correct Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis.html)
     + ranknorm age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs.html)
       + Missing & Low Frequency markers removed
-        + [Original Information & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
-        + [Correct Information](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
+        + [Original Phenotypes & Outliers Removed](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc.html)
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
+      + Additional disproportionate markers removed
+        + [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis.html)
 

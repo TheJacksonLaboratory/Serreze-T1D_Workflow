@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2022-02-25" />
+
+<title>Genotype Frequencies - ICI vs PBS</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze T1D Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Genotype Frequencies - ICI vs PBS</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2022-02-25</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#with-sample-outliers">with sample outliers</a></li>
+<li><a href="#sample-outliers-removed">sample outliers removed</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-02-25
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3targetblank2cccbf3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3" target="_blank">2cccbf3</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3targetblank2cccbf3a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3" target="_blank">2cccbf3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+Untracked files:
+    Untracked:  analysis/genotype.frequencies_ici.vs.eoi.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs.Rmd
+    Untracked:  data/GM_covar.csv
+    Untracked:  data/bad_markers_all_4.batches.RData
+    Untracked:  data/covar_cleaned_ici.vs.eoi.csv
+    Untracked:  data/covar_cleaned_ici.vs.pbs.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.eoi.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.eoi1.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs1.csv
+    Untracked:  data/covar_corrected_ici.vs.eoi.csv
+    Untracked:  data/covar_corrected_ici.vs.eoi1.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs1.csv
+    Untracked:  data/e.RData
+    Untracked:  data/e_snpg_samqc_4.batches.RData
+    Untracked:  data/e_snpg_samqc_4.batches_bc.RData
+    Untracked:  data/errors_ind_4.batches.RData
+    Untracked:  data/errors_ind_4.batches_bc.RData
+    Untracked:  data/genetic_map.csv
+    Untracked:  data/genotype_errors_marker_4.batches.RData
+    Untracked:  data/genotype_freq_marker_4.batches.RData
+    Untracked:  data/gm_allqc_4.batches.RData
+    Untracked:  data/gm_samqc_3.batches.RData
+    Untracked:  data/gm_samqc_4.batches.RData
+    Untracked:  data/gm_samqc_4.batches_bc.RData
+    Untracked:  data/gm_serreze.192.RData
+    Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.geno.freq.removed.csv
+    Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.probs.freq.removed.csv
+    Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/percent_missing_id_3.batches.RData
+    Untracked:  data/percent_missing_id_4.batches.RData
+    Untracked:  data/percent_missing_id_4.batches_bc.RData
+    Untracked:  data/percent_missing_marker_4.batches.RData
+    Untracked:  data/pheno.csv
+    Untracked:  data/physical_map.csv
+    Untracked:  data/qc_info_bad_sample_3.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches.RData
+    Untracked:  data/qc_info_bad_sample_4.batches_bc.RData
+    Untracked:  data/remaining.markers_geno.freq.xlsx
+    Untracked:  data/sample_geno.csv
+    Untracked:  data/sample_geno_bc.csv
+    Untracked:  data/serreze_probs.rds
+    Untracked:  data/serreze_probs_allqc.rds
+    Untracked:  data/summary.cg_3.batches.RData
+    Untracked:  data/summary.cg_4.batches.RData
+    Untracked:  data/summary.cg_4.batches_bc.RData
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="with-sample-outliers" class="section level2">
+<h2>with sample outliers</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_4.batches.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               188
+No. genotyped individuals       188
+No. phenotyped individuals      188
+No. with both geno &amp; pheno      188
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>pr &lt;- readRDS(&quot;data/serreze_probs_allqc.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+geno &lt;- read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/sample_geno_bc.csv&quot;, as.is=T)
+names(geno) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,names(geno))
+rownames(geno) &lt;- geno$marker</code></pre>
+<pre class="r"><code>## extracting animals with ici and pbs group status
+miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+table(miceinfo$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               113
+No. genotyped individuals       113
+No. phenotyped individuals      113
+No. with both geno &amp; pheno      113
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>table(gm$covar$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code>covars &lt;- read_csv(&quot;data/covar_corrected_ici.vs.pbs.csv&quot;)
+# removing any missing info
+#covars &lt;- subset(covars, covars$age.of.onset!=&#39;&#39;)
+nrow(covars)</code></pre>
+<pre><code>[1] 113</code></pre>
+<pre class="r"><code>table(covars$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code># keeping only informative mice
+gm &lt;- gm[covars$Mouse.ID]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               113
+No. genotyped individuals       113
+No. phenotyped individuals      113
+No. with both geno &amp; pheno      113
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>table(gm$covar$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code>pr.qc.ids &lt;- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno &lt;- geno[,covars$Mouse.ID]
+geno &lt;- geno[marker_names(gm),]
+dim(geno)</code></pre>
+<pre><code>[1] 131578    113</code></pre>
+<pre class="r"><code>## calculating genotype frequencies
+### from geno genotypes
+g &lt;- do.call(&quot;cbind&quot;, gm$geno)
+gf_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw&lt;- gf_mar_raw[gf_mar_raw[,2] != &quot;NaN&quot;,]
+colnames(gf_mar_geno) &lt;- c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)
+colnames(gn_mar_geno) &lt;- c(&quot;count_missing_geno_table&quot;,&quot;count_AA_geno_table&quot;,&quot;count_AB_geno_table&quot;)
+gfn_mar_geno &lt;- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by=&quot;row.names&quot;)
+rownames(gfn_mar_geno) &lt;- gfn_mar_geno[,1]
+gfn_mar_geno &lt;- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl &lt;- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi &lt;- geno[i,]
+#    freqf &lt;- table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;)))
+#    genoi$count_AA_raw_rowSums &lt;- rowSums(genoi == &quot;AA&quot;)
+#    genoi$count_AB_raw_rowSums &lt;- rowSums(genoi == &quot;AB&quot;)
+#    genoi$count_missing_raw_rowSums &lt;- rowSums(genoi == &quot;-&quot;)
+#    freqf &lt;- t(table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))))
+#    freqf &lt;- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) &lt;- rownames(genoi)
+#    colnames(freqf) &lt;- c(&quot;count_missing_raw_table&quot;,&quot;count_AA_raw_table&quot;,&quot;count_AB_raw_table&quot;)
+#    genoif &lt;- cbind(freqf,genoi[c(&quot;count_AA_raw_rowSums&quot;,&quot;count_AB_raw_rowSums&quot;,&quot;count_missing_raw_rowSums&quot;)])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw &lt;- do.call(&quot;rbind&quot;,genosl)
+#gf_mar_raw &lt;- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index &lt;- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 &lt;- calc_geno_freq(pr.qc.ids, by = &quot;marker&quot;, omit_x = FALSE)
+#gn_mar_probs &lt;- calc_geno_freq(probs, by = &quot;individual&quot;, omit_x = FALSE)
+gf_mar_probs &lt;- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) &lt;- paste0(&quot;freq_&quot;,colnames(gf_mar_probs),&quot;_probs&quot;)
+gf_mar_probs &lt;- as.data.frame(gf_mar_probs)
+gf_mar_probs$index &lt;- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 &lt;- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by=&quot;row.names&quot;)
+#rownames(gf_mar.1) &lt;- gf_mar.1[,1]
+#gf_mar.1 &lt;- gf_mar.1[-1]
+#gf_mar &lt;- merge(gf_mar.1,as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+gf_mar &lt;- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+rownames(gf_mar) &lt;- gf_mar[,1]
+gf_mar &lt;- gf_mar[-1]
+gf_mar &lt;- gf_mar[order(gf_mar$index),]
+dim(gf_mar)</code></pre>
+<pre><code>[1] 131578      8</code></pre>
+<pre class="r"><code># Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio &gt;= 0.90 &amp; gf_mar$ratio &lt;= 1.10, TRUE,FALSE)
+table(gf_mar$Include)</code></pre>
+<pre><code>
+ FALSE   TRUE 
+122652   8926 </code></pre>
+<pre class="r"><code>## filtering out &lt;= 0.05
+gf_mar$count.geno &lt;- rowSums(gf_mar[c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)] &lt;=0.05)
+filtered_gf_mar_geno &lt;- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno &lt;- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_geno)</code></pre>
+<pre><code>[1] 33368     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_geno$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+24442  8926 </code></pre>
+<pre class="r"><code>gf_mar$count.probs &lt;- rowSums(gf_mar[c(&quot;freq_AA_probs&quot;,&quot;freq_AB_probs&quot;)] &lt;=0.05)
+filtered_gf_mar_probs &lt;- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs &lt;- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_probs)</code></pre>
+<pre><code>[1] 33233     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_probs$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+26228  7005 </code></pre>
+<pre class="r"><code>## merging with sample_genos
+#filtered_gf_mar_geno_sample &lt;- merge(geno,filtered_gf_mar_geno, by=&quot;row.names&quot;, all.y=T)
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+#names(filtered_gf_mar_geno_sample)[1] &lt;- c(&quot;marker&quot;)
+#dim(filtered_gf_mar_geno_sample)
+
+#filtered_gf_mar_probs_sample &lt;- merge(geno,filtered_gf_mar_probs, by=&quot;row.names&quot;, all.y=T)
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+#names(filtered_gf_mar_probs_sample)[1] &lt;- c(&quot;marker&quot;)
+#dim(filtered_gf_mar_probs_sample)
+
+## saving files
+#write.csv(filtered_gf_mar_geno_sample, &quot;data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed.csv&quot;, quote=F)
+#write.csv(filtered_gf_mar_probs_sample, &quot;data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed.csv&quot;, quote=F)
+
+write.csv(filtered_gf_mar_geno, &quot;data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs, &quot;data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio.csv&quot;, quote=F)</code></pre>
+</div>
+<div id="sample-outliers-removed" class="section level2">
+<h2>sample outliers removed</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_4.batches.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               188
+No. genotyped individuals       188
+No. phenotyped individuals      188
+No. with both geno &amp; pheno      188
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>pr &lt;- readRDS(&quot;data/serreze_probs_allqc.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+geno &lt;- read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/sample_geno_bc.csv&quot;, as.is=T)
+names(geno) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,names(geno))
+rownames(geno) &lt;- geno$marker</code></pre>
+<pre class="r"><code>## extracting animals with ici and pbs group status
+miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+table(miceinfo$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               113
+No. genotyped individuals       113
+No. phenotyped individuals      113
+No. with both geno &amp; pheno      113
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>table(gm$covar$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  21 </code></pre>
+<pre class="r"><code>covars &lt;- read_csv(&quot;data/covar_corrected.cleaned_ici.vs.pbs.csv&quot;)
+# removing any missing info
+covars &lt;- subset(covars, covars$age.of.onset!=&#39;&#39;)
+nrow(covars)</code></pre>
+<pre><code>[1] 111</code></pre>
+<pre class="r"><code>table(covars$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  19 </code></pre>
+<pre class="r"><code># keeping only informative mice
+gm &lt;- gm[covars$Mouse.ID]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               111
+No. genotyped individuals       111
+No. phenotyped individuals      111
+No. with both geno &amp; pheno      111
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131578
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+ 9977 10005  7858  7589  7621  7758  7413  6472  6725  6396  7154  6137  6085 
+   14    15    16    17    18    19     X 
+ 5981  5346  5019  5093  4607  3564  4778 </code></pre>
+<pre class="r"><code>table(gm$covar$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 92  19 </code></pre>
+<pre class="r"><code>pr.qc.ids &lt;- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno &lt;- geno[,covars$Mouse.ID]
+geno &lt;- geno[marker_names(gm),]
+dim(geno)</code></pre>
+<pre><code>[1] 131578    111</code></pre>
+<pre class="r"><code>## calculating genotype frequencies
+### from geno genotypes
+g &lt;- do.call(&quot;cbind&quot;, gm$geno)
+gf_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw&lt;- gf_mar_raw[gf_mar_raw[,2] != &quot;NaN&quot;,]
+colnames(gf_mar_geno) &lt;- c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)
+colnames(gn_mar_geno) &lt;- c(&quot;count_missing_geno_table&quot;,&quot;count_AA_geno_table&quot;,&quot;count_AB_geno_table&quot;)
+gfn_mar_geno &lt;- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by=&quot;row.names&quot;)
+rownames(gfn_mar_geno) &lt;- gfn_mar_geno[,1]
+gfn_mar_geno &lt;- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl &lt;- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi &lt;- geno[i,]
+#    freqf &lt;- table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;)))
+#    genoi$count_AA_raw_rowSums &lt;- rowSums(genoi == &quot;AA&quot;)
+#    genoi$count_AB_raw_rowSums &lt;- rowSums(genoi == &quot;AB&quot;)
+#    genoi$count_missing_raw_rowSums &lt;- rowSums(genoi == &quot;-&quot;)
+#    freqf &lt;- t(table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))))
+#    freqf &lt;- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) &lt;- rownames(genoi)
+#    colnames(freqf) &lt;- c(&quot;count_missing_raw_table&quot;,&quot;count_AA_raw_table&quot;,&quot;count_AB_raw_table&quot;)
+#    genoif &lt;- cbind(freqf,genoi[c(&quot;count_AA_raw_rowSums&quot;,&quot;count_AB_raw_rowSums&quot;,&quot;count_missing_raw_rowSums&quot;)])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw &lt;- do.call(&quot;rbind&quot;,genosl)
+#gf_mar_raw &lt;- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index &lt;- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 &lt;- calc_geno_freq(pr.qc.ids, by = &quot;marker&quot;, omit_x = FALSE)
+#gn_mar_probs &lt;- calc_geno_freq(probs, by = &quot;individual&quot;, omit_x = FALSE)
+gf_mar_probs &lt;- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) &lt;- paste0(&quot;freq_&quot;,colnames(gf_mar_probs),&quot;_probs&quot;)
+gf_mar_probs &lt;- as.data.frame(gf_mar_probs)
+gf_mar_probs$index &lt;- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 &lt;- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by=&quot;row.names&quot;)
+#rownames(gf_mar.1) &lt;- gf_mar.1[,1]
+#gf_mar.1 &lt;- gf_mar.1[-1]
+#gf_mar &lt;- merge(gf_mar.1,as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+gf_mar &lt;- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+rownames(gf_mar) &lt;- gf_mar[,1]
+gf_mar &lt;- gf_mar[-1]
+gf_mar &lt;- gf_mar[order(gf_mar$index),]
+dim(gf_mar)</code></pre>
+<pre><code>[1] 131578      8</code></pre>
+<pre class="r"><code># Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio &gt;= 0.90 &amp; gf_mar$ratio &lt;= 1.10, TRUE,FALSE)
+table(gf_mar$Include)</code></pre>
+<pre><code>
+ FALSE   TRUE 
+122863   8715 </code></pre>
+<pre class="r"><code>## filtering out &lt;= 0.05
+gf_mar$count.geno &lt;- rowSums(gf_mar[c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)] &lt;=0.05)
+filtered_gf_mar_geno &lt;- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno &lt;- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_geno)</code></pre>
+<pre><code>[1] 33287     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_geno$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+24572  8715 </code></pre>
+<pre class="r"><code>gf_mar$count.probs &lt;- rowSums(gf_mar[c(&quot;freq_AA_probs&quot;,&quot;freq_AB_probs&quot;)] &lt;=0.05)
+filtered_gf_mar_probs &lt;- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs &lt;- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_probs)</code></pre>
+<pre><code>[1] 33240     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_probs$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+26427  6813 </code></pre>
+<pre class="r"><code>## merging with sample_genos
+#filtered_gf_mar_geno_sample &lt;- merge(geno,filtered_gf_mar_geno, by=&quot;row.names&quot;, all.y=T)
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+#names(filtered_gf_mar_geno_sample)[1] &lt;- c(&quot;marker&quot;)
+#dim(filtered_gf_mar_geno_sample)
+
+#filtered_gf_mar_probs_sample &lt;- merge(geno,filtered_gf_mar_probs, by=&quot;row.names&quot;, all.y=T)
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+#names(filtered_gf_mar_probs_sample)[1] &lt;- c(&quot;marker&quot;)
+#dim(filtered_gf_mar_probs_sample)
+
+## saving files
+#write.csv(filtered_gf_mar_geno_sample, &quot;data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv&quot;, quote=F)
+#write.csv(filtered_gf_mar_probs_sample, &quot;data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed.csv&quot;, quote=F)
+
+write.csv(filtered_gf_mar_geno, &quot;data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs, &quot;data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio.csv&quot;, quote=F)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] abind_1.4-5       qtl2_0.22         reshape2_1.4.4    ggplot2_3.3.5    
+ [5] tibble_3.1.2      psych_2.0.7       readxl_1.3.1      cluster_2.1.0    
+ [9] dplyr_0.8.5       optparse_1.6.6    rhdf5_2.28.1      mclust_5.4.6     
+[13] tidyr_1.0.2       data.table_1.14.0 knitr_1.33        kableExtra_1.1.0 
+[17] workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.1        bit64_4.0.5       viridisLite_0.4.0 assertthat_0.2.1 
+ [5] highr_0.9         blob_1.2.1        cellranger_1.1.0  yaml_2.2.1       
+ [9] pillar_1.6.1      RSQLite_2.2.7     backports_1.2.1   lattice_0.20-38  
+[13] glue_1.4.2        digest_0.6.27     promises_1.1.0    rvest_0.3.5      
+[17] colorspace_2.0-2  htmltools_0.5.1.1 httpuv_1.5.2      plyr_1.8.6       
+[21] pkgconfig_2.0.3   purrr_0.3.4       scales_1.1.1      webshot_0.5.2    
+[25] getopt_1.20.3     later_1.0.0       git2r_0.26.1      ellipsis_0.3.2   
+[29] cachem_1.0.5      withr_2.4.2       mnormt_1.5-7      magrittr_2.0.1   
+[33] crayon_1.4.1      memoise_2.0.0     evaluate_0.14     fs_1.4.1         
+[37] fansi_0.5.0       nlme_3.1-142      xml2_1.3.1        tools_3.6.2      
+[41] hms_0.5.3         lifecycle_1.0.0   stringr_1.4.0     Rhdf5lib_1.6.3   
+[45] munsell_0.5.0     compiler_3.6.2    rlang_0.4.11      grid_3.6.2       
+[49] rstudioapi_0.13   rmarkdown_2.1     gtable_0.3.0      DBI_1.1.1        
+[53] R6_2.5.0          fastmap_1.1.0     bit_4.0.4         utf8_1.2.1       
+[57] rprojroot_1.3-2   readr_1.3.1       stringi_1.7.2     parallel_3.6.2   
+[61] Rcpp_1.0.7        vctrs_0.3.8       tidyselect_1.0.0  xfun_0.24        </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
