@@ -11,7 +11,7 @@
 
 <meta name="author" content="Belinda Cornes" />
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-03-09" />
 
 <title>Serreze Workflow</title>
 
@@ -316,7 +316,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Serreze Workflow</h1>
 <h4 class="author">Belinda Cornes</h4>
-<h4 class="date">2022-02-25</h4>
+<h4 class="date">2022-03-09</h4>
 
 </div>
 
@@ -333,7 +333,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -342,7 +342,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -351,10 +351,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-02-25
+<strong>Last updated:</strong> 2022-03-09
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -370,12 +370,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -442,16 +442,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3targetblank2cccbf3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3" target="_blank">2cccbf3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree46d3df11fc7b922ae2056bea76235251014c0201targetblank46d3df1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/46d3df11fc7b922ae2056bea76235251014c0201" target="_blank">46d3df1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3targetblank2cccbf3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree46d3df11fc7b922ae2056bea76235251014c0201targetblank46d3df1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2cccbf3a9a7a4ce4dc49c668832d8d0ea35021b3" target="_blank">2cccbf3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/46d3df11fc7b922ae2056bea76235251014c0201" target="_blank">46d3df1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -459,15 +459,9 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
-    Ignored:    analysis/figure/
+    Ignored:    analysis/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis.Rmd
-    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis.Rmd
-    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis.Rmd
-    Untracked:  analysis/4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.eoi.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.pbs.Rmd
     Untracked:  data/GM_covar.csv
     Untracked:  data/bad_markers_all_4.batches.RData
     Untracked:  data/covar_cleaned_ici.vs.eoi.csv
@@ -527,9 +521,6 @@ Untracked files:
     Untracked:  data/summary.cg_4.batches.RData
     Untracked:  data/summary.cg_4.batches_bc.RData
 
-Unstaged changes:
-    Modified:   analysis/index.Rmd
-
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
@@ -567,6 +558,74 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/46d3df11fc7b922ae2056bea76235251014c0201/analysis/index.Rmd" target="_blank">46d3df1</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-03-09
+</td>
+<td>
+no xcovar or kinship
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/ce47ff8e1cfea72de68e02996aa93f5e9384b70b/analysis/index.Rmd" target="_blank">ce47ff8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-03-09
+</td>
+<td>
+Start workflowr project.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/analysis/index.Rmd" target="_blank">2d3ed78</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-02-25
+</td>
+<td>
+removing disproportionate markers
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/docs/index.html" target="_blank">2d3ed78</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-02-25
+</td>
+<td>
+removing disproportionate markers
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1030,11 +1089,21 @@ sex [F: 192; M: 0] (sex not used as all females); binary diabetic status for con
 <ul>
 <li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi.html">All markers</a></li>
 <li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc.html">Missing &amp; Low Frequency markers removed</a></li>
+<li>Additional disproportionate markers removed
+<ul>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis.html">markers removed</a></li>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x.html">markers removed &amp; no xcovar</a></li>
+</ul></li>
 </ul></li>
 <li>ICI vs PBS
 <ul>
 <li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs.html">All markers</a></li>
 <li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc.html">Missing &amp; Low Frequency markers removed</a></li>
+<li>Additional disproportionate markers removed
+<ul>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis.html">markers removed</a></li>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x.html">markers removed &amp; no xcovar</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 <li>continious phenotype
@@ -1053,6 +1122,7 @@ sex [F: 192; M: 0] (sex not used as all females); binary diabetic status for con
 <li>Additional disproportionate markers removed
 <ul>
 <li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis.html">Correct Phenotypes &amp; Outliers Removed</a></li>
+<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk.html">Correct Phenotypes &amp; Outliers Removed (no xcovar or kinship)</a></li>
 </ul></li>
 </ul></li>
 <li>ranknorm age-of-onset
@@ -1066,6 +1136,7 @@ sex [F: 192; M: 0] (sex not used as all females); binary diabetic status for con
 <li>Additional disproportionate markers removed
 <ul>
 <li><a href="4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis.html">Correct Phenotypes</a></li>
+<li><a href="4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis_no-xk.html">Correct Phenotypes (no xcovar or kinship)</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -1083,6 +1154,7 @@ sex [F: 192; M: 0] (sex not used as all females); binary diabetic status for con
 <li>Additional disproportionate markers removed
 <ul>
 <li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis.html">Correct Phenotypes &amp; Outliers Removed</a></li>
+<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk.html">Correct Phenotypes &amp; Outliers Removed (no xcovar or kinship)</a></li>
 </ul></li>
 </ul></li>
 <li>ranknorm age-of-onset
@@ -1096,6 +1168,7 @@ sex [F: 192; M: 0] (sex not used as all females); binary diabetic status for con
 <li>Additional disproportionate markers removed
 <ul>
 <li><a href="4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis.html">Correct Phenotypes</a></li>
+<li><a href="4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis_no-xk.html">Correct Phenotypes (no xcovar or kinship)</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
