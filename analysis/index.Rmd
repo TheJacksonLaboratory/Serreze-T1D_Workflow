@@ -113,8 +113,8 @@ design[] %>%
     * [All markers](4.1.1_qtl.analysis_binary_ici.vs.pbs.html)
     * [Missing & Low Frequency markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc.html)
     * Additional disproportionate markers removed
-      + [markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis.html)
-      + [markers removed & no xcovar](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x.html)
+      + [markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis.html)
+      + [markers removed & no xcovar](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x.html)
 * continious phenotype
   + ICI vs EOI
     * age-of-onset
@@ -133,7 +133,7 @@ design[] %>%
         * [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected.html)
       + Additional disproportionate markers removed
         * [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis.html)
-        * [Correct Phenotypes & Outliers Removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis_no-xk.html)
+        * [Correct Phenotypes (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rzage_ici.vs.eoi_snpsqc_pheno.corrected_dis_no-xk.html)
   + ICI vs PBS
     * age-of-onset
       + [All markers](4.1.2_qtl.analysis_cont_age_ici.vs.pbs.html)
@@ -151,5 +151,5 @@ design[] %>%
         * [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected.html)
       + Additional disproportionate markers removed
         * [Correct Phenotypes](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis.html)
-        * [Correct Phenotypes & Outliers Removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis_no-xk.html)
+        * [Correct Phenotypes (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rzage_ici.vs.pbs_snpsqc_pheno.corrected_dis_no-xk.html)
 
