@@ -109,12 +109,14 @@ design[] %>%
     * Additional disproportionate markers removed
       + [markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis.html)
       + [markers removed & no xcovar](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x.html)
+      + [markers removed & no xcovar (updated)](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated.html)
   + ICI vs PBS
     * [All markers](4.1.1_qtl.analysis_binary_ici.vs.pbs.html)
     * [Missing & Low Frequency markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc.html)
     * Additional disproportionate markers removed
       + [markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis.html)
       + [markers removed & no xcovar](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x.html)
+      + [markers removed & no xcovar (updated)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated.html)
 * continious phenotype
   + ICI vs EOI
     * age-of-onset
