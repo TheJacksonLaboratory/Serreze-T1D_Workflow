@@ -30,14 +30,14 @@ library(abind)
 setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
 ```
 
-### Data Information
+## Data Information
 
 + binary phenotype (therefore no kinship)
 + no Xcovar
 + low frequency (< 5% in samples) removed
 + disproportionate markers removed
 
-### Loading Data
+## Loading Data
 
 We will load the data and subset indivials out that are in the groups of interest.  We will create a binary phenotype from this  (EOI ==0, ICI == 1).
 
@@ -161,7 +161,7 @@ pr.qc <- calc_genoprob(gm)
 ```
 
 
-### Genome-wide scan
+## Genome-wide scan
 For each of the phenotype analyzed, permutations were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A).  
 
 The table shows the estimated significance thresholds from permutation test. 
@@ -231,7 +231,7 @@ plot_lod(out,gm$gmap)
 
 ```
 
-### LOD peaks
+## LOD peaks
 
 The table below shows QTL peaks associated with the phenotype. We use the 95% threshold from the permutations to find peaks. 
 
@@ -241,7 +241,7 @@ The table below shows QTL peaks associated with the phenotype. We use the 95% th
 #peaks <- find_peaks(out, gm$gmap,drop=1.5, peakdrop=3)
 #peaks <- find_peaks(out, gm$gmap, threshold=3, peakdrop=1, drop=1)
 #peaks <- find_peaks(out, gm$gmap, peakdrop=0.5, drop=0.5)
-peaks <- find_peaks(out, gm$gmap, threshold=summary(operm,alpha=0.01)$A, thresholdX = summary(operm,alpha=0.01)$X, peakdrop=3, drop=1.5)
+peaks <- find_peaks(out, gm$gmap, threshold=summary(operm,alpha=0.05)$A, thresholdX = summary(operm,alpha=0.05)$X, peakdrop=3, drop=1.5)
 
 rownames(peaks) <- NULL
 peaks[] %>%
@@ -275,6 +275,8 @@ for (i in 1:nrow(peaks)){
   plot_lod_chr(out,gm$gmap, peaks$chr[i])
 }
 
+print("peaks in MB positions")
+
 peaks_mbl <- list()
 #corresponding info in Mb
 for(i in 1:nrow(peaks)){
@@ -298,17 +300,43 @@ peaks_mba[] %>%
   kable_styling("striped", full_width = T) %>%
   column_spec(1, bold=TRUE)
 
+plot_lod_chr_mb<-function(out,map,chrom){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/",colnames(out)[i],  "_lod.png"))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx <- maxlod(out) # overall maximum LOD score
+    plot(out, map, chr = chrom, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
+    legend("topright", lwd=2, colnames(out)[i], bg="gray90")
+    title(main = paste0(colnames(out)[i], " - chr", chrom, " [positions in MB]"))
+    add_threshold(map,  summary(operm,alpha=0.1), col = 'purple')
+    add_threshold(map,  summary(operm, alpha=0.05), col = 'red')
+    add_threshold(map,  summary(operm, alpha=0.01), col = 'blue')
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col="red")
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste("p=", row.names(summary_table)[j]))
+    #}
+    #dev.off()
+  }
+}
+
+for (i in 1:nrow(peaks)){
+  plot_lod_chr_mb(out,gm$pmap, peaks$chr[i])
+}
+
 ```
-### QTL effects
+## QTL effects
 
 For each peak LOD location we give a list of gene
 
-```{r QTL effects, echo=TRUE, results="asis"}
+### Chromsome 3
+
+```{r QTL effects chr3, echo=TRUE, results="asis"}
 
 query_variants <- create_variant_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/cc_variants.sqlite")
 query_genes <- create_gene_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/mouse_genes_mgi.sqlite")
 
-for (i in 1:nrow(peaks)){
+for (i in 1){
 #for (i in 1:1){
   #Plot 1
   marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
@@ -412,5 +440,166 @@ for (i in 1:nrow(peaks)){
   
 
 }
+
+```
+
+### Chromsome 4
+
+```{r QTL effects chr4, echo=TRUE, results="asis"}
+
+query_variants <- create_variant_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/cc_variants.sqlite")
+query_genes <- create_gene_query_func("/Users/corneb/Documents/MyJax/CS/Projects/support.files/qtl2/mouse_genes_mgi.sqlite")
+
+for (i in 2){
+#for (i in 1:1){
+  #Plot 1
+  marker = find_marker(gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i])
+  #g <- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE, minprob = 0.5)
+  gp <- g[,marker]
+  gp[gp==1] <- "AA"
+  gp[gp==2] <- "AB"
+  gp[gp==0] <- NA
+  #png(filename=paste0("/Users/chenm/Documents/qtl/Jai/","qtl_effect_", i, ".png"))
+  #par(mar=c(4.1, 4.1, 1.5, 0.6))
+  plot_pxg(gp, gm$covar[,peaks$lodcolumn[i]], ylab=peaks$lodcolumn[i], sort=FALSE)
+  title(main = paste("chr", chr=peaks$chr[i], "pos: ", peaks$pos[i], "cM /",peaks_mba$pos[i],"mb (",peaks$lodcolumn[i],")"), line=0.2)
+  ##dev.off()
+
+  chr = peaks$chr[i]
+  
+
+# Plot 2
+  pr_sub <- pull_genoprobint(pr.qc, gm$gmap, chr, c(peaks$ci_lo[i], peaks$ci_hi[i]))
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar)
+  #coeff <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], Xcovar=Xcovar)
+  #coeff <- scan1coef(pr.qc[,chr], gm$covar[peaks$lodcolumn[i]], model="binary")
+  #coeff_sub <- scan1coef(pr_sub[,chr], gm$covar[peaks$lodcolumn[i]], model="binary")
+  blup <- scan1blup(pr.qc[,chr], gm$covar[peaks$lodcolumn[i]])
+  blup_sub <- scan1blup(pr_sub[,chr], gm$covar[peaks$lodcolumn[i]])
+
+  #plot_coef(coeff, 
+  #     gm$gmap, columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos: ", peaks$pos[i], "cM /",peaks_mba$pos[i],"MB\n(",peaks$lodcolumn[i]," [scan1coeff; positions in cM] )")
+  #     )
+
+  #plot_coef(coeff_sub, 
+  #     gm$gmap, columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos: ", peaks$pos[i], "cM /",peaks_mba$pos[i],"MB\n(",peaks$lodcolumn[i],"; 1.5 LOD drop interval [scan1coeff; positions in cM] ) ")
+  #     )
+
+
+  plot_coef(blup, 
+       gm$gmap, columns=1:2,
+       bgcolor="gray95", legend="bottomleft", 
+       main = paste("chr", chr=peaks$chr[i], "pos: ", peaks$pos[i], "cM /",peaks_mba$pos[i],"MB\n(",peaks$lodcolumn[i]," [scan1blup; positions in cM] )")
+       )
+
+  plot_coef(blup_sub, 
+       gm$gmap, columns=1:2,
+       bgcolor="gray95", legend="bottomleft", 
+       main = paste("chr", chr=peaks$chr[i], "pos: ", peaks$pos[i], "cM /",peaks_mba$pos[i],"MB\n(",peaks$lodcolumn[i],"; 1.5 LOD drop interval [scan1blup; positions in cM] )")
+       )
+
+  #last_coef <- unclass(coeff)[nrow(coeff),1:3]
+  #for(t in seq(along=last_coef))
+  #axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+ # Plot 3
+  #c2effB <- scan1coef(pr.qc[,chr], gm$covar[peaks$lodcolumn[i]], model="binary", contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  #c2effBb <- scan1blup(pr.qc[,chr], gm$covar[peaks$lodcolumn[i]], contrasts=cbind(a=c(-1, 0), d=c(0, -1)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]], addcovar = addcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  ##c2effB <- scan1coef(pr[,chr], cross$pheno[,peaks$lodcolumn[i]],Xcovar=Xcovar, contrasts=cbind(mu=c(1,1,1), a=c(-1, 0, 1), d=c(0, 1, 0)))
+  #plot(c2effB, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  #plot(c2effBb, gm$gmap[chr], columns=1:2,
+  #     bgcolor="gray95", legend="bottomleft", 
+  #     main = paste("chr", chr=peaks$chr[i], "pos", peaks$pos[i], "(",peaks$lodcolumn[i],")")
+  #     )
+  ##last_coef <- unclass(c2effB)[nrow(c2effB),2:3] # last two coefficients
+  ##for(t in seq(along=last_coef))
+  ##  axis(side=4, at=last_coef[t], names(last_coef)[t], tick=FALSE)
+
+
+  #Table 1
+  chr = peaks_mba$chr[i]
+  start=as.numeric(peaks_mba$ci_lo[i])
+  end=as.numeric(peaks_mba$ci_hi[i])
+
+
+  genesgss = query_genes(chr, start, end)
+
+  rownames(genesgss) <- NULL
+  genesgss$strand_old = genesgss$strand
+  genesgss$strand[genesgss$strand=="+"] <- "positive"
+  genesgss$strand[genesgss$strand=="-"] <- "negative"
+
+  #genesgss <- 
+  #table <- 
+  #genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")] %>%
+  #kable(escape = F,align = c("ccccccccccc")) %>%
+  #kable_styling("striped", full_width = T) #%>% 
+  #cat #%>%
+  #column_spec(1, bold=TRUE)
+#
+  #print(kable(genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")], escape = F,align = c("ccccccccccc")))
+
+  print(kable(genesgss[,c("chr","type","start","stop","strand","ID","Name","Dbxref","gene_id","mgi_type","description")], "html") %>% kable_styling("striped", full_width = T))
+
+  #table
+  
+
+}
+
+```
+
+## Multi-qtl (genoprobs, haley knott regression method)
+
+```{r multi-qtl, echo=TRUE}
+
+detach("package:qtl2", unload=TRUE)
+library(qtl)
+
+cross <- qtl::read.cross("csv", file = "/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_hh/gm_qtl.csv",alleles=c("A","B"))
+cross <- qtl::jittermap(cross)
+
+summary(cross)
+
+fitqtl.d1 = cross
+
+qc <- c(3, 4)
+qp <- c(29.03815, 69.1085558)
+#fitqtl.d1 <- subset(fitqtl.d1, chr=qc)
+  
+fitqtl.d1 <- qtl::calc.genoprob(fitqtl.d1)
+  
+qtl <- qtl::makeqtl(fitqtl.d1, qc, qp, what="prob")
+
+# fit an additive QTL model
+lod.add.1 <- qtl::fitqtl(fitqtl.d1, pheno.col="ICI.vs.EOI", qtl, formula=y~Q1+Q2,method="hk", model="binary", get.ests=FALSE)
+print(summary(lod.add.1))
+
+# fit model with 2 interacting QTLs interacting
+lod.1 <- qtl::fitqtl(fitqtl.d1, pheno.col="ICI.vs.EOI", qtl, formula=y~Q1*Q2, method="hk", model="binary", get.ests=FALSE)
+print(summary(lod.1))
+
+
+# fit the model including sex as an interacting covariate
+Sex <- data.frame(Sex=pull.pheno(fitqtl.d1, "sex"))
+
+# additive model
+lod.sex.add.1 <- qtl::fitqtl(fitqtl.d1, pheno.col="ICI.vs.EOI", qtl, formula=y~Q1+Q2+Sex, cov=Sex, method="hk", model="binary", get.ests=FALSE)
+print(summary(lod.sex.add.1))
+
+#interactive model
+
+lod.sex.1 <- qtl::fitqtl(fitqtl.d1, pheno.col="ICI.vs.EOI", qtl, formula=y~Q1*Q2*Sex, cov=Sex, method="hk", model="binary", get.ests=FALSE)
+print(summary(lod.sex.1))
+
+
 
 ```
