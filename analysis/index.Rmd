@@ -36,5 +36,8 @@ options(stringsAsFactors = FALSE)
 ```
 
 
-### [Previous Analysis: 4 batches](index_4.batches.html)
-### [Current Analysis: 5 batches](index_5.batches.html)
+#### Analyses
+* [3 neogen batches - september 2021](index_3.batches.html) 
+  + some results are also in [4 neogen batches](index_4.batches.html)
+* [4 neogen batches - march 2022](index_4.batches.html)
+* [5 neogen batches - april 2022](index_5.batches.html)
