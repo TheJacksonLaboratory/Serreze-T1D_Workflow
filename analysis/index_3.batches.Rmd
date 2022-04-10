@@ -1,0 +1,66 @@
+---
+title: "Serreze Workflow - 3 batches"
+author: "Belinda Cornes"
+date: "2021-09-21"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+library(data.table) 
+library(tidyr)
+library(mclust)
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(tibble)
+library(ggplot2)
+library(broman)
+library(qtl2)
+library(qtlcharts)
+library(ggrepel)
+library(dplyr)
+library(readxl) 
+
+options(stringsAsFactors = FALSE)
+
+```
+
+### **Neogen Files At A Glance** [Total Samples: 168]
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
+  + [Total Samples: 24](0.1_samples_batch_20201209.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210527
+  + [Total Samples: 72](0.1_samples_batch_20210527.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210909
+  + [Total Samples: 72](0.1_samples_batch_20210909.html)
+
+
+### 1. Phenotype QC
+* Phenotypes
+
+
+### 2. Genotype QC
+* Step 1: Sample QC 
+  + [3 batches](2.1_sample_bqc_3.batches.html)
+* Step 2: SNP QC (Monomorphic, Genotype Error & Missing Data)
+  + 3 batches
+* Step 3: Effect of Data Cleaning
+* Step 4: Preparing Files for QTL Analysis
+
+
+### 3. QTL Analysis
+* Step 1: Recombination Block Size & Founder Proportions
+* Step 2: GCTA Heritability
+* Step 3: QTL Mapping (`R/qtl2`)
+* Step 4: QTL Permutation (`R/qtl2`)
+* Step 5: QTL Best Linear Unbiased Prediction (BLUP) (`R/qtl2`)
+* Step 6: Results from `R/qtl2` analysis

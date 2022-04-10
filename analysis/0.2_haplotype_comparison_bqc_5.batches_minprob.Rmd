@@ -1,0 +1,87 @@
+---
+title: "Haplotype Phasing Before QC (minprob)"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#filepathp = '/Users/corneb/Documents/MyJax/CS/Projects/Simon.John.Tolman/Data/meta.data/'
+#filepaths = '/Users/corneb/Documents/MyJax/CS/Projects/Simon.John.Tolman/haplo.reconst/2020-11-11/129Sj.v265d/all_samples_sorted/'
+#setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/")
+
+#libraries
+library(broman)
+library(qtl2)
+
+```
+
+### Loading Project
+```{r load project, eval=TRUE}
+
+#gm <- read_cross2("/Users/corneb/Documents/MyJax/CS/Projects/Oconnor/genoprobs/3.batches/all.samples/qtl2/gm_sorted.json")
+
+gm <- get(load("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/gm_serreze.312_bc.RData"))
+gm
+
+apr <- readRDS("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/probs_8state_bc.rds")
+pr <- readRDS("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/probs_36state_bc.rds")
+mice <- ind_ids(gm)
+micelg <- as.data.frame(mice)
+#micelg$miceids <- sapply(strsplit(as.character(micelg$mice),'_',fixed=T),function(x) x[6])
+#micelg <- micelg[order(micelg$miceids),]
+#micelg <- micelg[order(micelg$mice),]
+#mice <- micelg$mice
+micedf <- as.data.frame(micelg)
+#mice <- micedf$micelg
+names(micedf) <- c("mice")
+#micedf$original.mouse.id <- sapply(strsplit(as.character(micedf$mice),'_',fixed=T),function(x) x[6])
+
+sample_file <- dir(path = "/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/", pattern = "^DODB_*", full.names = TRUE)
+samples <- read.csv(sample_file)
+micedf$index <- 1:nrow(micedf)
+#all.equal(as.character(ind_ids(gm)), as.character(samples$Original.Mouse.ID))
+micesamp <- merge(micedf, samples, by.x=c("mice"), by.y=c("Original.Mouse.ID"), all=T)
+micesamp <- micesamp[order(micesamp$index),]
+micesamp <- micesamp[c("mice","Unique.Sample.ID")]
+
+
+```
+
+### Plots
+```{r phased b6 plots, eval=TRUE}
+
+for(rn in 1:nrow(micesamp)){
+
+	#print(i)
+	newdf <- micesamp[rn,]
+	mouse.id <- newdf$mice
+	batch <- sapply(strsplit(as.character(newdf$Unique.Sample.ID),'_',fixed=T),function(x) x[6])
+	#mouse.id <- i
+	#print(mouse.id)
+	#print(newdf$Unique.Sample.ID)
+	i = mouse.id
+
+	gmi <- gm[i, ] 
+	#map <- insert_pseudomarkers(gmi$gmap, step=1)
+	#pr.new <- calc_genoprob(gmi, gmi$gmap, error_prob=0.002)
+	#ap <- genoprob_to_alleleprob(pr)
+	#apr.new <- apr[i,]
+	pr.new <- pr[i,]
+
+	# infer genotypes, as those with maximal marginal probability
+	#m <- maxmarg(apr.new, minprob = 0.5)
+    m <- maxmarg(pr.new, minprob = 0.5)
+	#m <- maxmarg(pr.new)
+
+	# guess phase
+	ph <- guess_phase(gmi, m)
+
+	# plot phased genotypes
+	#plot_onegeno(m, gmi$gmap, main = paste0(mouse.id," (batch date: ", batch,") [genoprobs;m]"),  shift=TRUE, col=c("#1111FF", "#888888"))
+	plot_onegeno(ph, gmi$gmap, main = paste0(mouse.id," (batch date: ", batch,") [genoprobs]"),  shift=TRUE, col=c("#1111FF", "#888888"))
+}
+
+```

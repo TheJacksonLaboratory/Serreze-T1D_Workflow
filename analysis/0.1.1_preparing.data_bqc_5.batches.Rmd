@@ -1,0 +1,174 @@
+---
+title: "Preparing data for QC"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+```
+
+
+### Loading data
+```{r loading, echo=TRUE, include=TRUE}
+
+##remember to run haplotype reconstruction (pre processing) to get out sample_inventory and hdf5 file
+sample_inventory <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/DODB_inventory_serreze_t1d_312_DO.csv", stringsAsFactors=FALSE, colClasses = c("character"))
+hdf5_filename <- "/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/hdf5_serreze_t1d_312_DO.h5"
+
+##marker file
+markers_v1 = read.csv("/Users/corneb/Documents/MyJax/CS/Projects/support.files/MUGAarrays/UWisc/gm_uwisc_v1.csv", as.is=T)
+dim(markers_v1)
+markers_v2 = read.csv("/Users/corneb/Documents/MyJax/CS/Projects/support.files/MUGAarrays/UWisc/gm_uwisc_v2.csv", as.is=T)
+
+markers_v1$index <- 1:nrow(markers_v1)
+# Filter to retain markers with one unique position in GRCm38.
+markers_v1 = subset(markers_v1, !is.na(chr) & !is.na(bp_mm10))
+dim(markers_v1)
+##merging updated allele codes (from v2)
+markers <- merge(markers_v1, markers_v2[c("marker","snp")], by=c("marker"), all.x=T)
+names(markers)[c(7,15)] <- c("snps_v1","snps_v2")
+markers <- markers[order(markers$index),]
+
+##using only unique markers
+markers_unique <- markers[markers$unique == TRUE, ]
+
+##creating a code list for encoding markers for qtl2 (bc)
+markers_1 <- markers_unique[,c("marker","chr","snps_v2")]
+markers_1$A <- substr(markers_1$snps_v2, 1, 1)
+markers_1$B <- substr(markers_1$snps_v2, 2, 2)
+dim(markers_1)
+codes <- markers_1[,c("marker","chr","A","B")]
+
+markers_2 <- markers_unique[markers_unique$chr %in% c(1:19, "X"), ]
+markers_2$chr <- sub("^chr", "", markers_2$chr)  ###remove prefix "chr"
+colnames(markers_2)[colnames(markers_2)=="bp_mm10"] <- "pos" 
+colnames(markers_2)[colnames(markers_2)=="cM_cox"] <- "cM"
+markers_2 <- markers_2 %>% drop_na(chr, marker) 
+markers_2$pos <- as.numeric(markers_2$pos) * 1e-6
+rownames(markers_2) <- markers_2$marker
+colnames(markers_2)[c(1:4)] <- c("marker", "chr", "pos", "pos")
+#codes <- markers_1[markers_1$marker %in% markers_2$marker,]
+#codes <- codes[,c("marker","chr","A","B")]
+
+##keeping only markers in code list for chromosome 1:10,X
+codes <- codes[codes$marker %in% markers_2$marker,]
+dim(markers_2)
+dim(codes)
+
+```
+
+### preparing files
+```{r preparing, echo=TRUE, include=TRUE}
+
+
+h5_info <- h5ls(hdf5_filename)
+h5_info <- h5_info[h5_info$group == "/G",]
+h5_info <- h5_info[order(as.numeric(h5_info$name)),]
+num_samples <- strsplit(h5_info$dim, " x ")  ##num of samples per project
+n=length(num_samples)
+num_rows <- as.numeric(num_samples[[1]][1])
+num_samples <- c(0, as.numeric(sapply(num_samples, "[", 2)))  
+rn <- h5read(hdf5_filename, "rownames/1")
+geno <- matrix("", nrow = num_rows, ncol = sum(num_samples),dimnames = list(rn, rep("", sum(num_samples))))
+for(i in 1:n) {
+    G  <- h5read(hdf5_filename, paste0("G/", i))
+    cn <- h5read(hdf5_filename, paste0("colnames/", i))
+    colnames(G) <- cn
+    rng  <- (sum(num_samples[1:i]) + 1):sum(num_samples[1:(i+1)])
+    geno[,rng] <- G
+    colnames(geno)[rng] <- colnames(G)
+} 
+# Remove samples that should not be included.
+idx2 <- intersect(colnames(geno), sample_inventory$Original.Mouse.ID)
+geno <- geno[ ,colnames(geno) %in% idx2, drop=FALSE]
+dim(geno)
+
+# Keep only the good SNPs.
+geno <- geno[rownames(markers_2),]
+dim(geno)
+
+##encdoing markers for qtl2
+geno.1 <- qtl2convert::encode_geno(geno, as.matrix(codes[,c("A","B")]))
+
+#encoding markers for backcross
+geno.1[geno.1 == "A"] <- "AA"
+geno.1[geno.1 == "H"] <- "AB"
+geno.1[geno.1 == "B"] <- "AA"
+
+geno.2 <- qtl2convert::encode_geno(geno, as.matrix(codes[,c("A","B")]))
+
+##saving files--------------------
+
+##physical map
+write.csv(markers_2[,1:3], file = "data/physical_map_BC312.csv",row.names = FALSE, quote = FALSE)
+
+
+##genetic map
+write.csv(markers_2[,c(1,2,4)], file = "data/genetic_map_BC312.csv",row.names = FALSE, col.names =c("marker", "chr", "pos"), quote = FALSE)  
+
+##sample genotypes
+marker.names <- markers_2[,"marker"]
+sample.geno.2 <- data.frame(marker = marker.names, geno.2[marker.names,], stringsAsFactors = F, check.names=F)
+write.csv(sample.geno.2, file = "data/sample_geno_AHB_BC312.csv",row.names = F, quote = F)
+
+sample.geno.1 <- data.frame(marker = marker.names, geno.1[marker.names,], stringsAsFactors = F, check.names=F)
+write.csv(sample.geno.1, file = "data/sample_geno_bc_BC312.csv",row.names = F, quote = F)
+
+
+# Write out temp covariates
+covar <- data.frame(id = sample_inventory$Original.Mouse.ID, sex = sample_inventory$Sex)
+rownames(covar) <- covar$id
+write.csv(covar, file <- "data/GM_covar_BC312.csv", quote = FALSE)
+
+# Write out temp phenotypes  
+pheno <- matrix(rnorm(ncol(geno)), nrow = ncol(geno), ncol = 1, dimnames =
+                   list(colnames(geno), "pheno")) 
+rownames(pheno) <- make.unique(rownames(pheno))
+write.csv(pheno, file <- "data/pheno_BC312.csv", row.names = TRUE, quote = FALSE)
+
+```
+
+### Genoprobs for QC/Haplotype Phasing
+```{r genoprobs, include=TRUE}
+
+gm <- read_cross2("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_5.batches/gm_bc.json")
+
+gm
+#Let’s omit markers without any genotype data
+gm <- drop_nullmarkers(gm)
+
+gm
+
+save(gm, file = "data/gm_serreze.BC312.RData")
+probsA <- calc_genoprob(gm, quiet = T)
+saveRDS(probsA, file = "data/serreze_probs_BC312.rds")
+
+
+e <- calc_errorlod(gm, probsA, cores=20)
+e <- do.call("cbind", e)
+save(e, file = "data/e_BC312.RData")
+```
