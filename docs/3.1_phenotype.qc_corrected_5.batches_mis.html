@@ -11,7 +11,7 @@
 
 <meta name="author" content="Belinda Cornes" />
 
-<meta name="date" content="2022-04-06" />
+<meta name="date" content="2022-04-11" />
 
 <title>Phenotype QC [Continious (corrected) Phenotype - Age of Onset]</title>
 
@@ -316,7 +316,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Phenotype QC [Continious (corrected) Phenotype - Age of Onset]</h1>
 <h4 class="author">Belinda Cornes</h4>
-<h4 class="date">2022-04-06</h4>
+<h4 class="date">2022-04-11</h4>
 
 </div>
 
@@ -325,6 +325,7 @@ $(document).ready(function () {
 <li><a href="#loading-data">Loading Data</a></li>
 <li><a href="#ici-vs-eoi">ICI vs EOI</a></li>
 <li><a href="#ici-vs-pbs">ICI vs PBS</a></li>
+<li><a href="#ici-early-vs-pbs">ICI-Early vs PBS</a></li>
 </ul>
 </div>
 
@@ -348,7 +349,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-04-06
+<strong>Last updated:</strong> 2022-04-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
@@ -372,7 +373,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -463,16 +464,16 @@ relative
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2d6f369c360d10a3e761153630d549f01d8a8d8ctargetblank2d6f369a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2d6f369c360d10a3e761153630d549f01d8a8d8c" target="_blank">2d6f369</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreed0c63e87425e778e5bccdac2e14bcf6eb43d9870targetblankd0c63e8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/d0c63e87425e778e5bccdac2e14bcf6eb43d9870" target="_blank">d0c63e8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree2d6f369c360d10a3e761153630d549f01d8a8d8ctargetblank2d6f369a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreed0c63e87425e778e5bccdac2e14bcf6eb43d9870targetblankd0c63e8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/2d6f369c360d10a3e761153630d549f01d8a8d8c" target="_blank">2d6f369</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/d0c63e87425e778e5bccdac2e14bcf6eb43d9870" target="_blank">d0c63e8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -482,47 +483,28 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    analysis/.DS_Store
     Ignored:    data/.DS_Store
+    Ignored:    untitled folder/
 
 Untracked files:
-    Untracked:  analysis/0.1.1_preparing.data_bqc_5.batches.Rmd
-    Untracked:  analysis/0.1_samples_batch_20220328.Rmd
-    Untracked:  analysis/0.2_haplotype_comparison_bqc_5.batches_minprob.Rmd
-    Untracked:  analysis/2.1_sample_bqc_5.batches.Rmd
-    Untracked:  analysis/2.2.1_snp_qc_5.batches.Rmd
-    Untracked:  analysis/2.2.1_snp_qc_5.batches_mis.Rmd
-    Untracked:  analysis/2.2.1_snp_qc_5.batches_mis.Rmd.R
-    Untracked:  analysis/2.4_preparing.data_aqc_5.batches.Rmd
-    Untracked:  analysis/2.4_preparing.data_aqc_5.batches_mis.Rmd
-    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches.Rmd
-    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd
-    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd.R
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches_mis.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches_mis.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_vo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_vo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_11.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_1.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_1.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_1.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_11.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_mis.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_5.batches.Rmd
-    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_5.batches_mis.Rmd
-    Untracked:  analysis/index_3.batches.Rmd
-    Untracked:  analysis/index_4.batches.Rmd
-    Untracked:  analysis/index_5.batches.Rmd
-    Untracked:  analysis/index_5.batches_additional.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs_5.batches.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs_5.batches_mis.Rmd
     Untracked:  analysis/index_5.batches_additional.Rmd.R
     Untracked:  data/GM_covar.csv
     Untracked:  data/GM_covar_BC312.csv
@@ -535,6 +517,7 @@ Untracked files:
     Untracked:  data/blup_sub_chr4_lod.drop-1.5_5.batches.csv
     Untracked:  data/covar_cleaned_ici.vs.eoi.csv
     Untracked:  data/covar_cleaned_ici.vs.pbs.csv
+    Untracked:  data/covar_corrected.cleaned_ici-early.vs.pbs_5.batches.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi1.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi_5.batches.csv
@@ -543,6 +526,7 @@ Untracked files:
     Untracked:  data/covar_corrected.cleaned_ici.vs.pbs1.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_5.batches.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_5.batches_mis.csv
+    Untracked:  data/covar_corrected_ici-early.vs.pbs_5.batches.csv
     Untracked:  data/covar_corrected_ici.vs.eoi.csv
     Untracked:  data/covar_corrected_ici.vs.eoi1.csv
     Untracked:  data/covar_corrected_ici.vs.eoi_5.batches.csv
@@ -584,19 +568,178 @@ Untracked files:
     Untracked:  data/gm_samqc_5.batches.RData
     Untracked:  data/gm_serreze.192.RData
     Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/ici.vs.eoi_blup.full_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.full_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-10_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-11_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-12_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-13_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-15_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-15_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-15_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-17_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-1_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-2_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-3_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-4_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-5_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-6_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-7_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-8_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.qc_chr-9_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.eoi_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup_sub_chr-10_peak.marker-ICR4295_lod.drop-1.5_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup_sub_chr-10_peak.marker-JAX00292499_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.eoi_blup_sub_chr-10_peak.marker-JAX00292927_lod.drop-1.5_5.batches.csv
@@ -880,12 +1023,24 @@ Untracked files:
     Untracked:  data/ici.vs.eoi_blup_sub_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_additive_5.batches.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_additive_5.batches_mis.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_additive_snpsqc_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_additive_snpsqc_dis_no-x_updated_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_additive_snpsqc_dis_no-x_updated_5.batches_mis.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_interacting_5.batches.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_interacting_5.batches_mis.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_interacting_snpsqc_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_interacting_snpsqc_dis_no-x_updated_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_interacting_snpsqc_dis_no-x_updated_5.batches_mis.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_additive_5.batches.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_additive_5.batches_mis.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_additive_snpsqc_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_additive_snpsqc_dis_no-x_updated_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_additive_snpsqc_dis_no-x_updated_5.batches_mis.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_interacting_5.batches.txt
     Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_interacting_5.batches_mis.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_interacting_snpsqc_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_interacting_snpsqc_dis_no-x_updated_5.batches.txt
+    Untracked:  data/ici.vs.eoi_fitqtl_peaks_sex_interacting_snpsqc_dis_no-x_updated_5.batches_mis.mis.txt
     Untracked:  data/ici.vs.eoi_genes_chr-10_peak.marker-ICR4295_lod.drop-1.5_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_genes_chr-10_peak.marker-JAX00292499_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.eoi_genes_chr-10_peak.marker-JAX00292927_lod.drop-1.5_5.batches.csv
@@ -1167,6 +1322,8 @@ Untracked files:
     Untracked:  data/ici.vs.eoi_genes_chr-X_peak.marker-UNCHS048313_lod.drop-1.5_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_genes_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_genes_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_gm_qtl_5.batches.csv
+    Untracked:  data/ici.vs.eoi_gm_qtl_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_gm_qtl_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.eoi_gm_qtl_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_gm_qtl_snpsqc_dis_no-x_updated_5.batches.csv
@@ -1187,216 +1344,261 @@ Untracked files:
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.probs.freq.removed.csv
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/ici.vs.eoi_scanone_5.batches.Rdata
+    Untracked:  data/ici.vs.eoi_scanone_5.batches_mis.Rdata
+    Untracked:  data/ici.vs.eoi_scanone_snpsqc_5.batches.Rdata
+    Untracked:  data/ici.vs.eoi_scanone_snpsqc_5.batches_mis.Rdata
+    Untracked:  data/ici.vs.eoi_scanone_snpsqc_dis_no-x_updated_5.batches.Rdata
     Untracked:  data/ici.vs.pbs_bad.markers_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-10_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-10_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-11_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-11_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-11_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-11_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-11_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-11_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-11_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-12_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-12_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-12_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-12_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-12_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-12_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-12_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-13_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-13_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-13_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-13_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-13_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-13_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-13_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-14_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-14_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-14_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-14_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-14_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-14_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-14_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-15_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-15_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-15_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-15_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-15_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-15_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-15_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-16_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-16_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-16_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-16_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-16_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-16_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-16_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-17_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-17_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-17_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-17_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-17_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-17_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-17_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-18_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-18_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-18_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-18_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-18_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-18_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-18_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-19_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-19_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-19_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-19_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-19_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-19_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-19_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-1_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-1_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-1_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-1_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-1_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-1_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-1_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-2_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-2_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-2_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-2_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-2_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-2_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-2_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-3_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-3_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-3_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-3_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-3_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-3_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-3_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-4_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-4_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-4_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-4_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-4_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-4_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-4_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-5_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-5_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-5_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-5_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-5_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-5_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-6_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-6_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-6_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-6_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-6_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-6_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-6_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-7_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-7_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-7_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-7_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-7_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-7_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-7_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-8_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-8_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-8_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-8_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-8_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-8_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-8_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-9_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-9_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-9_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-9_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-9_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-9_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-9_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-X_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-X_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-X_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.full_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-X_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.full_chr-X_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-14_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-15_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-16_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-17_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-18_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-19_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.qc_chr-X_lod.drop-1.5_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_lod.drop-1.5_snpsqc_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_lod.drop-1.5_snpsqc_5.batches_mis.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
-    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup_chr-10_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup_chr-10_lod.drop-1.5_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup_chr-10_lod.drop-1.5_snpsqc_5.batches_mis.csv
@@ -1496,6 +1698,7 @@ Untracked files:
     Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_5.batches.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches.csv
@@ -1516,6 +1719,12 @@ Untracked files:
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed.csv
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed.csv
+    Untracked:  data/ici.vs.pbs_scanone_5.batches.Rdata
+    Untracked:  data/ici.vs.pbs_scanone_5.batches_mis.Rdata
+    Untracked:  data/ici.vs.pbs_scanone_snpsqc_5.batches.Rdata
+    Untracked:  data/ici.vs.pbs_scanone_snpsqc_5.batches_mis.Rdata
+    Untracked:  data/ici.vs.pbs_scanone_snpsqc_dis_no-x_updated_5.batches.Rdata
+    Untracked:  data/ici.vs.pbs_scanone_snpsqc_dis_no-x_updated_5.batches_mis.Rdata
     Untracked:  data/percent_missing_id_3.batches.RData
     Untracked:  data/percent_missing_id_4.batches.RData
     Untracked:  data/percent_missing_id_4.batches_bc.RData
@@ -1544,6 +1753,7 @@ Untracked files:
     Untracked:  data/summary.cg_4.batches.RData
     Untracked:  data/summary.cg_4.batches_bc.RData
     Untracked:  data/summary.cg_5.batches.RData
+    Untracked:  files.to.push.txt
     Untracked:  output/Percent_missing_genotype_data_5.batches.pdf
     Untracked:  output/Percent_missing_genotype_data_per_marker_5.batches.pdf
     Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_5.batches.pdf
@@ -1551,8 +1761,12 @@ Untracked files:
     Untracked:  output/genotype_frequency_marker_5.batches.pdf
 
 Unstaged changes:
+    Modified:   analysis/3.1_phenotype.qc_corrected_5.batches.Rmd
+    Modified:   analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd
     Modified:   analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated.Rmd
     Modified:   analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated.Rmd
+    Modified:   analysis/index_5.batches.Rmd
+    Modified:   analysis/index_5.batches_additional.Rmd
 
 </code></pre>
 <p>
@@ -1565,9 +1779,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd</code>) and HTML (<code>docs/3.1_phenotype.qc_corrected_5.batches_mis.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/3.1_phenotype.qc_corrected_5.batches_mis.html" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+<td>
+analysis for 5 batches htmls
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/c98df6cb2a120c9a0ce1237f3766c4bf9aed403d/analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd" target="_blank">c98df6c</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+<td>
+analysis for 5 batches Rmds
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -1645,6 +1919,43 @@ p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color
 p</code></pre>
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution1-1.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution1-1">
+Past versions of "Phenotype distribution1-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution1-1.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI.vs.EOI&quot;))
 
 box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
@@ -1660,7 +1971,45 @@ box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), c
                   #legend.position = &quot;none&quot;
              )
 box1</code></pre>
-<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution1-2.png" width="912" style="display: block; margin: auto;" /> QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.</p>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution1-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution1-2">
+Past versions of "Phenotype distribution1-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution1-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution1-2.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.</p>
 <pre class="r"><code>##ranknorm
 rz.transform &lt;- function(y) {
   rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
@@ -1674,6 +2023,43 @@ p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot
 p</code></pre>
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution2-1.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution2-1">
+Past versions of "Phenotype distribution2-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution2-1.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI.vs.EOI&quot;,&quot;age.of.onset&quot;))
 
 box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
@@ -1690,6 +2076,43 @@ box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), c
              )
 box1</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution2-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution2-2">
+Past versions of "Phenotype distribution2-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution2-2.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>And then remove any samples that are 3 standard deviations from the mean.</p>
 <pre class="r"><code>#outliers
 #des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
@@ -1797,7 +2220,7 @@ write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici.vs.eoi_5.batches_mis.c
 <h3>ICI vs PBS</h3>
 <pre class="r"><code>gm=gm_allqc
 
-##extracting animals with ici and eoi group status
+##extracting animals with ici and pbs group status
 miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
 table(miceinfo$group)</code></pre>
 <pre><code>
@@ -1838,6 +2261,43 @@ p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color
 p</code></pre>
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution21-1.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution21-1">
+Past versions of "Phenotype distribution21-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution21-1.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI.vs.PBS&quot;))
 
 box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
@@ -1853,7 +2313,45 @@ box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), c
                   #legend.position = &quot;none&quot;
              )
 box1</code></pre>
-<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution21-2.png" width="912" style="display: block; margin: auto;" /> QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.</p>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution21-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution21-2">
+Past versions of "Phenotype distribution21-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution21-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution21-2.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.</p>
 <pre class="r"><code>##ranknorm
 rz.transform &lt;- function(y) {
   rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
@@ -1867,6 +2365,43 @@ p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot
 p</code></pre>
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution22-1.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution22-1">
+Past versions of "Phenotype distribution22-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution22-1.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI.vs.PBS&quot;,&quot;age.of.onset&quot;))
 
 box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
@@ -1883,6 +2418,43 @@ box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), c
              )
 box1</code></pre>
 <p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution22-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Phenotype-distribution22-2">
+Past versions of "Phenotype distribution22-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-Phenotype-distribution22-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype distribution22-2.png" target="_blank">d0c63e8</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>And then remove any samples that are 3 standard deviations from the mean.</p>
 <pre class="r"><code>#outliers
 #des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
@@ -1940,6 +2512,171 @@ gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39;
 #gm$covar$id &lt;- rownames(gm$covar)
 write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici.vs.pbs_5.batches_mis.csv&quot;, row.names=F, quote=F)</code></pre>
 <p>That is, those that have a grey square were removed for that particular phenotype in the QTL mapping.</p>
+</div>
+<div id="ici-early-vs-pbs" class="section level3">
+<h3>ICI-Early vs PBS</h3>
+<pre class="r"><code>gm=gm_allqc
+
+#removing ici-late
+table(gm$covar$group)</code></pre>
+<pre><code>
+ (A2 Parental) (DQ8 Parental) B6.g7 Parental            EOI             F1 
+             2              2              1            164              1 
+           ICI            PBS 
+           104             34 </code></pre>
+<pre class="r"><code>ici.late_ids &lt;- gm$covar[gm$covar$&quot;diabetic status&quot; == &quot;T1D&gt;17&quot;,]$id
+length(ici.late_ids)</code></pre>
+<pre><code>[1] 17</code></pre>
+<pre class="r"><code>ici.late_ids</code></pre>
+<pre><code> [1] &quot;NG00198-ICI-LATE&quot; &quot;NG00329-ICI-LATE&quot; &quot;NG00343-ICI-LATE&quot; &quot;NG00386-ICI-LATE&quot;
+ [5] &quot;NG00442-ICI-LATE&quot; &quot;NG00443-ICI-LATE&quot; &quot;NG00526-ICI-LATE&quot; &quot;NG00522-ICI-LATE&quot;
+ [9] &quot;NG00790-ICI-LATE&quot; &quot;NG00874-ICI-LATE&quot; &quot;NG00929-ICI-LATE&quot; &quot;NG01225-ICI-LATE&quot;
+[13] &quot;NG01303-ICI-LATE&quot; &quot;NG01020-ICI-LATE&quot; &quot;NG01397-ICI-LATE&quot; &quot;NG01389-ICI-LATE&quot;
+[17] &quot;NG01548-ICI-LATE&quot;</code></pre>
+<pre class="r"><code>gm &lt;- gm[paste0(&quot;-&quot;,as.character(ici.late_ids)),]
+
+##extracting animals with ici-early and pbs group status
+miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+table(miceinfo$group)</code></pre>
+<pre><code>
+ICI PBS 
+ 87  34 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               121
+No. genotyped individuals       121
+No. phenotyped individuals      121
+No. with both geno &amp; pheno      121
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131356
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9956 9987 7848 7586 7609 7736 7399 6458 6713 6385 7143 6110 6082 5966 5346 5015 
+  17   18   19    X 
+5080 4605 3562 4770 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$ICI_Early.vs.PBS &lt;- ifelse(gm$covar$group == &quot;PBS&quot;, 0, 1)
+names(gm$covar)[3] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$id==&quot;NG00453&quot;,]$age.of.onset = 13.7
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution31-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI_Early.vs.PBS&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution31-2.png" width="912" style="display: block; margin: auto;" /> QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution32-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;group&quot;,&quot;sex&quot;,&quot;diabetic status&quot;,&quot;strain&quot;,&quot;ICI_Early.vs.PBS&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group, fill=group)) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_5.batches_mis.Rmd/Phenotype%20distribution32-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+if(nrow(badind) &gt; 0){
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) %&gt;%
+   column_spec(1:3, width = &quot;3cm&quot;)}
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_ici-early.vs.pbs_5.batches_mis.csv&quot;, row.names=F, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici-early.vs.pbs_5.batches_mis.csv&quot;, row.names=F, quote=F)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1975,18 +2712,18 @@ loaded via a namespace (and not attached):
 [13] glue_1.4.2        digest_0.6.27     promises_1.1.0    rvest_0.3.5      
 [17] colorspace_2.0-2  htmltools_0.5.1.1 httpuv_1.5.2      plyr_1.8.6       
 [21] pkgconfig_2.0.3   purrr_0.3.4       scales_1.1.1      webshot_0.5.2    
-[25] getopt_1.20.3     later_1.0.0       git2r_0.26.1      farver_2.1.0     
-[29] generics_0.0.2    ellipsis_0.3.2    cachem_1.0.5      withr_2.4.2      
-[33] cli_3.0.0         mnormt_1.5-7      magrittr_2.0.1    crayon_1.4.1     
-[37] memoise_2.0.0     evaluate_0.14     fs_1.4.1          fansi_0.5.0      
-[41] nlme_3.1-142      xml2_1.3.1        tools_3.6.2       hms_0.5.3        
-[45] lifecycle_1.0.1   stringr_1.4.0     Rhdf5lib_1.6.3    munsell_0.5.0    
-[49] pastecs_1.3.21    compiler_3.6.2    rlang_1.0.2       grid_3.6.2       
-[53] rstudioapi_0.13   labeling_0.4.2    rmarkdown_2.1     boot_1.3-23      
-[57] gtable_0.3.0      DBI_1.1.1         R6_2.5.0          fastmap_1.1.0    
-[61] bit_4.0.4         utf8_1.2.1        rprojroot_1.3-2   readr_1.3.1      
-[65] stringi_1.7.2     parallel_3.6.2    Rcpp_1.0.7        vctrs_0.3.8      
-[69] tidyselect_1.1.2  xfun_0.24        </code></pre>
+[25] whisker_0.4       getopt_1.20.3     later_1.0.0       git2r_0.26.1     
+[29] farver_2.1.0      generics_0.0.2    ellipsis_0.3.2    cachem_1.0.5     
+[33] withr_2.4.2       cli_3.0.0         mnormt_1.5-7      magrittr_2.0.1   
+[37] crayon_1.4.1      memoise_2.0.0     evaluate_0.14     fs_1.4.1         
+[41] fansi_0.5.0       nlme_3.1-142      xml2_1.3.1        tools_3.6.2      
+[45] hms_0.5.3         lifecycle_1.0.1   stringr_1.4.0     Rhdf5lib_1.6.3   
+[49] munsell_0.5.0     pastecs_1.3.21    compiler_3.6.2    rlang_1.0.2      
+[53] grid_3.6.2        rstudioapi_0.13   labeling_0.4.2    rmarkdown_2.1    
+[57] boot_1.3-23       gtable_0.3.0      DBI_1.1.1         R6_2.5.0         
+[61] fastmap_1.1.0     bit_4.0.4         utf8_1.2.1        rprojroot_1.3-2  
+[65] readr_1.3.1       stringi_1.7.2     parallel_3.6.2    Rcpp_1.0.7       
+[69] vctrs_0.3.8       tidyselect_1.1.2  xfun_0.24        </code></pre>
 </div>
 </div>
 

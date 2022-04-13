@@ -91,6 +91,7 @@ design[] %>%
 * Step 4: Identifying additional disproportionate markers within each sample set
   + [ICI vs EOI](genotype.frequencies_ici.vs.eoi_5.batches.html)
   + [ICI vs PBS](genotype.frequencies_ici.vs.pbs_5.batches.html)
+  + [ICI-Early vs PBS](genotype.frequencies_ici-early.vs.pbs_5.batches.html)
 
 
 ### **3. Phenotype QC**
@@ -100,4 +101,7 @@ design[] %>%
 ### **4. QTL Analysis**
 * binary phenotpe (removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set)
   + [ICI vs EOI](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html)
-  + [ICI vs PBS](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
+  + ICI vs PBS
+     * [no additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
+     * [with additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html)
+  + [ICI-Early vs PBS](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
