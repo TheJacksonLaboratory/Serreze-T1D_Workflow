@@ -232,7 +232,7 @@ plot_lod<-function(out,map){
     ymx <- 11 # overall maximum LOD score
     plot(out, map, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
     #legend("topright", lwd=2, colnames(out)[i], bg="gray90")
-    title(main = paste0(colnames(out)[i], " [positions in cM] \n(using same scale as eoi vs ici-early for easier comparison)"))
+    title(main = paste0(colnames(out)[i], " [positions in cM] \n(using same scale as eoi vs ici for easier comparison)"))
     add_threshold(map,  summary(operm, alpha=0.1), col = 'purple')
     add_threshold(map,  summary(operm, alpha=0.05), col = 'red')
     add_threshold(map,  summary(operm, alpha=0.01), col = 'blue')
@@ -299,7 +299,7 @@ plot_lod_chr<-function(out,map,chrom){
     ymx <- 11
     plot(out, map, chr = chrom, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
     #legend("topright", lwd=2, colnames(out)[i], bg="gray90")
-    title(main = paste0(colnames(out)[i], " - chr", chrom, " [positions in cM]\n(using same scale as eoi vs. ici-early for easier comparison)"))
+    title(main = paste0(colnames(out)[i], " - chr", chrom, " [positions in cM]\n(using same scale as eoi vs. ici for easier comparison)"))
     add_threshold(map,  summary(operm,alpha=0.1), col = 'purple')
     add_threshold(map,  summary(operm, alpha=0.05), col = 'red')
     add_threshold(map,  summary(operm, alpha=0.01), col = 'blue')
@@ -385,7 +385,7 @@ plot_lod_chr_mb<-function(out,map,chrom){
     ymx <- 11
     plot(out, map, chr = chrom, lodcolumn=i, col="slateblue", ylim=c(0, ymx+0.5))
     #legend("topright", lwd=2, colnames(out)[i], bg="gray90")
-    title(main = paste0(colnames(out)[i], " - chr", chrom, " [positions in MB]\n(using same scale as eoi vs. ici-early for easier comparison)"))
+    title(main = paste0(colnames(out)[i], " - chr", chrom, " [positions in MB]\n(using same scale as eoi vs. ici for easier comparison)"))
     add_threshold(map,  summary(operm,alpha=0.1), col = 'purple')
     add_threshold(map,  summary(operm, alpha=0.05), col = 'red')
     add_threshold(map,  summary(operm, alpha=0.01), col = 'blue')
@@ -640,7 +640,7 @@ qtl::add.threshold(scanone.hk,  perms= operm.hk, alpha=0.1, col = 'purple')
 
 ymx <- 11
 plot(scanone.hk, bandcol = "grey90",lty=1, cex=1, col = "slateblue", ylim=c(0, ymx+0.5))
-title(main = paste0(colnames(out), " [positions in cM]\n(using same scale as eoi vs ici-early for easier comparison)"))
+title(main = paste0(colnames(out), " [positions in cM]\n(using same scale as eoi vs ici for easier comparison)"))
 qtl::add.threshold(scanone.hk,  perms= operm.hk, alpha=0.01, col = 'blue')
 qtl::add.threshold(scanone.hk,  perms= operm.hk, alpha=0.05, col = 'red')
 qtl::add.threshold(scanone.hk,  perms= operm.hk, alpha=0.1, col = 'purple')

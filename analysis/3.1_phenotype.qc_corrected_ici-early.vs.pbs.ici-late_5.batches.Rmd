@@ -1,0 +1,204 @@
+---
+title: "Phenotype QC [Continious (corrected) Phenotype - Age of Onset]"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+```
+
+### Loading Data
+
+```{r data, echo=TRUE}
+
+load("data/gm_allqc_5.batches.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+pr <- readRDS("data/serreze_probs_allqc_5.batches.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+```
+
+### ICI-Early vs PBS + ICI-Late
+
+```{r Phenotype distribution31, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+gm=gm_allqc
+gm
+
+table(gm$covar$"diabetic status")
+table(gm$covar$group)
+
+#ICI-Early vs (PBS-T1D + ICI > 17 weeks of age)
+##extracting animals with ici-early and pbs group status
+miceinfo <- gm$covar[gm$covar$group == "PBS" | gm$covar$group == "ICI",]
+table(miceinfo$group)
+mice.ids <- rownames(miceinfo)
+
+gm <- gm[mice.ids]
+gm
+
+table(gm$covar$"diabetic status")
+table(gm$covar$group)
+
+#Creating a new lable for pbs+ici late and ici-early
+table(gm$covar$group)
+gm$covar$group.new <- ifelse(gm$covar$"diabetic status" == "T1D>17" | gm$covar$group == "PBS", "PBS_ICI.Late", "ICI.Early")
+
+pr.qc <- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+#binary Yes/No T1D
+gm$covar$ICI.Early.vs.PBS_ICI.Late <- ifelse(gm$covar$group.new == "PBS_ICI.Late", 0, 1)
+names(gm$covar)[3] <- c("age.of.onset")
+gm$covar$age.of.onset <- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$id=="NG00453",]$age.of.onset = 13.7
+
+table(gm$covar$"diabetic status")
+table(gm$covar$group)
+table(gm$covar$group.new)
+table(gm$covar$ICI.Early.vs.PBS_ICI.Late)
+
+p <- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color="black", fill="white")
+p
+
+phenos.covars.lg <- gm$covar %>% gather(variable, value, -c("id","group","group.new", "sex","diabetic status","strain","ICI.Early.vs.PBS_ICI.Late"))
+
+box1 <-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group.new, fill=group.new)) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0("Values of ",v," [random dataframe: ",r,"]")) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = "bold",hjust = 0.5),
+                  #legend.position = "none"
+             )
+box1
+
+
+```
+QTL analysis requires variables follow normal distribution, from the above distributions, we need to ranknorm the data.  
+
+
+```{r Phenotype distribution32, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+##ranknorm
+rz.transform <- function(y) {
+  rankY=rank(y, ties.method="average", na.last="keep")
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age <- rz.transform(gm$covar$age.of.onset)
+
+p <- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color="black", fill="white")
+p
+
+phenos.covars.lg <- gm$covar %>% gather(variable, value, -c("id","group","group.new","sex","diabetic status","strain","ICI.Early.vs.PBS_ICI.Late","age.of.onset"))
+
+box1 <-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=group.new, fill=group.new)) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0("Values of ",v," [random dataframe: ",r,"]")) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = "bold",hjust = 0.5),
+                  #legend.position = "none"
+             )
+box1
+
+
+```
+
+And then remove any samples that are 3 standard deviations from the mean. 
+
+```{r outliers3, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+#outliers
+#des.3 <- Hmisc::describe(df_phenos[,c("R_AVG","L_AVG","Both_AVG")]) 
+des.1 <- pastecs::stat.desc(gm$covar[,c("age.of.onset" ,"rz.age")]) 
+des.2 <- psych::describe(gm$covar[,c("age.of.onset" ,"rz.age")]) 
+
+#scale(df_phenos[,c("R_AVG")])
+
+gm$covar$out.age.of.onset <- ifelse(gm$covar[,c("age.of.onset")] > (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c("age.of.onset")] < (des.1[9,1] - 3*des.1[13,1]), 'Outlier','Keep')
+gm$covar$out.rz.age <- ifelse(gm$covar[,c("rz.age")] > (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c("rz.age")] < (des.1[9,2] - 3*des.1[13,2]), 'Outlier','Keep')
+
+bad <- NULL
+bad$Mouse.ID <- rownames(gm$covar)
+bad$age.of.onset <- ifelse(gm$covar$out.age.of.onset =="Outlier", 'XX', '')
+bad$rz.age <- ifelse(gm$covar$out.rz.age =="Outlier", 'XX', '')
+bad[is.na(bad)] <- ""
+bad[bad=='NA'] <- ""
+df <- do.call(cbind, bad)
+bad <- as.data.frame(df)
+
+badind <- subset(bad, 
+         bad$age.of.onset == 'XX'|
+         bad$rz.age == 'XX')
+
+#badind <- bad[bad$no_pheno == 'XX',]
+
+badind[] <- lapply(badind, as.character)
+#badind$Thaiss_ID <- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, "--", bad$Thaiss_ID)
+
+rownames(badind) <- NULL
+
+if(nrow(badind) > 0){
+badind[] %>% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == 'XX',
+                  cell_spec(age.of.onset, color = 'gray',background = 'gray'),
+                  ''),
+     rz.age = ifelse(rz.age == 'XX',
+                  cell_spec(rz.age, color = 'gray',background = 'gray'),
+                  '')
+     ) %>%
+   kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+   kable_styling("striped", full_width = F) %>%
+   column_spec(1:3, width = "3cm")}
+
+##removing outliers
+gm$covar$Mouse.ID <- rownames(gm$covar)
+write.csv(gm$covar,"data/covar_corrected_ici-early.vs.pbs.ici-late_5.batches.csv", row.names=F, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == "Outlier"] <- '' 
+gm$covar$rz.age[gm$covar$out.rz.age == "Outlier"] <- '' 
+
+#gm$covar <- gm$covar[c(1:15)]
+#gm$covar$id <- rownames(gm$covar)
+write.csv(gm$covar,"data/covar_corrected.cleaned_ici-early.vs.pbs.ici-late_5.batches.csv", row.names=F, quote=F)
+
+```

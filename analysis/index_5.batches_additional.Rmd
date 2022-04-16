@@ -1,7 +1,7 @@
 ---
-title: "Serreze Workflow - 5 batches (additional analysis)"
+title: "Serreze Workflow - 5 batches (additonal analysis)"
 author: "Belinda Cornes"
-date: "2022-04-06"
+date: "`r Sys.Date()`"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -35,7 +35,7 @@ options(stringsAsFactors = FALSE)
 
 ```
 
-### **Neogen Files At A Glance** [Total Samples: 312]
+## **Neogen Files At A Glance** [Total Samples: 312]
 * Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
   + [Total Samples: 24](0.1_samples_batch_20201209.html)
 * Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210527
@@ -49,8 +49,13 @@ options(stringsAsFactors = FALSE)
 * [Preparing files for QC/Haplotype Phasing](0.1.1_preparing.data_bqc_5.batches.html)
 
 
-### **Haplotype Phasing**
+
+
+## **Haplotype Phasing**
 * [minimum probability set for estimation of genotypes](0.2_haplotype_comparison_bqc_5.batches_minprob.html)
+
+
+
 
 ### **1. Experiment Design**
 
@@ -65,11 +70,11 @@ design = matrix(ncol=8, nrow=1, dimnames = list("",c("abbreviations for strains:
 design[1,1] <- "AB: het; AA: hom"
 design[1,2] <- "Backcross"
 design[1,3] <- nrow(gm$pheno)
-design[1,4] <- "1 [binary]"
-design[1,5] <- "diabetic status/group [binary]"
+design[1,4] <- "2 [1 binary/1 quantiative]"
+design[1,5] <- "diabetic status/group [binary] & age of onset [continuous]"
 design[1,6] <- ncol(genos)
 design[1,7] <- nrow(genos)
-design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] though not used as all mice are females")
+design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] (sex not used as all females); binary diabetic status for continous traits")
 
 design <- t(design)
 #design <- as.data.frame(design)
@@ -84,133 +89,304 @@ design[] %>%
 
 ```
 
-### **2. Genotype QC (Part 1)**
+## **2. Genotype QC (Part 1)**
 * [Step 1: Sample QC](2.1_sample_bqc_5.batches.html)
 * Step 2: SNP QC (Monomorphic, Genotype Error & Missing Data)
   + [Removing missing data](2.2.1_snp_qc_5.batches_mis.html)
-  + [Removing monomorphic, genotype error & missing Data](2.2.1_snp_qc_5.batches.html)
+  + [Removing monomorphic, genotype error & missing Data](2.2.1_snp_qc_5.batches.html)  **FINAL**
 * Step 3: Preparing Files for QTL Analysis
   + [Using datatset with missing markers removed](2.4_preparing.data_aqc_5.batches_mis.html)
-  + [Using datatset with monomorphic, genotype error & missing markers removed](2.4_preparing.data_aqc_5.batches.html)
+  + [Using datatset with monomorphic, genotype error & missing markers removed](2.4_preparing.data_aqc_5.batches.html) **FINAL**
 
 
-### **3. Phenotype QC**
-* Phenotypes
-  + continuous (although not being used in QTL mapping)
-    + Correct Phenotypes
-      * [Using datatset with missing markers removed](3.1_phenotype.qc_corrected_5.batches_mis.html)
-      * [Using datatset with monomorphic, genotype error & missing markers removed](3.1_phenotype.qc_corrected_5.batches.html)
+
+## **3. Phenotype QC**
+
+### continous phenotypes (age of onset)
+
+all phenotypes have been corrected
+
+* `ICI vs PBS` & `ICI-Early vs PBS` & `ICI vs EOI` (EOI set as missing)
+  + [Using datatset with missing markers removed](3.1_phenotype.qc_corrected_5.batches_mis.html)
+  + [Using datatset with monomorphic, genotype error & missing markers removed](3.1_phenotype.qc_corrected_5.batches.html) **FINAL**
 
 
-### **4. Genotype QC (Part 2)**
+* `ICI vs PBS` & `ICI-Early vs PBS` & `ICI vs EOI` (EOI as arbitrary value == 0)
+  + [Using datatset with missing markers removed](3.1_phenotype.qc_corrected_5.batches_mis_0.html)
+  + [Using datatset with monomorphic, genotype error & missing markers removed](3.1_phenotype.qc_corrected_5.batches_0.html) **FINAL**
+
+
+* `ICI vs PBS` & `ICI-Early vs PBS` & `ICI vs EOI` (EOI as arbitrary value == 52)
+  + [Using datatset with missing markers removed](3.1_phenotype.qc_corrected_5.batches_mis_52.html)
+  + [Using datatset with monomorphic, genotype error & missing markers removed](3.1_phenotype.qc_corrected_5.batches_52.html) **FINAL**
+
+
+* `ICI-Early vs PBS & ICI-Late` only
+  + [Using datatset with missing markers removed](3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches_mis.html)
+  + [Using datatset with monomorphic, genotype error & missing markers removed](3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches.html) **outcome the same as `ICI vs PBS`** **FINAL**
+
+
+
+## **4. Genotype QC (Part 2)**
 * Step 4: Disproportionate markers per contrast group
-  + ICI vs EOI
-    * [Using datatset with missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_mis.html)
-    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches.html)
-  + ICI vs PBS
+
+  + `ICI vs EOI`
+
+    * `EOI` (in `ICI vs EOI`) as missing
+      + [Using datatset with missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_mis.html)
+      + [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches.html) **FINAL**
+
+    * `EOI` (in `ICI vs EOI`) as arbitrary value == 0
+      + [Using datatset with missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html)
+      + [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_0.html) **FINAL**
+
+    * `EOI` (in `ICI vs EOI`) as arbitrary value == 52
+      + [Using datatset with missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html)
+      + [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.eoi_5.batches_52.html) **FINAL**
+
+
+  + `ICI vs PBS`
     * [Using datatset with missing markers removed](genotype.frequencies_ici.vs.pbs_5.batches_mis.html)
-    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.pbs_5.batches.html)
-  + ICI-Early vs PBS
+    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici.vs.pbs_5.batches.html) **FINAL**
+
+
+  + `ICI-Early vs PBS`
     * [Using datatset with missing markers removed](genotype.frequencies_ici-early.vs.pbs_5.batches_mis.html)
-    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici-early.vs.pbs_5.batches.html)
+    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici-early.vs.pbs_5.batches.html) **FINAL**
 
 
-### **5. QTL Analysis**
-* binary phenotpe
-  + ICI vs EOI
-    * No further markers removed
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches.html)
-    * Further removal of Low Frequency markers in these group samples
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches.html)
-    * Further removal of disproportionate markers in these group samples
-      + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html)
-  + ICI vs PBS
-    * No further markers removed
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches.html)
-    * Further removal of Low Frequency markers in these group samples
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed with additional peak information](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_peaks.html)
-    * Further removal of disproportionate markers in these group samples
-      + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html)
-      + [Using datatset with missing markers removed (no xcovar with additonal peak information)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar additional peak information)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html)
-  + ICI-Early vs PBS
-    * No further markers removed
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.html)
-    * Further removal of Low Frequency markers in these group samples
-      + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.html)
-    * Further removal of disproportionate markers in these group samples
-      + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html)
-      + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
-* continious phenotype (all phenotypes used are corrected and all analyses remove outleirs where applicable)
-  + ICI vs EOI
-    * age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
-    * ranknorm age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
-  + ICI vs PBS
-    * age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
-    * ranknorm age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
-  + ICI-Early vs PBS
-    * age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
-    * ranknorm age-of-onset
-      * No further markers removed
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of Low Frequency markers in these group samples
-        + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
-      * Further removal of disproportionate markers in these group samples
-        + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
-        + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+  + `ICI-Early vs PBS & ICI-Late`
+    * [Using datatset with missing markers removed](genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches_mis.html)
+    * [Using datatset with monomorphic, genotype error & missing markers removed](genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.html) **outcome the same as `ICI vs PBS`** **FINAL**
+
+
+
+## **5. QTL Analysis**
+
+### binary phenotpe (diabetic status/group)
+
+no kinship included for this model as `r/qtl2` does not allow it. 
+
++ `ICI vs EOI`
+
+  Performed continious analysis with `age of onset` as well (see below) but given the type of phenotype it is (that is, disease status), the binary model is the correct model to use
+
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html) **FINAL**
+
+
+The following sample groups have also been done with `age of onset` as all samples have a value:
+
++ `ICI vs PBS`
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed with additional peak information](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_peaks.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html)
+    + [Using datatset with missing markers removed (no xcovar with additonal peak information)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html) **FINAL**
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar additional peak information)](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html) **FINAL**
+
+
++ `ICI-Early vs PBS`
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html) **FINAL**
+
+
++ `ICI-Early vs PBS & ICI-Late` 
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html) **FINAL** 
+
+
+
+### continous phenotypes (age of onset) 
+
+covariate used in  all analyses for each sample set was `disease status` which was binary (that is, diabetes/no diabetes or yes/no) 
+
+
+#### age of onset
+
++ `ICI vs EOI`
+
+*Note:** Given that the ‘ici vs. eoi’ group represents mice who have diabetes or do not have diabetes, the binary model is the appropriate model to use.
+
+However, I did perform QTL mapping for the conitnous traits setting:
+
+  1. EOI to missing (so essentially this will just perform QTL mapping on ICI), so this is not informative
+  2. EOI to 0 (last time I performed the analysis this is what I used)
+  3. EOI to 52 (thought I would give a very high number to represent unknown)
+
+For 2 & 3 putting in the same value for 164 samples (over half of the total samples in this sample group) affects the ability to correct the distribution.  Again, this will not be ideal given that `r/qtl2` requires the phenotype to be normally distributed
+
+  * `EOI` (in `ICI vs EOI`) as missing
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+  * `EOI` (in `ICI vs EOI`) as arbitrary value == 0
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html) **FINAL**
+
+  * `EOI` (in `ICI vs EOI`) as arbitrary value == 52
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html) **FINAL**
+
+
++ `ICI vs PBS`
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+
++ ICI-Early vs PBS
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+
++ `ICI-Early vs PBS & ICI-Late` 
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+
+
+#### age of onset (rank normalised)
+
++ `ICI vs EOI`
+
+see above for note. 
+
+  * `EOI` (in `ICI vs EOI`) as missing
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+  * `EOI` (in `ICI vs EOI`) as arbitrary value == 0
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html) **FINAL**
+
+  * `EOI` (in `ICI vs EOI`) as arbitrary value == 52
+    + No further markers removed
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html)
+    + Further removal of Low Frequency markers in these group samples
+      * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html)
+    + Further removal of disproportionate markers in these group samples
+      * [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html)
+      * [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html) **FINAL**
+
+
++ `ICI vs PBS`
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+
++ ICI-Early vs PBS
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
+
+
++ `ICI-Early vs PBS & ICI-Late` 
+  * No further markers removed
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of Low Frequency markers in these group samples
+    + [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html)
+  * Further removal of disproportionate markers in these group samples
+    + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
+    + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL** **same as `ICI vs PBS`**
+
+

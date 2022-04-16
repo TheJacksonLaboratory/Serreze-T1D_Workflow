@@ -11,7 +11,7 @@
 
 <meta name="author" content="Belinda Cornes" />
 
-<meta name="date" content="2022-04-11" />
+<meta name="date" content="2022-04-13" />
 
 <title>Phenotype QC [Continious (corrected) Phenotype - Age of Onset]</title>
 
@@ -316,7 +316,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Phenotype QC [Continious (corrected) Phenotype - Age of Onset]</h1>
 <h4 class="author">Belinda Cornes</h4>
-<h4 class="date">2022-04-11</h4>
+<h4 class="date">2022-04-13</h4>
 
 </div>
 
@@ -349,10 +349,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-04-11
+<strong>Last updated:</strong> 2022-04-13
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -368,12 +368,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -464,16 +464,16 @@ relative
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreed0c63e87425e778e5bccdac2e14bcf6eb43d9870targetblankd0c63e8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/d0c63e87425e778e5bccdac2e14bcf6eb43d9870" target="_blank">d0c63e8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreed0c63e87425e778e5bccdac2e14bcf6eb43d9870targetblankd0c63e8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/d0c63e87425e778e5bccdac2e14bcf6eb43d9870" target="_blank">d0c63e8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -483,17 +483,18 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    analysis/.DS_Store
     Ignored:    data/.DS_Store
-    Ignored:    untitled folder/
 
 Untracked files:
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_0.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_0.Rmd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_52.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_52.Rmd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_0.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_0.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_52.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_52.Rmd
     Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_mis_vo.Rmd
     Untracked:  analysis/3.1_phenotype.qc_corrected_5.batches_vo.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_11.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_1.Rmd
@@ -501,11 +502,68 @@ Untracked files:
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_1.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_11.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.Rmd
-    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.Rmd
-    Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs_5.batches.Rmd
-    Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs_5.batches_mis.Rmd
-    Untracked:  analysis/index_5.batches_additional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_changed.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_changed.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_scanone_5.batches.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_scanone_5.batches_mis.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_oops.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_vo.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_vo1.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_vo.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_vo1.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.Rmd.R
+    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_0.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_52.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_mis_0.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_mis_52.Rmd
     Untracked:  data/GM_covar.csv
     Untracked:  data/GM_covar_BC312.csv
     Untracked:  data/bad_markers_all_4.batches.RData
@@ -518,6 +576,7 @@ Untracked files:
     Untracked:  data/covar_cleaned_ici.vs.eoi.csv
     Untracked:  data/covar_cleaned_ici.vs.pbs.csv
     Untracked:  data/covar_corrected.cleaned_ici-early.vs.pbs_5.batches.csv
+    Untracked:  data/covar_corrected.cleaned_ici-early.vs.pbs_5.batches_mis.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi1.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.eoi_5.batches.csv
@@ -527,6 +586,7 @@ Untracked files:
     Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_5.batches.csv
     Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_5.batches_mis.csv
     Untracked:  data/covar_corrected_ici-early.vs.pbs_5.batches.csv
+    Untracked:  data/covar_corrected_ici-early.vs.pbs_5.batches_mis.csv
     Untracked:  data/covar_corrected_ici.vs.eoi.csv
     Untracked:  data/covar_corrected_ici.vs.eoi1.csv
     Untracked:  data/covar_corrected_ici.vs.eoi_5.batches.csv
@@ -543,6 +603,7 @@ Untracked files:
     Untracked:  data/errors_ind_4.batches.RData
     Untracked:  data/errors_ind_4.batches_bc.RData
     Untracked:  data/errors_ind_5.batches.RData
+    Untracked:  data/files.to.sync.txt
     Untracked:  data/fitqtl_chr3.peak_chr4.peak_additive.txt
     Untracked:  data/fitqtl_chr3.peak_chr4.peak_interacting.txt
     Untracked:  data/fitqtl_chr3.peak_chr4.peak_sex_additive.txt
@@ -568,6 +629,368 @@ Untracked files:
     Untracked:  data/gm_samqc_5.batches.RData
     Untracked:  data/gm_serreze.192.RData
     Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-additive.covariates_blup_sub_chr-7_peak.marker-UNC13388811_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-additive.covariates_genes_chr-7_peak.marker-UNC13388811_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-14_peak.marker-UNC24056202_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-17_peak.marker-UNCJPD006614_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-8_peak.marker-UNC15524531_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_genes_chr-14_peak.marker-UNC24056202_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_genes_chr-17_peak.marker-UNCJPD006614_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_genes_chr-8_peak.marker-UNC15524531_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_age.of.onset-no.covariates_genes_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-10_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-11_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-12_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-13_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-14_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-15_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-16_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-17_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-18_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-19_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-1_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-2_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-3_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-4_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-6_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-7_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-8_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-9_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.full_chr-X_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-10_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-11_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-12_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-13_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-14_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-15_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-15_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-15_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-15_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-16_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-17_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-17_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-17_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-17_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-18_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-19_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-1_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-2_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-3_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-4_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-6_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-7_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-8_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-9_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_blup.qc_chr-X_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici-early.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici-early.vs.pbs_scanone_5.batches.Rdata
+    Untracked:  data/ici-early.vs.pbs_scanone_5.batches_mis.Rdata
+    Untracked:  data/ici-early.vs.pbs_scanone_snpsqc_5.batches.Rdata
+    Untracked:  data/ici-early.vs.pbs_scanone_snpsqc_5.batches_mis.Rdata
+    Untracked:  data/ici-early.vs.pbs_scanone_snpsqc_dis_no-x_updated_5.batches.Rdata
+    Untracked:  data/ici-early.vs.pbs_scanone_snpsqc_dis_no-x_updated_5.batches_mis.Rdata
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-2_peak.marker-UNCHS008007_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-ICR5263_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-JAX00105649_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-JAX00516812_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-JAX00517674_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-JAX00518911r_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4809586_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4813186_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4820379_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4875653_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4901083_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4909519_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4912288_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4915446_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4923398_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4938565_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4945186_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4947492_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4957859_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4959266_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4960612_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4961542_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4979914_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC4990111_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNC5008656_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008193_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008209_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008215_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008219_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008229_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008234_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008260_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008271_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008281_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008338_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008363_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCHS008379_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCJPD001170_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-UNCJPD001198_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-3_peak.marker-sanger2496q_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-6_peak.marker-UNC11108920_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_blup_sub_chr-6_peak.marker-UNC11108920_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-2_peak.marker-UNCHS008007_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-ICR5263_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-JAX00105649_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-JAX00516812_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-JAX00517674_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-JAX00518911r_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4809586_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4813186_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4820379_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4875653_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4901083_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4909519_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4912288_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4915446_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4923398_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4938565_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4945186_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4947492_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4957859_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4959266_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4960612_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4961542_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4979914_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC4990111_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNC5008656_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008193_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008209_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008215_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008219_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008229_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008234_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008260_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008271_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008281_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008338_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008363_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCHS008379_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCJPD001170_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-UNCJPD001198_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-3_peak.marker-sanger2496q_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-6_peak.marker-UNC11108920_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_age.of.onset-no.covariates_genes_chr-6_peak.marker-UNC11108920_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.full_chr-10_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.eoi_blup.full_chr-10_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.eoi_blup.full_chr-11_snpsqc_5.batches.csv
@@ -1340,6 +1763,8 @@ Untracked files:
     Untracked:  data/ici.vs.eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio.csv
     Untracked:  data/ici.vs.eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches.csv
     Untracked:  data/ici.vs.eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici.vs.eoi_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.eoi_rz.age-additive.covariates_genes_chr-7_peak.marker-UNC13239362_lod.drop-1.5_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.geno.freq.removed.csv
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
     Untracked:  data/ici.vs.eoi_sample.genos_marker.freq_low.probs.freq.removed.csv
@@ -1349,6 +1774,26 @@ Untracked files:
     Untracked:  data/ici.vs.eoi_scanone_snpsqc_5.batches.Rdata
     Untracked:  data/ici.vs.eoi_scanone_snpsqc_5.batches_mis.Rdata
     Untracked:  data/ici.vs.eoi_scanone_snpsqc_dis_no-x_updated_5.batches.Rdata
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-14_peak.marker-UNC24056202_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-14_peak.marker-UNC24056202_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-17_peak.marker-UNCJPD006614_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-18_peak.marker-UNC28655293_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-5_peak.marker-UNC10044126_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-5_peak.marker-UNC8675939_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-8_peak.marker-JAX00667121_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-8_peak.marker-UNC15524531_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_blup_sub_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-14_peak.marker-UNC24056202_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-14_peak.marker-UNC24056202_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-17_peak.marker-UNCJPD006614_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-18_peak.marker-UNC28655293_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-5_peak.marker-UNC10044126_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-5_peak.marker-UNC8675939_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-8_peak.marker-JAX00667121_lod.drop-1.5_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-8_peak.marker-UNC15524531_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_age.of.onset-no.covariates_genes_chr-X_peak.marker-UNCHS048314_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_bad.markers_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-10_lod.drop-1.5_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup.full_chr-10_snpsqc_5.batches.csv
@@ -1695,26 +2140,65 @@ Untracked files:
     Untracked:  data/ici.vs.pbs_blup_chr-X_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
     Untracked:  data/ici.vs.pbs_blup_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-13_peak.marker-UNC22384241_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNC29893228_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNC29990033_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNCHS047192_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023364_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_additive_snpsqc_dis_no-x_updated_5.batches_mis_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_additive_snpsqc_dis_no-x_updated_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_additive_snpsqc_snpsqc_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_interacting_snpsqc_dis_no-x_updated_5.batches_mis_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_interacting_snpsqc_dis_no-x_updated_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_interacting_snpsqc_snpsqc_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_additive_snpsqc_dis_no-x_updated_5.batches_mis_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_additive_snpsqc_dis_no-x_updated_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_additive_snpsqc_snpsqc_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_interacting_snpsqc_dis_no-x_updated_5.batches_mis_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_interacting_snpsqc_dis_no-x_updated_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_interacting_snpsqc_snpsqc_5.batches_peaks.txt
+    Untracked:  data/ici.vs.pbs_genes_chr-13_peak.marker-UNC22384241_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNC29893228_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNC29990033_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNCHS047192_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023364_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_5.batches.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_5.batches.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio.csv
-    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_5.batches.csv
-    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_5.batches.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_5.batches.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-JAX00153527_lod.drop-1.5_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-JAX00153527_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNCHS020443_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNCHS020443_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_blup_sub_chr-7_peak.marker-UNCHS020486_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-JAX00153527_lod.drop-1.5_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-JAX00153527_lod.drop-1.5_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNCHS020443_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNCHS020443_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_rz.age-additive.covariates_genes_chr-7_peak.marker-UNCHS020486_lod.drop-1.5_snpsqc_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed.csv
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed.csv
     Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed.csv
@@ -1753,7 +2237,6 @@ Untracked files:
     Untracked:  data/summary.cg_4.batches.RData
     Untracked:  data/summary.cg_4.batches_bc.RData
     Untracked:  data/summary.cg_5.batches.RData
-    Untracked:  files.to.push.txt
     Untracked:  output/Percent_missing_genotype_data_5.batches.pdf
     Untracked:  output/Percent_missing_genotype_data_per_marker_5.batches.pdf
     Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_5.batches.pdf
@@ -1761,12 +2244,44 @@ Untracked files:
     Untracked:  output/genotype_frequency_marker_5.batches.pdf
 
 Unstaged changes:
-    Modified:   analysis/3.1_phenotype.qc_corrected_5.batches.Rmd
-    Modified:   analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd
     Modified:   analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated.Rmd
     Modified:   analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated.Rmd
-    Modified:   analysis/index_5.batches.Rmd
-    Modified:   analysis/index_5.batches_additional.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.Rmd
+    Modified:   analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.Rmd
 
 </code></pre>
 <p>
@@ -1805,6 +2320,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/a8c2d1a11f223361b54952ce8455e8c17017c914/analysis/3.1_phenotype.qc_corrected_5.batches_mis.Rmd" target="_blank">a8c2d1a</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-13
+</td>
+<td>
+additonal analysis - peaks and continuous variables
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/a8c2d1a11f223361b54952ce8455e8c17017c914/docs/3.1_phenotype.qc_corrected_5.batches_mis.html" target="_blank">a8c2d1a</a>
+</td>
+<td>
+Belinda Cornes
+</td>
+<td>
+2022-04-13
+</td>
+<td>
+additonal analysis - peaks and continuous variables
+</td>
+</tr>
 <tr>
 <td>
 html

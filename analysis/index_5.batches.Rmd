@@ -35,7 +35,7 @@ options(stringsAsFactors = FALSE)
 
 ```
 
-### **Neogen Files At A Glance** [Total Samples: 312]
+## **Neogen Files At A Glance** [Total Samples: 312]
 * Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
   + [Total Samples: 24](0.1_samples_batch_20201209.html)
 * Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210527
@@ -49,10 +49,10 @@ options(stringsAsFactors = FALSE)
 * [Preparing files for QC/Haplotype Phasing](0.1.1_preparing.data_bqc_5.batches.html)
 
 
-### **Haplotype Phasing**
+## **Haplotype Phasing**
 * [minimum probability set for estimation of genotypes](0.2_haplotype_comparison_bqc_5.batches_minprob.html)
 
-### **1. Experiment Design**
+## **1. Experiment Design**
 
 ```{r chapter1, eval=TRUE}
 
@@ -65,11 +65,11 @@ design = matrix(ncol=8, nrow=1, dimnames = list("",c("abbreviations for strains:
 design[1,1] <- "AB: het; AA: hom"
 design[1,2] <- "Backcross"
 design[1,3] <- nrow(gm$pheno)
-design[1,4] <- "1 [binary]"
-design[1,5] <- "diabetic status/group [binary]"
+design[1,4] <- "2 [1 binary/1 quantiative]"
+design[1,5] <- "diabetic status/group [binary] & age of onset [continuous]"
 design[1,6] <- ncol(genos)
 design[1,7] <- nrow(genos)
-design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] though not used as all mice are females")
+design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="Female",]), "; M: ", nrow(gm$covar[gm$covar$sex=="Male",]),"] (sex not used as all females); binary diabetic status for continous traits")
 
 design <- t(design)
 #design <- as.data.frame(design)
@@ -84,24 +84,67 @@ design[] %>%
 
 ```
 
-### **2. Genotype QC **
+## **2. Genotype QC **
 * Step 1: [Sample QC](2.1_sample_bqc_5.batches.html)
-* Step 2: [SNP QC](2.2.1_snp_qc_5.batches.html)(removing monomorphic, gnotype Error & missing markers)
+* Step 2: [SNP QC](2.2.1_snp_qc_5.batches.html)(removing monomorphic, genotype error & missing markers)
 * Step 3: [Preparing Files for QTL Analysis](2.4_preparing.data_aqc_5.batches.html)
 * Step 4: Identifying additional disproportionate markers within each sample set
-  + [ICI vs EOI](genotype.frequencies_ici.vs.eoi_5.batches.html)
-  + [ICI vs PBS](genotype.frequencies_ici.vs.pbs_5.batches.html)
-  + [ICI-Early vs PBS](genotype.frequencies_ici-early.vs.pbs_5.batches.html)
+  + [`ICI vs EOI`](genotype.frequencies_ici.vs.eoi_5.batches.html)
+  + [`ICI vs PBS`](genotype.frequencies_ici.vs.pbs_5.batches.html)
+  + [`ICI-Early vs PBS`](genotype.frequencies_ici-early.vs.pbs_5.batches.html)
+  + [`ICI-Early vs PBS & ICI-Late`](genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.html) **outcome the same as `ICI vs PBS`**
 
 
-### **3. Phenotype QC**
-* No QC as using binary phenotypes for best results
+## **3. Phenotype QC**
+
+### continous phenotypes (age of onset)
+
+* Corrected Phenotypes
+    + [`ICI vs PBS` & `ICI-Early vs PBS` & `ICI vs EOI` (EOI set as missing)](3.1_phenotype.qc_corrected_5.batches.html) 
+    + [`ICI-Early vs PBS & ICI-Late`](3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches.html) **outcome the same as `ICI vs PBS`**
 
 
-### **4. QTL Analysis**
-* binary phenotpe (removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set)
-  + [ICI vs EOI](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html)
-  + ICI vs PBS
-     * [no additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
-     * [with additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html)
-  + [ICI-Early vs PBS](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
+
+## **4. QTL Analysis**
+
+### binary phenotpe (diabetic status/group)
+
+1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
+2.  no X covariate (ie. `Xcovar`)
+3.  no kinship included as `r/qtl2` does not allow for the inclusion of a kinship matrix in this type of model
+4.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
+
+
+* [`ICI vs EOI`](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html)
+
+
+The following analysis has been done with `age of onset` as all samples have a value:
+
+* ICI vs PBS
+    + [no additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
+    + [with additional information about peaks](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html)
+* [`ICI-Early vs PBS`](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
+* [`ICI-Early vs PBS & ICI-Late`](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html)
+
+
+### continous phenotypes (age of onset)
+
+1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
+2.  `disease status` was used as a binary covariate (that is, diabetes/no diabetes or yes/no) for analyses in each sample set
+3.  no X covariate (ie. `Xcovar`)
+4   no kinship included 
+5.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
+
+#### age of onset
+
+* [`ICI vs PBS`](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+* [`ICI-Early vs PBS`](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+* [`ICI-Early vs PBS & ICI-Late`](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+
+#### age of onset (rank normalised)
+
+* [`ICI vs PBS`](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+* [`ICI-Early vs PBS`](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+* [`ICI-Early vs PBS & ICI-Late`](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
+
+
