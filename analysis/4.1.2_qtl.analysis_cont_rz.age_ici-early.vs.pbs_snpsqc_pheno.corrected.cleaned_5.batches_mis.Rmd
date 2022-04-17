@@ -229,6 +229,7 @@ out <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", kinship=K)
 
 plot_lod(out,gm$gmap)
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 
@@ -511,6 +512,7 @@ plot_lod(outa,gm$gmap)
 
 out = outa
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 
@@ -770,16 +772,18 @@ plot_lod<-function(out,map){
 
 
 print("with no kinship")
-outfi <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, addcovar=addcovar, intcovar=addcovar, model="normal")
+outfi <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar)
+
+plot_lod(outfi,gm$gmap)
 
 outf.new <- outfi-outfa
 
-plot_lod(outfi,gm$gmap)
+plot_lod(outf.new,gm$gmap)
 
 print("with normal kinship")
 outki <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=kinship)
 
-#plot_lod(outki,gm$gmap)
+plot_lod(outki,gm$gmap)
 
 outk.new <- outki-outka
 
@@ -788,15 +792,16 @@ plot_lod(outk.new,gm$gmap)
 print("with loco kinship")
 outi <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=K)
 
-#plot_lod(outi,gm$gmap)
+plot_lod(outi,gm$gmap)
 
-out.new <- outi-outa
+outi.new <- outi-outa
 
-plot_lod(out.new,gm$gmap)
+plot_lod(outi.new,gm$gmap)
 
-out = out.new
+out = outi.new
 
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 

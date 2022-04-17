@@ -219,27 +219,28 @@ plot_lod<-function(out,map){
 }
 
 
-print("with no kinship")
-outf <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal")
+#print("with no kinship")
+#outf <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal")
 
-plot_lod(outf,gm$gmap)
+#plot_lod(outf,gm$gmap)
 
-print("with normal kinship")
-outk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", kinship=kinship)
+#print("with normal kinship")
+#outk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", kinship=kinship)
 
-plot_lod(outk,gm$gmap)
+#plot_lod(outk,gm$gmap)
 
 
-print("with loco kinship")
-outlk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", kinship=K)
+#print("with loco kinship")
+#outlk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", kinship=K)
 
-plot_lod(outlk,gm$gmap)
+#plot_lod(outlk,gm$gmap)
 
 print("no kinship and no xcovar")
 out <- scan1(pr.qc, covars["rz.age"], model="normal")
 
 plot_lod(out,gm$gmap)
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 
@@ -505,20 +506,20 @@ plot_lod<-function(out,map){
 }
 
 
-print("with no kinship")
-outfa <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar)
+#print("with no kinship")
+#outfa <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar)
 
-plot_lod(outfa,gm$gmap)
+#plot_lod(outfa,gm$gmap)
 
-print("with normal kinship")
-outka <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=kinship)
+#print("with normal kinship")
+#outka <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=kinship)
 
-plot_lod(outka,gm$gmap)
+#plot_lod(outka,gm$gmap)
 
-print("with loco kinship")
-outlk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=K)
+#print("with loco kinship")
+#outlka <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, kinship=K)
 
-plot_lod(outlk,gm$gmap)
+#plot_lod(outlka,gm$gmap)
 
 print("no kinship and no xcovar")
 outa <- scan1(pr.qc, covars["rz.age"], model="normal",addcovar=addcovar)
@@ -527,6 +528,7 @@ plot_lod(outa,gm$gmap)
 
 out = outa
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 
@@ -786,33 +788,37 @@ plot_lod<-function(out,map){
 }
 
 
-print("with no kinship")
-outfi <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, addcovar=addcovar, intcovar=addcovar, model="normal")
+#print("with no kinship")
+#outfi <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, addcovar=addcovar, intcovar=addcovar, model="normal")
 
-outf.new <- outfi-outfa
+#plot_lod(outfi,gm$gmap)
 
-plot_lod(outfi,gm$gmap)
+#outf.new <- outfi-outfa
 
-print("with normal kinship")
-outki <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=kinship)
+#plot_lod(outf.new,gm$gmap)
+
+#print("with normal kinship")
+#outki <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=kinship)
 
 #plot_lod(outki,gm$gmap)
 
-outk.new <- outki-outka
+#outk.new <- outki-outka
 
-plot_lod(outk.new,gm$gmap)
+#plot_lod(outk.new,gm$gmap)
 
-print("with loco kinship")
-outlk <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=K)
+#print("with loco kinship")
+#outlki <- scan1(pr.qc, covars["rz.age"], Xcovar=Xcovar, model="normal", addcovar=addcovar, intcovar=addcovar, kinship=K)
 
-#plot_lod(outi,gm$gmap)
+#plot_lod(outlki,gm$gmap)
 
-outlk.new <- outlk-outlk
+#outlk.new <- outlki-outlka
 
-plot_lod(outlk.new,gm$gmap)
+#plot_lod(outlk.new,gm$gmap)
 
 print("no kinship and no xcovar")
 outi <- scan1(pr.qc, covars["rz.age"], model="normal",addcovar=addcovar, intcovar=addcovar)
+
+#plot_lod(outi, gm$gmap)
 
 out.new <- outi-outa
 
@@ -823,6 +829,7 @@ out = out.new
 
 
 
+print(paste0("number of samples in analysis = ", as.data.frame(attributes(out)$sample_size)[1,]))
 
 ```
 
