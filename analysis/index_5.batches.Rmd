@@ -148,3 +148,6 @@ The following analysis has been done with `age of onset` as all samples have a v
 * [`ICI-Early vs PBS & ICI-Late`](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
 
 
+## **5. Power Analysis**
+
+* [`ICI vs PBS`](power.analysis_ici.vs.pbs_5.batches.html)

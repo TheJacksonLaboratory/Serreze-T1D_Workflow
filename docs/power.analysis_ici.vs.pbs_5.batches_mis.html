@@ -13,7 +13,7 @@
 
 <meta name="date" content="2022-05-17" />
 
-<title>Serreze Workflow - 5 batches</title>
+<title>Power Analysis - ICI vs PBS</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -34,7 +34,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -287,7 +286,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Serreze Workflow - 5 batches</h1>
+<h1 class="title toc-ignore">Power Analysis - ICI vs PBS</h1>
 <h4 class="author">Belinda Cornes</h4>
 <h4 class="date">2022-05-17</h4>
 
@@ -295,20 +294,9 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#neogen-files-at-a-glance-total-samples-312"><strong>Neogen Files At A Glance</strong> [Total Samples: 312]</a></li>
-<li><a href="#haplotype-phasing"><strong>Haplotype Phasing</strong></a></li>
-<li><a href="#experiment-design"><strong>1. Experiment Design</strong></a></li>
-<li><a href="#genotype-qc"><strong>2. Genotype QC </strong></a></li>
-<li><a href="#phenotype-qc"><strong>3. Phenotype QC</strong></a>
-<ul>
-<li><a href="#continous-phenotypes-age-of-onset">continous phenotypes (age of onset)</a></li>
-</ul></li>
-<li><a href="#qtl-analysis"><strong>4. QTL Analysis</strong></a>
-<ul>
-<li><a href="#binary-phenotpe-diabetic-statusgroup">binary phenotpe (diabetic status/group)</a></li>
-<li><a href="#continous-phenotypes-age-of-onset-1">continous phenotypes (age of onset)</a></li>
-</ul></li>
-<li><a href="#power-analysis"><strong>5. Power Analysis</strong></a></li>
+<li><a href="#loading-data">Loading Data</a></li>
+<li><a href="#power">Power</a></li>
+<li><a href="#sample-size-with-80-power">Sample Size (with 80% power)</a></li>
 </ul>
 </div>
 
@@ -335,7 +323,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2022-05-17
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -356,7 +344,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -411,12 +399,36 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -3280,301 +3292,291 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index_5.batches.Rmd</code>) and HTML (<code>docs/index_5.batches.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/a8c2d1a11f223361b54952ce8455e8c17017c914/analysis/index_5.batches.Rmd" target="_blank">a8c2d1a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-13
-</td>
-<td>
-additonal analysis - peaks and continuous variables
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/a8c2d1a11f223361b54952ce8455e8c17017c914/docs/index_5.batches.html" target="_blank">a8c2d1a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-13
-</td>
-<td>
-additonal analysis - peaks and continuous variables
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/d0c63e87425e778e5bccdac2e14bcf6eb43d9870/docs/index_5.batches.html" target="_blank">d0c63e8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-10
-</td>
-<td>
-analysis for 5 batches htmls
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/c98df6cb2a120c9a0ce1237f3766c4bf9aed403d/analysis/index_5.batches.Rmd" target="_blank">c98df6c</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-10
-</td>
-<td>
-analysis for 5 batches Rmds
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<div id="neogen-files-at-a-glance-total-samples-312" class="section level2">
-<h2><strong>Neogen Files At A Glance</strong> [Total Samples: 312]</h2>
-<ul>
-<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
-<ul>
-<li><a href="0.1_samples_batch_20201209.html">Total Samples: 24</a></li>
-</ul></li>
-<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210527
-<ul>
-<li><a href="0.1_samples_batch_20210527.html">Total Samples: 72</a></li>
-</ul></li>
-<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20210909
-<ul>
-<li><a href="0.1_samples_batch_20210909.html">Total Samples: 72</a></li>
-</ul></li>
-<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20211101
-<ul>
-<li><a href="0.1_samples_batch_20211101.html">Total Samples: 24</a></li>
-</ul></li>
-<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_220220328
-<ul>
-<li><a href="0.1_samples_batch_220220328.html">Total Samples: 120</a></li>
-</ul></li>
-<li><a href="0.1.1_preparing.data_bqc_5.batches.html">Preparing files for QC/Haplotype Phasing</a></li>
-</ul>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_5.batches_mis.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               308
+No. genotyped individuals       308
+No. phenotyped individuals      308
+No. with both geno &amp; pheno      308
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131356
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9956 9987 7848 7586 7609 7736 7399 6458 6713 6385 7143 6110 6082 5966 5346 5015 
+  17   18   19    X 
+5080 4605 3562 4770 </code></pre>
+<pre class="r"><code>#pr &lt;- readRDS(&quot;data/serreze_probs_allqc.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+##extracting animals with ici and pbs group status
+miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+table(miceinfo$group)</code></pre>
+<pre><code>
+ICI PBS 
+104  34 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               138
+No. genotyped individuals       138
+No. phenotyped individuals      138
+No. with both geno &amp; pheno      138
+
+No. phenotypes                    1
+No. covariates                    6
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                131356
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9956 9987 7848 7586 7609 7736 7399 6458 6713 6385 7143 6110 6082 5966 5346 5015 
+  17   18   19    X 
+5080 4605 3562 4770 </code></pre>
+<pre class="r"><code>table(gm$covar$group)</code></pre>
+<pre><code>
+ICI PBS 
+104  34 </code></pre>
+<pre class="r"><code>##loading genotypes
+
+genos.1 &lt;- read.csv(&quot;data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_5.batches_mis.csv&quot;)
+dim(genos.1)</code></pre>
+<pre><code>[1] 32691   149</code></pre>
+<pre class="r"><code>genos.1 &lt;- genos.1[genos.1$Include,]
+dim(genos.1)</code></pre>
+<pre><code>[1] 8182  149</code></pre>
+<pre class="r"><code>#dis.genos.1 &lt;- read.csv(&quot;data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_5.batches_mis.csv&quot;)
+#dim(dis.genos.1)
+rownames(genos.1) &lt;- genos.1$marker
+genos.1 &lt;- t(genos.1[3:(ncol(genos.1)-9)])
+rownames(genos.1) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,rownames(genos.1))
+
+genos.2&lt;- read.csv(&quot;data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_5.batches_mis.csv&quot;)
+dim(genos.2)</code></pre>
+<pre><code>[1] 32691   149</code></pre>
+<pre class="r"><code>genos.2 &lt;- genos.2[genos.2$Include,]
+dim(genos.2)</code></pre>
+<pre><code>[1] 8182  149</code></pre>
+<pre class="r"><code>#dis.genos.2 &lt;- read.csv(&quot;data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_5.batches_mis.csv&quot;)
+rownames(genos.2) &lt;- genos.2$marker
+genos.2 &lt;- t(genos.2[3:(ncol(genos.2)-9)])
+rownames(genos.2) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,rownames(genos.2))
+
+
+##merge with phenotypes (age.of.onset &amp; binary)
+
+names(gm$covar)[3] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar[gm$covar$id==&quot;NG00453&quot;,]$age.of.onset = 13.7
+gm$covar[gm$covar$age.of.onset==&#39;&#39;,] &lt;- 0
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+geno.pheno.1 &lt;- merge(data.frame(genos.1), gm$covar,  by=&quot;row.names&quot;, all.x=T, sort=F)
+aov.1 &lt;- stats::aov(age.of.onset ~ group, geno.pheno.1)
+mse.1 &lt;- mean(aov.1$residuals^2) 
+geno.pheno.2 &lt;- merge(data.frame(genos.2), gm$covar,  by=&quot;row.names&quot;, all.x=T, sort=F)
+aov.2 &lt;- stats::aov(age.of.onset ~ group, geno.pheno.2)
+mse.2 &lt;- mean(aov.2$residuals^2) 
+
+
+## calculating effect (age.of.onset)
+
+age.marker.sum.1 &lt;- list()
+geno.pheno.1a &lt;- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-7)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 &lt;- geno.pheno.1a %&gt;% 
+  group_by(geno.pheno.1a[i])  %&gt;%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.1) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.1a[i]),&quot;_age.of.onset&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.1 &lt;- merge(genotypes, age.marker.1, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] &lt;- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) &lt;- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t &lt;- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) &lt;- gsub(&quot;_age.of.onset&quot;,&quot;&quot;,rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t &lt;- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom &lt;- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+max.1 &lt;- max(age.marker.sum.1.all.t$diffhethom)
+min.1 &lt;- min(age.marker.sum.1.all.t$diffhethom)
+write.csv(age.marker.sum.1.all.t,&quot;data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_5.batches_mis.csv&quot;)
+
+age.marker.sum.2 &lt;- list()
+geno.pheno.2a &lt;- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-7)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 &lt;- geno.pheno.2a %&gt;% 
+  group_by(geno.pheno.2a[i])  %&gt;%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.2) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.2a[i]),&quot;_age.of.onset&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.2 &lt;- merge(genotypes, age.marker.2, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] &lt;- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) &lt;- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t &lt;- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) &lt;- gsub(&quot;_age.of.onset&quot;,&quot;&quot;,rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t &lt;- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom &lt;- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+max.2 &lt;- max(age.marker.sum.2.all.t$diffhethom)
+min.2 &lt;- min(age.marker.sum.2.all.t$diffhethom)
+write.csv(age.marker.sum.2.all.t,&quot;data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_5.batches_mis.csv&quot;)
+
+
+max.a &lt;- max(max.1, max.2)
+print(max.a)</code></pre>
+<pre><code>[1] 3.343679</code></pre>
+<pre class="r"><code>min.a &lt;- min(min.1, min.2)
+print(min.a)</code></pre>
+<pre><code>[1] -3.122579</code></pre>
+<pre class="r"><code>mse.a &lt;- (mse.1 + mse.2)/2
+print(mse.a)</code></pre>
+<pre><code>[1] 27.12483</code></pre>
+<pre class="r"><code>## calculating effect (group)
+
+age.marker.sum.1 &lt;- list()
+geno.pheno.1a &lt;- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-7)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 &lt;- geno.pheno.1a %&gt;% 
+  group_by(geno.pheno.1a[i])  %&gt;%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.1) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.1a[i]),&quot;_group&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.1 &lt;- merge(genotypes, age.marker.1, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] &lt;- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) &lt;- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t &lt;- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) &lt;- gsub(&quot;_group&quot;,&quot;&quot;,rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t &lt;- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom &lt;- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+write.csv(age.marker.sum.1.all.t,&quot;data/mean.differences_group_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_5.batches_mis.csv&quot;)
+
+age.marker.sum.2 &lt;- list()
+geno.pheno.2a &lt;- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-7)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 &lt;- geno.pheno.2a %&gt;% 
+  group_by(geno.pheno.2a[i])  %&gt;%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.2) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.2a[i]),&quot;_group&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.2 &lt;- merge(genotypes, age.marker.2, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] &lt;- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) &lt;- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t &lt;- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) &lt;- gsub(&quot;_group&quot;,&quot;&quot;,rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t &lt;- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom &lt;- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+write.csv(age.marker.sum.2.all.t,&quot;data/mean.differences_group_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_5.batches_mis.csv&quot;)
+
+
+max.g &lt;- max(max.1, max.2)
+print(max.g)</code></pre>
+<pre><code>[1] 3.343679</code></pre>
+<pre class="r"><code>min.g &lt;- min(min.1, min.2)
+print(min.g)</code></pre>
+<pre><code>[1] -3.122579</code></pre>
+<pre class="r"><code>mse.g &lt;- (mse.1 + mse.2)/2
+print(mse.g)</code></pre>
+<pre><code>[1] 27.12483</code></pre>
 </div>
-<div id="haplotype-phasing" class="section level2">
-<h2><strong>Haplotype Phasing</strong></h2>
-<ul>
-<li><a href="0.2_haplotype_comparison_bqc_5.batches_minprob.html">minimum probability set for estimation of genotypes</a></li>
-</ul>
+<div id="power" class="section level2">
+<h2>Power</h2>
+<p>For powercalc the power is returned, along with the proportion of variance explained. LOD threshold set to 3 (which is roughly what is seen for suggestive significance)</p>
+<pre class="r"><code>## age.of onset
+
+
+powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.4225683              8.245675</code></pre>
+<pre class="r"><code>powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.5215428              9.341773</code></pre>
+<pre class="r"><code>#powercalc(&quot;bc&quot;,100,31,sigma2=1,sel.frac=1,theta=0)
+
+## group (binary)
+
+powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.4225683              8.245675</code></pre>
+<pre class="r"><code>powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.5215428              9.341773</code></pre>
+<pre class="r"><code>## graph</code></pre>
 </div>
-<div id="experiment-design" class="section level2">
-<h2><strong>1. Experiment Design</strong></h2>
-<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:left;">
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-abbreviations for strains:
-</td>
-<td style="text-align:left;width: 1cms; ">
-AB: het; AA: hom
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-type of cross:
-</td>
-<td style="text-align:left;width: 1cms; ">
-Backcross
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-number of mice phenotyped:
-</td>
-<td style="text-align:left;width: 1cms; ">
-312
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-total number of mice phenotypes:
-</td>
-<td style="text-align:left;width: 1cms; ">
-2 [1 binary/1 quantiative]
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-phenotypes:
-</td>
-<td style="text-align:left;width: 1cms; ">
-diabetic status/group [binary] &amp; age of onset [continuous]
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-number of mice:
-</td>
-<td style="text-align:left;width: 1cms; ">
-312
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-number of markers:
-</td>
-<td style="text-align:left;width: 1cms; ">
-137302
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5cms; font-weight: bold;">
-covariates:
-</td>
-<td style="text-align:left;width: 1cms; ">
-sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for continous traits
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="genotype-qc" class="section level2">
-<h2><strong>2. Genotype QC </strong></h2>
-<ul>
-<li>Step 1: <a href="2.1_sample_bqc_5.batches.html">Sample QC</a></li>
-<li>Step 2: <a href="2.2.1_snp_qc_5.batches.html">SNP QC</a>(removing monomorphic, genotype error &amp; missing markers)</li>
-<li>Step 3: <a href="2.4_preparing.data_aqc_5.batches.html">Preparing Files for QTL Analysis</a></li>
-<li>Step 4: Identifying additional disproportionate markers within each sample set
-<ul>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches.html"><code>ICI vs EOI</code></a></li>
-<li><a href="genotype.frequencies_ici.vs.pbs_5.batches.html"><code>ICI vs PBS</code></a></li>
-<li><a href="genotype.frequencies_ici-early.vs.pbs_5.batches.html"><code>ICI-Early vs PBS</code></a></li>
-<li><a href="genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.html"><code>ICI-Early vs PBS &amp; ICI-Late</code></a> <strong>outcome the same as <code>ICI vs PBS</code></strong></li>
-</ul></li>
-</ul>
-</div>
-<div id="phenotype-qc" class="section level2">
-<h2><strong>3. Phenotype QC</strong></h2>
-<div id="continous-phenotypes-age-of-onset" class="section level3">
-<h3>continous phenotypes (age of onset)</h3>
-<ul>
-<li>Corrected Phenotypes
-<ul>
-<li><a href="3.1_phenotype.qc_corrected_5.batches.html"><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp; <code>ICI vs EOI</code> (EOI set as missing)</a></li>
-<li><a href="3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches.html"><code>ICI-Early vs PBS &amp; ICI-Late</code></a> <strong>outcome the same as <code>ICI vs PBS</code></strong></li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="qtl-analysis" class="section level2">
-<h2><strong>4. QTL Analysis</strong></h2>
-<div id="binary-phenotpe-diabetic-statusgroup" class="section level3">
-<h3>binary phenotpe (diabetic status/group)</h3>
-<ol style="list-style-type: decimal">
-<li>removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set</li>
-<li>no X covariate (ie. <code>Xcovar</code>)</li>
-<li>no kinship included as <code>r/qtl2</code> does not allow for the inclusion of a kinship matrix in this type of model</li>
-<li>For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p &lt; 0.01, p &lt; 0.05, p &lt; 0.10, respectively, separately for X and automsomes (A)</li>
-</ol>
-<ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html"><code>ICI vs EOI</code></a></li>
-</ul>
-<p>The following analysis has been done with <code>age of onset</code> as all samples have a value:</p>
-<ul>
-<li><code>ICI vs PBS</code>
-<ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html">no additional information about peaks</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html">with additional information about peaks</a></li>
-</ul></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html"><code>ICI-Early vs PBS</code></a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html"><code>ICI-Early vs PBS &amp; ICI-Late</code></a></li>
-</ul>
-</div>
-<div id="continous-phenotypes-age-of-onset-1" class="section level3">
-<h3>continous phenotypes (age of onset)</h3>
-<ol style="list-style-type: decimal">
-<li>removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set</li>
-<li><code>disease status</code> was used as a binary covariate (that is, diabetes/no diabetes or yes/no) for analyses in each sample set</li>
-<li>no X covariate (ie. <code>Xcovar</code>) 4 no kinship included</li>
-<li>For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p &lt; 0.01, p &lt; 0.05, p &lt; 0.10, respectively, separately for X and automsomes (A)</li>
-</ol>
-<div id="age-of-onset" class="section level4">
-<h4>age of onset</h4>
-<ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI vs PBS</code></a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI-Early vs PBS</code></a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI-Early vs PBS &amp; ICI-Late</code></a></li>
-</ul>
-</div>
-<div id="age-of-onset-rank-normalised" class="section level4">
-<h4>age of onset (rank normalised)</h4>
-<ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI vs PBS</code></a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI-Early vs PBS</code></a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html"><code>ICI-Early vs PBS &amp; ICI-Late</code></a></li>
-</ul>
-</div>
-</div>
-</div>
-<div id="power-analysis" class="section level2">
-<h2><strong>5. Power Analysis</strong></h2>
-<ul>
-<li><a href="power.analysis_ici.vs.pbs_5.batches.html"><code>ICI vs PBS</code></a></li>
-</ul>
+<div id="sample-size-with-80-power" class="section level2">
+<h2>Sample Size (with 80% power)</h2>
+<p>For samplesize the sample size (rounded up to the nearest integer) is returned along with the proportion of variance explained. LOD threshold set to 3 (which is roughly what is seen for suggestive significance) and 80% power</p>
+<pre class="r"><code>## age.of onset
+samplesize(cross = &quot;bc&quot;,effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]         232              8.245675</code></pre>
+<pre class="r"><code>samplesize(cross = &quot;bc&quot;,effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]         202              9.341773</code></pre>
+<pre class="r"><code>## group (binary)
+samplesize(cross = &quot;bc&quot;,effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]         232              8.245675</code></pre>
+<pre class="r"><code>samplesize(cross = &quot;bc&quot;,effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]         202              9.341773</code></pre>
+<pre class="r"><code>## graph</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -3597,29 +3599,31 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggrepel_0.8.2     qtlcharts_0.11-6  qtl2_0.28         broman_0.70-4    
- [5] ggplot2_3.3.6     tibble_3.1.7      readxl_1.4.0      cluster_2.1.0    
- [9] dplyr_1.0.9       optparse_1.6.6    mclust_5.4.6      tidyr_1.2.0      
-[13] data.table_1.14.2 knitr_1.39        kableExtra_1.1.0  workflowr_1.6.2  
+ [1] qtlDesign_0.941   abind_1.4-5       qtl2_0.28         reshape2_1.4.4   
+ [5] ggplot2_3.3.6     tibble_3.1.7      psych_2.0.7       readxl_1.4.0     
+ [9] cluster_2.1.0     dplyr_1.0.9       optparse_1.6.6    rhdf5_2.28.1     
+[13] mclust_5.4.6      tidyr_1.2.0       data.table_1.14.2 knitr_1.39       
+[17] kableExtra_1.1.0  workflowr_1.6.2  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8.3      assertthat_0.2.1  rprojroot_2.0.3   digest_0.6.29    
- [5] utf8_1.2.2        R6_2.5.1          cellranger_1.1.0  RSQLite_2.2.14   
- [9] evaluate_0.15     httr_1.4.3        pillar_1.7.0      rlang_1.0.2      
-[13] rstudioapi_0.13   blob_1.2.3        whisker_0.4       jquerylib_0.1.4  
-[17] rmarkdown_2.14    qtl_1.50          webshot_0.5.2     readr_2.1.2      
-[21] stringr_1.4.0     bit_4.0.4         munsell_0.5.0     compiler_3.6.2   
-[25] httpuv_1.5.2      xfun_0.31         pkgconfig_2.0.3   htmltools_0.5.2  
-[29] tidyselect_1.1.2  fansi_1.0.3       viridisLite_0.4.0 crayon_1.5.1     
-[33] tzdb_0.3.0        withr_2.5.0       later_1.0.0       grid_3.6.2       
-[37] jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1   DBI_1.1.2        
-[41] git2r_0.26.1      magrittr_2.0.3    scales_1.2.0      cachem_1.0.6     
-[45] cli_3.3.0         stringi_1.7.6     fs_1.5.2          promises_1.1.0   
-[49] getopt_1.20.3     xml2_1.3.3        bslib_0.3.1       ellipsis_0.3.2   
-[53] generics_0.1.2    vctrs_0.4.1       tools_3.6.2       bit64_4.0.5      
-[57] glue_1.6.2        purrr_0.3.4       hms_1.1.1         parallel_3.6.2   
-[61] fastmap_1.1.0     yaml_2.3.5        colorspace_2.0-3  rvest_1.0.2      
-[65] memoise_2.0.1     sass_0.4.1       </code></pre>
+ [1] httr_1.4.3        sass_0.4.1        bit64_4.0.5       jsonlite_1.8.0   
+ [5] viridisLite_0.4.0 bslib_0.3.1       assertthat_0.2.1  highr_0.9        
+ [9] blob_1.2.3        cellranger_1.1.0  yaml_2.3.5        pillar_1.7.0     
+[13] RSQLite_2.2.14    lattice_0.20-38   glue_1.6.2        digest_0.6.29    
+[17] promises_1.1.0    rvest_1.0.2       colorspace_2.0-3  htmltools_0.5.2  
+[21] httpuv_1.5.2      plyr_1.8.7        pkgconfig_2.0.3   purrr_0.3.4      
+[25] scales_1.2.0      webshot_0.5.2     getopt_1.20.3     later_1.0.0      
+[29] tzdb_0.3.0        git2r_0.26.1      generics_0.1.2    ellipsis_0.3.2   
+[33] cachem_1.0.6      withr_2.5.0       cli_3.3.0         mnormt_1.5-7     
+[37] magrittr_2.0.3    crayon_1.5.1      memoise_2.0.1     evaluate_0.15    
+[41] fs_1.5.2          fansi_1.0.3       nlme_3.1-142      xml2_1.3.3       
+[45] tools_3.6.2       hms_1.1.1         lifecycle_1.0.1   stringr_1.4.0    
+[49] Rhdf5lib_1.6.3    munsell_0.5.0     compiler_3.6.2    jquerylib_0.1.4  
+[53] rlang_1.0.2       grid_3.6.2        rstudioapi_0.13   rmarkdown_2.14   
+[57] gtable_0.3.0      DBI_1.1.2         R6_2.5.1          fastmap_1.1.0    
+[61] bit_4.0.4         utf8_1.2.2        rprojroot_2.0.3   readr_2.1.2      
+[65] stringi_1.7.6     parallel_3.6.2    Rcpp_1.0.8.3      vctrs_0.4.1      
+[69] tidyselect_1.1.2  xfun_0.31        </code></pre>
 </div>
 </div>
 

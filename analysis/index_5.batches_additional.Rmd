@@ -246,6 +246,7 @@ However, I did perform QTL mapping for the conitnous traits setting:
 
 For 2 & 3 putting in the same value for 164 samples (over half of the total samples in this sample group) affects the ability to correct the distribution.  Again, this will not be ideal given that `r/qtl2` requires the phenotype to be normally distributed
 
+
   * `EOI` (in `ICI vs EOI`) as missing
     + No further markers removed
       * [Using datatset with missing markers removed](4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html)
@@ -393,3 +394,11 @@ see above for note.
     + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL** **same as `ICI vs PBS`**
 
 
+## **6. Power Analysis**
+
+* `ICI vs EOI`
+  + [Using datatset with missing & disproporational markers removed](power.analysis_ici.vs.eoi_5.batches_mis.html)
+  + [Using datatset with monomorphic, genotype error, missing & disproporational markers removed](power.analysis_ici.vs.eoi_5.batches.html) **FINAL**
+* `ICI vs PBS`
+  + [Using datatset with missing & disproporational markers removed](power.analysis_ici.vs.pbs_5.batches_mis.html)
+  + [Using datatset with monomorphic, genotype error, missing & disproporational markers removed](power.analysis_ici.vs.pbs_5.batches.html) **FINAL**
