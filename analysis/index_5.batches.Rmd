@@ -107,7 +107,7 @@ design[] %>%
 
 ## **4. QTL Analysis**
 
-### binary phenotpe (diabetic status/group)
+### **binary phenotpe (diabetic status/group)**
 
 1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
 2.  no X covariate (ie. `Xcovar`)
@@ -126,6 +126,18 @@ The following analysis has been done with `age of onset` as all samples have a v
 * [`ICI-Early vs PBS`](4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html)
 * [`ICI-Early vs PBS & ICI-Late`](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html)
 
+#### <u>Correcting for `ICI vs EOI` peak markers (conditional analysis)</u>
+
+* `ICI vs PBS`
+    + One peak
+        * [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak.html)
+        * [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak_ahb.html)
+    + Two peaks
+        * [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks.html)
+        * [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks_ahb.html)
+    + Three peaks
+        * [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks.html)
+        * [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks_ahb.html)
 
 ### continous phenotypes (age of onset)
 
@@ -135,13 +147,14 @@ The following analysis has been done with `age of onset` as all samples have a v
 4   no kinship included 
 5.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
 
-#### age of onset
+#### **age of onset**
 
 * [`ICI vs PBS`](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
 * [`ICI-Early vs PBS`](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
 * [`ICI-Early vs PBS & ICI-Late`](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
 
-#### age of onset (rank normalised)
+
+#### **age of onset (rank normalised)**
 
 * [`ICI vs PBS`](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)
 * [`ICI-Early vs PBS`](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html)

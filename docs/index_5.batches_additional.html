@@ -11,30 +11,22 @@
 
 <meta name="author" content="Belinda Cornes" />
 
-<meta name="date" content="2022-05-17" />
+<meta name="date" content="2022-07-12" />
 
 <title>Serreze Workflow - 5 batches (additonal analysis)</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -48,16 +40,12 @@ div.section {
 
 
 
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -70,8 +58,32 @@ if (window.hljs) {
 
 
 
-
-
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 
 
@@ -81,6 +93,10 @@ if (window.hljs) {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -97,16 +113,40 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
 </style>
 
 
 <style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -134,7 +174,7 @@ pre code {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
+  border-left-color: #ffffff;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -146,7 +186,7 @@ pre code {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -157,23 +197,10 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.tab('show');
+  menuAnchor.parent().addClass('active');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
 });
 </script>
 
@@ -185,6 +212,7 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -251,7 +279,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -283,41 +311,52 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
-<h1 class="title toc-ignore">Serreze Workflow - 5 batches (additonal analysis)</h1>
+<h1 class="title toc-ignore">Serreze Workflow - 5 batches (additonal
+analysis)</h1>
 <h4 class="author">Belinda Cornes</h4>
-<h4 class="date">2022-05-17</h4>
+<h4 class="date">2022-07-12</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#neogen-files-at-a-glance-total-samples-312"><strong>Neogen Files At A Glance</strong> [Total Samples: 312]</a></li>
+<li><a href="#neogen-files-at-a-glance-total-samples-312"><strong>Neogen
+Files At A Glance</strong> [Total Samples: 312]</a></li>
 <li><a href="#haplotype-phasing"><strong>Haplotype Phasing</strong></a>
 <ul>
-<li><a href="#experiment-design"><strong>1. Experiment Design</strong></a></li>
+<li><a href="#experiment-design"><strong>1. Experiment
+Design</strong></a></li>
 </ul></li>
-<li><a href="#genotype-qc-part-1"><strong>2. Genotype QC (Part 1)</strong></a></li>
+<li><a href="#genotype-qc-part-1"><strong>2. Genotype QC (Part
+1)</strong></a></li>
 <li><a href="#phenotype-qc"><strong>3. Phenotype QC</strong></a>
 <ul>
-<li><a href="#continous-phenotypes-age-of-onset">continous phenotypes (age of onset)</a></li>
+<li><a href="#continous-phenotypes-age-of-onset">continous phenotypes
+(age of onset)</a></li>
 </ul></li>
-<li><a href="#genotype-qc-part-2"><strong>4. Genotype QC (Part 2)</strong></a></li>
+<li><a href="#genotype-qc-part-2"><strong>4. Genotype QC (Part
+2)</strong></a></li>
 <li><a href="#qtl-analysis"><strong>5. QTL Analysis</strong></a>
 <ul>
-<li><a href="#binary-phenotpe-diabetic-statusgroup">binary phenotpe (diabetic status/group)</a></li>
-<li><a href="#continous-phenotypes-age-of-onset-1">continous phenotypes (age of onset)</a></li>
+<li><a href="#binary-phenotpe-diabetic-statusgroup">binary phenotpe
+(diabetic status/group)</a></li>
+<li><a href="#continous-phenotypes-age-of-onset-1">continous phenotypes
+(age of onset)</a></li>
 </ul></li>
-<li><a href="#power-analysis"><strong>6. Power Analysis</strong></a></li>
+<li><a href="#power-analysis"><strong>6. Power
+Analysis</strong></a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -326,7 +365,9 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -335,17 +376,27 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-17
+<strong>Last updated:</strong> 2022-07-12
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
 </p>
 <p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version
+1.6.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -354,91 +405,141 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20220210)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220210)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed20220210code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20220210code"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20220210)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20220210)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a>
+</a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa" class="panel-collapse collapse">
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtreea8c2d1a11f223361b54952ce8455e8c17017c914targetblanka8c2d1aa"
+class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/a8c2d1a11f223361b54952ce8455e8c17017c914" target="_blank">a8c2d1a</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -463,11 +564,73 @@ Untracked files:
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches_mis.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_11.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_test.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_3-peaks_ahb.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks_ahb.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_3-peaks_ahb.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_1.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_11.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks_ahb.Rmd
     Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_11.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1.peak.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks_ahb.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks.Rmd.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks_ahb.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
@@ -496,6 +659,12 @@ Untracked files:
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_test.with.4_miss.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_test.with.5.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_test.with.5_0.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional.Rmd.R
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.Rmd
@@ -518,6 +687,13 @@ Untracked files:
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.Rmd
     Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.Rmd
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional.Rmd.R
+    Untracked:  analysis/4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak.Rmd.R
     Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.Rmd
     Untracked:  analysis/genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches_mis.Rmd
     Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_0.Rmd
@@ -525,6 +701,8 @@ Untracked files:
     Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_mis_0.Rmd
     Untracked:  analysis/genotype.frequencies_ici.vs.eoi_5.batches_mis_52.Rmd
     Untracked:  analysis/index_5.batches_additional_vo.Rmd
+    Untracked:  analysis/index_5.batches_extra.Rmd
+    Untracked:  analysis/index_5.batches_old.Rmd
     Untracked:  analysis/power.analysis_ici.vs.eoi_5.batches.Rmd
     Untracked:  analysis/power.analysis_ici.vs.eoi_5.batches.Rmd.R
     Untracked:  analysis/power.analysis_ici.vs.eoi_5.batches_mis.Rmd
@@ -3101,9 +3279,19 @@ Untracked files:
     Untracked:  data/ici.vs.pbs_blup_chr-X_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-13_peak.marker-UNC22384241_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNC29893228_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNC29990033_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-19_peak.marker-UNCHS047192_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-4_peak.marker-UNCHS012304_lod.drop-1.5_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-5_peak.marker-UNCJPD008862_lod.drop-1.5_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_blup_sub_chr-5_peak.marker-UNCJPD008862_lod.drop-1.5_5.batches_mis_conditional_2-peaks-chr4-10.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_blup_sub_chr-8_peak.marker-UNCHS023364_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
@@ -3121,19 +3309,68 @@ Untracked files:
     Untracked:  data/ici.vs.pbs_fitqtl_peaks_sex_interacting_snpsqc_snpsqc_5.batches_peaks.txt
     Untracked:  data/ici.vs.pbs_genes_chr-13_peak.marker-UNC22384241_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-18_peak.marker-UNCHS045343_lod.drop-1.5_snpsqc_5.batches_mis_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNC29893228_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNC29990033_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-19_peak.marker-UNCHS047192_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-4_peak.marker-UNCHS012304_lod.drop-1.5_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-5_peak.marker-UNCJPD008862_lod.drop-1.5_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_genes_chr-5_peak.marker-UNCJPD008862_lod.drop-1.5_5.batches_mis_conditional_2-peaks-chr4-10.csv
     Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023353_lod.drop-1.5_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_genes_chr-8_peak.marker-UNCHS023364_lod.drop-1.5_snpsqc_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_5.batches.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_5.batches_mis_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_mis_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak-chr10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak-chr3.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak-chr4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks-chr3-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks-chr3-4.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks-chr4-10.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks-chr3-4-10.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_mis_peaks.csv
     Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_5.batches_peaks.csv
     Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio.csv
@@ -3274,7 +3511,9 @@ Unstaged changes:
 
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
 </p>
 </div>
 </div>
@@ -3285,7 +3524,13 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index_5.batches_additional.Rmd</code>) and HTML (<code>docs/index_5.batches_additional.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were
+made to the R Markdown
+(<code>analysis/index_5.batches_additional.Rmd</code>) and HTML
+(<code>docs/index_5.batches_additional.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -3384,7 +3629,8 @@ analysis for 5 batches Rmds
 </div>
 </div>
 </div>
-<div id="neogen-files-at-a-glance-total-samples-312" class="section level2">
+<div id="neogen-files-at-a-glance-total-samples-312"
+class="section level2">
 <h2><strong>Neogen Files At A Glance</strong> [Total Samples: 312]</h2>
 <ul>
 <li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20201209
@@ -3405,15 +3651,19 @@ analysis for 5 batches Rmds
 </ul></li>
 <li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_220220328
 <ul>
-<li><a href="0.1_samples_batch_220220328.html">Total Samples: 120</a></li>
+<li><a href="0.1_samples_batch_220220328.html">Total Samples:
+120</a></li>
 </ul></li>
-<li><a href="0.1.1_preparing.data_bqc_5.batches.html">Preparing files for QC/Haplotype Phasing</a></li>
+<li><a href="0.1.1_preparing.data_bqc_5.batches.html">Preparing files
+for QC/Haplotype Phasing</a></li>
 </ul>
 </div>
 <div id="haplotype-phasing" class="section level2">
 <h2><strong>Haplotype Phasing</strong></h2>
 <ul>
-<li><a href="0.2_haplotype_comparison_bqc_5.batches_minprob.html">minimum probability set for estimation of genotypes</a></li>
+<li><a
+href="0.2_haplotype_comparison_bqc_5.batches_minprob.html">minimum
+probability set for estimation of genotypes</a></li>
 </ul>
 <div id="experiment-design" class="section level3">
 <h3><strong>1. Experiment Design</strong></h3>
@@ -3488,7 +3738,8 @@ number of markers:
 covariates:
 </td>
 <td style="text-align:left;width: 1cms; ">
-sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for continous traits
+sex [F: 312; M: 0] (sex not used as all females); binary diabetic status
+for continous traits
 </td>
 </tr>
 </tbody>
@@ -3501,13 +3752,18 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <li><a href="2.1_sample_bqc_5.batches.html">Step 1: Sample QC</a></li>
 <li>Step 2: SNP QC (Monomorphic, Genotype Error &amp; Missing Data)
 <ul>
-<li><a href="2.2.1_snp_qc_5.batches_mis.html">Removing missing data</a></li>
-<li><a href="2.2.1_snp_qc_5.batches.html">Removing monomorphic, genotype error &amp; missing Data</a> <strong>FINAL</strong></li>
+<li><a href="2.2.1_snp_qc_5.batches_mis.html">Removing missing
+data</a></li>
+<li><a href="2.2.1_snp_qc_5.batches.html">Removing monomorphic, genotype
+error &amp; missing Data</a> <strong>FINAL</strong></li>
 </ul></li>
 <li>Step 3: Preparing Files for QTL Analysis
 <ul>
-<li><a href="2.4_preparing.data_aqc_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="2.4_preparing.data_aqc_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="2.4_preparing.data_aqc_5.batches_mis.html">Using datatset
+with missing markers removed</a></li>
+<li><a href="2.4_preparing.data_aqc_5.batches.html">Using datatset with
+monomorphic, genotype error &amp; missing markers removed</a>
+<strong>FINAL</strong></li>
 </ul></li>
 </ul>
 </div>
@@ -3517,25 +3773,43 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <h3>continous phenotypes (age of onset)</h3>
 <p>all phenotypes have been corrected</p>
 <ul>
-<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp; <code>ICI vs EOI</code> (EOI set as missing)
+<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp;
+<code>ICI vs EOI</code> (EOI set as missing)
 <ul>
-<li><a href="3.1_phenotype.qc_corrected_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="3.1_phenotype.qc_corrected_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches.html">Using datatset
+with monomorphic, genotype error &amp; missing markers removed</a>
+<strong>FINAL</strong></li>
 </ul></li>
-<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp; <code>ICI vs EOI</code> (EOI as arbitrary value == 0)
+<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp;
+<code>ICI vs EOI</code> (EOI as arbitrary value == 0)
 <ul>
-<li><a href="3.1_phenotype.qc_corrected_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="3.1_phenotype.qc_corrected_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches_0.html">Using datatset
+with monomorphic, genotype error &amp; missing markers removed</a>
+<strong>FINAL</strong></li>
 </ul></li>
-<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp; <code>ICI vs EOI</code> (EOI as arbitrary value == 52)
+<li><code>ICI vs PBS</code> &amp; <code>ICI-Early vs PBS</code> &amp;
+<code>ICI vs EOI</code> (EOI as arbitrary value == 52)
 <ul>
-<li><a href="3.1_phenotype.qc_corrected_5.batches_mis_52.html">Using datatset with missing markers removed</a></li>
-<li><a href="3.1_phenotype.qc_corrected_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches_mis_52.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="3.1_phenotype.qc_corrected_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 <li><code>ICI-Early vs PBS &amp; ICI-Late</code> only
 <ul>
-<li><a href="3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>outcome the same as <code>ICI vs PBS</code></strong> <strong>FINAL</strong></li>
+<li><a
+href="3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="3.1_phenotype.qc_corrected_ici-early.vs.pbs.ici-late_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>outcome the same as <code>ICI vs PBS</code></strong>
+<strong>FINAL</strong></li>
 </ul></li>
 </ul>
 </div>
@@ -3549,34 +3823,58 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <ul>
 <li><code>EOI</code> (in <code>ICI vs EOI</code>) as missing
 <ul>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 0
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+0
 <ul>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 52
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+52
 <ul>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="genotype.frequencies_ici.vs.eoi_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><p><code>ICI vs PBS</code></p>
 <ul>
-<li><a href="genotype.frequencies_ici.vs.pbs_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici.vs.pbs_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a href="genotype.frequencies_ici.vs.pbs_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="genotype.frequencies_ici.vs.pbs_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 <li><p><code>ICI-Early vs PBS</code></p>
 <ul>
-<li><a href="genotype.frequencies_ici-early.vs.pbs_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici-early.vs.pbs_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>FINAL</strong></li>
+<li><a
+href="genotype.frequencies_ici-early.vs.pbs_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="genotype.frequencies_ici-early.vs.pbs_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 <li><p><code>ICI-Early vs PBS &amp; ICI-Late</code></p>
 <ul>
-<li><a href="genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a> <strong>outcome the same as <code>ICI vs PBS</code></strong> <strong>FINAL</strong></li>
+<li><a
+href="genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="genotype.frequencies_ici-early.vs.pbs.ici-late_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a> <strong>outcome the same as <code>ICI vs PBS</code></strong>
+<strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -3585,218 +3883,803 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <h2><strong>5. QTL Analysis</strong></h2>
 <div id="binary-phenotpe-diabetic-statusgroup" class="section level3">
 <h3>binary phenotpe (diabetic status/group)</h3>
-<p>no kinship included for this model as <code>r/qtl2</code> does not allow it.</p>
+<p>no kinship included for this model as <code>r/qtl2</code> does not
+allow it.</p>
 <ul>
 <li><p><code>ICI vs EOI</code></p>
-<p>Performed continious analysis with <code>age of onset</code> as well (see below) but given the type of phenotype it is (that is, disease status), the binary model is the correct model to use</p>
+<p>Performed continious analysis with <code>age of onset</code> as well
+(see below) but given the type of phenotype it is (that is, disease
+status), the binary model is the correct model to use</p>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis.html">Using datatset with missing markers removed (no xcovar)</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar)</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 </ul>
-<p>The following sample groups have also been done with <code>age of onset</code> as all samples have a value:</p>
+<p>The following sample groups have also been done with
+<code>age of onset</code> as all samples have a value:</p>
 <ul>
 <li><code>ICI vs PBS</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_peaks.html">Using datatset with monomorphic, genotype error &amp; missing markers removed with additional peak information</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_peaks.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+with additional peak information</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html">Using datatset with missing markers removed (no xcovar)</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.html">Using datatset with missing markers removed (no xcovar with additonal peak information)</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar)</a> <strong>FINAL</strong></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar additional peak information)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar)</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_peaks.html">Using
+datatset with missing markers removed (no xcovar with additonal peak
+information)</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_peaks.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar additional peak information)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI-Early vs PBS</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html">Using datatset with missing markers removed (no xcovar)</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar)</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs_snpsqc_dis_no-x_updated_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI-Early vs PBS &amp; ICI-Late</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches_mis.html">Using datatset with missing markers removed (no xcovar)</a></li>
-<li><a href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar)</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar)</a> <strong>FINAL</strong></li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="correcting-for-ici-vs-eoi-peak-markers-conditional-analysis"
+class="section level4">
+<h4><u>Correcting for <code>ICI vs EOI</code> peak markers (conditional
+analysis)</u></h4>
+<ul>
+<li><code>ICI vs PBS</code>
+<ul>
+<li>No further markers removed
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of Low Frequency markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of disproportionate markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed (no xcovar)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed (no xcovar)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="continous-phenotypes-age-of-onset-1" class="section level3">
 <h3>continous phenotypes (age of onset)</h3>
-<p>covariate used in all analyses for each sample set was <code>disease status</code> which was binary (that is, diabetes/no diabetes or yes/no)</p>
+<p>covariate used in all analyses for each sample set was
+<code>disease status</code> which was binary (that is, diabetes/no
+diabetes or yes/no)</p>
 <div id="age-of-onset" class="section level4">
-<h4>age of onset</h4>
+<h4><strong>age of onset</strong></h4>
 <ul>
 <li><code>ICI vs EOI</code></li>
 </ul>
-<p>*Note:** Given that the ‘ici vs. eoi’ group represents mice who have diabetes or do not have diabetes, the binary model is the appropriate model to use.</p>
-<p>However, I did perform QTL mapping for the conitnous traits setting:</p>
+<p><strong>Note:</strong> Given that the ‘ici vs. eoi’ group represents
+mice who have diabetes or do not have diabetes, the binary model is the
+appropriate model to use.</p>
+<p>However, I did perform QTL mapping for the conitnous traits
+setting:</p>
 <ol style="list-style-type: decimal">
-<li>EOI to missing (so essentially this will just perform QTL mapping on ICI), so this is not informative</li>
-<li>EOI to 0 (last time I performed the analysis this is what I used)</li>
-<li>EOI to 52 (thought I would give a very high number to represent unknown)</li>
+<li>EOI to missing (so essentially this will just perform QTL mapping on
+ICI), so this is not informative</li>
+<li>EOI to 0 (last time I performed the analysis this is what I
+used)</li>
+<li>EOI to 52 (thought I would give a very high number to represent
+unknown)</li>
 </ol>
-<p>For 2 &amp; 3 putting in the same value for 164 samples (over half of the total samples in this sample group) affects the ability to correct the distribution. Again, this will not be ideal given that <code>r/qtl2</code> requires the phenotype to be normally distributed</p>
+<p>For 2 &amp; 3 putting in the same value for 164 samples (over half of
+the total samples in this sample group) affects the ability to correct
+the distribution. Again, this will not be ideal given that
+<code>r/qtl2</code> requires the phenotype to be normally
+distributed</p>
 <ul>
 <li><code>EOI</code> (in <code>ICI vs EOI</code>) as missing
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 0
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+0
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 52
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+52
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI vs PBS</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li>ICI-Early vs PBS
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI-Early vs PBS &amp; ICI-Late</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="correcting-for-ici-vs-eoi-peak-markers-conditional-analysis-1"
+class="section level4">
+<h4><u>Correcting for <code>ICI vs EOI</code> peak markers (conditional
+analysis)</u></h4>
+<ul>
+<li><code>ICI vs PBS</code>
+<ul>
+<li>No further markers removed
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of Low Frequency markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of disproportionate markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed (no xcovar or kinship)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed (no xcovar or kinship)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="age-of-onset-rank-normalised" class="section level4">
-<h4>age of onset (rank normalised)</h4>
+<h4><strong>age of onset (rank normalised)</strong></h4>
 <ul>
 <li><code>ICI vs EOI</code></li>
 </ul>
@@ -3806,108 +4689,406 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 0
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+0
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_0.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_0.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_0.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
-<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value == 52
+<li><code>EOI</code> (in <code>ICI vs EOI</code>) as arbitrary value ==
+52
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_mis_52.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_pheno.corrected.cleaned_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_mis_52.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_52.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.eoi_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_52.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI vs PBS</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li>ICI-Early vs PBS
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul></li>
 <li><code>ICI-Early vs PBS &amp; ICI-Late</code>
 <ul>
 <li>No further markers removed
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of Low Frequency markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using datatset with missing markers removed</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches_mis.html">Using
+datatset with missing markers removed</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers
+removed</a></li>
 </ul></li>
 <li>Further removal of disproportionate markers in these group samples
 <ul>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using datatset with missing markers removed (no xcovar or kinship)</a></li>
-<li><a href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using datatset with monomorphic, genotype error &amp; missing markers removed (no xcovar or kinship)</a> <strong>FINAL</strong> <strong>same as <code>ICI vs PBS</code></strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html">Using
+datatset with missing markers removed (no xcovar or kinship)</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html">Using
+datatset with monomorphic, genotype error &amp; missing markers removed
+(no xcovar or kinship)</a> <strong>FINAL</strong> <strong>same as
+<code>ICI vs PBS</code></strong></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="correcting-for-ici-vs-eoi-peak-markers-conditional-analysis-2"
+class="section level4">
+<h4><u>Correcting for <code>ICI vs EOI</code> peak markers (conditional
+analysis)</u></h4>
+<ul>
+<li><code>ICI vs PBS</code>
+<ul>
+<li>No further markers removed
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of Low Frequency markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Further removal of disproportionate markers in these group samples
+<ul>
+<li>Using datatset with missing markers removed (no xcovar or kinship)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a></li>
+</ul></li>
+</ul></li>
+<li>Using datatset with monomorphic, genotype error &amp; missing
+markers removed (no xcovar or kinship)
+<ul>
+<li>One peak
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Two peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+<li>Three peaks
+<ul>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks.html">using
+genotypes from cross object for covariates</a>
+<strong>FINAL</strong></li>
+<li><a
+href="4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks_ahb.html">using
+raw genotypes for covariates</a> <strong>FINAL</strong></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -3919,29 +5100,36 @@ sex [F: 312; M: 0] (sex not used as all females); binary diabetic status for con
 <ul>
 <li><code>ICI vs EOI</code>
 <ul>
-<li><a href="power.analysis_ici.vs.eoi_5.batches_mis.html">Using datatset with missing &amp; disproporational markers removed</a></li>
-<li><a href="power.analysis_ici.vs.eoi_5.batches.html">Using datatset with monomorphic, genotype error, missing &amp; disproporational markers removed</a> <strong>FINAL</strong></li>
+<li><a href="power.analysis_ici.vs.eoi_5.batches_mis.html">Using
+datatset with missing &amp; disproporational markers removed</a></li>
+<li><a href="power.analysis_ici.vs.eoi_5.batches.html">Using datatset
+with monomorphic, genotype error, missing &amp; disproporational markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 <li><code>ICI vs PBS</code>
 <ul>
-<li><a href="power.analysis_ici.vs.pbs_5.batches_mis.html">Using datatset with missing &amp; disproporational markers removed</a></li>
-<li><a href="power.analysis_ici.vs.pbs_5.batches.html">Using datatset with monomorphic, genotype error, missing &amp; disproporational markers removed</a> <strong>FINAL</strong></li>
+<li><a href="power.analysis_ici.vs.pbs_5.batches_mis.html">Using
+datatset with missing &amp; disproporational markers removed</a></li>
+<li><a href="power.analysis_ici.vs.pbs_5.batches.html">Using datatset
+with monomorphic, genotype error, missing &amp; disproporational markers
+removed</a> <strong>FINAL</strong></li>
 </ul></li>
 </ul>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
-<pre><code>R version 3.6.2 (2019-12-12)
+<pre><code>R version 3.5.1 (2018-07-02)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS Catalina 10.15.7
+Running under: macOS  10.15.7
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
@@ -3950,29 +5138,28 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggrepel_0.8.2     qtlcharts_0.11-6  qtl2_0.28         broman_0.70-4    
- [5] ggplot2_3.3.6     tibble_3.1.7      readxl_1.4.0      cluster_2.1.0    
- [9] dplyr_1.0.9       optparse_1.6.6    mclust_5.4.6      tidyr_1.2.0      
-[13] data.table_1.14.2 knitr_1.39        kableExtra_1.1.0  workflowr_1.6.2  
+ [1] ggrepel_0.8.2     qtlcharts_0.11-6  qtl2_0.22         broman_0.69-5    
+ [5] ggplot2_3.3.6     tibble_3.1.7      readxl_1.4.0      cluster_2.0.7-1  
+ [9] dplyr_1.0.9       optparse_1.6.6    mclust_5.4.5      tidyr_1.2.0      
+[13] data.table_1.14.2 knitr_1.29        kableExtra_1.3.4  workflowr_1.6.2  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8.3      assertthat_0.2.1  rprojroot_2.0.3   digest_0.6.29    
- [5] utf8_1.2.2        R6_2.5.1          cellranger_1.1.0  RSQLite_2.2.14   
- [9] evaluate_0.15     httr_1.4.3        pillar_1.7.0      rlang_1.0.2      
-[13] rstudioapi_0.13   blob_1.2.3        whisker_0.4       jquerylib_0.1.4  
-[17] rmarkdown_2.14    qtl_1.50          webshot_0.5.2     readr_2.1.2      
-[21] stringr_1.4.0     bit_4.0.4         munsell_0.5.0     compiler_3.6.2   
-[25] httpuv_1.5.2      xfun_0.31         pkgconfig_2.0.3   htmltools_0.5.2  
-[29] tidyselect_1.1.2  fansi_1.0.3       viridisLite_0.4.0 crayon_1.5.1     
-[33] tzdb_0.3.0        withr_2.5.0       later_1.0.0       grid_3.6.2       
-[37] jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1   DBI_1.1.2        
-[41] git2r_0.26.1      magrittr_2.0.3    scales_1.2.0      cachem_1.0.6     
-[45] cli_3.3.0         stringi_1.7.6     fs_1.5.2          promises_1.1.0   
-[49] getopt_1.20.3     xml2_1.3.3        bslib_0.3.1       ellipsis_0.3.2   
-[53] generics_0.1.2    vctrs_0.4.1       tools_3.6.2       bit64_4.0.5      
-[57] glue_1.6.2        purrr_0.3.4       hms_1.1.1         parallel_3.6.2   
-[61] fastmap_1.1.0     yaml_2.3.5        colorspace_2.0-3  rvest_1.0.2      
-[65] memoise_2.0.1     sass_0.4.1       </code></pre>
+ [1] Rcpp_1.0.4.6      svglite_1.2.3     assertthat_0.2.1  rprojroot_1.3-2  
+ [5] digest_0.6.25     utf8_1.1.4        R6_2.4.1          cellranger_1.1.0 
+ [9] backports_1.1.5   RSQLite_2.2.0     evaluate_0.14     httr_1.4.3       
+[13] pillar_1.7.0      gdtools_0.2.1     rlang_1.0.3       rstudioapi_0.13  
+[17] blob_1.2.1        whisker_0.4       rmarkdown_2.3     qtl_1.46-2       
+[21] webshot_0.5.3     stringr_1.4.0     bit_1.1-15.2      munsell_0.5.0    
+[25] compiler_3.5.1    httpuv_1.5.2      xfun_0.15         pkgconfig_2.0.3  
+[29] systemfonts_0.1.1 htmltools_0.5.2   tidyselect_1.1.2  fansi_0.4.1      
+[33] viridisLite_0.3.0 crayon_1.5.1      withr_2.5.0       later_1.0.0      
+[37] grid_3.5.1        jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1  
+[41] DBI_1.1.0         git2r_0.26.1      magrittr_2.0.3    scales_1.1.1     
+[45] cli_3.3.0         stringi_1.4.6     fs_1.3.2          promises_1.1.0   
+[49] getopt_1.20.3     xml2_1.3.2        ellipsis_0.3.2    generics_0.0.2   
+[53] vctrs_0.4.1       tools_3.5.1       bit64_0.9-7       glue_1.6.2       
+[57] purrr_0.3.4       parallel_3.5.1    fastmap_1.1.0     yaml_2.2.1       
+[61] colorspace_1.4-1  rvest_1.0.2       memoise_1.1.0    </code></pre>
 </div>
 </div>
 
@@ -3999,7 +5186,7 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -4017,7 +5204,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>

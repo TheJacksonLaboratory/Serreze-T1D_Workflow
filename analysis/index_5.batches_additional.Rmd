@@ -225,6 +225,72 @@ The following sample groups have also been done with `age of onset` as all sampl
     + [Using datatset with missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches_mis.html)
     + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)](4.1.1_qtl.analysis_binary_ici-early.vs.pbs.ici-late_snpsqc_dis_no-x_updated_5.batches.html) **FINAL** 
 
+#### <u>Correcting for `ICI vs EOI` peak markers (conditional analysis)</u>
+
++ `ICI vs PBS`
+  * No further markers removed
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of Low Frequency markers in these group samples
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of disproportionate markers in these group samples
+    + Using datatset with missing markers removed (no xcovar)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_mis_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed (no xcovar)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_1-peak_ahb.html) **FINAL**
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_2-peaks_ahb.html) **FINAL**
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_5.batches_conditional_3-peaks_ahb.html) **FINAL**
 
 
 ### continous phenotypes (age of onset) 
@@ -232,11 +298,11 @@ The following sample groups have also been done with `age of onset` as all sampl
 covariate used in  all analyses for each sample set was `disease status` which was binary (that is, diabetes/no diabetes or yes/no) 
 
 
-#### age of onset
+#### **age of onset**
 
 + `ICI vs EOI`
 
-*Note:** Given that the ‘ici vs. eoi’ group represents mice who have diabetes or do not have diabetes, the binary model is the appropriate model to use.
+**Note:** Given that the ‘ici vs. eoi’ group represents mice who have diabetes or do not have diabetes, the binary model is the appropriate model to use.
 
 However, I did perform QTL mapping for the conitnous traits setting:
 
@@ -316,9 +382,75 @@ For 2 & 3 putting in the same value for 164 samples (over half of the total samp
     + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
     + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL**
 
+#### <u>Correcting for `ICI vs EOI` peak markers (conditional analysis)</u>
+
++ `ICI vs PBS`
+  * No further markers removed
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of Low Frequency markers in these group samples
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of disproportionate markers in these group samples
+    + Using datatset with missing markers removed (no xcovar or kinship)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak_ahb.html) **FINAL**
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks_ahb.html) **FINAL**
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks_ahb.html) **FINAL**
 
 
-#### age of onset (rank normalised)
+#### **age of onset (rank normalised)**
 
 + `ICI vs EOI`
 
@@ -392,6 +524,73 @@ see above for note.
   * Further removal of disproportionate markers in these group samples
     + [Using datatset with missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis.html)
     + [Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)](4.1.2_qtl.analysis_cont_rz.age_ici-early.vs.pbs.ici-late_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches.html) **FINAL** **same as `ICI vs PBS`**
+
+#### <u>Correcting for `ICI vs EOI` peak markers (conditional analysis)</u>
+
++ `ICI vs PBS`
+  * No further markers removed
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of Low Frequency markers in these group samples
+    + Using datatset with missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_5.batches_conditional_3-peaks_ahb.html)
+  * Further removal of disproportionate markers in these group samples
+    + Using datatset with missing markers removed (no xcovar or kinship)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_1-peak_ahb.html)
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_2-peaks_ahb.html)
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks.html)
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_mis_conditional_3-peaks_ahb.html)
+    + Using datatset with monomorphic, genotype error & missing markers removed (no xcovar or kinship)
+      * One peak
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_1-peak_ahb.html) **FINAL**
+      + Two peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_2-peaks_ahb.html) **FINAL**
+      + Three peaks
+        + [using genotypes from cross object for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks.html) **FINAL**
+        + [using raw genotypes for covariates](4.1.2_qtl.analysis_cont_rz.age_ici.vs.pbs_snpsqc_pheno.corrected.cleaned_dis_no-xk_5.batches_conditional_3-peaks_ahb.html) **FINAL**
 
 
 ## **6. Power Analysis**
