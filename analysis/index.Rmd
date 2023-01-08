@@ -1,5 +1,5 @@
 ---
-title: "Serreze Workflow"
+title: "ICI induced autoimmunity complications"
 author: "Belinda Cornes"
 date: "`r Sys.Date()`"
 site: workflowr::wflow_site
@@ -9,6 +9,8 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+
+Mapping and identifying genes uniquely contributing to immune check point inhibitor (ICI) induced autoimmunity complications
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
@@ -35,10 +37,16 @@ options(stringsAsFactors = FALSE)
 
 ```
 
-
-#### Analyses
+### T1D
 * [3 neogen batches - september 2021](index_3.batches.html) 
   + some results are also in [4 neogen batches](index_4.batches.html)
 * [4 neogen batches - march 2022](index_4.batches.html)
 * [5 neogen batches - april 2022](index_5.batches.html)
   + additional runs are included [here](index_5.batches_additional.html)
+* SNP based map [to identify where NOD.Chr4NOR is unique, B6-like, B10-like, DBA/2-like, NOD-Like etc]
+  + [Total Samples: 10 samples out of 95](0.1_samples_batch_20221006_10T1D.html)
+  + (snp.based.map.html) 
+  
+
+### Myocarditis
+* [4 neogen batches - november 2022](index_4.batches_myo.html) 
