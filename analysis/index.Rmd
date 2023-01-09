@@ -43,9 +43,6 @@ options(stringsAsFactors = FALSE)
 * [4 neogen batches - march 2022](index_4.batches.html)
 * [5 neogen batches - april 2022](index_5.batches.html)
   + additional runs are included [here](index_5.batches_additional.html)
-* SNP based map [to identify where NOD.Chr4NOR is unique, B6-like, B10-like, DBA/2-like, NOD-Like etc]
-  + [Total Samples: 10 samples out of 95](0.1_samples_batch_20221006_10T1D.html)
-  + (snp.based.map.html) 
   
 
 ### Myocarditis
