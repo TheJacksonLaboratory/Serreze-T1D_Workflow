@@ -1,7 +1,7 @@
-name: Serreze T1D Workflow
+name: Serreze Autoimmune Workflow
 output_dir: ../docs
 navbar:
-  title: Serreze T1D Workflow
+  title: Serreze Autoimmune Workflow
   left:
   - text: Home
     href: index.html
