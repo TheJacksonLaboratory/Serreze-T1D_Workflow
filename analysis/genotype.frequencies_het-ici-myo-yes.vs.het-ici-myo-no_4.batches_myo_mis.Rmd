@@ -1,0 +1,328 @@
+---
+title: "Genotype Frequencies - Hetero: ICI Myocarditis Yes vs ICI Myocarditis No"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+options(scipen=999)
+
+```
+
+## with sample outliers
+
+```{r data pbs, echo=TRUE}
+load("data/gm_allqc_4.batches_myo_mis.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+pr <- readRDS("data/serreze_probs_allqc_4.batches_myo_mis.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+geno <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_4.batches_myo_corrected/sample_geno_bc_4.batches_myo_BC217.csv", as.is=T)
+names(geno) <- gsub("^X","",names(geno))
+names(geno) <- gsub("\\.","-",names(geno))
+rownames(geno) <- geno$marker
+
+```
+
+
+```{r pbs outliers, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+## extracting animals with ici and pbs group status
+#miceinfo <- gm$covar[gm$covar$group == "PBS" | gm$covar$group == "ICI",]
+#table(miceinfo$group)
+#mice.ids <- rownames(miceinfo)
+
+#gm <- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars <- read_csv("data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo_mis.csv")
+# removing any missing info
+#covars <- subset(covars, covars$age.of.onset!='')
+nrow(covars)
+table(covars$"Myocarditis Status")
+table(covars$"Murine MHC KO Status")
+table(covars$"Drug Treatment")
+table(covars$"clinical pheno")
+
+# keeping only informative mice
+gm <- gm[covars$Mouse.ID]
+gm
+table(gm$covar$"Myocarditis Status")
+table(gm$covar$"Murine MHC KO Status")
+table(gm$covar$"Drug Treatment")
+table(gm$covar$"clinical pheno")
+
+pr.qc.ids <- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno <- geno[,covars$Mouse.ID]
+geno <- geno[marker_names(gm),]
+dim(geno)
+
+## calculating genotype frequencies
+### from geno genotypes
+g <- do.call("cbind", gm$geno)
+gf_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw<- gf_mar_raw[gf_mar_raw[,2] != "NaN",]
+colnames(gf_mar_geno) <- c("freq_AA_geno_table","freq_AB_geno_table")
+colnames(gn_mar_geno) <- c("count_missing_geno_table","count_AA_geno_table","count_AB_geno_table")
+gfn_mar_geno <- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by="row.names")
+rownames(gfn_mar_geno) <- gfn_mar_geno[,1]
+gfn_mar_geno <- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl <- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi <- geno[i,]
+#    freqf <- table(factor(geno[i,], c("-","AA","AB")))
+#    genoi$count_AA_raw_rowSums <- rowSums(genoi == "AA")
+#    genoi$count_AB_raw_rowSums <- rowSums(genoi == "AB")
+#    genoi$count_missing_raw_rowSums <- rowSums(genoi == "-")
+#    freqf <- t(table(factor(geno[i,], c("-","AA","AB"))))
+#    freqf <- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) <- rownames(genoi)
+#    colnames(freqf) <- c("count_missing_raw_table","count_AA_raw_table","count_AB_raw_table")
+#    genoif <- cbind(freqf,genoi[c("count_AA_raw_rowSums","count_AB_raw_rowSums","count_missing_raw_rowSums")])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw <- do.call("rbind",genosl)
+#gf_mar_raw <- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index <- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 <- calc_geno_freq(pr.qc.ids, by = "marker", omit_x = FALSE)
+#gn_mar_probs <- calc_geno_freq(probs, by = "individual", omit_x = FALSE)
+gf_mar_probs <- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) <- paste0("freq_",colnames(gf_mar_probs),"_probs")
+gf_mar_probs <- as.data.frame(gf_mar_probs)
+gf_mar_probs$index <- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 <- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by="row.names")
+#rownames(gf_mar.1) <- gf_mar.1[,1]
+#gf_mar.1 <- gf_mar.1[-1]
+#gf_mar <- merge(gf_mar.1,as.data.frame(gf_mar_probs), by="row.names")
+gf_mar <- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by="row.names")
+rownames(gf_mar) <- gf_mar[,1]
+gf_mar <- gf_mar[-1]
+gf_mar <- gf_mar[order(gf_mar$index),]
+dim(gf_mar)
+
+
+# Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio >= 0.90 & gf_mar$ratio <= 1.10, TRUE,FALSE)
+table(gf_mar$Include)
+
+## filtering out <= 0.05
+gf_mar$count.geno <- rowSums(gf_mar[c("freq_AA_geno_table","freq_AB_geno_table")] <=0.05)
+filtered_gf_mar_geno <- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno <- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c("count.geno","index"))]
+dim(filtered_gf_mar_geno)
+table(filtered_gf_mar_geno$Include)
+
+gf_mar$count.probs <- rowSums(gf_mar[c("freq_AA_probs","freq_AB_probs")] <=0.05)
+filtered_gf_mar_probs <- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs <- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c("count.geno","count.probs","index"))]
+dim(filtered_gf_mar_probs)
+table(filtered_gf_mar_probs$Include)
+
+## merging with sample_genos
+filtered_gf_mar_geno_sample <- merge(geno,filtered_gf_mar_geno, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c("count.geno","index"))]
+names(filtered_gf_mar_geno_sample)[1] <- c("marker")
+dim(filtered_gf_mar_geno_sample)
+
+filtered_gf_mar_probs_sample <- merge(geno,filtered_gf_mar_probs, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c("count.geno","count.probs","index"))]
+names(filtered_gf_mar_probs_sample)[1] <- c("marker")
+dim(filtered_gf_mar_probs_sample)
+
+## saving files
+write.csv(filtered_gf_mar_geno_sample, "data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_4.batches_myo_mis.csv", quote=F)
+write.csv(filtered_gf_mar_probs_sample, "data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_4.batches_myo_mis.csv", quote=F)
+
+write.csv(filtered_gf_mar_geno, "data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv", quote=F)
+write.csv(filtered_gf_mar_probs, "data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv", quote=F)
+
+```
+
+## sample outliers removed
+
+```{r data pbs no outleirs, echo=TRUE}
+load("data/gm_allqc_4.batches_myo_mis.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+pr <- readRDS("data/serreze_probs_allqc_4.batches_myo_mis.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+geno <- read.csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_4.batches_myo_corrected/sample_geno_bc_4.batches_myo_BC217.csv", as.is=T)
+names(geno) <- gsub("^X","",names(geno))
+names(geno) <- gsub("\\.","-",names(geno))
+rownames(geno) <- geno$marker
+
+```
+
+```{r pbs no outliers, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+## extracting animals with ici and pbs group status
+#miceinfo <- gm$covar[gm$covar$group == "PBS" | gm$covar$group == "ICI",]
+#table(miceinfo$group)
+#mice.ids <- rownames(miceinfo)
+
+#gm <- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars <- read_csv("data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo_mis.csv")
+# removing any missing info
+covars <- subset(covars, covars$out.age.of.onset=='Keep' & covars$out.rz.age=='Keep')
+nrow(covars)
+table(covars$"Myocarditis Status")
+table(covars$"Murine MHC KO Status")
+table(covars$"Drug Treatment")
+table(covars$"clinical pheno")
+
+# keeping only informative mice
+gm <- gm[covars$Mouse.ID]
+gm
+table(gm$covar$"Myocarditis Status")
+table(gm$covar$"Murine MHC KO Status")
+table(gm$covar$"Drug Treatment")
+table(gm$covar$"clinical pheno")
+
+pr.qc.ids <- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno <- geno[,covars$Mouse.ID]
+geno <- geno[marker_names(gm),]
+dim(geno)
+
+## calculating genotype frequencies
+### from geno genotypes
+g <- do.call("cbind", gm$geno)
+gf_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw<- gf_mar_raw[gf_mar_raw[,2] != "NaN",]
+colnames(gf_mar_geno) <- c("freq_AA_geno_table","freq_AB_geno_table")
+colnames(gn_mar_geno) <- c("count_missing_geno_table","count_AA_geno_table","count_AB_geno_table")
+gfn_mar_geno <- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by="row.names")
+rownames(gfn_mar_geno) <- gfn_mar_geno[,1]
+gfn_mar_geno <- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl <- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi <- geno[i,]
+#    freqf <- table(factor(geno[i,], c("-","AA","AB")))
+#    genoi$count_AA_raw_rowSums <- rowSums(genoi == "AA")
+#    genoi$count_AB_raw_rowSums <- rowSums(genoi == "AB")
+#    genoi$count_missing_raw_rowSums <- rowSums(genoi == "-")
+#    freqf <- t(table(factor(geno[i,], c("-","AA","AB"))))
+#    freqf <- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) <- rownames(genoi)
+#    colnames(freqf) <- c("count_missing_raw_table","count_AA_raw_table","count_AB_raw_table")
+#    genoif <- cbind(freqf,genoi[c("count_AA_raw_rowSums","count_AB_raw_rowSums","count_missing_raw_rowSums")])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw <- do.call("rbind",genosl)
+#gf_mar_raw <- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index <- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 <- calc_geno_freq(pr.qc.ids, by = "marker", omit_x = FALSE)
+#gn_mar_probs <- calc_geno_freq(probs, by = "individual", omit_x = FALSE)
+gf_mar_probs <- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) <- paste0("freq_",colnames(gf_mar_probs),"_probs")
+gf_mar_probs <- as.data.frame(gf_mar_probs)
+gf_mar_probs$index <- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 <- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by="row.names")
+#rownames(gf_mar.1) <- gf_mar.1[,1]
+#gf_mar.1 <- gf_mar.1[-1]
+#gf_mar <- merge(gf_mar.1,as.data.frame(gf_mar_probs), by="row.names")
+gf_mar <- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by="row.names")
+rownames(gf_mar) <- gf_mar[,1]
+gf_mar <- gf_mar[-1]
+gf_mar <- gf_mar[order(gf_mar$index),]
+dim(gf_mar)
+
+
+# Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio >= 0.90 & gf_mar$ratio <= 1.10, TRUE,FALSE)
+table(gf_mar$Include)
+
+## filtering out <= 0.05
+gf_mar$count.geno <- rowSums(gf_mar[c("freq_AA_geno_table","freq_AB_geno_table")] <=0.05)
+filtered_gf_mar_geno <- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno <- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c("count.geno","index"))]
+dim(filtered_gf_mar_geno)
+table(filtered_gf_mar_geno$Include)
+
+gf_mar$count.probs <- rowSums(gf_mar[c("freq_AA_probs","freq_AB_probs")] <=0.05)
+filtered_gf_mar_probs <- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs <- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c("count.geno","count.probs","index"))]
+dim(filtered_gf_mar_probs)
+table(filtered_gf_mar_probs$Include)
+
+## merging with sample_genos
+filtered_gf_mar_geno_sample <- merge(geno,filtered_gf_mar_geno, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c("count.geno","index"))]
+names(filtered_gf_mar_geno_sample)[1] <- c("marker")
+dim(filtered_gf_mar_geno_sample)
+
+filtered_gf_mar_probs_sample <- merge(geno,filtered_gf_mar_probs, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c("count.geno","count.probs","index"))]
+names(filtered_gf_mar_probs_sample)[1] <- c("marker")
+dim(filtered_gf_mar_probs_sample)
+
+## saving files
+write.csv(filtered_gf_mar_geno_sample, "data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_4.batches_myo_mis.csv", quote=F)
+write.csv(filtered_gf_mar_probs_sample, "data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_4.batches_myo_mis.csv", quote=F)
+
+write.csv(filtered_gf_mar_geno, "data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv", quote=F)
+write.csv(filtered_gf_mar_probs, "data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv", quote=F)
+
+
+```
