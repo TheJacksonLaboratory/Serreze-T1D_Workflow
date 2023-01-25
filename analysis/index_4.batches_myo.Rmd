@@ -114,7 +114,6 @@ design[] %>%
 4.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
 
 
-* [`ICI vs EOI`](4.1.1_qtl.analysis_binary_ici.vs.eoi_snpsqc_dis_no-x_updated_4.batches_myo.html)
 * [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_4.batches_myo.html)
 * [`ICI vs PBS`](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_4.batches_myo.html)
 * [`ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo.html)
@@ -123,21 +122,9 @@ design[] %>%
 * [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_4.batches_myo.html)
 * [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo.html)
 
-The following analysis has been done with `age of onset` as all samples have a value:....
-
-### continous phenotypes (age of onset)
-
-1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
-2.  `disease status` was used as a binary covariate (that is, diabetes/no diabetes or yes/no) for analyses in each sample set
-3.  no X covariate (ie. `Xcovar`)
-4   no kinship included 
-5.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
-
-....
 
 ## **5. Power Analysis**
 
-* [`ICI vs EOI`](power.analysis_ici.vs.eoi_4.batches_myo.html)
 * [`ICI Sick vs ICI EOI`](power.analysis_ici-sick.vs.ici-eoi_4.batches_myo.html)
 * [`ICI vs PBS`](power.analysis_ici.vs.pbs_4.batches_myo.html)
 * [`ICI Myocarditis Yes vs ICI Myocarditis No`](power.analysis_ici-myo-yes.vs.ici-myo-no_4.batches_myo.html)
@@ -145,5 +132,3 @@ The following analysis has been done with `age of onset` as all samples have a v
 * [`Myocarditis Yes vs Myocarditis No`](power.analysis_myo-yes.vs.myo-no_4.batches_myo.html)
 * [`Hetero: ICI vs PBS`](power.analysis_het-ici.vs.het-pbs_4.batches_myo.html)
 * [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo.html)
-
-....
