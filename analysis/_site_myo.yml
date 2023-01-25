@@ -1,0 +1,21 @@
+name: Serreze Autoimmune Workflow
+output_dir: ../docs
+navbar:
+  title: Serreze Autoimmune Workflow
+  left:
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: no
+    theme: spacelab
+    highlight: textmate
