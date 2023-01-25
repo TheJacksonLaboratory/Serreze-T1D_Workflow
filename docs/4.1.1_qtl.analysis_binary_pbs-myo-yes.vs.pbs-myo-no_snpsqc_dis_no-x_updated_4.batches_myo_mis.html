@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-01-24" />
+
+<title>QTL Analysis - binary [PBS Myocarditis Yes vs PBS Myocarditis No]</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">QTL Analysis - binary [PBS Myocarditis Yes vs PBS Myocarditis No]</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-01-24</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#data-information">Data Information</a></li>
+<li><a href="#loading-data">Loading Data</a></li>
+<li><a href="#genome-wide-scan">Genome-wide scan</a></li>
+<li><a href="#lod-peaks">LOD peaks</a>
+<ul>
+<li><a href="#centimorgan-cm">Centimorgan (cM)</a></li>
+<li><a href="#megabase-mb">Megabase (MB)</a></li>
+</ul></li>
+<li><a href="#qtl-effects">QTL effects</a></li>
+<li><a href="#rqtl">R/qtl</a>
+<ul>
+<li><a href="#scanone">scanone</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-01-24
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230109code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20230109)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230109code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230109)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/projects/serreze-lab/USERS/corneb/qtl2/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong850cb80"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> 850cb80 </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrong850cb80" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version 850cb80. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_4.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20220729.Rmd
+    Untracked:  analysis/0.1_samples_batch_20220826.Rmd
+    Untracked:  analysis/0.1_samples_batch_20221006.Rmd
+    Untracked:  analysis/0.1_samples_batch_20221116.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_4.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_4.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_4.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_4.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_4.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_4.batches_myo_mis.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_4.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_4.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_4.batches_myo1.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_4.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo_mis.Rmd
+    Untracked:  analysis/index_4.batches_myo.Rmd
+    Untracked:  code/cc_variants.sqlite
+    Untracked:  code/mouse_genes.sqlite
+    Untracked:  code/mouse_genes_mgi.sqlite
+    Untracked:  data/GM_covar_4.batches_myo.csv
+    Untracked:  data/bad_markers_all_4.batches_myo.RData
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_4.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_4.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_4.batches_myo.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_4.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo_mis.csv
+    Untracked:  data/e_4.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_4.batches_myo.RData
+    Untracked:  data/errors_ind_4.batches_myo.RData
+    Untracked:  data/genetic_map_4.batches_myo.csv
+    Untracked:  data/genetic_map_4.batches_myo_BC217.csv
+    Untracked:  data/genotype_errors_marker_4.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_4.batches_myo.RData
+    Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-10_peak.marker-UNC18805053_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-10_peak.marker-UNCHS029427_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-11_peak.marker-UNCHS031753_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-11_peak.marker-UNCHS031790_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-11_peak.marker-UNCHS031802_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-12_peak.marker-JAX00326005_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-12_peak.marker-UNC20622785_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-12_peak.marker-UNC21995304_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-13_peak.marker-JAX00370189_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-13_peak.marker-UNCHS035661_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-13_peak.marker-UNCHS037125_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-14_peak.marker-UNC24597582_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-14_peak.marker-UNCHS039096_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-15_peak.marker-UNC25489755_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-15_peak.marker-UNCHS040614_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-16_peak.marker-UNCHS042686_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-17_peak.marker-UNCHS043775_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-17_peak.marker-UNCHS043777_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-17_peak.marker-UNCHS043880_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-18_peak.marker-UNC29296831_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-18_peak.marker-UNC29297751_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-19_peak.marker-UNC30069852_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-19_peak.marker-UNC30386742_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-1_peak.marker-UNCHS001121_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-1_peak.marker-UNCHS002308_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-2_peak.marker-UNC3990359_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-2_peak.marker-UNCHS006134_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-3_peak.marker-JAX00105915_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-3_peak.marker-UNC6020011_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-4_peak.marker-UNC8099452_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-4_peak.marker-UNC8161950_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-5_peak.marker-UNC9678100_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-5_peak.marker-UNC9678931_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-6_peak.marker-UNC12162881_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-6_peak.marker-backupUNC060363218_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-7_peak.marker-UNC12719038_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-7_peak.marker-UNCHS022024_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-8_peak.marker-UNC14948439_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-8_peak.marker-UNCHS023592_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-9_peak.marker-UNC16009822_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-9_peak.marker-UNC17271730_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-X_peak.marker-UNC31358512_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-10_peak.marker-UNC18805053_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-10_peak.marker-UNCHS029427_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-11_peak.marker-UNCHS031753_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-11_peak.marker-UNCHS031790_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-11_peak.marker-UNCHS031802_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-12_peak.marker-JAX00326005_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-12_peak.marker-UNC20622785_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-12_peak.marker-UNC21995304_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-13_peak.marker-JAX00370189_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-13_peak.marker-UNCHS035661_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-13_peak.marker-UNCHS037125_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-14_peak.marker-UNC24597582_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-14_peak.marker-UNCHS039096_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-15_peak.marker-UNC25489755_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-15_peak.marker-UNCHS040614_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-16_peak.marker-UNCHS042686_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-17_peak.marker-UNCHS043775_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-17_peak.marker-UNCHS043777_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-17_peak.marker-UNCHS043880_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-18_peak.marker-UNC29296831_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-18_peak.marker-UNC29297751_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-19_peak.marker-UNC30069852_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-19_peak.marker-UNC30386742_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-1_peak.marker-UNCHS001121_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-1_peak.marker-UNCHS002308_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-2_peak.marker-UNC3990359_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-2_peak.marker-UNCHS006134_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-3_peak.marker-JAX00105915_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-3_peak.marker-UNC6020011_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-4_peak.marker-UNC8099452_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-4_peak.marker-UNC8161950_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-5_peak.marker-UNC9678100_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-5_peak.marker-UNC9678931_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-6_peak.marker-UNC12162881_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-6_peak.marker-backupUNC060363218_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-7_peak.marker-UNC12719038_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-7_peak.marker-UNCHS022024_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-8_peak.marker-UNC14948439_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-8_peak.marker-UNCHS023592_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-9_peak.marker-UNC16009822_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-9_peak.marker-UNC17271730_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-X_peak.marker-UNC31358512_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_gm_qtl_snpsqc_dis_no-x_updated_4.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratiov_4.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_4.batches_myo_mis.csv
+    Untracked:  data/percent_missing_id_4.batches_myo.RData
+    Untracked:  data/percent_missing_marker_4.batches_myo.RData
+    Untracked:  data/pheno_4.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo_BC217.csv
+    Untracked:  data/qc_info_bad_sample_4.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_4.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_4.batches_myo_BC217.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo_BC217.csv
+    Untracked:  data/sample_geno_raw_4.batches_myo_BC217.csv
+    Untracked:  data/serreze_probs_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo_mis.rds
+    Untracked:  data/summary.cg_4.batches_myo.RData
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="data-information" class="section level2">
+<h2>Data Information</h2>
+<ul>
+<li>Myocarditis Status: Yes, No</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Drug Treatment(s): PBS</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score, sex)</li>
+</ul>
+</div>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<p>We will load the data and subset indivials out that are in the groups of interest.</p>
+<pre class="r"><code>load(&quot;data/gm_allqc_4.batches_myo_mis.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               208
+No. genotyped individuals       208
+No. phenotyped individuals      208
+No. with both geno &amp; pheno      208
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                129944
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9845 9889 7757 7506 7511 7676 7328 6392 6649 6316 7062 6035 6015 5895 5277 4953 
+  17   18   19    X 
+5017 4554 3520 4747 </code></pre>
+<pre class="r"><code>#pr &lt;- readRDS(&quot;data/serreze_probs_allqc.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+##extracting animals with ici and pbs group status
+#miceinfo &lt;- covars[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+#table(miceinfo$group)
+#mice.ids &lt;- rownames(miceinfo)
+
+#gm &lt;- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+#gm$covar$pbs.myo.yes_vs_pbs.myo.no &lt;- ifelse(gm$covar$group == &quot;PBS&quot;, 0, 1)
+#gm.full &lt;- gm
+
+covars &lt;- read_csv(&quot;data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_4.batches_myo_mis.csv&quot;)
+#removing any missing info
+#covars &lt;- subset(covars, covars$pbs.myo.yes_vs_pbs.myo.no!=&#39;&#39;)
+nrow(covars)</code></pre>
+<pre><code>[1] 58</code></pre>
+<pre class="r"><code>table(covars$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 13  45 </code></pre>
+<pre class="r"><code>table(covars$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+ 58 </code></pre>
+<pre class="r"><code>table(covars$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+PBS 
+ 58 </code></pre>
+<pre class="r"><code>table(covars$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  39   19 </code></pre>
+<pre class="r"><code>#keeping only informative mice
+gm &lt;- gm[covars$Mouse.ID]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals                58
+No. genotyped individuals        58
+No. phenotyped individuals       58
+No. with both geno &amp; pheno       58
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                129944
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9845 9889 7757 7506 7511 7676 7328 6392 6649 6316 7062 6035 6015 5895 5277 4953 
+  17   18   19    X 
+5017 4554 3520 4747 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 13  45 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+ 58 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+PBS 
+ 58 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  39   19 </code></pre>
+<pre class="r"><code>#pr.qc.ids &lt;- pr
+#for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+##removing problmetic marker
+
+#gm &lt;- drop_markers(gm, &quot;UNCHS013106&quot;)
+
+##dropping monomorphic markers within the dataset
+
+g &lt;- do.call(&quot;cbind&quot;, gm$geno)
+
+gf_mar &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+#gn_mar &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))))
+
+gf_mar &lt;- gf_mar[gf_mar[,2] != &quot;NaN&quot;,]
+
+count &lt;- rowSums(gf_mar &lt;=0.05)
+low_freq_df &lt;- merge(as.data.frame(gf_mar),as.data.frame(count), by=&quot;row.names&quot;,all=T)
+low_freq_df[is.na(low_freq_df)] &lt;- &#39;&#39;
+low_freq_df &lt;- low_freq_df[low_freq_df$count == 1,]
+rownames(low_freq_df) &lt;- low_freq_df$Row.names
+
+low_freq &lt;- find_markerpos(gm, rownames(low_freq_df))
+low_freq$id &lt;- rownames(low_freq)
+
+nrow(low_freq)</code></pre>
+<pre><code>[1] 96291</code></pre>
+<pre class="r"><code>low_freq_bad &lt;- merge(low_freq,low_freq_df, by=&quot;row.names&quot;,all=T)
+names(low_freq_bad)[1] &lt;- c(&quot;marker&quot;)
+
+gf_mar &lt;- gf_mar[gf_mar[,2] != &quot;NaN&quot;,]
+MAF &lt;- apply(gf_mar, 1, function(x) min(x))
+MAF &lt;- as.data.frame(MAF)
+MAF$index &lt;- 1:nrow(gf_mar)
+gf_mar_maf &lt;- merge(gf_mar,as.data.frame(MAF), by=&quot;row.names&quot;)
+gf_mar_maf &lt;- gf_mar_maf[order(gf_mar_maf$index),]
+
+gfmar &lt;- NULL
+gfmar$gfmar_mar_0 &lt;- sum(gf_mar_maf$MAF==0)
+gfmar$gfmar_mar_1 &lt;- sum(gf_mar_maf$MAF&lt; 0.01)
+gfmar$gfmar_mar_5 &lt;- sum(gf_mar_maf$MAF&lt; 0.05)
+gfmar$gfmar_mar_10 &lt;- sum(gf_mar_maf$MAF&lt; 0.10)
+gfmar$gfmar_mar_15 &lt;- sum(gf_mar_maf$MAF&lt; 0.15)
+gfmar$gfmar_mar_25 &lt;- sum(gf_mar_maf$MAF&lt; 0.25)
+gfmar$gfmar_mar_50 &lt;- sum(gf_mar_maf$MAF&lt; 0.50)
+gfmar$total_snps &lt;- nrow(as.data.frame(gf_mar_maf))
+
+gfmar &lt;- t(as.data.frame(gfmar))
+gfmar &lt;- as.data.frame(gfmar)
+gfmar$count &lt;- gfmar$V1
+
+gfmar[c(2)] %&gt;%
+  kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+  kable_styling(full_width = F) %&gt;%
+  kable_styling(&quot;striped&quot;, full_width = F)  %&gt;%
+  row_spec(8 ,bold=T,color= &quot;white&quot;,background = &quot;black&quot;)</code></pre>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_0
+</td>
+<td style="text-align:center;">
+92338
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_1
+</td>
+<td style="text-align:center;">
+92338
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_5
+</td>
+<td style="text-align:center;">
+96291
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_10
+</td>
+<td style="text-align:center;">
+97463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_15
+</td>
+<td style="text-align:center;">
+97745
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_25
+</td>
+<td style="text-align:center;">
+97928
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gfmar_mar_50
+</td>
+<td style="text-align:center;">
+128329
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: black !important;">
+total_snps
+</td>
+<td style="text-align:center;font-weight: bold;color: white !important;background-color: black !important;">
+129944
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>gm_qc &lt;- drop_markers(gm, low_freq_bad$marker)
+gm_qc &lt;- drop_nullmarkers(gm_qc)
+
+gm_qc</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               58
+No. genotyped individuals       58
+No. phenotyped individuals      58
+No. with both geno &amp; pheno      58
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                33653
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2982 2823 2101 2097 1970 2121 1890 1700 2021 1286 2080 1424 1638 1736 1311  978 
+  17   18   19    X 
+ 730 1107 1061  597 </code></pre>
+<pre class="r"><code>## dropping disproportionate markers
+dismark &lt;- read.csv(&quot;data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_4.batches_myo_mis.csv&quot;)
+nrow(dismark)</code></pre>
+<pre><code>[1] 33653</code></pre>
+<pre class="r"><code>names(dismark)[1] &lt;- c(&quot;marker&quot;)
+dismark &lt;- dismark[!dismark$Include,]
+nrow(dismark)</code></pre>
+<pre><code>[1] 27139</code></pre>
+<pre class="r"><code>gm_qc_dis &lt;- drop_markers(gm_qc, dismark$marker)
+gm_qc_dis &lt;- drop_nullmarkers(gm_qc_dis)
+
+gm = gm_qc_dis
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals              58
+No. genotyped individuals      58
+No. phenotyped individuals     58
+No. with both geno &amp; pheno     58
+
+No. phenotypes                  1
+No. covariates                 11
+No. phenotype covariates        0
+
+No. chromosomes                20
+Total markers                6514
+
+No. markers by chr:
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19   X 
+784 440 388 151 259 365 203 310 563 247 549 406 264 113 218 301   8 282 404 259 </code></pre>
+<pre class="r"><code>markers &lt;- marker_names(gm)
+gmapdf &lt;- read.csv(&quot;data/genetic_map_4.batches_myo_BC217.csv&quot;)
+pmapdf &lt;- read.csv(&quot;data/physical_map_4.batches_myo_BC217.csv&quot;)
+#mapdf &lt;- merge(gmapdf,pmapdf, by=c(&quot;marker&quot;,&quot;chr&quot;), all=T)
+#rownames(mapdf) &lt;- mapdf$marker
+#mapdf &lt;- mapdf[markers,]
+#names(mapdf) &lt;- c(&#39;marker&#39;,&#39;chr&#39;,&#39;gmapdf&#39;,&#39;pmapdf&#39;)
+#mapdfnd &lt;- mapdf[!duplicated(mapdf[c(2:3)]),]
+
+pr.qc &lt;- calc_genoprob(gm)
+
+colnames(covars) &lt;- gsub(&quot; &quot;, &quot;.&quot;, colnames(covars))</code></pre>
+</div>
+<div id="genome-wide-scan" class="section level2">
+<h2>Genome-wide scan</h2>
+<p>For each of the phenotype analyzed, permutations were used for each model to obtain genome-wide LOD significance threshold for p &lt; 0.01, p &lt; 0.05, p &lt; 0.10, respectively, separately for X and automsomes (A).</p>
+<p>The table shows the estimated significance thresholds from permutation test.</p>
+<p>We also looked at the kinship to see how correlated each sample is. Kinship values between pairs of samples range between 0 (no relationship) and 1.0 (completely identical). The darker the colour the more indentical the pairs are.</p>
+<pre class="r"><code>#Xcovar &lt;- get_x_covar(gm)
+addcovar = model.matrix(~sex+Histology.Score, data = covars)[,-1]
+covars$pbs.myo.yes_vs_pbs.myo.no= as.numeric(covars$pbs.myo.yes_vs_pbs.myo.no)
+
+kinship &lt;- calc_kinship(pr.qc)
+heatmap(kinship)</code></pre>
+<p><img src="figure/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd/permutation-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>operm &lt;- scan1perm(pr.qc, covars[&quot;pbs.myo.yes_vs_pbs.myo.no&quot;], model=&quot;binary&quot;, addcovar=addcovar, n_perm=1000, perm_Xsp=TRUE, chr_lengths=chr_lengths(gm$gmap))
+
+summary_table&lt;-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+names(summary_table) &lt;- c(&quot;autosomes&quot;,&quot;X&quot;)
+summary_table$significance.level &lt;- rownames(summary_table)
+
+rownames(summary_table) &lt;- NULL
+
+summary_table[c(3,1:2)] %&gt;%
+  kable(escape = F,align = c(&quot;ccc&quot;)) %&gt;%
+  kable_styling(&quot;striped&quot;, full_width = T) %&gt;%
+  column_spec(1, bold=TRUE)</code></pre>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+significance.level
+</th>
+<th style="text-align:center;">
+autosomes
+</th>
+<th style="text-align:center;">
+X
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+0.01
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+0.05
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+0.1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>The figures below show QTL maps for each phenotype</p>
+<pre class="r"><code>#out &lt;- scan1(pr.qc, covars[&quot;pbs.myo.yes_vs_pbs.myo.no&quot;], Xcovar=Xcovar, model=&quot;binary&quot;)
+out &lt;- scan1(pr.qc, covars[&quot;pbs.myo.yes_vs_pbs.myo.no&quot;], model=&quot;binary&quot;,addcovar=addcovar)
+
+summary_table&lt;-data.frame(unclass(summary(operm, alpha=c(0.01,  0.05, 0.1))))
+
+
+plot_lod&lt;-function(out,map){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0(&quot;/Users/chenm/Documents/qtl/Jai/&quot;,colnames(out)[i],  &quot;_lod.png&quot;))
+    
+    ymx &lt;- maxlod(out) # overall maximum LOD score
+    plot(out, map, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    #legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    title(main = paste0(colnames(out)[i], &quot; [positions in cM]&quot;))
+    add_threshold(map,  summary(operm,alpha=0.1), col = &#39;purple&#39;)
+    add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+
+    ##par(mar=c(5.1, 6.1, 1.1, 1.1))
+    #ymx &lt;- 11 # overall maximum LOD score
+    #plot(out, map, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    ##legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    #title(main = paste0(colnames(out)[i], &quot; [positions in cM] \n(using same scale as eoi vs ici for easier comparison)&quot;))
+    #add_threshold(map,  summary(operm, alpha=0.1), col = &#39;purple&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+    ##for (j in 1: dim(summary_table)[1]){
+    ##  abline(h=summary_table[j, i],col=&quot;red&quot;)
+    ##  text(x=400, y =summary_table[j, i]+0.12, labels = paste(&quot;p=&quot;, row.names(summary_table)[j]))
+    ##}
+    ##dev.off()
+  }
+}
+
+plot_lod(out,gm$gmap)</code></pre>
+<p><img src="figure/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_4.batches_myo_mis.Rmd/Genome-wide%20scan-1.png" width="912" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lod-peaks" class="section level2">
+<h2>LOD peaks</h2>
+<p>The table below shows QTL peaks associated with the phenotype. We use the 95% threshold from the permutations to find peaks.</p>
+<div id="centimorgan-cm" class="section level3">
+<h3>Centimorgan (cM)</h3>
+<pre class="r"><code>peaks &lt;- find_peaks(out, gm$gmap, threshold=summary(operm,alpha=0.05)$A, thresholdX = summary(operm,alpha=0.05)$X, peakdrop=3, drop=1.5)
+
+if(nrow(peaks) &gt;0){
+peaks$marker &lt;- find_marker(gm$gmap, chr=peaks$chr,pos=peaks$pos)
+names(peaks)[2] &lt;- c(&quot;phenotype&quot;)
+peaks &lt;- peaks[-1]
+
+rownames(peaks) &lt;- NULL
+print(kable(peaks, escape = F, align = c(&quot;cccccccc&quot;), &quot;html&quot;) 
+  %&gt;% kable_styling(&quot;striped&quot;, full_width = T)%&gt;%
+  column_spec(1, bold=TRUE)
+  )
+
+#plot only peak chromosomes
+
+plot_lod_chr&lt;-function(out,map,chrom){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0(&quot;/Users/chenm/Documents/qtl/Jai/&quot;,colnames(out)[i],  &quot;_lod.png&quot;))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx &lt;- maxlod(out) # overall maximum LOD score
+    plot(out, map, chr = chrom, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    #legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    title(main = paste0(colnames(out)[i], &quot; - chr&quot;, chrom, &quot; [positions in cM]&quot;))
+    add_threshold(map,  summary(operm,alpha=0.1), col = &#39;purple&#39;)
+    add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col=&quot;red&quot;)
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste(&quot;p=&quot;, row.names(summary_table)[j]))
+    #}
+    #dev.off()
+
+    
+    #ymx &lt;- 11
+    #plot(out, map, chr = chrom, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    ##legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    #title(main = paste0(colnames(out)[i], &quot; - chr&quot;, chrom, &quot; [positions in cM]\n(using same scale as eoi vs. ici for easier comparison)&quot;))
+    #add_threshold(map,  summary(operm,alpha=0.1), col = &#39;purple&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+
+  }
+}
+
+
+for(i in unique(peaks$chr)){
+#for (i in 1:nrow(peaks)){
+  #plot_lod_chr(out,gm$gmap, peaks$chr[i])
+  plot_lod_chr(out,gm$gmap, i)
+}
+
+} else {
+  print(paste0(&quot;There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of &quot;,summary(operm,alpha=0.05)$A, &quot; [autosomes]/&quot;,summary(operm,alpha=0.05)$X, &quot; [x-chromosome]&quot;))
+}</code></pre>
+<p>[1] “There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of 0 [autosomes]/0 [x-chromosome]”</p>
+</div>
+<div id="megabase-mb" class="section level3">
+<h3>Megabase (MB)</h3>
+<pre class="r"><code>print(&quot;peaks in MB positions&quot;)</code></pre>
+<p>[1] “peaks in MB positions”</p>
+<pre class="r"><code>peaks_mba &lt;- find_peaks(out, gm$pmap, threshold=summary(operm,alpha=0.05)$A, thresholdX = summary(operm,alpha=0.05)$X, peakdrop=3, drop=1.5)
+
+if(nrow(peaks) &gt;0){
+peaks_mba$marker &lt;- find_marker(gm$pmap, chr=peaks_mba$chr,pos=peaks_mba$pos)
+names(peaks_mba)[2] &lt;- c(&quot;phenotype&quot;)
+peaks_mba &lt;- peaks_mba[-1]
+
+
+rownames(peaks_mba) &lt;- NULL
+print(kable(peaks_mba, escape = F, align = c(&quot;cccccccc&quot;), &quot;html&quot;) 
+  %&gt;% kable_styling(&quot;striped&quot;, full_width = T)%&gt;%
+  column_spec(1, bold=TRUE)
+  )
+
+plot_lod_chr_mb&lt;-function(out,map,chrom){
+  for (i in 1:dim(out)[2]){
+    #png(filename=paste0(&quot;/Users/chenm/Documents/qtl/Jai/&quot;,colnames(out)[i],  &quot;_lod.png&quot;))
+    
+    #par(mar=c(5.1, 6.1, 1.1, 1.1))
+    ymx &lt;- maxlod(out) # overall maximum LOD score
+    plot(out, map, chr = chrom, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    #legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    title(main = paste0(colnames(out)[i], &quot; - chr&quot;, chrom, &quot; [positions in MB]&quot;))
+    add_threshold(map,  summary(operm,alpha=0.1), col = &#39;purple&#39;)
+    add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+    #for (j in 1: dim(summary_table)[1]){
+    #  abline(h=summary_table[j, i],col=&quot;red&quot;)
+    #  text(x=400, y =summary_table[j, i]+0.12, labels = paste(&quot;p=&quot;, row.names(summary_table)[j]))
+    #}
+    #dev.off()
+
+    #ymx &lt;- 11
+    #plot(out, map, chr = chrom, lodcolumn=i, col=&quot;slateblue&quot;, ylim=c(0, ymx+0.5))
+    ##legend(&quot;topright&quot;, lwd=2, colnames(out)[i], bg=&quot;gray90&quot;)
+    #title(main = paste0(colnames(out)[i], &quot; - chr&quot;, chrom, &quot; [positions in MB]\n(using same scale as eoi vs. ici for easier comparison)&quot;))
+    #add_threshold(map,  summary(operm,alpha=0.1), col = &#39;purple&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.05), col = &#39;red&#39;)
+    #add_threshold(map,  summary(operm, alpha=0.01), col = &#39;blue&#39;)
+
+
+  }
+}
+
+for(i in unique(peaks_mba$chr)){
+#for (i in 1:nrow(peaks_mba)){
+  #plot_lod_chr_mb(out,gm$pmap, peaks_mba$chr[i])
+  plot_lod_chr_mb(out,gm$pmap,i)
+}
+
+} else {
+  print(paste0(&quot;There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of &quot;,summary(operm,alpha=0.05)$A, &quot; [autosomes]/&quot;,summary(operm,alpha=0.05)$X, &quot; [x-chromosome]&quot;))
+}</code></pre>
+<p>[1] “There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of 0 [autosomes]/0 [x-chromosome]”</p>
+</div>
+</div>
+<div id="qtl-effects" class="section level2">
+<h2>QTL effects</h2>
+<p>For each peak LOD location we give a list of gene</p>
+<pre class="r"><code>query_variants &lt;- create_variant_query_func(&quot;code/cc_variants.sqlite&quot;)
+query_genes &lt;- create_gene_query_func(&quot;code/mouse_genes_mgi.sqlite&quot;)
+
+if(nrow(peaks) &gt;0){
+for (i in 1:nrow(peaks)){
+
+
+  g &lt;- maxmarg(pr.qc, gm$gmap, chr=peaks$chr[i], pos=peaks$pos[i], return_char=TRUE)
+  #png(filename=paste0(&quot;/Users/chenm/Documents/qtl/Jai/&quot;,&quot;qtl_effect_&quot;, i, &quot;.png&quot;))
+  #par(mar=c(4.1, 4.1, 1.5, 0.6))
+  plot_pxg(g, covars[,peaks$phenotype[i]], ylab=peaks$phenotype[i], sort=FALSE)
+  title(main = paste0(&quot;chr: &quot;, chr=peaks$chr[i],&quot;; pos: &quot;, peaks$pos[i], &quot;cM /&quot;,peaks_mba$pos[i],&quot;MB\n(&quot;,peaks$phenotype[i],&quot; )&quot;), line=0.2)
+  ##dev.off()
+
+  chr = peaks$chr[i]
+
+# Plot 2
+  pr_sub &lt;- pull_genoprobint(pr.qc, gm$gmap, chr, c(peaks$ci_lo[i], peaks$ci_hi[i]))
+  blup &lt;- scan1blup(pr.qc[,chr], covars[peaks$phenotype[i]],addcovar = addcovar)
+  blup_sub &lt;- scan1blup(pr_sub[,chr], covars[peaks$phenotype[i]], addcovar = addcovar)
+
+  write.csv(as.data.frame(blup_sub), paste0(&quot;data/pbs-myo-yes.vs.pbs-myo-no_blup_sub_chr-&quot;,chr,&quot;_peak.marker-&quot;,peaks$marker[i],&quot;_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo_mis.csv&quot;), quote=F)
+
+  plot_coef(blup, 
+       gm$gmap, columns=1:2,
+       bgcolor=&quot;gray95&quot;, legend=&quot;bottomleft&quot;, 
+       main = paste0(&quot;chr: &quot;, chr=peaks$chr[i],&quot;; pos: &quot;, peaks$pos[i], &quot;cM /&quot;,peaks_mba$pos[i],&quot;MB\n(&quot;,peaks$phenotype[i],&quot; [scan1blup; positions in cM])&quot;)
+       )
+
+  plot_coef(blup_sub, 
+       gm$gmap, columns=1:2,
+       bgcolor=&quot;gray95&quot;, legend=&quot;bottomleft&quot;, 
+       main = paste0(&quot;chr: &quot;, chr=peaks$chr[i],&quot;; pos: &quot;, peaks$pos[i], &quot;cM /&quot;,peaks_mba$pos[i],&quot;MB\n(&quot;,peaks$phenotype[i],&quot;; 1.5 LOD drop interval [scan1blup; positions in cM])&quot;)
+       )
+
+  #Table 1
+  chr = peaks_mba$chr[i]
+  start=as.numeric(peaks_mba$ci_lo[i])
+  end=as.numeric(peaks_mba$ci_hi[i])
+
+  genesgss = query_genes(chr, start, end)
+
+  write.csv(genesgss, file=paste0(&quot;data/pbs-myo-yes.vs.pbs-myo-no_genes_chr-&quot;,chr,&quot;_peak.marker-&quot;,peaks$marker[i],&quot;_lod.drop-1.5_snpsqc_dis_no-x_updated_4.batches_myo_mis.csv&quot;), quote=F)
+
+  rownames(genesgss) &lt;- NULL
+  genesgss$strand_old = genesgss$strand
+  genesgss$strand[genesgss$strand==&quot;+&quot;] &lt;- &quot;positive&quot;
+  genesgss$strand[genesgss$strand==&quot;-&quot;] &lt;- &quot;negative&quot;
+
+  print(kable(genesgss[,c(&quot;chr&quot;,&quot;type&quot;,&quot;start&quot;,&quot;stop&quot;,&quot;strand&quot;,&quot;ID&quot;,&quot;Name&quot;,&quot;Dbxref&quot;,&quot;gene_id&quot;,&quot;mgi_type&quot;,&quot;description&quot;)], &quot;html&quot;) %&gt;% kable_styling(&quot;striped&quot;, full_width = T))
+
+
+}
+
+} else {
+  print(paste0(&quot;There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of &quot;,summary(operm,alpha=0.05)$A, &quot; [autosomes]/&quot;,summary(operm,alpha=0.05)$X, &quot; [x-chromosome]&quot;))
+}</code></pre>
+<p>[1] “There are no peaks that have a LOD that reaches suggestive (p&lt;0.05) level of 0 [autosomes]/0 [x-chromosome]”</p>
+</div>
+<div id="rqtl" class="section level2">
+<h2>R/qtl</h2>
+<div id="scanone" class="section level3">
+<h3>scanone</h3>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] abind_1.4-5       qtl2_0.22         reshape2_1.4.4    ggplot2_3.4.0    
+ [5] tibble_3.1.8      psych_2.2.9       readxl_1.4.1      cluster_2.1.4    
+ [9] dplyr_1.0.10      optparse_1.7.3    rhdf5_2.34.0      mclust_6.0.0     
+[13] tidyr_1.2.1       data.table_1.14.6 knitr_1.41        kableExtra_1.3.4 
+[17] workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.4         sass_0.4.4         bit64_4.0.5        jsonlite_1.7.2    
+ [5] viridisLite_0.4.1  bslib_0.4.2        assertthat_0.2.1   getPass_0.2-2     
+ [9] highr_0.8          blob_1.2.1         cellranger_1.1.0   yaml_2.2.1        
+[13] pillar_1.8.1       RSQLite_2.2.3      lattice_0.20-41    glue_1.6.2        
+[17] digest_0.6.31      promises_1.1.1     rvest_1.0.3        colorspace_2.0-0  
+[21] htmltools_0.5.4    httpuv_1.5.5       plyr_1.8.8         pkgconfig_2.0.3   
+[25] purrr_0.3.4        scales_1.2.1       webshot_0.5.4      processx_3.8.0    
+[29] svglite_2.1.0      whisker_0.4        getopt_1.20.3      later_1.1.0.1     
+[33] git2r_0.28.0       generics_0.1.3     cachem_1.0.3       withr_2.5.0       
+[37] cli_3.6.0          mnormt_2.1.1       magrittr_2.0.1     memoise_2.0.1     
+[41] evaluate_0.19      ps_1.5.0           fs_1.5.2           fansi_0.4.2       
+[45] nlme_3.1-149       xml2_1.3.3         tools_4.0.3        lifecycle_1.0.3   
+[49] stringr_1.4.0      Rhdf5lib_1.12.1    munsell_0.5.0      callr_3.7.3       
+[53] compiler_4.0.3     jquerylib_0.1.3    systemfonts_1.0.1  rlang_1.0.6       
+[57] grid_4.0.3         rhdf5filters_1.2.1 rstudioapi_0.13    rmarkdown_2.19    
+[61] gtable_0.3.0       DBI_1.1.1          R6_2.5.0           bit_4.0.4         
+[65] fastmap_1.1.0      utf8_1.1.4         rprojroot_2.0.2    stringi_1.5.3     
+[69] parallel_4.0.3     Rcpp_1.0.6         vctrs_0.5.1        tidyselect_1.2.0  
+[73] xfun_0.36         </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
