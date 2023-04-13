@@ -46,4 +46,5 @@ options(stringsAsFactors = FALSE)
   
 
 ### Myocarditis
-* [4 neogen batches - november 2022](index_4.batches_myo.html) 
+* [4 neogen batches (3 groups) - november 2022](index_4.batches_myo.html)  
+* [7 neogen batches (6 groups) - february 2023](index_7.batches_myo.html) 
