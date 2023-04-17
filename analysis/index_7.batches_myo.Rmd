@@ -114,10 +114,14 @@ design[] %>%
 
 ### **binary phenotpe**
 
+I reran these a couple of different ways as I am not sure why its difficult to get any results
+
+#### ** ANALYSIS ONE **
+
 1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
 2.  no X covariate (ie. `Xcovar`); using sex as a covariate
 3.  no kinship included as `r/qtl2` does not allow for the inclusion of a kinship matrix in this type of model
-4.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
+4.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A)
 
 
 * [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.html)
@@ -128,8 +132,62 @@ design[] %>%
 * [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.html)
 * [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html)
 
+#### ** ANALYSIS TWO **
+
+The same as above but removing sex as a covariate (not sure if confounding might be an issue)
+
+* [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`ICI vs PBS`](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`PBS Myocarditis Yes vs PBS Myocarditis No`](4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`Myocarditis Yes vs Myocarditis No`](4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+* [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_no-sex_7.batches_myo.html)
+
+#### ** ANALYSIS THREE **
+
+same as analysis one but this time kept disproportionate markers (removed low frequency markers).  That is, kept sex as covariate. 
+
+* [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_7.batches_myo.html)
+* [`ICI vs PBS`](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_7.batches_myo.html)
+* [`ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_7.batches_myo.html)
+* [`PBS Myocarditis Yes vs PBS Myocarditis No`](4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_7.batches_myo.html)
+* [`Myocarditis Yes vs Myocarditis No`](4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_7.batches_myo.html)
+* [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_7.batches_myo.html)
+* [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_7.batches_myo.html)
+
+#### ** ANALYSIS FOUR **
+
+same as analysis three but removed sex.
+
+* [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_no-sex_7.batches_myo.html)
+* [`ICI vs PBS`](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_no-sex_7.batches_myo.html)
+* [`ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_no-sex_7.batches_myo.html)
+* [`PBS Myocarditis Yes vs PBS Myocarditis No`](4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_no-sex_7.batches_myo.html)
+* [`Myocarditis Yes vs Myocarditis No`](4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_no-sex_7.batches_myo.html)
+* [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_no-sex_7.batches_myo.html)
+* [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_no-sex_7.batches_myo.html)
+
+#### ** ANALYSIS FIVE **
+
+suggested by Vivek P.:
+
+1. map binary phenotype (drug treatment - `ICI vs. PBS`) 
+      * Murine MHC KO Status & clinical phenotype as an additive covariates
+      * Qn: is there a genetic difference between drug treatment groups, regardless of clinical phenotype, KO or Myocarditis Status?
+
+2. map binary phenotype (clinical phenotype - `SICK vs. EOI`) 
+      * Murine MHC KO Status & drug treatment as an additive covariates
+      * Qn: is there a genetic difference between clinical phenotype samples, regardless of drug treatment, KO or Myocarditis Status?
+
+3. map binary phenotype (clinical phenotype - `SICK vs. EOI` within each drug treatment) 
+      * Murine MHC KO Status & drug treatment as an additive covariates
+      * Qn: is there a genetic difference between clinical phenotype samples, regardless of KO or Myocarditis Status?
+
 
 ## **5. Power Analysis**
+
+Using ANALYSIS ONE
 
 * [`ICI Sick vs ICI EOI`](power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.html)
 * [`ICI vs PBS`](power.analysis_ici.vs.pbs_7.batches_myo.html)
