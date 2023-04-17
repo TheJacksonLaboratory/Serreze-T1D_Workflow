@@ -1,0 +1,85 @@
+---
+title: "Haplotype Phasing Before QC (minprob)"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#libraries
+library(broman)
+library(qtl2)
+library(lubridate)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+```
+
+### Loading Project
+```{r load project, eval=TRUE}
+
+gm <- get(load("data/gm_serreze_bc_7.batches_myo.RData"))
+gm
+
+apr <- readRDS("data/probs_8state_bc_7.batches_myo.rds")
+pr <- readRDS("data/probs_36state_bc_7.batches_myo.rds")
+mice <- ind_ids(gm)
+micelg <- as.data.frame(mice)
+#micelg$miceids <- sapply(strsplit(as.character(micelg$mice),'_',fixed=T),function(x) x[6])
+#micelg <- micelg[order(micelg$miceids),]
+#micelg <- micelg[order(micelg$mice),]
+#mice <- micelg$mice
+micedf <- as.data.frame(micelg)
+#mice <- micedf$micelg
+names(micedf) <- c("mice")
+#micedf$original.mouse.id <- sapply(strsplit(as.character(micedf$mice),'_',fixed=T),function(x) x[6])
+
+sample_file <- dir(path = "/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/", pattern = "^DODB_*", full.names = TRUE)
+samples <- read.csv(sample_file)
+micedf$index <- 1:nrow(micedf)
+#all.equal(as.character(ind_ids(gm)), as.character(samples$Original.Mouse.ID))
+micesamp <- merge(micedf, samples, by.x=c("mice"), by.y=c("Unique.Sample.ID"), all=T)
+micesamp <- micesamp[order(micesamp$index),]
+micesamp <- micesamp[c("mice","Original.Mouse.ID")]
+
+
+```
+
+### Plots
+```{r phased b6 plots, eval=TRUE}
+
+for(rn in 1:nrow(micesamp)){
+
+	#print(i)
+	newdf <- micesamp[rn,]
+	unique.mouse.id <- newdf$mice
+	mouse.id <- newdf$Original.Mouse.ID
+	batch <- ymd(parse_date_time((sapply(strsplit(as.character(newdf$mice),'_',fixed=T),function(x) x[6])), "ymd"))
+	#mouse.id <- i
+	#print(mouse.id)
+	#print(newdf$Unique.Sample.ID)
+	i = unique.mouse.id
+
+	gmi <- gm[i, ] 
+	#map <- insert_pseudomarkers(gmi$gmap, step=1)
+	#pr.new <- calc_genoprob(gmi, gmi$gmap, error_prob=0.002)
+	#ap <- genoprob_to_alleleprob(pr)
+	#apr.new <- apr[i,]
+	pr.new <- pr[i,]
+
+	# infer genotypes, as those with maximal marginal probability
+	#m <- maxmarg(apr.new, minprob = 0.5)
+    m <- maxmarg(pr.new, minprob = 0.5)
+	#m <- maxmarg(pr.new)
+
+	# guess phase
+	ph <- guess_phase(gmi, m)
+
+	# plot phased genotypes
+	#plot_onegeno(m, gmi$gmap, main = paste0(mouse.id," (batch date: ", batch,") [genoprobs;m]"),  shift=TRUE, col=c("#1111FF", "#888888"))
+	plot_onegeno(ph, gmi$gmap, main = paste0(mouse.id, "\n",unique.mouse.id,"\n(batch date: ", batch,") [using genoprobs]"),  shift=TRUE, col=c("#1111FF", "#888888"))
+}
+
+```

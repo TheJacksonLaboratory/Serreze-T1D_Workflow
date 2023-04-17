@@ -1,0 +1,259 @@
+---
+title: "Step 2: SNP QC [7.batches_myo]"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+
+#libraries
+library(broman)
+library(qtl2)
+library(qtlcharts)
+library(ggplot2)
+library(ggrepel)
+#library(DOQTL)
+library(mclust)
+#source("code/reconst_utils.R")
+library("kableExtra")
+library("knitr")
+library("fst")
+```
+
+### Loading Project
+```{r loading project}
+load("data/e_snpg_samqc_7.batches_myo.RData")
+gm <- get(load("data/gm_samqc_7.batches_myo.RData"))
+
+gm
+```
+
+It can also be useful to look at the proportion of missing genotypes by marker. Markers with a lot of missing data were likely difficult to call, and so the genotypes that were called may contain a lot of errors.
+
+### Marker Missing Data 
+```{r Missing data in Markers and Genotype frequencies Markers, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+pmis_mar <- n_missing(gm, "marker", "proportion")*100
+save(pmis_mar, file = "data/percent_missing_marker_7.batches_myo.RData")
+
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(pmis_mar, breaks=seq(0, 100, length=201),
+     main="", yaxt="n", ylab="", xlab="Percent missing genotypes")
+rug(pmis_mar)
+
+pdf(file = "output/Percent_missing_genotype_data_per_marker_7.batches_myo.pdf")
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(pmis_mar, breaks=seq(0, 100, length=201),
+     main="", yaxt="n", ylab="", xlab="Percent missing genotypes")
+rug(pmis_mar)
+dev.off()
+```
+
+```{r missing table, echo=FALSE}
+
+pmis <- NULL
+pmis$pmis_mar_5 <- sum(pmis_mar >= 5)
+pmis$pmis_mar_10 <- sum(pmis_mar >= 10)
+pmis$pmis_mar_15 <- sum(pmis_mar >= 15)
+pmis$pmis_mar_25 <- sum(pmis_mar >= 25)
+pmis$pmis_mar_50 <- sum(pmis_mar >= 50)
+pmis$pmis_mar_75 <- sum(pmis_mar >= 75)
+pmis$total_snps <- nrow(as.data.frame(pmis_mar))
+
+pmis <- t(as.data.frame(pmis))
+pmis <- as.data.frame(pmis)
+pmis$count <- pmis$V1
+
+pmis[c(2)] %>%
+  kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F)  %>%
+  row_spec(7 ,bold=T,color= "white",background = "black")
+
+```
+
+### Marker Genotype Frequencies
+```{r Genotype frequencies Markers, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+
+g <- do.call("cbind", gm$geno[1:19])
+#fg <- do.call("cbind", gm$founder_geno[1:19])
+#g <- g[,colSums(g)!=0]
+#fg <- fg[,colSums(fg==0)==0]
+#fgn <- colSums(g==2)
+
+gf_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar <- t(apply(g, 2, function(a) table(factor(a, 1:2))))
+
+gf_mar <- gf_mar[gf_mar[,2] != "NaN",]
+MAF <- apply(gf_mar, 1, function(x) min(x))
+MAF <- as.data.frame(MAF)
+MAF$index <- 1:nrow(gf_mar)
+gf_mar_maf <- merge(gf_mar,as.data.frame(MAF), by="row.names")
+gf_mar_maf <- gf_mar_maf[order(gf_mar_maf$index),]
+
+pdf(file = "output/genotype_frequency_marker_7.batches_myo.pdf")
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(gf_mar_maf$MAF, breaks=seq(0, 1, length=201),
+     main="", yaxt="n", ylab="", xlab="MAF")
+rug(gf_mar_maf$MAF)
+dev.off()
+
+par(mar=c(5.1,0.6,0.6, 0.6))
+hist(gf_mar_maf$MAF, breaks=seq(0, 1, length=201),
+     main="", yaxt="n", ylab="", xlab="MAF")
+rug(gf_mar_maf$MAF)
+
+gfmar <- NULL
+gfmar$gfmar_mar_0 <- sum(gf_mar_maf$MAF==0)
+gfmar$gfmar_mar_1 <- sum(gf_mar_maf$MAF< 0.01)
+gfmar$gfmar_mar_5 <- sum(gf_mar_maf$MAF< 0.05)
+gfmar$gfmar_mar_10 <- sum(gf_mar_maf$MAF< 0.10)
+gfmar$gfmar_mar_15 <- sum(gf_mar_maf$MAF< 0.15)
+gfmar$gfmar_mar_25 <- sum(gf_mar_maf$MAF< 0.25)
+gfmar$gfmar_mar_50 <- sum(gf_mar_maf$MAF<= 0.50)
+gfmar$total_snps <- nrow(as.data.frame(gf_mar_maf))
+
+gfmar <- t(as.data.frame(gfmar))
+gfmar <- as.data.frame(gfmar)
+gfmar$count <- gfmar$V1
+
+gfmar[c(2)] %>%
+  kable(escape = F,align = c("ccccccccc"),linesep ="\\hline") %>%
+  kable_styling(full_width = F) %>%
+  kable_styling("striped", full_width = F)  %>%
+  row_spec(8 ,bold=T,color= "white",background = "black")
+
+save(gf_mar, file = "data/genotype_freq_marker_7.batches_myo.RData")
+
+```
+
+### Marker Genotype Errors
+```{r Genotype errors Markers, fig.height = 6, fig.width = 9.5, fig.align = "center"}
+errors_mar <- colSums(e>2)/n_typed(gm, "marker")*100
+
+grayplot(pmis_mar, errors_mar,
+         xlab="Proportion missing", ylab="Proportion genotyping errors")
+
+
+pdf(file = "output/genotype_error_marker_7.batches_myo.pdf")
+grayplot(pmis_mar, errors_mar,
+         xlab="Proportion missing", ylab="Proportion genotyping errors")
+dev.off()
+
+save(errors_mar, file = "data/genotype_errors_marker_7.batches_myo.RData")
+
+```
+
+Markers with higher rates of missing genotypes tend to show higher errors rates.
+
+### Removing Markers
+#### Missingness
+```{r listing markers missing}
+
+#Missingness
+
+length(pmis_mar[pmis_mar >= 10])
+
+high_miss <- find_markerpos(gm, names(pmis_mar[pmis_mar >= 10]))
+high_miss$id <- rownames(high_miss)
+high_miss_df <- as.data.frame(pmis_mar[pmis_mar >= 10])
+high_miss_df$index = 1: nrow(high_miss_df)
+high_miss_df$id <- rownames(high_miss_df)
+
+high_miss_bad <- merge(high_miss,high_miss_df, by=c("id"),all=T)
+names(high_miss_bad)[5] <- c("high_miss")
+names(high_miss_bad)[1] <- c("marker")
+high_miss_bad <- high_miss_bad[order(high_miss_bad$index),]
+```
+
+#### Monomorphic/Low Frequency markers
+```{r listing markers Monomorphic or Low Frequency markers}
+
+#Monomorphic/Low Frequency markers
+
+#low_freq_df <- as.data.frame(gf_mar)
+count <- rowSums(gf_mar <= 0.01)
+#count <- as.data.frame(count)
+low_freq_df <- merge(as.data.frame(gf_mar),as.data.frame(count), by="row.names",all=T)
+low_freq_df[is.na(low_freq_df)] <- ''
+low_freq_df <- low_freq_df[low_freq_df$count == 1,]
+rownames(low_freq_df) <- low_freq_df$Row.names
+#low_freq_df$id <- rownames(low_freq_df)
+#low_freq_df$index = 1: nrow(low_freq_df)
+low_freq <- find_markerpos(gm, rownames(low_freq_df))
+low_freq$id <- rownames(low_freq)
+
+nrow(low_freq)
+
+low_freq_bad <- merge(low_freq,low_freq_df, by="row.names",all=T)
+#names(low_freq_bad)[5] <- c("AA_freq")
+#names(low_freq_bad)[6] <- c("AB_freq")
+#names(low_freq_bad)[7] <- c("BB_freq")
+names(low_freq_bad)[1] <- c("marker")
+#low_freq_bad <- low_freq_bad[order(low_freq_bad$index),]
+
+```
+
+#### Genotyping Error
+```{r listing markers Genotyping Error}
+
+##Genotyping Error
+
+length(errors_mar[errors_mar > 5])
+
+error_markers_names <- names(errors_mar[errors_mar > 5])
+error_markers_names <- error_markers_names[complete.cases(error_markers_names)]
+
+error_markers <- find_markerpos(gm, error_markers_names)
+error_markers$id <- rownames(error_markers)
+#rne <- rownames(as.data.frame(errors_mar))
+error_mars_df <- as.data.frame(errors_mar[errors_mar > 5])
+error_mars_df <- error_mars_df[complete.cases(error_mars_df$"errors_mar[errors_mar > 5]"),]
+error_mars_df <- as.data.frame(error_mars_df)
+#error_mars_df$id = rownames(error_mars_df)
+error_mars_df$index = 1: nrow(error_mars_df)
+
+#error_markers_bad <- merge(error_markers,error_mars_df, by=c("id"),all=T)
+error_markers_bad <- cbind(error_markers,error_mars_df)
+names(error_markers_bad)[5] <- c("error_mars")
+names(error_markers_bad)[4] <- c("marker")
+error_markers_bad <- error_markers_bad[order(error_markers_bad$index),]
+
+```
+
+#### Total
+```{r listing markers total}
+
+### merge all
+
+bad_markers <- rbind(high_miss_bad[c("marker","chr","gmap","pmap")], low_freq_bad[c("marker","chr","gmap","pmap")], error_markers_bad[c("marker","chr","gmap","pmap")])
+#nrow(bad_markers)
+
+duplicate <- bad_markers[duplicated(bad_markers),]
+
+bad_markers <- bad_markers[!duplicated(bad_markers),]
+nrow(bad_markers)
+
+save(bad_markers, file = "data/bad_markers_all_7.batches_myo.RData")
+
+```
+
+Only removing markers that are missing in at least 10% of the samples
+
+```{r Removing markers }
+
+#missing in at least 10% of the samples
+
+gm_allqc2 <- drop_markers(gm_samqc, high_miss_bad$marker)
+gm_allqc <- drop_nullmarkers(gm_allqc2)
+
+
+gm_allqc
+
+save(gm_allqc, file = "data/gm_allqc_7.batches_myo_mis.RData")
+
+```

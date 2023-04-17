@@ -1,0 +1,140 @@
+---
+title: "Serreze Workflow - 7 batches/6 groups"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+library(data.table) 
+library(tidyr)
+library(mclust)
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(tibble)
+library(ggplot2)
+library(broman)
+library(qtl2)
+library(qtlcharts)
+library(ggrepel)
+library(dplyr)
+library(readxl) 
+
+options(stringsAsFactors = FALSE)
+
+```
+
+## **Neogen Files At A Glance** [Total Samples: 366]
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20220729
+  + [Total Samples: 48](0.1_samples_batch_20220729.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20220826
+  + [Total Samples: 12](0.1_samples_batch_20220826.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20221006
+  + [Total Samples: 85](0.1_samples_batch_20221006.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20221116
+  + [Total Samples: 72](0.1_samples_batch_20221116.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230124
+  + [Total Samples: 36](0.1_samples_batch_20230124.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230225
+  + [Total Samples: 95](0.1_samples_batch_20230225.html)
+* Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230313
+  + [Total Samples: 18](0.1_samples_batch_20230313.html) [**Note:** Sample `D249-PBS-EOI`, also appears in the [previous](0.1_samples_batch_20230225.html) group submitted in Feb 2023]
+* [Preparing files for QC/Haplotype Phasing](0.1.1_preparing.data_bqc_7.batches_myo.html)
+
+
+## **Haplotype Phasing**
+* [minimum probability set for estimation of genotypes](0.2_haplotype_comparison_bqc_7.batches_myo_minprob.html)
+
+## **1. Experiment Design**
+
+```{r chapter1, eval=TRUE}
+
+gm <- read_cross2("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/gm_bc.json")
+#gm
+
+genos <- read_csv("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/sample_geno_bc.csv")
+
+design = matrix(ncol=8, nrow=1, dimnames = list("",c("abbreviations for strains:","type of cross:","number of mice phenotyped:","total number of mice phenotypes:","phenotypes:","number of mice:","number of markers:","covariates:")))
+design[1,1] <- "AB: het; AA: hom"
+design[1,2] <- "Backcross"
+design[1,3] <- nrow(gm$pheno)
+design[1,4] <- "2 [1 binary/1 quantiative]"
+design[1,5] <- "myocarditis status/group [binary] & age of onset [continuous]"
+design[1,6] <- ncol(genos)
+design[1,7] <- nrow(genos)
+design[1,8] <- paste0("sex [F: ", nrow(gm$covar[gm$covar$sex=="F",]), "; M: ", nrow(gm$covar[gm$covar$sex=="M",]),"] ; and others depending on samples used in analysis")
+
+design <- t(design)
+#design <- as.data.frame(design)
+#design$category <- rownames(design)
+#rownames <- NULL
+
+design[] %>%
+  kable(escape = F,align = c("lr")) %>%
+  kable_styling("striped", full_width = T) %>%
+  column_spec(1, width = "5cms", bold=TRUE)  %>%
+  column_spec(2, width = "1cms") 
+
+```
+
+## **2. Genotype QC **
+* Step 1: [Sample QC](2.1_sample_bqc_7.batches_myo.html)
+* Step 2: [SNP QC](2.2.1_snp_qc_7.batches_myo.html)(removing monomorphic, genotype error & missing markers)
+* Step 3: [Preparing Files for QTL Analysis](2.4_preparing.data_aqc_7.batches_myo.html)
+* Step 4: Identifying additional disproportionate markers within each sample set
+  + [`ICI Sick vs ICI EOI`](genotype.frequencies_ici-sick.vs.ici-eoi_freq_7.batches_myo.html)
+  + [`ICI vs PBS`](genotype.frequencies_ici.vs.pbs_freq_7.batches_myo.html)
+  + [`ICI Myocarditis Yes vs ICI Myocarditis No`](genotype.frequencies_ici-myo-yes.vs.ici-myo-no_freq_7.batches_myo.html)
+  + [`PBS Myocarditis Yes vs PBS Myocarditis No`](genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_freq_7.batches_myo.html)
+  + [`Myocarditis Yes vs Myocarditis No`](genotype.frequencies_myo-yes.vs.myo-no_freq_7.batches_myo.html)
+  + [`Hetero: ICI vs PBS`](genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.html)
+  + [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_freq_7.batches_myo.html)
+
+
+## **3. Phenotype QC**
+
+### continous phenotypes (age of onset) [not necessary for current analysis]
+
+* Corrected Phenotypes
+    + [all comparisons](3.1_phenotype.qc_corrected_7.batches_myo.html) 
+
+
+## **4. QTL Analysis**
+
+### **binary phenotpe**
+
+1.  removed additional low frequency markers as well as disproportionate markers (identified in Step 2.4) within each sample set
+2.  no X covariate (ie. `Xcovar`); using sex as a covariate
+3.  no kinship included as `r/qtl2` does not allow for the inclusion of a kinship matrix in this type of model
+4.  For each model run, permutations (1000) were used for each model to obtain genome-wide LOD significance threshold for p < 0.01, p < 0.05, p < 0.10,  respectively, separately for X and automsomes (A) 
+
+
+* [`ICI Sick vs ICI EOI`](4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`ICI vs PBS`](4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`PBS Myocarditis Yes vs PBS Myocarditis No`](4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`Myocarditis Yes vs Myocarditis No`](4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`Hetero: ICI vs PBS`](4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.html)
+* [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html)
+
+
+## **5. Power Analysis**
+
+* [`ICI Sick vs ICI EOI`](power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.html)
+* [`ICI vs PBS`](power.analysis_ici.vs.pbs_7.batches_myo.html)
+* [`ICI Myocarditis Yes vs ICI Myocarditis No`](power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.html)
+* [`PBS Myocarditis Yes vs PBS Myocarditis No`](power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.html)
+* [`Myocarditis Yes vs Myocarditis No`](power.analysis_myo-yes.vs.myo-no_7.batches_myo.html)
+* [`Hetero: ICI vs PBS`](power.analysis_het-ici.vs.het-pbs_7.batches_myo.html)
+* [`Hetero: ICI Myocarditis Yes vs ICI Myocarditis No`](power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.html)

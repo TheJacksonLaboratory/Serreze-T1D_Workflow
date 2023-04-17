@@ -1,0 +1,900 @@
+---
+title: "Genotype Frequencies - ICI vs PBS"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+library(ggnewscale)
+library(cowplot)
+library(ggthemes)
+library(ggdark)
+
+setwd("/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow")
+filepaths = '/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/'
+
+sample_file <- dir(path = filepaths, pattern = "^DODB_*", full.names = TRUE)
+samples <- read.csv(sample_file)
+
+options(scipen=999)
+
+chr.groups = cbind(c(1:10), c(11:19,"X"))
+
+```
+
+## Allele Frequencies 
+
+### All variants (before snp qc)
+
+```{r pbs all figures, out.height = "100%", out.width = "100%", fig.height = 7, fig.width=9, fig.align = "center", echo=FALSE}
+
+load("data/gm_allqc_7.batches_myo.RData")
+
+#gm_allqc
+gm=gm_allqc
+#gm
+
+geno <- read_csv("data/sample_geno_bc_7.batches_myo.csv")
+genot = t(geno)
+#comp <- merge(genot, gm$covar, by="row.names")
+#names(comp)[which(colnames(comp) == "clinical pheno")] <- "clinical.pheno"
+#rownames(comp) = comp[,1]
+#comp = comp[-1]
+
+covars <- read_csv("data/covar_corrected_ici.vs.pbs_7.batches_myo.csv")
+bingrp = covars[grep("vs", colnames(covars))]
+
+group = names(covars[grep("vs", colnames(covars))])
+control = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[2])
+case = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[1])
+
+gs <- genot[covars[bingrp == 1,]$Mouse.ID,1:ncol(genot)]
+ge <- genot[covars[bingrp == 0,]$Mouse.ID,1:ncol(genot)]
+
+gmap <- read_csv("data/genetic_map_7.batches_myo.csv")
+pmap <- read_csv("data/physical_map_7.batches_myo.csv")
+
+#binary value = 1 (eg SICK)
+
+gf_mars <- as.data.frame(t(apply(gs, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mars[is.na(gf_mars)] <- ''
+#gf_mars[gf_mars=="NaN"] <- ''
+gf_mars$group = case
+gf_mars$chr = pmap[match(rownames(gf_mars), rownames(pmap)),]$chr
+gf_mars$pos = pmap[match(rownames(gf_mars), rownames(pmap)),]$pos
+##gf_mars$MAF = with(gf_mars,pmin(gf_mars$"AA",gf_mars$"AB"))
+gf_mars$MAF = gf_mars$AB
+
+goodChrOrder <- c(1:19,"X")
+gf_mars$chr <- factor(gf_mars$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#6C0BA9","#D7A1F9"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mars$MAFn <- round(as.numeric(gf_mars$MAF), digits=2)
+gf_mars$colour <- my_colors[match(gf_mars$MAFn,my_colors$MAF),]$colour
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",case,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#binary value = 1 
+
+gf_mare <- as.data.frame(t(apply(ge, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mare[is.na(gf_mare)] <- ''
+#gf_mare[gf_mare=="NaN"] <- ''
+gf_mare$group = control
+gf_mare$chr = pmap[match(rownames(gf_mare), rownames(pmap)),]$chr
+gf_mare$pos = pmap[match(rownames(gf_mare), rownames(pmap)),]$pos
+#gf_mare$MAF = with(gf_mare,pmin(gf_mare$"AA",gf_mare$"AB"))
+gf_mare$MAF = gf_mare$"AB"
+
+goodChrOrder <- c(1:19,"X")
+gf_mare$chr <- factor(gf_mare$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#fd7f20","#ffc04d"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mare$MAFn <- round(as.numeric(gf_mare$MAF), digits=2)
+gf_mare$colour <- my_colors[match(gf_mare$MAFn,my_colors$MAF),]$colour
+
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",control,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#BOTH TOGETHER
+gf_mar = rbind(gf_mars, gf_mare)
+
+
+for(c in c(1:2)){
+	#print(c)
+	fp_subdatas <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp_subdatae <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot() +
+			geom_point(data = fp_subdatae, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatae$colour, breaks=fp_subdatae$MAFn) +
+     		new_scale_color() + 
+     		geom_point(data = fp_subdatas, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatas$colour, breaks=fp_subdatas$MAFn) +
+    		scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    		scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    		facet_grid(chr~.) +
+     		ggtitle(paste0("Frequency of AB genotype in \'",case,"\'(purple) & \'",control,"\'(orange) samples")) +
+     		xlab("Position in the genome (Mb)") + 
+     		ylab("AB frequency") +
+    		theme_light(10) +
+    		theme(plot.title = element_text(size=12, face="bold", hjust=0.5),
+        		  legend.position="none",
+        		  #strip.background =element_rect(fill="grey"),
+        		  panel.spacing = unit(0.5, "lines"))
+	print(fp)
+}
+
+```
+
+### After SNP QC
+
+```{r pbs qc figures, out.height = "100%", out.width = "100%", fig.height = 7, fig.width=9, fig.align = "center", echo=FALSE}
+
+load("data/gm_allqc_7.batches_myo.RData")
+
+#gm_allqc
+gm=gm_allqc
+#gm
+
+covars <- read_csv("data/covar_corrected_ici.vs.pbs_7.batches_myo.csv")
+
+bingrp = covars[grep("vs", colnames(covars))]
+
+group = names(covars[grep("vs", colnames(covars))])
+control = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[2])
+case = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[1])
+
+gs <- do.call("cbind", gm[covars[bingrp == 1,]$Mouse.ID]$geno)
+ge <- do.call("cbind", gm[covars[bingrp == 0,]$Mouse.ID]$geno)
+
+gmap <- read_csv("data/genetic_map_7.batches_myo.csv")
+pmap <- read_csv("data/physical_map_7.batches_myo.csv")
+
+#binary value = 1 (eg SICK)
+
+gf_mars <- as.data.frame(t(apply(gs, 2, function(a) table(factor(a, 1:2))/sum(a != 0))))
+gf_mars$group = case
+gf_mars$chr = pmap[match(rownames(gf_mars), rownames(pmap)),]$chr
+gf_mars$pos = pmap[match(rownames(gf_mars), rownames(pmap)),]$pos
+#gf_mars$MAF = with(gf_mars,pmin(gf_mars$"1",gf_mars$"2"))
+gf_mars$MAF = gf_mars$"2"
+
+goodChrOrder <- c(1:19,"X")
+gf_mars$chr <- factor(gf_mars$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#6C0BA9","#D7A1F9"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mars$MAFn <- round(gf_mars$MAF, digits=2)
+gf_mars$colour <- my_colors[match(gf_mars$MAFn,my_colors$MAF),]$colour
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",case,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#binary value = 1 (eg EOI)
+
+gf_mare <- as.data.frame(t(apply(ge, 2, function(a) table(factor(a, 1:2))/sum(a != 0))))
+gf_mare$group = control
+gf_mare$chr = pmap[match(rownames(gf_mare), rownames(pmap)),]$chr
+gf_mare$pos = pmap[match(rownames(gf_mare), rownames(pmap)),]$pos
+#gf_mare$MAF = with(gf_mare,pmin(gf_mare$"1",gf_mare$"2"))
+gf_mare$MAF = gf_mare$"2"
+
+goodChrOrder <- c(1:19,"X")
+gf_mare$chr <- factor(gf_mare$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#fd7f20","#ffc04d"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mare$MAFn <- round(gf_mare$MAF, digits=2)
+gf_mare$colour <- my_colors[match(gf_mare$MAFn,my_colors$MAF),]$colour
+
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",control,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+
+#BOTH TOGETHER
+gf_mar = rbind(gf_mars, gf_mare)
+
+for(c in c(1:2)){
+	#print(c)
+	fp_subdatas <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp_subdatae <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot() +
+			geom_point(data = fp_subdatae, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatae$colour, breaks=fp_subdatae$MAFn) +
+     		new_scale_color() + 
+     		geom_point(data = fp_subdatas, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatas$colour, breaks=fp_subdatas$MAFn) +
+    		scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    		scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    		facet_grid(chr~.) +
+     		ggtitle(paste0("Frequency of AB genotype in \'",case,"\'(purple) & \'",control,"\'(orange) samples")) +
+     		xlab("Position in the genome (Mb)") + 
+     		ylab("AB frequency") +
+    		theme_light(10) +
+    		theme(plot.title = element_text(size=12, face="bold", hjust=0.5),
+        		  legend.position="none",
+        		  #strip.background =element_rect(fill="grey"),
+        		  panel.spacing = unit(0.5, "lines"))
+	print(fp)
+
+}
+
+```
+
+
+## with sample outliers
+
+```{r data pbs, echo=TRUE}
+load("data/gm_allqc_7.batches_myo.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+pr <- readRDS("data/serreze_probs_allqc_7.batches_myo.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+geno <- read.csv("data/sample_geno_bc_7.batches_myo.csv", as.is=T, check.names=FALSE)
+#names(geno) <- gsub("^X","",names(geno))
+#names(geno) <- gsub("\.","-",names(geno))
+#names(geno)[2:ncol(geno)] <- samples$Unique.Sample.ID
+rownames(geno) <- geno$marker
+
+```
+
+
+```{r pbs outliers, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+## extracting animals with ici and pbs group status
+#miceinfo <- gm$covar[gm$covar$group == "PBS" | gm$covar$group == "ICI",]
+#table(miceinfo$group)
+#mice.ids <- rownames(miceinfo)
+
+#gm <- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars <- read_csv("data/covar_corrected_ici.vs.pbs_7.batches_myo.csv")
+# removing any missing info
+#covars <- subset(covars, covars$age.of.onset!='')
+nrow(covars)
+table(covars$"Myocarditis Status")
+table(covars$"Murine MHC KO Status")
+table(covars$"Drug Treatment")
+table(covars$"clinical pheno")
+
+# keeping only informative mice
+gm <- gm[covars$Mouse.ID]
+gm
+table(gm$covar$"Myocarditis Status")
+table(gm$covar$"Murine MHC KO Status")
+table(gm$covar$"Drug Treatment")
+table(gm$covar$"clinical pheno")
+
+pr.qc.ids <- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno <- geno[,covars$Mouse.ID]
+geno <- geno[marker_names(gm),]
+dim(geno)
+
+## calculating genotype frequencies
+### from geno genotypes
+g <- do.call("cbind", gm$geno)
+gf_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw<- gf_mar_raw[gf_mar_raw[,2] != "NaN",]
+colnames(gf_mar_geno) <- c("freq_AA_geno_table","freq_AB_geno_table")
+colnames(gn_mar_geno) <- c("count_missing_geno_table","count_AA_geno_table","count_AB_geno_table")
+gfn_mar_geno <- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by="row.names")
+rownames(gfn_mar_geno) <- gfn_mar_geno[,1]
+gfn_mar_geno <- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl <- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi <- geno[i,]
+#    freqf <- table(factor(geno[i,], c("-","AA","AB")))
+#    genoi$count_AA_raw_rowSums <- rowSums(genoi == "AA")
+#    genoi$count_AB_raw_rowSums <- rowSums(genoi == "AB")
+#    genoi$count_missing_raw_rowSums <- rowSums(genoi == "-")
+#    freqf <- t(table(factor(geno[i,], c("-","AA","AB"))))
+#    freqf <- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) <- rownames(genoi)
+#    colnames(freqf) <- c("count_missing_raw_table","count_AA_raw_table","count_AB_raw_table")
+#    genoif <- cbind(freqf,genoi[c("count_AA_raw_rowSums","count_AB_raw_rowSums","count_missing_raw_rowSums")])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw <- do.call("rbind",genosl)
+#gf_mar_raw <- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index <- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 <- calc_geno_freq(pr.qc.ids, by = "marker", omit_x = FALSE)
+#gn_mar_probs <- calc_geno_freq(probs, by = "individual", omit_x = FALSE)
+gf_mar_probs <- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) <- paste0("freq_",colnames(gf_mar_probs),"_probs")
+gf_mar_probs <- as.data.frame(gf_mar_probs)
+gf_mar_probs$index <- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 <- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by="row.names")
+#rownames(gf_mar.1) <- gf_mar.1[,1]
+#gf_mar.1 <- gf_mar.1[-1]
+#gf_mar <- merge(gf_mar.1,as.data.frame(gf_mar_probs), by="row.names")
+gf_mar <- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by="row.names")
+rownames(gf_mar) <- gf_mar[,1]
+gf_mar <- gf_mar[-1]
+gf_mar <- gf_mar[order(gf_mar$index),]
+dim(gf_mar)
+
+
+# Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio >= 0.90 & gf_mar$ratio <= 1.10, TRUE,FALSE)
+table(gf_mar$Include)
+
+## filtering out <= 0.05
+gf_mar$count.geno <- rowSums(gf_mar[c("freq_AA_geno_table","freq_AB_geno_table")] <=0.05)
+filtered_gf_mar_geno <- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno <- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c("count.geno","index"))]
+dim(filtered_gf_mar_geno)
+table(filtered_gf_mar_geno$Include)
+
+gf_mar$count.probs <- rowSums(gf_mar[c("freq_AA_probs","freq_AB_probs")] <=0.05)
+filtered_gf_mar_probs <- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs <- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c("count.geno","count.probs","index"))]
+dim(filtered_gf_mar_probs)
+table(filtered_gf_mar_probs$Include)
+
+## merging with sample_genos
+filtered_gf_mar_geno_sample <- merge(geno,filtered_gf_mar_geno, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c("count.geno","index"))]
+names(filtered_gf_mar_geno_sample)[1] <- c("marker")
+dim(filtered_gf_mar_geno_sample)
+
+filtered_gf_mar_probs_sample <- merge(geno,filtered_gf_mar_probs, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c("count.geno","count.probs","index"))]
+names(filtered_gf_mar_probs_sample)[1] <- c("marker")
+dim(filtered_gf_mar_probs_sample)
+
+## saving files
+write.csv(filtered_gf_mar_geno_sample, "data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv", quote=F)
+write.csv(filtered_gf_mar_probs_sample, "data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv", quote=F)
+
+write.csv(filtered_gf_mar_geno, "data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv", quote=F)
+write.csv(filtered_gf_mar_probs, "data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv", quote=F)
+
+```
+
+```{r pbs figures dismark, out.height = "100%", out.width = "100%", fig.height = 7, fig.width=9, fig.align = "center", echo=FALSE}
+
+
+geno <- filtered_gf_mar_geno_sample
+rownames(geno) <- geno$marker
+geno <- geno[as.logical(geno$Include),]
+genot = t(geno[2:(ncol(geno)-9)])
+#comp <- merge(genot, gm$covar, by="row.names")
+#names(comp)[which(colnames(comp) == "clinical pheno")] <- "clinical.pheno"
+#rownames(comp) = comp[,1]
+#comp = comp[-1]
+
+#covars <- read_csv("data/covar_corrected_ici.vs.pbs_7.batches_myo.csv")
+bingrp = covars[grep("vs", colnames(covars))]
+
+group = names(covars[grep("vs", colnames(covars))])
+control = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[2])
+case = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[1])
+
+gs <- genot[covars[bingrp == 1,]$Mouse.ID,1:ncol(genot)]
+ge <- genot[covars[bingrp == 0,]$Mouse.ID,1:ncol(genot)]
+
+gmap <- read_csv("data/genetic_map_7.batches_myo.csv")
+pmap <- read_csv("data/physical_map_7.batches_myo.csv")
+
+#binary value = 1 (eg SICK)
+
+gf_mars <- as.data.frame(t(apply(gs, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mars[is.na(gf_mars)] <- ''
+#gf_mars[gf_mars=="NaN"] <- ''
+gf_mars$group = case
+gf_mars$chr = pmap[match(rownames(gf_mars), rownames(pmap)),]$chr
+gf_mars$pos = pmap[match(rownames(gf_mars), rownames(pmap)),]$pos
+#gf_mars$MAF = with(gf_mars,pmin(gf_mars$"AA",gf_mars$"AB"))
+gf_mars$MAF = gf_mars$AB
+
+goodChrOrder <- c(1:19,"X")
+gf_mars$chr <- factor(gf_mars$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#6C0BA9","#D7A1F9"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mars$MAFn <- round(as.numeric(gf_mars$MAF), digits=2)
+gf_mars$colour <- my_colors[match(gf_mars$MAFn,my_colors$MAF),]$colour
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",case,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#binary value = 1 
+
+gf_mare <- as.data.frame(t(apply(ge, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mare[is.na(gf_mare)] <- ''
+#gf_mare[gf_mare=="NaN"] <- ''
+gf_mare$group = control
+gf_mare$chr = pmap[match(rownames(gf_mare), rownames(pmap)),]$chr
+gf_mare$pos = pmap[match(rownames(gf_mare), rownames(pmap)),]$pos
+#gf_mare$MAF = with(gf_mare,pmin(gf_mare$"AA",gf_mare$"AB"))
+gf_mare$MAF = gf_mare$AB
+
+goodChrOrder <- c(1:19,"X")
+gf_mare$chr <- factor(gf_mare$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#fd7f20","#ffc04d"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mare$MAFn <- round(as.numeric(gf_mare$MAF), digits=2)
+gf_mare$colour <- my_colors[match(gf_mare$MAFn,my_colors$MAF),]$colour
+
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",control,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#BOTH TOGETHER
+gf_mar = rbind(gf_mars, gf_mare)
+
+
+for(c in c(1:2)){
+	#print(c)
+	fp_subdatas <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp_subdatae <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot() +
+			geom_point(data = fp_subdatae, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatae$colour, breaks=fp_subdatae$MAFn) +
+     		new_scale_color() + 
+     		geom_point(data = fp_subdatas, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatas$colour, breaks=fp_subdatas$MAFn) +
+    		scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    		scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    		facet_grid(chr~.) +
+     		ggtitle(paste0("Frequency of AB genotype in \'",case,"\'(purple) & \'",control,"\'(orange) samples")) +
+     		xlab("Position in the genome (Mb)") + 
+     		ylab("AB frequency") +
+    		theme_light(10) +
+    		theme(plot.title = element_text(size=12, face="bold", hjust=0.5),
+        		  legend.position="none",
+        		  #strip.background =element_rect(fill="grey"),
+        		  panel.spacing = unit(0.5, "lines"))
+	print(fp)
+
+}
+
+```
+
+
+
+## sample outliers removed
+
+```{r data pbs no outleirs, echo=TRUE}
+load("data/gm_allqc_7.batches_myo.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+pr <- readRDS("data/serreze_probs_allqc_7.batches_myo.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+geno <- read.csv("data/sample_geno_bc_7.batches_myo.csv", as.is=T, check.names=FALSE)
+#names(geno) <- gsub("^X","",names(geno))
+#names(geno) <- gsub("\.","-",names(geno))
+#names(geno)[2:ncol(geno)] <- samples$Unique.Sample.ID
+rownames(geno) <- geno$marker
+
+```
+
+```{r pbs no outliers, fig.height = 6, fig.width = 9.5, fig.align = "center", echo=TRUE}
+
+## extracting animals with ici and pbs group status
+#miceinfo <- gm$covar[gm$covar$group == "PBS" | gm$covar$group == "ICI",]
+#table(miceinfo$group)
+#mice.ids <- rownames(miceinfo)
+
+#gm <- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars <- read_csv("data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo.csv")
+# removing any missing info
+covars <- subset(covars, covars$out.age.of.onset=='Keep' & covars$out.rz.age=='Keep')
+nrow(covars)
+table(covars$"Myocarditis Status")
+table(covars$"Murine MHC KO Status")
+table(covars$"Drug Treatment")
+table(covars$"clinical pheno")
+
+# keeping only informative mice
+gm <- gm[covars$Mouse.ID]
+gm
+table(gm$covar$"Myocarditis Status")
+table(gm$covar$"Murine MHC KO Status")
+table(gm$covar$"Drug Treatment")
+table(gm$covar$"clinical pheno")
+
+pr.qc.ids <- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno <- geno[,covars$Mouse.ID]
+geno <- geno[marker_names(gm),]
+dim(geno)
+
+## calculating genotype frequencies
+### from geno genotypes
+g <- do.call("cbind", gm$geno)
+gf_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno <- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw<- gf_mar_raw[gf_mar_raw[,2] != "NaN",]
+colnames(gf_mar_geno) <- c("freq_AA_geno_table","freq_AB_geno_table")
+colnames(gn_mar_geno) <- c("count_missing_geno_table","count_AA_geno_table","count_AB_geno_table")
+gfn_mar_geno <- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by="row.names")
+rownames(gfn_mar_geno) <- gfn_mar_geno[,1]
+gfn_mar_geno <- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl <- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi <- geno[i,]
+#    freqf <- table(factor(geno[i,], c("-","AA","AB")))
+#    genoi$count_AA_raw_rowSums <- rowSums(genoi == "AA")
+#    genoi$count_AB_raw_rowSums <- rowSums(genoi == "AB")
+#    genoi$count_missing_raw_rowSums <- rowSums(genoi == "-")
+#    freqf <- t(table(factor(geno[i,], c("-","AA","AB"))))
+#    freqf <- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) <- rownames(genoi)
+#    colnames(freqf) <- c("count_missing_raw_table","count_AA_raw_table","count_AB_raw_table")
+#    genoif <- cbind(freqf,genoi[c("count_AA_raw_rowSums","count_AB_raw_rowSums","count_missing_raw_rowSums")])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw <- do.call("rbind",genosl)
+#gf_mar_raw <- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index <- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 <- calc_geno_freq(pr.qc.ids, by = "marker", omit_x = FALSE)
+#gn_mar_probs <- calc_geno_freq(probs, by = "individual", omit_x = FALSE)
+gf_mar_probs <- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) <- paste0("freq_",colnames(gf_mar_probs),"_probs")
+gf_mar_probs <- as.data.frame(gf_mar_probs)
+gf_mar_probs$index <- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 <- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by="row.names")
+#rownames(gf_mar.1) <- gf_mar.1[,1]
+#gf_mar.1 <- gf_mar.1[-1]
+#gf_mar <- merge(gf_mar.1,as.data.frame(gf_mar_probs), by="row.names")
+gf_mar <- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by="row.names")
+rownames(gf_mar) <- gf_mar[,1]
+gf_mar <- gf_mar[-1]
+gf_mar <- gf_mar[order(gf_mar$index),]
+dim(gf_mar)
+
+
+# Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio >= 0.90 & gf_mar$ratio <= 1.10, TRUE,FALSE)
+table(gf_mar$Include)
+
+## filtering out <= 0.05
+gf_mar$count.geno <- rowSums(gf_mar[c("freq_AA_geno_table","freq_AB_geno_table")] <=0.05)
+filtered_gf_mar_geno <- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno <- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c("count.geno","index"))]
+dim(filtered_gf_mar_geno)
+table(filtered_gf_mar_geno$Include)
+
+gf_mar$count.probs <- rowSums(gf_mar[c("freq_AA_probs","freq_AB_probs")] <=0.05)
+filtered_gf_mar_probs <- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs <- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c("count.geno","count.probs","index"))]
+dim(filtered_gf_mar_probs)
+table(filtered_gf_mar_probs$Include)
+
+## merging with sample_genos
+filtered_gf_mar_geno_sample <- merge(geno,filtered_gf_mar_geno, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample <- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c("count.geno","index"))]
+names(filtered_gf_mar_geno_sample)[1] <- c("marker")
+dim(filtered_gf_mar_geno_sample)
+
+filtered_gf_mar_probs_sample <- merge(geno,filtered_gf_mar_probs, by="row.names", all.y=T, sort=F)
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample <- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c("count.geno","count.probs","index"))]
+names(filtered_gf_mar_probs_sample)[1] <- c("marker")
+dim(filtered_gf_mar_probs_sample)
+
+## saving files
+write.csv(filtered_gf_mar_geno_sample, "data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv", quote=F)
+write.csv(filtered_gf_mar_probs_sample, "data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv", quote=F)
+
+write.csv(filtered_gf_mar_geno, "data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv", quote=F)
+write.csv(filtered_gf_mar_probs, "data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv", quote=F)
+
+
+```
+
+```{r pbs figures dismark out, out.height = "100%", out.width = "100%", fig.height = 7, fig.width=9, fig.align = "center", echo=FALSE}
+
+
+geno <- filtered_gf_mar_geno_sample
+rownames(geno) <- geno$marker
+geno <- geno[as.logical(geno$Include),]
+genot = t(geno[2:(ncol(geno)-9)])
+#comp <- merge(genot, gm$covar, by="row.names")
+#names(comp)[which(colnames(comp) == "clinical pheno")] <- "clinical.pheno"
+#rownames(comp) = comp[,1]
+#comp = comp[-1]
+
+#covars <- read_csv("data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo.csv")
+bingrp = covars[grep("vs", colnames(covars))]
+
+group = names(covars[grep("vs", colnames(covars))])
+control = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[2])
+case = sapply(strsplit(group,'_vs_',fixed=T),function(x) x[1])
+
+gs <- genot[covars[bingrp == 1,]$Mouse.ID,1:ncol(genot)]
+ge <- genot[covars[bingrp == 0,]$Mouse.ID,1:ncol(genot)]
+
+gmap <- read_csv("data/genetic_map_7.batches_myo.csv")
+pmap <- read_csv("data/physical_map_7.batches_myo.csv")
+
+#binary value = 1 (eg SICK)
+
+gf_mars <- as.data.frame(t(apply(gs, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mars[is.na(gf_mars)] <- ''
+#gf_mars[gf_mars=="NaN"] <- ''
+gf_mars$group = case
+gf_mars$chr = pmap[match(rownames(gf_mars), rownames(pmap)),]$chr
+gf_mars$pos = pmap[match(rownames(gf_mars), rownames(pmap)),]$pos
+#gf_mars$MAF = with(gf_mars,pmin(gf_mars$"AA",gf_mars$"AB"))
+gf_mars$MAF = gf_mars$AB
+
+goodChrOrder <- c(1:19,"X")
+gf_mars$chr <- factor(gf_mars$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#6C0BA9","#D7A1F9"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mars$MAFn <- round(as.numeric(gf_mars$MAF), digits=2)
+gf_mars$colour <- my_colors[match(gf_mars$MAFn,my_colors$MAF),]$colour
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",case,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#binary value = 1 
+
+gf_mare <- as.data.frame(t(apply(ge, 2, function(a) table(factor(a, c("AA","AB")))/sum(table(a)))))
+gf_mare[is.na(gf_mare)] <- ''
+#gf_mare[gf_mare=="NaN"] <- ''
+gf_mare$group = control
+gf_mare$chr = pmap[match(rownames(gf_mare), rownames(pmap)),]$chr
+gf_mare$pos = pmap[match(rownames(gf_mare), rownames(pmap)),]$pos
+#gf_mare$MAF = with(gf_mare,pmin(gf_mare$"AA",gf_mare$"AB"))
+gf_mare$MAF = gf_mare$AB
+
+goodChrOrder <- c(1:19,"X")
+gf_mare$chr <- factor(gf_mare$chr,levels=goodChrOrder)
+
+fun_color_range <- colorRampPalette(c("#fd7f20","#ffc04d"))
+my_colors <- as.data.frame(fun_color_range(101))
+my_colors$MAF <- (1:nrow(my_colors)-1)/100
+names(my_colors)[1] <- c("colour")
+
+gf_mare$MAFn <- round(as.numeric(gf_mare$MAF), digits=2)
+gf_mare$colour <- my_colors[match(gf_mare$MAFn,my_colors$MAF),]$colour
+
+
+for(c in c(1:2)){
+	##print(c)
+	fp_subdata <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot(fp_subdata,aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn))) + geom_point(size=1) +
+    	scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    	scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    	facet_grid(chr~.) +
+    	ggtitle(paste0("Frequency of AB genotype in \'",control,"\' samples")) +
+    	scale_color_manual(values = fp_subdata$colour, breaks=fp_subdata$MAFn) +
+    	xlab("Position in the genome (Mb)") + 
+    	ylab("AB frequency") +
+    	theme_light(10) +
+    	theme(plot.title = element_text(size=12,face="bold", hjust=0.5),
+        	  legend.position="none",
+        	  #strip.background =element_rect(fill="grey"),
+        	  panel.spacing = unit(0.5, "lines"))
+	#print(fp)
+}
+
+#BOTH TOGETHER
+gf_mar = rbind(gf_mars, gf_mare)
+
+
+for(c in c(1:2)){
+	#print(c)
+	fp_subdatas <- gf_mars[gf_mars$chr %in% chr.groups[,c],]
+	fp_subdatae <- gf_mare[gf_mare$chr %in% chr.groups[,c],]
+	fp = ggplot() +
+			geom_point(data = fp_subdatae, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatae$colour, breaks=fp_subdatae$MAFn) +
+     		new_scale_color() + 
+     		geom_point(data = fp_subdatas, aes(as.numeric(pos),as.numeric(MAF), colour=as.factor(MAFn)), size=1, alpha=0.6) +
+     		scale_color_manual(values = fp_subdatas$colour, breaks=fp_subdatas$MAFn) +
+    		scale_y_continuous(limits = c(0, 1), labels = c(0, 0.5, 1), breaks = c(0, 0.5, 1)) +
+    		scale_x_continuous(limits = c(0, 200), labels = c(0, 50, 100, 150, 200), breaks = c(0, 50, 100,150,200)) +
+    		facet_grid(chr~.) +
+     		ggtitle(paste0("Frequency of AB genotype in \'",case,"\'(purple) & \'",control,"\'(orange) samples")) +
+     		xlab("Position in the genome (Mb)") + 
+     		ylab("AB frequency") +
+    		theme_light(10) +
+    		theme(plot.title = element_text(size=12, face="bold", hjust=0.5),
+        		  legend.position="none",
+        		  #strip.background =element_rect(fill="grey"),
+        		  panel.spacing = unit(0.5, "lines"))
+	print(fp)
+
+}
+
+```

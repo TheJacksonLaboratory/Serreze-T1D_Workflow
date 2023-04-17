@@ -1,5 +1,5 @@
 ---
-title: "ICI induced autoimmunity complications"
+title: "ICI induced autoimmune complications"
 author: "Belinda Cornes"
 date: "`r Sys.Date()`"
 site: workflowr::wflow_site
@@ -47,4 +47,4 @@ options(stringsAsFactors = FALSE)
 
 ### Myocarditis
 * [4 neogen batches (3 groups) - november 2022](index_4.batches_myo.html)  
-* [7 neogen batches (6 groups) - february 2023](index_7.batches_myo.html) 
+* [7 neogen batches (6 groups) - march 2023](index_7.batches_myo.html) 
