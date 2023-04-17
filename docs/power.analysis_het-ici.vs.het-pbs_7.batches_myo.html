@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-04-14" />
+
+<title>Power Analysis - Hetero: ICI vs PBS</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fas fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Power Analysis - Hetero: ICI vs PBS</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-04-14</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#loading-data">Loading Data</a></li>
+<li><a href="#power">Power</a></li>
+<li><a href="#sample-size-with-80-power">Sample Size (with 80% power)</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-14
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230413code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20230413)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230413code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230413)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/projects/serreze-lab/USERS/corneb/qtl2/workflowr/2023.04.13/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong03e83ae"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> 03e83ae </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrong03e83ae" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version 03e83ae. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230124.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230225.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230313.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/index_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  code/cc_variants.sqlite
+    Untracked:  code/mouse_genes.sqlite
+    Untracked:  code/mouse_genes_mgi.sqlite
+    Untracked:  data/GM_covar_7.batches_myo.csv
+    Untracked:  data/bad_markers_all_7.batches_myo.RData
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/e_7.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_7.batches_myo.RData
+    Untracked:  data/errors_ind_7.batches_myo.RData
+    Untracked:  data/genetic_map_7.batches_myo.csv
+    Untracked:  data/genotype_errors_marker_7.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_7.batches_myo.RData
+    Untracked:  data/gm_serreze_7.batches_myo.RData
+    Untracked:  data/gm_serreze_bc_7.batches_myo.RData
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-10_peak.marker-UNC18343990_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-10_peak.marker-UNC18343990_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-11_peak.marker-UNC20070077_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-11_peak.marker-UNC20070077_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-12_peak.marker-UNC21652584_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-12_peak.marker-UNC21652584_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-13_peak.marker-UNCHS036579_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-13_peak.marker-UNCHS036579_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-14_peak.marker-UNCHS037782_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-14_peak.marker-UNCHS037782_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-15_peak.marker-UNC26069905_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-15_peak.marker-UNCHS041223_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-16_peak.marker-JAX00070117_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-16_peak.marker-JAX00070117_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-17_peak.marker-UNC28542319_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-17_peak.marker-UNCJPD006670_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-18_peak.marker-UNC28776739_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-18_peak.marker-UNCHS045594_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-19_peak.marker-UNC30414168_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-19_peak.marker-UNC30426276_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-1_peak.marker-UNC2031646_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-1_peak.marker-UNCHS003700_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-2_peak.marker-ICR5131_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-2_peak.marker-UNCHS006420_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-3_peak.marker-UNC5667757_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-3_peak.marker-UNC5667757_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-4_peak.marker-UNC6759992_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-4_peak.marker-UNC6765178_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-5_peak.marker-UNC9889957_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-5_peak.marker-UNC9900273_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-6_peak.marker-UNC10800126_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-6_peak.marker-UNC10832076_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-7_peak.marker-UNCHS020903_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-7_peak.marker-UNCHS021163_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-8_peak.marker-UNC15471847_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-8_peak.marker-UNC15548888_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-9_peak.marker-UNC16231874_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-9_peak.marker-UNC16231874_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_blup_sub_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-10_peak.marker-UNC18343990_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-10_peak.marker-UNC18343990_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-11_peak.marker-UNC20070077_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-11_peak.marker-UNC20070077_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-12_peak.marker-UNC21652584_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-12_peak.marker-UNC21652584_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-13_peak.marker-UNCHS036579_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-13_peak.marker-UNCHS036579_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-14_peak.marker-UNCHS037782_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-14_peak.marker-UNCHS037782_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-15_peak.marker-UNC26069905_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-15_peak.marker-UNCHS041223_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-16_peak.marker-JAX00070117_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-16_peak.marker-JAX00070117_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-17_peak.marker-UNC28542319_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-17_peak.marker-UNCJPD006670_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-18_peak.marker-UNC28776739_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-18_peak.marker-UNCHS045594_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-19_peak.marker-UNC30414168_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-19_peak.marker-UNC30426276_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-1_peak.marker-UNC2031646_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-1_peak.marker-UNCHS003700_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-2_peak.marker-ICR5131_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-2_peak.marker-UNCHS006420_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-3_peak.marker-UNC5667757_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-3_peak.marker-UNC5667757_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-4_peak.marker-UNC6759992_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-4_peak.marker-UNC6765178_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-5_peak.marker-UNC9889957_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-5_peak.marker-UNC9900273_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-6_peak.marker-UNC10800126_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-6_peak.marker-UNC10832076_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-7_peak.marker-UNCHS020903_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-7_peak.marker-UNCHS021163_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-8_peak.marker-UNC15471847_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-8_peak.marker-UNC15548888_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-9_peak.marker-UNC16231874_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-9_peak.marker-UNC16231874_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_genes_chr-X_peak.marker-UNCHS049472_lod.drop-1.5_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/mean.differences_group_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_gm_qtl_snpsqc_dis_no-x_updated_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/percent_missing_id_7.batches_myo.RData
+    Untracked:  data/percent_missing_marker_7.batches_myo.RData
+    Untracked:  data/pheno_7.batches_myo.csv
+    Untracked:  data/physical_map_7.batches_myo.csv
+    Untracked:  data/probs_36state_bc_7.batches_myo.rds
+    Untracked:  data/probs_8state_bc_7.batches_myo.rds
+    Untracked:  data/qc_info_bad_sample_7.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_7.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo_orig.id.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo_orig.id.csv
+    Untracked:  data/serreze_probs_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo_mis.rds
+    Untracked:  data/summary.cg_7.batches_myo.RData
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_7.batches_myo.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals              357
+No. genotyped individuals      357
+No. phenotyped individuals     357
+No. with both geno &amp; pheno     357
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>#pr &lt;- readRDS(&quot;data/serreze_probs_allqc.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+##extracting animals with ici and pbs group status
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HET&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;PBS&quot; | miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               13
+No. genotyped individuals       13
+No. phenotyped individuals      13
+No. with both geno &amp; pheno      13
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code>gm$covar$het.ici_vs_het.pbs &lt;- ifelse(gm$covar$&quot;Drug Treatment&quot; == &quot;PBS&quot;, 0, 1)
+gm$covar$group = gm$covar$het.ici_vs_het.pbs
+
+
+##loading genotypes
+
+genos.1 &lt;- read.csv(&quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv&quot;)
+dim(genos.1)</code></pre>
+<pre><code>[1] 26427    24</code></pre>
+<pre class="r"><code>genos.1 &lt;- genos.1[genos.1$Include,]
+dim(genos.1)</code></pre>
+<pre><code>[1] 127  24</code></pre>
+<pre class="r"><code>#dis.genos.1 &lt;- read.csv(&quot;data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv&quot;)
+#dim(dis.genos.1)
+rownames(genos.1) &lt;- genos.1$marker
+genos.1 &lt;- t(genos.1[3:(ncol(genos.1)-9)])
+rownames(genos.1) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,rownames(genos.1))
+
+genos.2&lt;- read.csv(&quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv&quot;)
+dim(genos.2)</code></pre>
+<pre><code>[1] 26427    24</code></pre>
+<pre class="r"><code>genos.2 &lt;- genos.2[genos.2$Include,]
+dim(genos.2)</code></pre>
+<pre><code>[1] 127  24</code></pre>
+<pre class="r"><code>#dis.genos.2 &lt;- read.csv(&quot;data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv&quot;)
+rownames(genos.2) &lt;- genos.2$marker
+genos.2 &lt;- t(genos.2[3:(ncol(genos.2)-9)])
+rownames(genos.2) &lt;- gsub(&quot;\\.&quot;,&quot;-&quot;,rownames(genos.2))
+
+
+##merge with phenotypes (age.of.onset &amp; binary)
+
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+#if(0 %in% unique(gm$covar$age.of.onset)){
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+geno.pheno.1 &lt;- merge(data.frame(genos.1), gm$covar,  by=&quot;row.names&quot;, all.x=T, sort=F)
+aov.1 &lt;- stats::aov(age.of.onset ~ group, geno.pheno.1)
+mse.1 &lt;- mean(aov.1$residuals^2) 
+geno.pheno.2 &lt;- merge(data.frame(genos.2), gm$covar,  by=&quot;row.names&quot;, all.x=T, sort=F)
+aov.2 &lt;- stats::aov(age.of.onset ~ group, geno.pheno.2)
+mse.2 &lt;- mean(aov.2$residuals^2) 
+
+
+## calculating effect (age.of.onset)
+
+age.marker.sum.1 &lt;- list()
+geno.pheno.1a &lt;- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-13)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 &lt;- geno.pheno.1a %&gt;% 
+  group_by(geno.pheno.1a[i])  %&gt;%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.1) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.1a[i]),&quot;_age.of.onset&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.1 &lt;- merge(genotypes, age.marker.1, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] &lt;- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) &lt;- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t &lt;- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) &lt;- gsub(&quot;_age.of.onset&quot;,&quot;&quot;,rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t &lt;- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom &lt;- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+max.1 &lt;- max(age.marker.sum.1.all.t$diffhethom)
+min.1 &lt;- min(age.marker.sum.1.all.t$diffhethom)
+write.csv(age.marker.sum.1.all.t,&quot;data/mean.differences_age.of.onset_het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv&quot;)
+
+age.marker.sum.2 &lt;- list()
+geno.pheno.2a &lt;- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-13)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 &lt;- geno.pheno.2a %&gt;% 
+  group_by(geno.pheno.2a[i])  %&gt;%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.2) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.2a[i]),&quot;_age.of.onset&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.2 &lt;- merge(genotypes, age.marker.2, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] &lt;- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) &lt;- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t &lt;- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) &lt;- gsub(&quot;_age.of.onset&quot;,&quot;&quot;,rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t &lt;- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom &lt;- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+max.2 &lt;- max(age.marker.sum.2.all.t$diffhethom)
+min.2 &lt;- min(age.marker.sum.2.all.t$diffhethom)
+write.csv(age.marker.sum.2.all.t,&quot;data/mean.differences_age.of.onset_het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv&quot;)
+
+
+max.a &lt;- max(max.1, max.2)
+print(max.a)</code></pre>
+<pre><code>[1] 16.02143</code></pre>
+<pre class="r"><code>min.a &lt;- min(min.1, min.2)
+print(min.a)</code></pre>
+<pre><code>[1] -12.59762</code></pre>
+<pre class="r"><code>mse.a &lt;- (mse.1 + mse.2)/2
+print(mse.a)</code></pre>
+<pre><code>[1] 85.97808</code></pre>
+<pre class="r"><code>## calculating effect (group)
+
+age.marker.sum.1 &lt;- list()
+geno.pheno.1a &lt;- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-13)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 &lt;- geno.pheno.1a %&gt;% 
+  group_by(geno.pheno.1a[i])  %&gt;%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.1) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.1a[i]),&quot;_group&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.1 &lt;- merge(genotypes, age.marker.1, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] &lt;- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) &lt;- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t &lt;- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) &lt;- gsub(&quot;_group&quot;,&quot;&quot;,rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t &lt;- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom &lt;- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+write.csv(age.marker.sum.1.all.t,&quot;data/mean.differences_group_het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv&quot;)
+
+age.marker.sum.2 &lt;- list()
+geno.pheno.2a &lt;- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-13)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 &lt;- geno.pheno.2a %&gt;% 
+  group_by(geno.pheno.2a[i])  %&gt;%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.2) &lt;- c(&quot;genotypes&quot;, paste0(names(geno.pheno.2a[i]),&quot;_group&quot;))
+  genotypes &lt;- as.data.frame(c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))
+  names(genotypes) &lt;- c(&quot;genotypes&quot;)
+  age.marker.2 &lt;- merge(genotypes, age.marker.2, by=c(&quot;genotypes&quot;), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] &lt;- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all &lt;- Reduce(function(x, y) merge(x, y, by=c(&quot;genotypes&quot;),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) &lt;- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t &lt;- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) &lt;- gsub(&quot;_group&quot;,&quot;&quot;,rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t &lt;- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom &lt;- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+write.csv(age.marker.sum.2.all.t,&quot;data/mean.differences_group_het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv&quot;)
+
+
+max.g &lt;- max(max.1, max.2)
+print(max.g)</code></pre>
+<pre><code>[1] 16.02143</code></pre>
+<pre class="r"><code>min.g &lt;- min(min.1, min.2)
+print(min.g)</code></pre>
+<pre><code>[1] -12.59762</code></pre>
+<pre class="r"><code>mse.g &lt;- (mse.1 + mse.2)/2
+print(mse.g)</code></pre>
+<pre><code>[1] 85.97808</code></pre>
+</div>
+<div id="power" class="section level2">
+<h2>Power</h2>
+<p>For powercalc the power is returned, along with the proportion of variance explained. LOD threshold set to 3 (which is roughly what is seen for suggestive significance)</p>
+<pre class="r"><code>## age.of onset
+
+
+powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.1024607              31.57503</code></pre>
+<pre class="r"><code>powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.2735915               42.7384</code></pre>
+<pre class="r"><code>#powercalc(&quot;bc&quot;,100,31,sigma2=1,sel.frac=1,theta=0)
+
+## group (binary)
+
+powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.1024607              31.57503</code></pre>
+<pre class="r"><code>powercalc(cross = &quot;bc&quot;,n=length(mice.ids),effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>         power percent.var.explained
+[1,] 0.2735915               42.7384</code></pre>
+<pre class="r"><code>## graph</code></pre>
+</div>
+<div id="sample-size-with-80-power" class="section level2">
+<h2>Sample Size (with 80% power)</h2>
+<p>For samplesize the sample size (rounded up to the nearest integer) is returned along with the proportion of variance explained. LOD threshold set to 3 (which is roughly what is seen for suggestive significance) and 80% power</p>
+<pre class="r"><code>## age.of onset
+samplesize(cross = &quot;bc&quot;,effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]          46              31.57503</code></pre>
+<pre class="r"><code>samplesize(cross = &quot;bc&quot;,effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]          28               42.7384</code></pre>
+<pre class="r"><code>## group (binary)
+samplesize(cross = &quot;bc&quot;,effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]          46              31.57503</code></pre>
+<pre class="r"><code>samplesize(cross = &quot;bc&quot;,effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)</code></pre>
+<pre><code>     sample.size percent.var.explained
+[1,]          28               42.7384</code></pre>
+<pre class="r"><code>## graph</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] qtlDesign_0.941   abind_1.4-5       qtl2_0.24         reshape2_1.4.4   
+ [5] ggplot2_3.3.3     tibble_3.0.6      psych_2.0.12      readxl_1.3.1     
+ [9] cluster_2.1.0     dplyr_1.0.4       optparse_1.6.6    rhdf5_2.34.0     
+[13] mclust_5.4.7      tidyr_1.1.2       data.table_1.13.6 knitr_1.31       
+[17] kableExtra_1.3.1  workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.2         bit64_4.0.5        viridisLite_0.3.0  tmvnsim_1.0-2     
+ [5] assertthat_0.2.1   highr_0.8          blob_1.2.1         cellranger_1.1.0  
+ [9] yaml_2.2.1         pillar_1.4.7       RSQLite_2.2.3      lattice_0.20-41   
+[13] glue_1.4.2         digest_0.6.27      promises_1.1.1     rvest_0.3.6       
+[17] colorspace_2.0-0   htmltools_0.5.1.1  httpuv_1.5.5       plyr_1.8.6        
+[21] pkgconfig_2.0.3    purrr_0.3.4        scales_1.1.1       webshot_0.5.2     
+[25] getopt_1.20.3      later_1.1.0.1      git2r_0.28.0       generics_0.1.0    
+[29] ellipsis_0.3.1     cachem_1.0.3       withr_2.4.1        mnormt_2.0.2      
+[33] magrittr_2.0.1     crayon_1.4.1       memoise_2.0.0      evaluate_0.14     
+[37] fs_1.5.0           nlme_3.1-152       xml2_1.3.2         tools_4.0.3       
+[41] lifecycle_0.2.0    stringr_1.4.0      Rhdf5lib_1.12.1    munsell_0.5.0     
+[45] compiler_4.0.3     rlang_0.4.10       grid_4.0.3         rhdf5filters_1.2.1
+[49] rstudioapi_0.13    rmarkdown_2.6      gtable_0.3.0       DBI_1.1.1         
+[53] R6_2.5.0           fastmap_1.1.0      bit_4.0.4          rprojroot_2.0.2   
+[57] stringi_1.5.3      parallel_4.0.3     Rcpp_1.0.10        vctrs_0.3.6       
+[61] tidyselect_1.1.0   xfun_0.21         </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

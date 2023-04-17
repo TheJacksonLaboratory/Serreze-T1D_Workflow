@@ -1,0 +1,304 @@
+---
+title: "Power Analysis - ICI vs PBS"
+author: "Belinda Cornes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE)
+
+library("kableExtra")
+library("knitr")
+options(stringsAsFactors = FALSE)
+library(data.table) 
+library(tidyr)     
+library(mclust)     
+library(rhdf5)      
+library(optparse)
+library(dplyr)
+library(cluster)
+library(readxl)
+library(psych)
+library(tibble)
+library(ggplot2)
+library(reshape2)
+library(qtl2)
+#library(qtl)
+library(abind)
+
+#install.packages("qtlDesign")
+library(qtlDesign)
+
+setwd("/projects/serreze-lab/USERS/corneb/qtl2/workflowr/2023.04.13/Serreze-T1D_Workflow")
+
+```
+
+## Loading Data
+
+```{r data, echo=TRUE}
+
+load("data/gm_allqc_7.batches_myo_mis.RData")
+
+#gm_allqc
+gm=gm_allqc
+gm
+
+#pr <- readRDS("data/serreze_probs_allqc.rds")
+#pr <- readRDS("data/serreze_probs.rds")
+
+##extracting animals with ici and pbs group status
+##extracting animals 
+#Myocarditis Status
+miceinfo <- gm$covar[gm$covar$"Myocarditis Status" == "YES",]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo <- miceinfo[miceinfo$"Murine MHC KO Status" == "HOM",]
+#Drug Treatment
+miceinfo <- miceinfo[miceinfo$"Drug Treatment" == "ICI" | miceinfo$"Drug Treatment" == "PBS",]
+#Clinical Phenotype
+miceinfo <- miceinfo[miceinfo$"clinical pheno" == "SICK" | miceinfo$"clinical pheno" == "EOI",]
+
+table(miceinfo$"Myocarditis Status")
+table(miceinfo$"Murine MHC KO Status")
+table(miceinfo$"Drug Treatment")
+table(miceinfo$"clinical pheno")
+
+mice.ids <- rownames(miceinfo)
+
+##removing X samples
+x.samples = c("NM00179-ICI-EOI","NM00186-ICI-EOI","D22-ICI-EOI","D39-ICI-Myo","D67-ICI-Myo","D111-PBS-Myo","D120-ICI-Myo","6895-PBS-Myo","D704-ICI-Myo")
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, "_"))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c("The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3")
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm <- gm[mice.ids]
+gm
+table(gm$covar$"Myocarditis Status")
+table(gm$covar$"Murine MHC KO Status")
+table(gm$covar$"Drug Treatment")
+table(gm$covar$"clinical pheno")
+
+gm$covar$ici_vs_pbs <- ifelse(gm$covar$"Drug Treatment" == "PBS", 0, 1)
+gm$covar$group = gm$covar$ici_vs_pbs
+
+
+##loading genotypes
+
+genos.1 <- read.csv("data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv")
+dim(genos.1)
+genos.1 <- genos.1[genos.1$Include,]
+dim(genos.1)
+#dis.genos.1 <- read.csv("data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis_mis.csv")
+#dim(dis.genos.1)
+rownames(genos.1) <- genos.1$marker
+genos.1 <- t(genos.1[3:(ncol(genos.1)-9)])
+rownames(genos.1) <- gsub("\\.","-",rownames(genos.1))
+
+genos.2<- read.csv("data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv")
+dim(genos.2)
+genos.2 <- genos.2[genos.2$Include,]
+dim(genos.2)
+#dis.genos.2 <- read.csv("data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis_mis.csv")
+rownames(genos.2) <- genos.2$marker
+genos.2 <- t(genos.2[3:(ncol(genos.2)-9)])
+rownames(genos.2) <- gsub("\\.","-",rownames(genos.2))
+
+
+##merge with phenotypes (age.of.onset & binary)
+
+names(gm$covar)[6] <- c("age.of.onset")
+gm$covar$age.of.onset <- as.numeric(gm$covar$age.of.onset)
+#if(0 %in% unique(gm$covar$age.of.onset)){
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset=="NA" ,]$age.of.onset = ""
+gm$covar[gm$covar$age.of.onset=='' ,]$age.of.onset <- 40
+gm$covar$age.of.onset <- as.numeric(gm$covar$age.of.onset)
+
+geno.pheno.1 <- merge(data.frame(genos.1), gm$covar,  by="row.names", all.x=T, sort=F)
+aov.1 <- stats::aov(age.of.onset ~ group, geno.pheno.1)
+mse.1 <- mean(aov.1$residuals^2) 
+geno.pheno.2 <- merge(data.frame(genos.2), gm$covar,  by="row.names", all.x=T, sort=F)
+aov.2 <- stats::aov(age.of.onset ~ group, geno.pheno.2)
+mse.2 <- mean(aov.2$residuals^2) 
+
+
+## calculating effect (age.of.onset)
+
+age.marker.sum.1 <- list()
+geno.pheno.1a <- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-13)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 <- geno.pheno.1a %>% 
+  group_by(geno.pheno.1a[i])  %>%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.1) <- c("genotypes", paste0(names(geno.pheno.1a[i]),"_age.of.onset"))
+  genotypes <- as.data.frame(c("-","AA","AB"))
+  names(genotypes) <- c("genotypes")
+  age.marker.1 <- merge(genotypes, age.marker.1, by=c("genotypes"), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] <- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all <- Reduce(function(x, y) merge(x, y, by=c("genotypes"),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) <- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t <- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) <- gsub("_age.of.onset","",rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t <- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom <- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+max.1 <- max(age.marker.sum.1.all.t$diffhethom)
+min.1 <- min(age.marker.sum.1.all.t$diffhethom)
+write.csv(age.marker.sum.1.all.t,"data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv")
+
+age.marker.sum.2 <- list()
+geno.pheno.2a <- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-13)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 <- geno.pheno.2a %>% 
+  group_by(geno.pheno.2a[i])  %>%
+  summarize(mean_age.of.onset = mean(as.numeric(age.of.onset), na.rm =T))
+
+
+  names(age.marker.2) <- c("genotypes", paste0(names(geno.pheno.2a[i]),"_age.of.onset"))
+  genotypes <- as.data.frame(c("-","AA","AB"))
+  names(genotypes) <- c("genotypes")
+  age.marker.2 <- merge(genotypes, age.marker.2, by=c("genotypes"), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] <- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all <- Reduce(function(x, y) merge(x, y, by=c("genotypes"),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) <- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t <- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) <- gsub("_age.of.onset","",rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t <- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom <- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+max.2 <- max(age.marker.sum.2.all.t$diffhethom)
+min.2 <- min(age.marker.sum.2.all.t$diffhethom)
+write.csv(age.marker.sum.2.all.t,"data/mean.differences_age.of.onset_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv")
+
+
+max.a <- max(max.1, max.2)
+print(max.a)
+
+min.a <- min(min.1, min.2)
+print(min.a)
+
+mse.a <- (mse.1 + mse.2)/2
+print(mse.a)
+
+
+## calculating effect (group)
+
+age.marker.sum.1 <- list()
+geno.pheno.1a <- geno.pheno.1[-1]
+for(i in 1:(ncol(geno.pheno.1a)-13)){
+#geno.pheno.1$snp=geno.pheno.1[i]
+age.marker.1 <- geno.pheno.1a %>% 
+  group_by(geno.pheno.1a[i])  %>%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.1) <- c("genotypes", paste0(names(geno.pheno.1a[i]),"_group"))
+  genotypes <- as.data.frame(c("-","AA","AB"))
+  names(genotypes) <- c("genotypes")
+  age.marker.1 <- merge(genotypes, age.marker.1, by=c("genotypes"), all=T, sort=T)
+  #print(age.marker.1)
+
+  age.marker.sum.1[[i]] <- as.data.frame(age.marker.1)
+}
+
+age.marker.sum.1.all <- Reduce(function(x, y) merge(x, y, by=c("genotypes"),all=TRUE),age.marker.sum.1)
+rownames(age.marker.sum.1.all) <- age.marker.sum.1.all$genotypes
+age.marker.sum.1.all.t <- t(age.marker.sum.1.all[-1])
+rownames(age.marker.sum.1.all.t) <- gsub("_group","",rownames(age.marker.sum.1.all.t))
+age.marker.sum.1.all.t <- as.data.frame(age.marker.sum.1.all.t)
+age.marker.sum.1.all.t$diffhethom <- age.marker.sum.1.all.t$AB - age.marker.sum.1.all.t$AA
+write.csv(age.marker.sum.1.all.t,"data/mean.differences_group_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv")
+
+age.marker.sum.2 <- list()
+geno.pheno.2a <- geno.pheno.2[-1]
+for(i in 1:(ncol(geno.pheno.2a)-13)){
+#geno.pheno.2$snp=geno.pheno.2[i]
+age.marker.2 <- geno.pheno.2a %>% 
+  group_by(geno.pheno.2a[i])  %>%
+  summarize(mean_group = mean(as.numeric(group), na.rm =T))
+
+
+  names(age.marker.2) <- c("genotypes", paste0(names(geno.pheno.2a[i]),"_group"))
+  genotypes <- as.data.frame(c("-","AA","AB"))
+  names(genotypes) <- c("genotypes")
+  age.marker.2 <- merge(genotypes, age.marker.2, by=c("genotypes"), all=T, sort=T)
+  #print(age.marker.2)
+
+  age.marker.sum.2[[i]] <- as.data.frame(age.marker.2)
+}
+
+age.marker.sum.2.all <- Reduce(function(x, y) merge(x, y, by=c("genotypes"),all=TRUE),age.marker.sum.2)
+rownames(age.marker.sum.2.all) <- age.marker.sum.2.all$genotypes
+age.marker.sum.2.all.t <- t(age.marker.sum.2.all[-1])
+rownames(age.marker.sum.2.all.t) <- gsub("_group","",rownames(age.marker.sum.2.all.t))
+age.marker.sum.2.all.t <- as.data.frame(age.marker.sum.2.all.t)
+age.marker.sum.2.all.t$diffhethom <- age.marker.sum.2.all.t$AB - age.marker.sum.2.all.t$AA
+write.csv(age.marker.sum.2.all.t,"data/mean.differences_group_ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv")
+
+
+max.g <- max(max.1, max.2)
+print(max.g)
+
+min.g <- min(min.1, min.2)
+print(min.g)
+
+mse.g <- (mse.1 + mse.2)/2
+print(mse.g)
+
+```
+
+
+## Power
+
+For powercalc the power is returned, along with the proportion of variance explained.  LOD threshold set to 3 (which is roughly what is seen for suggestive significance)
+
+```{r power, echo=TRUE}
+
+
+## age.of onset
+
+
+powercalc(cross = "bc",n=length(mice.ids),effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+powercalc(cross = "bc",n=length(mice.ids),effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+
+#powercalc("bc",100,31,sigma2=1,sel.frac=1,theta=0)
+
+## group (binary)
+
+powercalc(cross = "bc",n=length(mice.ids),effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+powercalc(cross = "bc",n=length(mice.ids),effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+
+## graph
+
+```
+
+## Sample Size (with 80% power)
+
+For samplesize the sample size (rounded up to the nearest integer) is returned along with the proportion of variance explained. LOD threshold set to 3 (which is roughly what is seen for suggestive significance) and 80% power
+
+```{r sample, echo=TRUE}
+
+
+## age.of onset
+samplesize(cross = "bc",effect=min.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+samplesize(cross = "bc",effect=max.a,sigma2=mse.a,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+
+## group (binary)
+samplesize(cross = "bc",effect=min.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+samplesize(cross = "bc",effect=max.g,sigma2=mse.g,thresh=3,sel.frac=1,theta=0,bio.reps=1)
+
+## graph
+
+```
