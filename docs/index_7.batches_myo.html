@@ -13,7 +13,7 @@
 
 <meta name="date" content="2023-04-17" />
 
-<title>ICI induced autoimmune complications</title>
+<title>Serreze Workflow - 7 batches/6 groups</title>
 
 <script src="site_libs/header-attrs-2.21.2/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -34,6 +34,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -283,7 +285,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">ICI induced autoimmune complications</h1>
+<h1 class="title toc-ignore">Serreze Workflow - 7 batches/6 groups</h1>
 <h4 class="author">Belinda Cornes</h4>
 <h4 class="date">2023-04-17</h4>
 
@@ -291,8 +293,31 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#t1d" id="toc-t1d">T1D</a></li>
-<li><a href="#myocarditis" id="toc-myocarditis">Myocarditis</a></li>
+<li><a href="#neogen-files-at-a-glance-total-samples-366"
+id="toc-neogen-files-at-a-glance-total-samples-366"><strong>Neogen Files
+At A Glance</strong> [Total Samples: 366]</a></li>
+<li><a href="#haplotype-phasing"
+id="toc-haplotype-phasing"><strong>Haplotype Phasing</strong></a></li>
+<li><a href="#experiment-design" id="toc-experiment-design"><strong>1.
+Experiment Design</strong></a></li>
+<li><a href="#genotype-qc" id="toc-genotype-qc"><strong>2. Genotype QC
+</strong></a></li>
+<li><a href="#phenotype-qc" id="toc-phenotype-qc"><strong>3. Phenotype
+QC</strong></a>
+<ul>
+<li><a
+href="#continous-phenotypes-age-of-onset-not-necessary-for-current-analysis"
+id="toc-continous-phenotypes-age-of-onset-not-necessary-for-current-analysis">continous
+phenotypes (age of onset) [not necessary for current analysis]</a></li>
+</ul></li>
+<li><a href="#qtl-analysis" id="toc-qtl-analysis"><strong>4. QTL
+Analysis</strong></a>
+<ul>
+<li><a href="#binary-phenotpe" id="toc-binary-phenotpe"><strong>binary
+phenotpe</strong></a></li>
+</ul></li>
+<li><a href="#power-analysis" id="toc-power-analysis"><strong>5. Power
+Analysis</strong></a></li>
 </ul>
 </div>
 
@@ -358,10 +383,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -1010,631 +1035,237 @@ have uncommitted changes.
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML
-(<code>docs/index.html</code>) files. If you’ve configured a remote Git
-repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
-in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
+<hr>
+</div>
+</div>
+</div>
+<div id="neogen-files-at-a-glance-total-samples-366"
+class="section level2">
+<h2><strong>Neogen Files At A Glance</strong> [Total Samples: 366]</h2>
+<ul>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20220729
+<ul>
+<li><a href="0.1_samples_batch_20220729.html">Total Samples: 48</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20220826
+<ul>
+<li><a href="0.1_samples_batch_20220826.html">Total Samples: 12</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20221006
+<ul>
+<li><a href="0.1_samples_batch_20221006.html">Total Samples: 85</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20221116
+<ul>
+<li><a href="0.1_samples_batch_20221116.html">Total Samples: 72</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230124
+<ul>
+<li><a href="0.1_samples_batch_20230124.html">Total Samples: 36</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230225
+<ul>
+<li><a href="0.1_samples_batch_20230225.html">Total Samples: 95</a></li>
+</ul></li>
+<li>Samples: The_Jackson_Lab_Serreze_MURGIGV01_20230313
+<ul>
+<li><a href="0.1_samples_batch_20230313.html">Total Samples: 18</a>
+[<strong>Note:</strong> Sample <code>D249-PBS-EOI</code>, also appears
+in the <a href="0.1_samples_batch_20230225.html">previous</a> group
+submitted in Feb 2023]</li>
+</ul></li>
+<li><a href="0.1.1_preparing.data_bqc_7.batches_myo.html">Preparing
+files for QC/Haplotype Phasing</a></li>
+</ul>
+</div>
+<div id="haplotype-phasing" class="section level2">
+<h2><strong>Haplotype Phasing</strong></h2>
+<ul>
+<li><a
+href="0.2_haplotype_comparison_bqc_7.batches_myo_minprob.html">minimum
+probability set for estimation of genotypes</a></li>
+</ul>
+</div>
+<div id="experiment-design" class="section level2">
+<h2><strong>1. Experiment Design</strong></h2>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th>
-File
+<th style="text-align:left;">
 </th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
+<th style="text-align:left;">
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+abbreviations for strains:
 </td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/51e3845997bafb634294c1746dc74344f9838d41/analysis/index.Rmd" target="_blank">51e3845</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-04-13
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 1cms; ">
+AB: het; AA: hom
 </td>
 </tr>
 <tr>
-<td>
-html
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+type of cross:
 </td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/4dd59b750642ac38e73c94af9b2058650ac20266/docs/index.html" target="_blank">4dd59b7</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-25
-</td>
-<td>
-myocarditis html files
+<td style="text-align:left;width: 1cms; ">
+Backcross
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+number of mice phenotyped:
 </td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/1da01c0e066ff048d09a68201fa9a532612204a1/analysis/index.Rmd" target="_blank">1da01c0</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-09
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 1cms; ">
+366
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+total number of mice phenotypes:
 </td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/b3853795c951d6f294ff8b842c1012a4eac765d6/analysis/index.Rmd" target="_blank">b385379</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-08
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 1cms; ">
+2 [1 binary/1 quantiative]
 </td>
 </tr>
 <tr>
-<td>
-html
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+phenotypes:
 </td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/409c35e24ef526c6edda04c2f572d66927fa06f4/docs/index.html" target="_blank">409c35e</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-10
-</td>
-<td>
-analysis for 5 batches htmls + figures
+<td style="text-align:left;width: 1cms; ">
+myocarditis status/group [binary] &amp; age of onset [continuous]
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+number of mice:
 </td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/2d6f369c360d10a3e761153630d549f01d8a8d8c/analysis/index.Rmd" target="_blank">2d6f369</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-05
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 1cms; ">
+366
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+number of markers:
 </td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d43c91c3c0e49a9e6581e3b5fe00404444526a0f/analysis/index.Rmd" target="_blank">d43c91c</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-31
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 1cms; ">
+137302
 </td>
 </tr>
 <tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/bc33efa4086948a5373f3b859e84c9250ff20a46/analysis/index.Rmd" target="_blank">bc33efa</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-29
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/a4d66b5837f0d4280e6a6432b7729823280d79eb/docs/index.html" target="_blank">a4d66b5</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/93afca974c725ed32e4334b49d66f0ceb20f1141/analysis/index.Rmd" target="_blank">93afca9</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-15
-</td>
-<td>
-updated binary qtl
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/c9102b8a9edf329ae1d5803488af6f6e32be35cb/docs/index.html" target="_blank">c9102b8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/46d3df11fc7b922ae2056bea76235251014c0201/analysis/index.Rmd" target="_blank">46d3df1</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-no xcovar or kinship
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/ce47ff8e1cfea72de68e02996aa93f5e9384b70b/analysis/index.Rmd" target="_blank">ce47ff8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/analysis/index.Rmd" target="_blank">2d3ed78</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-25
-</td>
-<td>
-removing disproportionate markers
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/docs/index.html" target="_blank">2d3ed78</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-25
-</td>
-<td>
-removing disproportionate markers
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/76519c3eb46183b09fea4d08de6a5a60e5dfac74/docs/index.html" target="_blank">76519c3</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/11af5dab835cd421b1d2e4e419b40f0d10e09014/analysis/index.Rmd" target="_blank">11af5da</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/b41bf38bcdb164fbd82bf722f6ca03864153c65f/docs/index.html" target="_blank">b41bf38</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/a6d6f05b25f6a6412f9f516debc8d8efdd1690c7/analysis/index.Rmd" target="_blank">a6d6f05</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/e1e81a899e6bcbaff391978b6059f10f3354e35f/docs/index.html" target="_blank">e1e81a8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/c62f852efd4f9fc36e604057b884cea7b454d871/analysis/index.Rmd" target="_blank">c62f852</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating geno freq calculation and correcting phenotypes
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/80fa7b166df4e6dd1646fa72d6bf2d0ab20bde69/analysis/index.Rmd" target="_blank">80fa7b1</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/982969fac870b2061949d2d1bc3245a16c15a357/docs/index.html" target="_blank">982969f</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/fc177220882c02dc9e81a8830807393d9b78ad73/analysis/index.Rmd" target="_blank">fc17722</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-QTL Mapping correcting MAF cutoff
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/14f643ad7493837c160bea6ec5606f9c1113e51b/docs/index.html" target="_blank">14f643a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/676cb2e5f4becd33c72b3bff5126ab355461d032/analysis/index.Rmd" target="_blank">676cb2e</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/d3acccec1f041a57c45adac12f48e7b11a6dce77/docs/index.html" target="_blank">d3accce</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/e325cf0326da1086c35abb4dbabc2b68b747e74a/analysis/index.Rmd" target="_blank">e325cf0</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/1218e08b8c97bf94c226de2b9e27e5c1a553443d/docs/index.html" target="_blank">1218e08</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/8427b219958fbe80c98a7966a5a973d0557c9b7c/analysis/index.Rmd" target="_blank">8427b21</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-QTL Mapping after snp qc
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/7b05d4190b4bb1cedc1cf1b5cf0c1becbc09c1f1/docs/index.html" target="_blank">7b05d41</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d199bd46f7ccd3ca5f11371d4fe63dbdd7f2ab93/analysis/index.Rmd" target="_blank">d199bd4</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-QC analysis
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/131508afea94a594c794d7dfbce523100520f63b/analysis/index.Rmd" target="_blank">131508a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:left;width: 5cms; font-weight: bold;">
+covariates:
+</td>
+<td style="text-align:left;width: 1cms; ">
+sex [F: 344; M: 22] ; and others depending on samples used in analysis
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<hr>
-</div>
-</div>
-</div>
-<p>Mapping and identifying genes uniquely contributing to immune check
-point inhibitor (ICI) induced autoimmunity complications</p>
-<div id="t1d" class="section level3">
-<h3>T1D</h3>
+<div id="genotype-qc" class="section level2">
+<h2><strong>2. Genotype QC </strong></h2>
 <ul>
-<li><a href="index_3.batches.html">3 neogen batches - september 2021</a>
+<li>Step 1: <a href="2.1_sample_bqc_7.batches_myo.html">Sample
+QC</a></li>
+<li>Step 2: <a href="2.2.1_snp_qc_7.batches_myo.html">SNP
+QC</a>(removing monomorphic, genotype error &amp; missing markers)</li>
+<li>Step 3: <a
+href="2.4_preparing.data_aqc_7.batches_myo.html">Preparing Files for QTL
+Analysis</a></li>
+<li>Step 4: Identifying additional disproportionate markers within each
+sample set
 <ul>
-<li>some results are also in <a href="index_4.batches.html">4 neogen
-batches</a></li>
-</ul></li>
-<li><a href="index_4.batches.html">4 neogen batches - march
-2022</a></li>
-<li><a href="index_5.batches.html">5 neogen batches - april 2022</a>
-<ul>
-<li>additional runs are included <a
-href="index_5.batches_additional.html">here</a></li>
+<li><a
+href="genotype.frequencies_ici-sick.vs.ici-eoi_freq_7.batches_myo.html"><code>ICI Sick vs ICI EOI</code></a></li>
+<li><a
+href="genotype.frequencies_ici.vs.pbs_freq_7.batches_myo.html"><code>ICI vs PBS</code></a></li>
+<li><a
+href="genotype.frequencies_ici-myo-yes.vs.ici-myo-no_freq_7.batches_myo.html"><code>ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
+<li><a
+href="genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_freq_7.batches_myo.html"><code>PBS Myocarditis Yes vs PBS Myocarditis No</code></a></li>
+<li><a
+href="genotype.frequencies_myo-yes.vs.myo-no_freq_7.batches_myo.html"><code>Myocarditis Yes vs Myocarditis No</code></a></li>
+<li><a
+href="genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.html"><code>Hetero: ICI vs PBS</code></a></li>
+<li><a
+href="genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_freq_7.batches_myo.html"><code>Hetero: ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
 </ul></li>
 </ul>
 </div>
-<div id="myocarditis" class="section level3">
-<h3>Myocarditis</h3>
+<div id="phenotype-qc" class="section level2">
+<h2><strong>3. Phenotype QC</strong></h2>
+<div
+id="continous-phenotypes-age-of-onset-not-necessary-for-current-analysis"
+class="section level3">
+<h3>continous phenotypes (age of onset) [not necessary for current
+analysis]</h3>
 <ul>
-<li><a href="index_4.batches_myo.html">4 neogen batches (3 groups) -
-november 2022</a><br />
-</li>
-<li><a href="index_7.batches_myo.html">7 neogen batches (6 groups) -
-march 2023</a></li>
+<li>Corrected Phenotypes
+<ul>
+<li><a href="3.1_phenotype.qc_corrected_7.batches_myo.html">all
+comparisons</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="qtl-analysis" class="section level2">
+<h2><strong>4. QTL Analysis</strong></h2>
+<div id="binary-phenotpe" class="section level3">
+<h3><strong>binary phenotpe</strong></h3>
+<ol style="list-style-type: decimal">
+<li>removed additional low frequency markers as well as disproportionate
+markers (identified in Step 2.4) within each sample set</li>
+<li>no X covariate (ie. <code>Xcovar</code>); using sex as a
+covariate</li>
+<li>no kinship included as <code>r/qtl2</code> does not allow for the
+inclusion of a kinship matrix in this type of model</li>
+<li>For each model run, permutations (1000) were used for each model to
+obtain genome-wide LOD significance threshold for p &lt; 0.01, p &lt;
+0.05, p &lt; 0.10, respectively, separately for X and automsomes
+(A)</li>
+</ol>
+<ul>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>ICI Sick vs ICI EOI</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>ICI vs PBS</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>PBS Myocarditis Yes vs PBS Myocarditis No</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>Myocarditis Yes vs Myocarditis No</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>Hetero: ICI vs PBS</code></a></li>
+<li><a
+href="4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.html"><code>Hetero: ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
+</ul>
+</div>
+</div>
+<div id="power-analysis" class="section level2">
+<h2><strong>5. Power Analysis</strong></h2>
+<ul>
+<li><a
+href="power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.html"><code>ICI Sick vs ICI EOI</code></a></li>
+<li><a
+href="power.analysis_ici.vs.pbs_7.batches_myo.html"><code>ICI vs PBS</code></a></li>
+<li><a
+href="power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.html"><code>ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
+<li><a
+href="power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.html"><code>PBS Myocarditis Yes vs PBS Myocarditis No</code></a></li>
+<li><a
+href="power.analysis_myo-yes.vs.myo-no_7.batches_myo.html"><code>Myocarditis Yes vs Myocarditis No</code></a></li>
+<li><a
+href="power.analysis_het-ici.vs.het-pbs_7.batches_myo.html"><code>Hetero: ICI vs PBS</code></a></li>
+<li><a
+href="power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.html"><code>Hetero: ICI Myocarditis Yes vs ICI Myocarditis No</code></a></li>
 </ul>
 <br>
 <p>

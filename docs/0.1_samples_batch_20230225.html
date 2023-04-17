@@ -1,0 +1,9138 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-04-13" />
+
+<title>Samples [Batch: MURGIGV01_20230225]</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Samples [Batch: MURGIGV01_20230225]</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-04-13</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#genotype-summary-by-sample"
+id="toc-genotype-summary-by-sample">Genotype Summary by Sample</a></li>
+<li><a href="#gender-summary-by-sample"
+id="toc-gender-summary-by-sample">Gender Summary by Sample</a></li>
+<li><a href="#phenotype-summary-by-sample"
+id="toc-phenotype-summary-by-sample">Phenotype Summary by
+Sample</a></li>
+<li><a href="#all-problematic-samples"
+id="toc-all-problematic-samples">All Problematic Samples</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-13
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.R
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230124.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230225.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230313.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.R
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.R
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_misd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/debugging_comparing_old_Rmd/
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/index_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  data/GM_covar_4.batches_myo.csv
+    Untracked:  data/GM_covar_7.batches_myo.csv
+    Untracked:  data/bad_markers_all_4.batches_myo.RData
+    Untracked:  data/bad_markers_all_7.batches_myo.RData
+    Untracked:  data/e_4.batches_myo.RData
+    Untracked:  data/e_7.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_4.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_7.batches_myo.RData
+    Untracked:  data/errors_ind_4.batches_myo.RData
+    Untracked:  data/errors_ind_7.batches_myo.RData
+    Untracked:  data/genetic_map_4.batches_myo.csv
+    Untracked:  data/genetic_map_7.batches_myo.csv
+    Untracked:  data/genotype_errors_marker_4.batches_myo.RData
+    Untracked:  data/genotype_errors_marker_7.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_4.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_7.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo_mis.RData
+    Untracked:  data/gm_allqc_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_4.batches_myo.RData
+    Untracked:  data/gm_samqc_7.batches_myo.RData
+    Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/gm_serreze.BC366.RData
+    Untracked:  data/gm_serreze_7.batches_myo.RData
+    Untracked:  data/gm_serreze_bc_7.batches_myo.RData
+    Untracked:  data/percent_missing_id_4.batches_myo.RData
+    Untracked:  data/percent_missing_id_7.batches_myo.RData
+    Untracked:  data/percent_missing_marker_4.batches_myo.RData
+    Untracked:  data/percent_missing_marker_7.batches_myo.RData
+    Untracked:  data/pheno_4.batches_myo.csv
+    Untracked:  data/pheno_7.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo.csv
+    Untracked:  data/physical_map_7.batches_myo.csv
+    Untracked:  data/probs_36state_bc_7.batches_myo.rds
+    Untracked:  data/probs_8state_bc_7.batches_myo.rds
+    Untracked:  data/qc_info_bad_sample_4.batches_myo.RData
+    Untracked:  data/qc_info_bad_sample_7.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_4.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo.csv
+    Untracked:  data/serreze_probs_4.batches_myo.rds
+    Untracked:  data/serreze_probs_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo_mis.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo_mis.rds
+    Untracked:  data/summary.cg_4.batches_myo.RData
+    Untracked:  data/summary.cg_7.batches_myo.RData
+    Untracked:  output/Percent_missing_genotype_data_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_7.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_7.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_4.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_7.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_7.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_7.batches_myo.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="genotype-summary-by-sample" class="section level3">
+<h3>Genotype Summary by Sample</h3>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Missing
+</th>
+<th style="text-align:center;">
+AA
+</th>
+<th style="text-align:center;">
+AC
+</th>
+<th style="text-align:center;">
+AG
+</th>
+<th style="text-align:center;">
+AT
+</th>
+<th style="text-align:center;">
+CC
+</th>
+<th style="text-align:center;">
+CG
+</th>
+<th style="text-align:center;">
+GC
+</th>
+<th style="text-align:center;">
+GG
+</th>
+<th style="text-align:center;">
+TA
+</th>
+<th style="text-align:center;">
+TC
+</th>
+<th style="text-align:center;">
+TG
+</th>
+<th style="text-align:center;">
+TT
+</th>
+<th style="text-align:center;">
+Total_Genotyped
+</th>
+<th style="text-align:center;">
+Percent_Genotyped
+</th>
+<th style="text-align:center;">
+MURGIGV01_SNP.Count
+</th>
+<th style="text-align:center;">
+cr
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+D497-PBS-Myo
+</td>
+<td style="text-align:center;">
+5486
+</td>
+<td style="text-align:center;width: 5cms; ">
+30861
+</td>
+<td style="text-align:center;width: 5cms; ">
+1252
+</td>
+<td style="text-align:center;width: 5cms; ">
+5141
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31619
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31990
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5189
+</td>
+<td style="text-align:center;width: 5cms; ">
+1206
+</td>
+<td style="text-align:center;width: 5cms; ">
+30502
+</td>
+<td style="text-align:center;width: 5cms; ">
+137773
+</td>
+<td style="text-align:center;">
+96.17%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961705721804564
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D645-ICI-Myo
+</td>
+<td style="text-align:center;">
+5442
+</td>
+<td style="text-align:center;width: 5cms; ">
+29279
+</td>
+<td style="text-align:center;width: 5cms; ">
+1857
+</td>
+<td style="text-align:center;width: 5cms; ">
+7613
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30186
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30517
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7511
+</td>
+<td style="text-align:center;width: 5cms; ">
+1749
+</td>
+<td style="text-align:center;width: 5cms; ">
+29085
+</td>
+<td style="text-align:center;width: 5cms; ">
+137817
+</td>
+<td style="text-align:center;">
+96.20%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962012857830922
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D764-ICI-Myo
+</td>
+<td style="text-align:center;">
+5790
+</td>
+<td style="text-align:center;width: 5cms; ">
+29334
+</td>
+<td style="text-align:center;width: 5cms; ">
+1729
+</td>
+<td style="text-align:center;width: 5cms; ">
+7291
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30488
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30709
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6970
+</td>
+<td style="text-align:center;width: 5cms; ">
+1640
+</td>
+<td style="text-align:center;width: 5cms; ">
+29283
+</td>
+<td style="text-align:center;width: 5cms; ">
+137469
+</td>
+<td style="text-align:center;">
+95.96%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.959583691077
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1090-ICI-Myo
+</td>
+<td style="text-align:center;">
+6123
+</td>
+<td style="text-align:center;width: 5cms; ">
+30718
+</td>
+<td style="text-align:center;width: 5cms; ">
+1208
+</td>
+<td style="text-align:center;width: 5cms; ">
+4805
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31811
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+32160
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+4754
+</td>
+<td style="text-align:center;width: 5cms; ">
+1139
+</td>
+<td style="text-align:center;width: 5cms; ">
+30518
+</td>
+<td style="text-align:center;width: 5cms; ">
+137136
+</td>
+<td style="text-align:center;">
+95.73%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.95725922978661
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1656-ICI-Myo
+</td>
+<td style="text-align:center;">
+5412
+</td>
+<td style="text-align:center;width: 5cms; ">
+29728
+</td>
+<td style="text-align:center;width: 5cms; ">
+1769
+</td>
+<td style="text-align:center;width: 5cms; ">
+6948
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30538
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30795
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6953
+</td>
+<td style="text-align:center;width: 5cms; ">
+1655
+</td>
+<td style="text-align:center;width: 5cms; ">
+29436
+</td>
+<td style="text-align:center;width: 5cms; ">
+137847
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962222268757984
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7185-PBS-EOI
+</td>
+<td style="text-align:center;">
+5503
+</td>
+<td style="text-align:center;width: 5cms; ">
+30115
+</td>
+<td style="text-align:center;width: 5cms; ">
+1453
+</td>
+<td style="text-align:center;width: 5cms; ">
+6116
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31220
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31472
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5844
+</td>
+<td style="text-align:center;width: 5cms; ">
+1421
+</td>
+<td style="text-align:center;width: 5cms; ">
+30100
+</td>
+<td style="text-align:center;width: 5cms; ">
+137756
+</td>
+<td style="text-align:center;">
+96.16%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961587055612562
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7787-ICI-EOI
+</td>
+<td style="text-align:center;">
+5420
+</td>
+<td style="text-align:center;width: 5cms; ">
+28674
+</td>
+<td style="text-align:center;width: 5cms; ">
+2092
+</td>
+<td style="text-align:center;width: 5cms; ">
+8574
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29595
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+29915
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8509
+</td>
+<td style="text-align:center;width: 5cms; ">
+1969
+</td>
+<td style="text-align:center;width: 5cms; ">
+28496
+</td>
+<td style="text-align:center;width: 5cms; ">
+137839
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962166425844101
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8623-PBS-EOI
+</td>
+<td style="text-align:center;">
+5352
+</td>
+<td style="text-align:center;width: 5cms; ">
+28951
+</td>
+<td style="text-align:center;width: 5cms; ">
+2023
+</td>
+<td style="text-align:center;width: 5cms; ">
+8089
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29880
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30198
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7922
+</td>
+<td style="text-align:center;width: 5cms; ">
+1944
+</td>
+<td style="text-align:center;width: 5cms; ">
+28874
+</td>
+<td style="text-align:center;width: 5cms; ">
+137907
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962641090612108
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D501-ICI-Myo
+</td>
+<td style="text-align:center;">
+5295
+</td>
+<td style="text-align:center;width: 5cms; ">
+29451
+</td>
+<td style="text-align:center;width: 5cms; ">
+1781
+</td>
+<td style="text-align:center;width: 5cms; ">
+7266
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30507
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30798
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7098
+</td>
+<td style="text-align:center;width: 5cms; ">
+1752
+</td>
+<td style="text-align:center;width: 5cms; ">
+29286
+</td>
+<td style="text-align:center;width: 5cms; ">
+137964
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963038971373526
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D647-PBS-EOI
+</td>
+<td style="text-align:center;">
+5665
+</td>
+<td style="text-align:center;width: 5cms; ">
+30143
+</td>
+<td style="text-align:center;width: 5cms; ">
+1432
+</td>
+<td style="text-align:center;width: 5cms; ">
+6133
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31168
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31342
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5945
+</td>
+<td style="text-align:center;width: 5cms; ">
+1435
+</td>
+<td style="text-align:center;width: 5cms; ">
+29979
+</td>
+<td style="text-align:center;width: 5cms; ">
+137594
+</td>
+<td style="text-align:center;">
+96.05%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960456236606426
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D772-PBS-Myo
+</td>
+<td style="text-align:center;">
+5575
+</td>
+<td style="text-align:center;width: 5cms; ">
+30693
+</td>
+<td style="text-align:center;width: 5cms; ">
+1305
+</td>
+<td style="text-align:center;width: 5cms; ">
+5173
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31725
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+32009
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5021
+</td>
+<td style="text-align:center;width: 5cms; ">
+1229
+</td>
+<td style="text-align:center;width: 5cms; ">
+30519
+</td>
+<td style="text-align:center;width: 5cms; ">
+137684
+</td>
+<td style="text-align:center;">
+96.11%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961084469387613
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1100-PBS-Myo
+</td>
+<td style="text-align:center;">
+5728
+</td>
+<td style="text-align:center;width: 5cms; ">
+29010
+</td>
+<td style="text-align:center;width: 5cms; ">
+1867
+</td>
+<td style="text-align:center;width: 5cms; ">
+7645
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30209
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30570
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7553
+</td>
+<td style="text-align:center;width: 5cms; ">
+1786
+</td>
+<td style="text-align:center;width: 5cms; ">
+28872
+</td>
+<td style="text-align:center;width: 5cms; ">
+137531
+</td>
+<td style="text-align:center;">
+96.00%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960016473659596
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1729-PBS-Myo
+</td>
+<td style="text-align:center;">
+5397
+</td>
+<td style="text-align:center;width: 5cms; ">
+31366
+</td>
+<td style="text-align:center;width: 5cms; ">
+1044
+</td>
+<td style="text-align:center;width: 5cms; ">
+4285
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+32257
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+32541
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4279
+</td>
+<td style="text-align:center;width: 5cms; ">
+1003
+</td>
+<td style="text-align:center;width: 5cms; ">
+31074
+</td>
+<td style="text-align:center;width: 5cms; ">
+137862
+</td>
+<td style="text-align:center;">
+96.23%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962326974221515
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7277-PBS-EOI
+</td>
+<td style="text-align:center;">
+5227
+</td>
+<td style="text-align:center;width: 5cms; ">
+29559
+</td>
+<td style="text-align:center;width: 5cms; ">
+1767
+</td>
+<td style="text-align:center;width: 5cms; ">
+7149
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30479
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30845
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7160
+</td>
+<td style="text-align:center;width: 5cms; ">
+1779
+</td>
+<td style="text-align:center;width: 5cms; ">
+29281
+</td>
+<td style="text-align:center;width: 5cms; ">
+138032
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963513636141534
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7796-PBS-EOI
+</td>
+<td style="text-align:center;">
+5404
+</td>
+<td style="text-align:center;width: 5cms; ">
+29693
+</td>
+<td style="text-align:center;width: 5cms; ">
+1686
+</td>
+<td style="text-align:center;width: 5cms; ">
+6974
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30662
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30879
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6872
+</td>
+<td style="text-align:center;width: 5cms; ">
+1666
+</td>
+<td style="text-align:center;width: 5cms; ">
+29393
+</td>
+<td style="text-align:center;width: 5cms; ">
+137855
+</td>
+<td style="text-align:center;">
+96.23%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962278111671867
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8625-PBS-EOI
+</td>
+<td style="text-align:center;">
+5359
+</td>
+<td style="text-align:center;width: 5cms; ">
+30212
+</td>
+<td style="text-align:center;width: 5cms; ">
+1550
+</td>
+<td style="text-align:center;width: 5cms; ">
+6097
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31112
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31422
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5907
+</td>
+<td style="text-align:center;width: 5cms; ">
+1468
+</td>
+<td style="text-align:center;width: 5cms; ">
+30116
+</td>
+<td style="text-align:center;width: 5cms; ">
+137900
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96259222806246
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D533-ICI-Myo
+</td>
+<td style="text-align:center;">
+5252
+</td>
+<td style="text-align:center;width: 5cms; ">
+28429
+</td>
+<td style="text-align:center;width: 5cms; ">
+2210
+</td>
+<td style="text-align:center;width: 5cms; ">
+8953
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+29428
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29740
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8814
+</td>
+<td style="text-align:center;width: 5cms; ">
+2160
+</td>
+<td style="text-align:center;width: 5cms; ">
+28242
+</td>
+<td style="text-align:center;width: 5cms; ">
+138007
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963339127035649
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D652-PBS-Myo
+</td>
+<td style="text-align:center;">
+5300
+</td>
+<td style="text-align:center;width: 5cms; ">
+30424
+</td>
+<td style="text-align:center;width: 5cms; ">
+1373
+</td>
+<td style="text-align:center;width: 5cms; ">
+5821
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31395
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31699
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5628
+</td>
+<td style="text-align:center;width: 5cms; ">
+1296
+</td>
+<td style="text-align:center;width: 5cms; ">
+30303
+</td>
+<td style="text-align:center;width: 5cms; ">
+137959
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963004069552349
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D789-ICI-Myo
+</td>
+<td style="text-align:center;">
+5978
+</td>
+<td style="text-align:center;width: 5cms; ">
+28118
+</td>
+<td style="text-align:center;width: 5cms; ">
+2129
+</td>
+<td style="text-align:center;width: 5cms; ">
+8916
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29524
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+29716
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8737
+</td>
+<td style="text-align:center;width: 5cms; ">
+2136
+</td>
+<td style="text-align:center;width: 5cms; ">
+27987
+</td>
+<td style="text-align:center;width: 5cms; ">
+137281
+</td>
+<td style="text-align:center;">
+95.83%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.958271382600744
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1168-PBS-SICK
+</td>
+<td style="text-align:center;">
+5528
+</td>
+<td style="text-align:center;width: 5cms; ">
+30654
+</td>
+<td style="text-align:center;width: 5cms; ">
+1188
+</td>
+<td style="text-align:center;width: 5cms; ">
+5157
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31867
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32134
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+4953
+</td>
+<td style="text-align:center;width: 5cms; ">
+1222
+</td>
+<td style="text-align:center;width: 5cms; ">
+30536
+</td>
+<td style="text-align:center;width: 5cms; ">
+137731
+</td>
+<td style="text-align:center;">
+96.14%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961412546506677
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D133-PBS-EOI
+</td>
+<td style="text-align:center;">
+5233
+</td>
+<td style="text-align:center;width: 5cms; ">
+29856
+</td>
+<td style="text-align:center;width: 5cms; ">
+1655
+</td>
+<td style="text-align:center;width: 5cms; ">
+6774
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30810
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31074
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6654
+</td>
+<td style="text-align:center;width: 5cms; ">
+1581
+</td>
+<td style="text-align:center;width: 5cms; ">
+29597
+</td>
+<td style="text-align:center;width: 5cms; ">
+138026
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963471753956121
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7278-PBS-EOI
+</td>
+<td style="text-align:center;">
+5260
+</td>
+<td style="text-align:center;width: 5cms; ">
+30258
+</td>
+<td style="text-align:center;width: 5cms; ">
+1518
+</td>
+<td style="text-align:center;width: 5cms; ">
+6187
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31173
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31349
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+6129
+</td>
+<td style="text-align:center;width: 5cms; ">
+1449
+</td>
+<td style="text-align:center;width: 5cms; ">
+29914
+</td>
+<td style="text-align:center;width: 5cms; ">
+137999
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963283284121765
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7800-PBS-EOI
+</td>
+<td style="text-align:center;">
+5327
+</td>
+<td style="text-align:center;width: 5cms; ">
+30226
+</td>
+<td style="text-align:center;width: 5cms; ">
+1515
+</td>
+<td style="text-align:center;width: 5cms; ">
+6047
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+31189
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31526
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5822
+</td>
+<td style="text-align:center;width: 5cms; ">
+1404
+</td>
+<td style="text-align:center;width: 5cms; ">
+30176
+</td>
+<td style="text-align:center;width: 5cms; ">
+137932
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962815599717993
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5296
+</td>
+<td style="text-align:center;width: 5cms; ">
+29084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1930
+</td>
+<td style="text-align:center;width: 5cms; ">
+7939
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30073
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30331
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7777
+</td>
+<td style="text-align:center;width: 5cms; ">
+1865
+</td>
+<td style="text-align:center;width: 5cms; ">
+28936
+</td>
+<td style="text-align:center;width: 5cms; ">
+137963
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963031991009291
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5296
+</td>
+<td style="text-align:center;width: 5cms; ">
+29084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1930
+</td>
+<td style="text-align:center;width: 5cms; ">
+7939
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30073
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30331
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7777
+</td>
+<td style="text-align:center;width: 5cms; ">
+1865
+</td>
+<td style="text-align:center;width: 5cms; ">
+28936
+</td>
+<td style="text-align:center;width: 5cms; ">
+137963
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963255362664824
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5296
+</td>
+<td style="text-align:center;width: 5cms; ">
+29084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1930
+</td>
+<td style="text-align:center;width: 5cms; ">
+7939
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30073
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30331
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7777
+</td>
+<td style="text-align:center;width: 5cms; ">
+1865
+</td>
+<td style="text-align:center;width: 5cms; ">
+28936
+</td>
+<td style="text-align:center;width: 5cms; ">
+137963
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963255362664824
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5296
+</td>
+<td style="text-align:center;width: 5cms; ">
+29084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1930
+</td>
+<td style="text-align:center;width: 5cms; ">
+7939
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30073
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30331
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7777
+</td>
+<td style="text-align:center;width: 5cms; ">
+1865
+</td>
+<td style="text-align:center;width: 5cms; ">
+28936
+</td>
+<td style="text-align:center;width: 5cms; ">
+137963
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963031991009291
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D561-ICI-Myo
+</td>
+<td style="text-align:center;">
+5355
+</td>
+<td style="text-align:center;width: 5cms; ">
+29462
+</td>
+<td style="text-align:center;width: 5cms; ">
+1801
+</td>
+<td style="text-align:center;width: 5cms; ">
+7336
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30281
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30670
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7235
+</td>
+<td style="text-align:center;width: 5cms; ">
+1753
+</td>
+<td style="text-align:center;width: 5cms; ">
+29346
+</td>
+<td style="text-align:center;width: 5cms; ">
+137904
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962620149519402
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D665-PBS-Myo
+</td>
+<td style="text-align:center;">
+5361
+</td>
+<td style="text-align:center;width: 5cms; ">
+30548
+</td>
+<td style="text-align:center;width: 5cms; ">
+1373
+</td>
+<td style="text-align:center;width: 5cms; ">
+5486
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31501
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+31867
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+5518
+</td>
+<td style="text-align:center;width: 5cms; ">
+1332
+</td>
+<td style="text-align:center;width: 5cms; ">
+30262
+</td>
+<td style="text-align:center;width: 5cms; ">
+137898
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962578267333989
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D827-ICI-EOI
+</td>
+<td style="text-align:center;">
+5363
+</td>
+<td style="text-align:center;width: 5cms; ">
+29838
+</td>
+<td style="text-align:center;width: 5cms; ">
+1608
+</td>
+<td style="text-align:center;width: 5cms; ">
+6452
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30944
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31342
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6426
+</td>
+<td style="text-align:center;width: 5cms; ">
+1546
+</td>
+<td style="text-align:center;width: 5cms; ">
+29721
+</td>
+<td style="text-align:center;width: 5cms; ">
+137896
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962564306605519
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1224-ICI-Myo
+</td>
+<td style="text-align:center;">
+5546
+</td>
+<td style="text-align:center;width: 5cms; ">
+28936
+</td>
+<td style="text-align:center;width: 5cms; ">
+1965
+</td>
+<td style="text-align:center;width: 5cms; ">
+7899
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30082
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30376
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7735
+</td>
+<td style="text-align:center;width: 5cms; ">
+1835
+</td>
+<td style="text-align:center;width: 5cms; ">
+28859
+</td>
+<td style="text-align:center;width: 5cms; ">
+137713
+</td>
+<td style="text-align:center;">
+96.13%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961286899950439
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6197-PBS-EOI
+</td>
+<td style="text-align:center;">
+5265
+</td>
+<td style="text-align:center;width: 5cms; ">
+30056
+</td>
+<td style="text-align:center;width: 5cms; ">
+1529
+</td>
+<td style="text-align:center;width: 5cms; ">
+6370
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31067
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31340
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6213
+</td>
+<td style="text-align:center;width: 5cms; ">
+1516
+</td>
+<td style="text-align:center;width: 5cms; ">
+29881
+</td>
+<td style="text-align:center;width: 5cms; ">
+137994
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963248382300588
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7328-PBS-EOI
+</td>
+<td style="text-align:center;">
+5216
+</td>
+<td style="text-align:center;width: 5cms; ">
+29601
+</td>
+<td style="text-align:center;width: 5cms; ">
+1676
+</td>
+<td style="text-align:center;width: 5cms; ">
+7065
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30667
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30963
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6923
+</td>
+<td style="text-align:center;width: 5cms; ">
+1652
+</td>
+<td style="text-align:center;width: 5cms; ">
+29472
+</td>
+<td style="text-align:center;width: 5cms; ">
+138043
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963590420148123
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7801-PBS-EOI
+</td>
+<td style="text-align:center;">
+5306
+</td>
+<td style="text-align:center;width: 5cms; ">
+28349
+</td>
+<td style="text-align:center;width: 5cms; ">
+2193
+</td>
+<td style="text-align:center;width: 5cms; ">
+9049
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+29385
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29698
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8913
+</td>
+<td style="text-align:center;width: 5cms; ">
+2118
+</td>
+<td style="text-align:center;width: 5cms; ">
+28214
+</td>
+<td style="text-align:center;width: 5cms; ">
+137953
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962962187366937
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8609-PBS-EOI
+</td>
+<td style="text-align:center;">
+5367
+</td>
+<td style="text-align:center;width: 5cms; ">
+30396
+</td>
+<td style="text-align:center;width: 5cms; ">
+1442
+</td>
+<td style="text-align:center;width: 5cms; ">
+5879
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31259
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31562
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5720
+</td>
+<td style="text-align:center;width: 5cms; ">
+1387
+</td>
+<td style="text-align:center;width: 5cms; ">
+30227
+</td>
+<td style="text-align:center;width: 5cms; ">
+137892
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962536385148577
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D564-ICI-Myo
+</td>
+<td style="text-align:center;">
+5362
+</td>
+<td style="text-align:center;width: 5cms; ">
+30698
+</td>
+<td style="text-align:center;width: 5cms; ">
+1281
+</td>
+<td style="text-align:center;width: 5cms; ">
+5257
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31682
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32018
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5166
+</td>
+<td style="text-align:center;width: 5cms; ">
+1288
+</td>
+<td style="text-align:center;width: 5cms; ">
+30488
+</td>
+<td style="text-align:center;width: 5cms; ">
+137897
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962571286969754
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D683-ICI-Myo
+</td>
+<td style="text-align:center;">
+5283
+</td>
+<td style="text-align:center;width: 5cms; ">
+28949
+</td>
+<td style="text-align:center;width: 5cms; ">
+1987
+</td>
+<td style="text-align:center;width: 5cms; ">
+8104
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29902
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30298
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7915
+</td>
+<td style="text-align:center;width: 5cms; ">
+1899
+</td>
+<td style="text-align:center;width: 5cms; ">
+28889
+</td>
+<td style="text-align:center;width: 5cms; ">
+137976
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963122735744351
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D828-ICI-Myo
+</td>
+<td style="text-align:center;">
+5391
+</td>
+<td style="text-align:center;width: 5cms; ">
+30412
+</td>
+<td style="text-align:center;width: 5cms; ">
+1450
+</td>
+<td style="text-align:center;width: 5cms; ">
+5605
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31470
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31819
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5466
+</td>
+<td style="text-align:center;width: 5cms; ">
+1322
+</td>
+<td style="text-align:center;width: 5cms; ">
+30307
+</td>
+<td style="text-align:center;width: 5cms; ">
+137868
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962368856406927
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1244-PBS-Myo
+</td>
+<td style="text-align:center;">
+5462
+</td>
+<td style="text-align:center;width: 5cms; ">
+28205
+</td>
+<td style="text-align:center;width: 5cms; ">
+2225
+</td>
+<td style="text-align:center;width: 5cms; ">
+9078
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+29429
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29731
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8870
+</td>
+<td style="text-align:center;width: 5cms; ">
+2135
+</td>
+<td style="text-align:center;width: 5cms; ">
+28093
+</td>
+<td style="text-align:center;width: 5cms; ">
+137797
+</td>
+<td style="text-align:center;">
+96.19%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961873250546214
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6200-PBS-SICK
+</td>
+<td style="text-align:center;">
+5188
+</td>
+<td style="text-align:center;width: 5cms; ">
+29624
+</td>
+<td style="text-align:center;width: 5cms; ">
+1723
+</td>
+<td style="text-align:center;width: 5cms; ">
+7137
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30603
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30876
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7010
+</td>
+<td style="text-align:center;width: 5cms; ">
+1681
+</td>
+<td style="text-align:center;width: 5cms; ">
+29394
+</td>
+<td style="text-align:center;width: 5cms; ">
+138071
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963785870346715
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7334-PBS-EOI
+</td>
+<td style="text-align:center;">
+5190
+</td>
+<td style="text-align:center;width: 5cms; ">
+29006
+</td>
+<td style="text-align:center;width: 5cms; ">
+2025
+</td>
+<td style="text-align:center;width: 5cms; ">
+8133
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+29881
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30212
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+8162
+</td>
+<td style="text-align:center;width: 5cms; ">
+1980
+</td>
+<td style="text-align:center;width: 5cms; ">
+28652
+</td>
+<td style="text-align:center;width: 5cms; ">
+138069
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963771909618244
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7907-PBS-EOI
+</td>
+<td style="text-align:center;">
+5294
+</td>
+<td style="text-align:center;width: 5cms; ">
+29823
+</td>
+<td style="text-align:center;width: 5cms; ">
+1702
+</td>
+<td style="text-align:center;width: 5cms; ">
+6832
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30697
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30967
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6763
+</td>
+<td style="text-align:center;width: 5cms; ">
+1648
+</td>
+<td style="text-align:center;width: 5cms; ">
+29514
+</td>
+<td style="text-align:center;width: 5cms; ">
+137965
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963045951737762
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8610-PBS-EOI
+</td>
+<td style="text-align:center;">
+5358
+</td>
+<td style="text-align:center;width: 5cms; ">
+30086
+</td>
+<td style="text-align:center;width: 5cms; ">
+1556
+</td>
+<td style="text-align:center;width: 5cms; ">
+6428
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30953
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31228
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6315
+</td>
+<td style="text-align:center;width: 5cms; ">
+1522
+</td>
+<td style="text-align:center;width: 5cms; ">
+29794
+</td>
+<td style="text-align:center;width: 5cms; ">
+137901
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962599208426696
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D578-PBS-Myo
+</td>
+<td style="text-align:center;">
+5357
+</td>
+<td style="text-align:center;width: 5cms; ">
+29536
+</td>
+<td style="text-align:center;width: 5cms; ">
+1803
+</td>
+<td style="text-align:center;width: 5cms; ">
+7272
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30455
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30678
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7135
+</td>
+<td style="text-align:center;width: 5cms; ">
+1718
+</td>
+<td style="text-align:center;width: 5cms; ">
+29286
+</td>
+<td style="text-align:center;width: 5cms; ">
+137902
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962606188790931
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D690-ICI-Myo
+</td>
+<td style="text-align:center;">
+5322
+</td>
+<td style="text-align:center;width: 5cms; ">
+30094
+</td>
+<td style="text-align:center;width: 5cms; ">
+1529
+</td>
+<td style="text-align:center;width: 5cms; ">
+6322
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31086
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31334
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6207
+</td>
+<td style="text-align:center;width: 5cms; ">
+1521
+</td>
+<td style="text-align:center;width: 5cms; ">
+29832
+</td>
+<td style="text-align:center;width: 5cms; ">
+137937
+</td>
+<td style="text-align:center;">
+96.29%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96285050153917
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D854-PBS-EOI
+</td>
+<td style="text-align:center;">
+5388
+</td>
+<td style="text-align:center;width: 5cms; ">
+29426
+</td>
+<td style="text-align:center;width: 5cms; ">
+1768
+</td>
+<td style="text-align:center;width: 5cms; ">
+7182
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30607
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30910
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6986
+</td>
+<td style="text-align:center;width: 5cms; ">
+1667
+</td>
+<td style="text-align:center;width: 5cms; ">
+29305
+</td>
+<td style="text-align:center;width: 5cms; ">
+137871
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962389797499633
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1266-PBS-Myo
+</td>
+<td style="text-align:center;">
+5564
+</td>
+<td style="text-align:center;width: 5cms; ">
+30593
+</td>
+<td style="text-align:center;width: 5cms; ">
+1258
+</td>
+<td style="text-align:center;width: 5cms; ">
+5239
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31788
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+32083
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+5158
+</td>
+<td style="text-align:center;width: 5cms; ">
+1219
+</td>
+<td style="text-align:center;width: 5cms; ">
+30346
+</td>
+<td style="text-align:center;width: 5cms; ">
+137695
+</td>
+<td style="text-align:center;">
+96.12%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961161253394202
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6410-PBS-EOI
+</td>
+<td style="text-align:center;">
+5258
+</td>
+<td style="text-align:center;width: 5cms; ">
+29973
+</td>
+<td style="text-align:center;width: 5cms; ">
+1643
+</td>
+<td style="text-align:center;width: 5cms; ">
+6477
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30873
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31243
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6338
+</td>
+<td style="text-align:center;width: 5cms; ">
+1599
+</td>
+<td style="text-align:center;width: 5cms; ">
+29842
+</td>
+<td style="text-align:center;width: 5cms; ">
+138001
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963297244850236
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7337-PBS-EOI
+</td>
+<td style="text-align:center;">
+5179
+</td>
+<td style="text-align:center;width: 5cms; ">
+28512
+</td>
+<td style="text-align:center;width: 5cms; ">
+2225
+</td>
+<td style="text-align:center;width: 5cms; ">
+8963
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29445
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29705
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8710
+</td>
+<td style="text-align:center;width: 5cms; ">
+2098
+</td>
+<td style="text-align:center;width: 5cms; ">
+28403
+</td>
+<td style="text-align:center;width: 5cms; ">
+138080
+</td>
+<td style="text-align:center;">
+96.38%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963848693624833
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7909-PBS-EOI
+</td>
+<td style="text-align:center;">
+5391
+</td>
+<td style="text-align:center;width: 5cms; ">
+29299
+</td>
+<td style="text-align:center;width: 5cms; ">
+1858
+</td>
+<td style="text-align:center;width: 5cms; ">
+7524
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+30217
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30585
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7398
+</td>
+<td style="text-align:center;width: 5cms; ">
+1758
+</td>
+<td style="text-align:center;width: 5cms; ">
+29203
+</td>
+<td style="text-align:center;width: 5cms; ">
+137868
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962368856406927
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8614-PBS-EOI
+</td>
+<td style="text-align:center;">
+5418
+</td>
+<td style="text-align:center;width: 5cms; ">
+30626
+</td>
+<td style="text-align:center;width: 5cms; ">
+1351
+</td>
+<td style="text-align:center;width: 5cms; ">
+5409
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31628
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31853
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5176
+</td>
+<td style="text-align:center;width: 5cms; ">
+1308
+</td>
+<td style="text-align:center;width: 5cms; ">
+30470
+</td>
+<td style="text-align:center;width: 5cms; ">
+137841
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962180386572571
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D589-PBS-Myo
+</td>
+<td style="text-align:center;">
+5380
+</td>
+<td style="text-align:center;width: 5cms; ">
+30012
+</td>
+<td style="text-align:center;width: 5cms; ">
+1571
+</td>
+<td style="text-align:center;width: 5cms; ">
+6390
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30961
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31260
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+6276
+</td>
+<td style="text-align:center;width: 5cms; ">
+1563
+</td>
+<td style="text-align:center;width: 5cms; ">
+29818
+</td>
+<td style="text-align:center;width: 5cms; ">
+137879
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962445640413517
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D695-ICI-Myo
+</td>
+<td style="text-align:center;">
+5384
+</td>
+<td style="text-align:center;width: 5cms; ">
+30305
+</td>
+<td style="text-align:center;width: 5cms; ">
+1487
+</td>
+<td style="text-align:center;width: 5cms; ">
+5925
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31242
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+31563
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5864
+</td>
+<td style="text-align:center;width: 5cms; ">
+1422
+</td>
+<td style="text-align:center;width: 5cms; ">
+30059
+</td>
+<td style="text-align:center;width: 5cms; ">
+137875
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962417718956575
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D877-ICI-EOI
+</td>
+<td style="text-align:center;">
+5777
+</td>
+<td style="text-align:center;width: 5cms; ">
+29314
+</td>
+<td style="text-align:center;width: 5cms; ">
+1728
+</td>
+<td style="text-align:center;width: 5cms; ">
+7165
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30543
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30827
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6981
+</td>
+<td style="text-align:center;width: 5cms; ">
+1685
+</td>
+<td style="text-align:center;width: 5cms; ">
+29219
+</td>
+<td style="text-align:center;width: 5cms; ">
+137482
+</td>
+<td style="text-align:center;">
+95.97%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.959674435812061
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1267-PBS-Myo
+</td>
+<td style="text-align:center;">
+6048
+</td>
+<td style="text-align:center;width: 5cms; ">
+28483
+</td>
+<td style="text-align:center;width: 5cms; ">
+1991
+</td>
+<td style="text-align:center;width: 5cms; ">
+8285
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+29827
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30149
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8124
+</td>
+<td style="text-align:center;width: 5cms; ">
+1956
+</td>
+<td style="text-align:center;width: 5cms; ">
+28378
+</td>
+<td style="text-align:center;width: 5cms; ">
+137211
+</td>
+<td style="text-align:center;">
+95.78%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.957782757104266
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6868-PBS-EOI
+</td>
+<td style="text-align:center;">
+5292
+</td>
+<td style="text-align:center;width: 5cms; ">
+30129
+</td>
+<td style="text-align:center;width: 5cms; ">
+1558
+</td>
+<td style="text-align:center;width: 5cms; ">
+6342
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31017
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31279
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6161
+</td>
+<td style="text-align:center;width: 5cms; ">
+1510
+</td>
+<td style="text-align:center;width: 5cms; ">
+29957
+</td>
+<td style="text-align:center;width: 5cms; ">
+137967
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963059912466232
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7341-PBS-EOI
+</td>
+<td style="text-align:center;">
+5239
+</td>
+<td style="text-align:center;width: 5cms; ">
+28371
+</td>
+<td style="text-align:center;width: 5cms; ">
+2254
+</td>
+<td style="text-align:center;width: 5cms; ">
+9094
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+29336
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29633
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+8963
+</td>
+<td style="text-align:center;width: 5cms; ">
+2102
+</td>
+<td style="text-align:center;width: 5cms; ">
+28234
+</td>
+<td style="text-align:center;width: 5cms; ">
+138020
+</td>
+<td style="text-align:center;">
+96.34%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963429871770709
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7920-PBS-EOI
+</td>
+<td style="text-align:center;">
+5417
+</td>
+<td style="text-align:center;width: 5cms; ">
+30623
+</td>
+<td style="text-align:center;width: 5cms; ">
+1439
+</td>
+<td style="text-align:center;width: 5cms; ">
+5516
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31415
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31750
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5327
+</td>
+<td style="text-align:center;width: 5cms; ">
+1276
+</td>
+<td style="text-align:center;width: 5cms; ">
+30471
+</td>
+<td style="text-align:center;width: 5cms; ">
+137842
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962187366936807
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8618-PBS-EOI
+</td>
+<td style="text-align:center;">
+5383
+</td>
+<td style="text-align:center;width: 5cms; ">
+29334
+</td>
+<td style="text-align:center;width: 5cms; ">
+1853
+</td>
+<td style="text-align:center;width: 5cms; ">
+7470
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30307
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30547
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7404
+</td>
+<td style="text-align:center;width: 5cms; ">
+1837
+</td>
+<td style="text-align:center;width: 5cms; ">
+29111
+</td>
+<td style="text-align:center;width: 5cms; ">
+137876
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962424699320811
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D602-ICI-Myo
+</td>
+<td style="text-align:center;">
+5587
+</td>
+<td style="text-align:center;width: 5cms; ">
+29827
+</td>
+<td style="text-align:center;width: 5cms; ">
+1689
+</td>
+<td style="text-align:center;width: 5cms; ">
+6599
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30682
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31046
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6561
+</td>
+<td style="text-align:center;width: 5cms; ">
+1598
+</td>
+<td style="text-align:center;width: 5cms; ">
+29650
+</td>
+<td style="text-align:center;width: 5cms; ">
+137672
+</td>
+<td style="text-align:center;">
+96.10%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961000705016788
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D706-PBS-Myo
+</td>
+<td style="text-align:center;">
+5362
+</td>
+<td style="text-align:center;width: 5cms; ">
+28988
+</td>
+<td style="text-align:center;width: 5cms; ">
+1985
+</td>
+<td style="text-align:center;width: 5cms; ">
+8139
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29910
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30168
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+8054
+</td>
+<td style="text-align:center;width: 5cms; ">
+1864
+</td>
+<td style="text-align:center;width: 5cms; ">
+28763
+</td>
+<td style="text-align:center;width: 5cms; ">
+137897
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962571286969754
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D884-ICI-Myo
+</td>
+<td style="text-align:center;">
+5498
+</td>
+<td style="text-align:center;width: 5cms; ">
+28775
+</td>
+<td style="text-align:center;width: 5cms; ">
+2046
+</td>
+<td style="text-align:center;width: 5cms; ">
+8228
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+29857
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30196
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8065
+</td>
+<td style="text-align:center;width: 5cms; ">
+1858
+</td>
+<td style="text-align:center;width: 5cms; ">
+28714
+</td>
+<td style="text-align:center;width: 5cms; ">
+137761
+</td>
+<td style="text-align:center;">
+96.16%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961621957433739
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1299-PBS-Myo
+</td>
+<td style="text-align:center;">
+5686
+</td>
+<td style="text-align:center;width: 5cms; ">
+29916
+</td>
+<td style="text-align:center;width: 5cms; ">
+1540
+</td>
+<td style="text-align:center;width: 5cms; ">
+6269
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31052
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31410
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6176
+</td>
+<td style="text-align:center;width: 5cms; ">
+1438
+</td>
+<td style="text-align:center;width: 5cms; ">
+29751
+</td>
+<td style="text-align:center;width: 5cms; ">
+137573
+</td>
+<td style="text-align:center;">
+96.03%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960309648957483
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6869-PBS-EOI
+</td>
+<td style="text-align:center;">
+5249
+</td>
+<td style="text-align:center;width: 5cms; ">
+27946
+</td>
+<td style="text-align:center;width: 5cms; ">
+2430
+</td>
+<td style="text-align:center;width: 5cms; ">
+9822
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+28812
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29152
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+9665
+</td>
+<td style="text-align:center;width: 5cms; ">
+2301
+</td>
+<td style="text-align:center;width: 5cms; ">
+27861
+</td>
+<td style="text-align:center;width: 5cms; ">
+138010
+</td>
+<td style="text-align:center;">
+96.34%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963360068128355
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7349-PBS-SICK
+</td>
+<td style="text-align:center;">
+5268
+</td>
+<td style="text-align:center;width: 5cms; ">
+29555
+</td>
+<td style="text-align:center;width: 5cms; ">
+1804
+</td>
+<td style="text-align:center;width: 5cms; ">
+7208
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30496
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30751
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7042
+</td>
+<td style="text-align:center;width: 5cms; ">
+1748
+</td>
+<td style="text-align:center;width: 5cms; ">
+29371
+</td>
+<td style="text-align:center;width: 5cms; ">
+137991
+</td>
+<td style="text-align:center;">
+96.32%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963227441207882
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7929-PBS-EOI
+</td>
+<td style="text-align:center;">
+5369
+</td>
+<td style="text-align:center;width: 5cms; ">
+29290
+</td>
+<td style="text-align:center;width: 5cms; ">
+1902
+</td>
+<td style="text-align:center;width: 5cms; ">
+7583
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30190
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30495
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7465
+</td>
+<td style="text-align:center;width: 5cms; ">
+1780
+</td>
+<td style="text-align:center;width: 5cms; ">
+29160
+</td>
+<td style="text-align:center;width: 5cms; ">
+137890
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962522424420106
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8620-PBS-EOI
+</td>
+<td style="text-align:center;">
+5314
+</td>
+<td style="text-align:center;width: 5cms; ">
+30549
+</td>
+<td style="text-align:center;width: 5cms; ">
+1344
+</td>
+<td style="text-align:center;width: 5cms; ">
+5591
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31524
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31833
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5448
+</td>
+<td style="text-align:center;width: 5cms; ">
+1283
+</td>
+<td style="text-align:center;width: 5cms; ">
+30357
+</td>
+<td style="text-align:center;width: 5cms; ">
+137945
+</td>
+<td style="text-align:center;">
+96.29%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962906344453054
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D604-ICI-Myo
+</td>
+<td style="text-align:center;">
+5421
+</td>
+<td style="text-align:center;width: 5cms; ">
+28866
+</td>
+<td style="text-align:center;width: 5cms; ">
+1993
+</td>
+<td style="text-align:center;width: 5cms; ">
+8262
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29847
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30119
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8034
+</td>
+<td style="text-align:center;width: 5cms; ">
+1971
+</td>
+<td style="text-align:center;width: 5cms; ">
+28725
+</td>
+<td style="text-align:center;width: 5cms; ">
+137838
+</td>
+<td style="text-align:center;">
+96.22%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962159445479865
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D721-PBS-Myo
+</td>
+<td style="text-align:center;">
+5371
+</td>
+<td style="text-align:center;width: 5cms; ">
+30016
+</td>
+<td style="text-align:center;width: 5cms; ">
+1604
+</td>
+<td style="text-align:center;width: 5cms; ">
+6447
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30932
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31201
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6282
+</td>
+<td style="text-align:center;width: 5cms; ">
+1548
+</td>
+<td style="text-align:center;width: 5cms; ">
+29835
+</td>
+<td style="text-align:center;width: 5cms; ">
+137888
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962508463691635
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D896-ICI-Myo
+</td>
+<td style="text-align:center;">
+5447
+</td>
+<td style="text-align:center;width: 5cms; ">
+28697
+</td>
+<td style="text-align:center;width: 5cms; ">
+2024
+</td>
+<td style="text-align:center;width: 5cms; ">
+8374
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29928
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30140
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8111
+</td>
+<td style="text-align:center;width: 5cms; ">
+1918
+</td>
+<td style="text-align:center;width: 5cms; ">
+28594
+</td>
+<td style="text-align:center;width: 5cms; ">
+137812
+</td>
+<td style="text-align:center;">
+96.20%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961977956009745
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1628-ICI-Myo
+</td>
+<td style="text-align:center;">
+5525
+</td>
+<td style="text-align:center;width: 5cms; ">
+29308
+</td>
+<td style="text-align:center;width: 5cms; ">
+1839
+</td>
+<td style="text-align:center;width: 5cms; ">
+7308
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30474
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30737
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1716
+</td>
+<td style="text-align:center;width: 5cms; ">
+29245
+</td>
+<td style="text-align:center;width: 5cms; ">
+137734
+</td>
+<td style="text-align:center;">
+96.14%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961433487599383
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6870-PBS-EOI
+</td>
+<td style="text-align:center;">
+5335
+</td>
+<td style="text-align:center;width: 5cms; ">
+30862
+</td>
+<td style="text-align:center;width: 5cms; ">
+1263
+</td>
+<td style="text-align:center;width: 5cms; ">
+5081
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31753
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32069
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5106
+</td>
+<td style="text-align:center;width: 5cms; ">
+1218
+</td>
+<td style="text-align:center;width: 5cms; ">
+30553
+</td>
+<td style="text-align:center;width: 5cms; ">
+137924
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96275975680411
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7442-ICI-EOI
+</td>
+<td style="text-align:center;">
+5282
+</td>
+<td style="text-align:center;width: 5cms; ">
+30393
+</td>
+<td style="text-align:center;width: 5cms; ">
+1469
+</td>
+<td style="text-align:center;width: 5cms; ">
+5760
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31347
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31750
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5674
+</td>
+<td style="text-align:center;width: 5cms; ">
+1373
+</td>
+<td style="text-align:center;width: 5cms; ">
+30196
+</td>
+<td style="text-align:center;width: 5cms; ">
+137977
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963129716108587
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8059-PBS-EOI
+</td>
+<td style="text-align:center;">
+5298
+</td>
+<td style="text-align:center;width: 5cms; ">
+29064
+</td>
+<td style="text-align:center;width: 5cms; ">
+1957
+</td>
+<td style="text-align:center;width: 5cms; ">
+8008
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30054
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30305
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7791
+</td>
+<td style="text-align:center;width: 5cms; ">
+1862
+</td>
+<td style="text-align:center;width: 5cms; ">
+28905
+</td>
+<td style="text-align:center;width: 5cms; ">
+137961
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.96301803028082
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8835-PBS-EOI
+</td>
+<td style="text-align:center;">
+5345
+</td>
+<td style="text-align:center;width: 5cms; ">
+31532
+</td>
+<td style="text-align:center;width: 5cms; ">
+1001
+</td>
+<td style="text-align:center;width: 5cms; ">
+3925
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+32458
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+32781
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+3931
+</td>
+<td style="text-align:center;width: 5cms; ">
+1040
+</td>
+<td style="text-align:center;width: 5cms; ">
+31235
+</td>
+<td style="text-align:center;width: 5cms; ">
+137914
+</td>
+<td style="text-align:center;">
+96.27%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962689953161756
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D605-ICI-Myo
+</td>
+<td style="text-align:center;">
+5530
+</td>
+<td style="text-align:center;width: 5cms; ">
+29851
+</td>
+<td style="text-align:center;width: 5cms; ">
+1624
+</td>
+<td style="text-align:center;width: 5cms; ">
+6632
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+30762
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6616
+</td>
+<td style="text-align:center;width: 5cms; ">
+1624
+</td>
+<td style="text-align:center;width: 5cms; ">
+29528
+</td>
+<td style="text-align:center;width: 5cms; ">
+137729
+</td>
+<td style="text-align:center;">
+96.14%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961398585778206
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D722-PBS-Myo
+</td>
+<td style="text-align:center;">
+5452
+</td>
+<td style="text-align:center;width: 5cms; ">
+28786
+</td>
+<td style="text-align:center;width: 5cms; ">
+2011
+</td>
+<td style="text-align:center;width: 5cms; ">
+8389
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+29707
+</td>
+<td style="text-align:center;width: 5cms; ">
+12
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30009
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+8238
+</td>
+<td style="text-align:center;width: 5cms; ">
+1990
+</td>
+<td style="text-align:center;width: 5cms; ">
+28642
+</td>
+<td style="text-align:center;width: 5cms; ">
+137807
+</td>
+<td style="text-align:center;">
+96.19%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961943054188568
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D914-PBS-Myo
+</td>
+<td style="text-align:center;">
+5488
+</td>
+<td style="text-align:center;width: 5cms; ">
+30149
+</td>
+<td style="text-align:center;width: 5cms; ">
+1538
+</td>
+<td style="text-align:center;width: 5cms; ">
+5989
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31168
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31564
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5969
+</td>
+<td style="text-align:center;width: 5cms; ">
+1452
+</td>
+<td style="text-align:center;width: 5cms; ">
+29921
+</td>
+<td style="text-align:center;width: 5cms; ">
+137771
+</td>
+<td style="text-align:center;">
+96.17%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961691761076093
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1630-ICI-Myo
+</td>
+<td style="text-align:center;">
+5554
+</td>
+<td style="text-align:center;width: 5cms; ">
+29067
+</td>
+<td style="text-align:center;width: 5cms; ">
+1936
+</td>
+<td style="text-align:center;width: 5cms; ">
+7718
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30215
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30455
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+7602
+</td>
+<td style="text-align:center;width: 5cms; ">
+1847
+</td>
+<td style="text-align:center;width: 5cms; ">
+28842
+</td>
+<td style="text-align:center;width: 5cms; ">
+137705
+</td>
+<td style="text-align:center;">
+96.12%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961231057036556
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6881-PBS-EOI
+</td>
+<td style="text-align:center;">
+5280
+</td>
+<td style="text-align:center;width: 5cms; ">
+30797
+</td>
+<td style="text-align:center;width: 5cms; ">
+1323
+</td>
+<td style="text-align:center;width: 5cms; ">
+5211
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31671
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32019
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5051
+</td>
+<td style="text-align:center;width: 5cms; ">
+1248
+</td>
+<td style="text-align:center;width: 5cms; ">
+30639
+</td>
+<td style="text-align:center;width: 5cms; ">
+137979
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963143676837057
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7445-ICI-EOI
+</td>
+<td style="text-align:center;">
+5235
+</td>
+<td style="text-align:center;width: 5cms; ">
+29914
+</td>
+<td style="text-align:center;width: 5cms; ">
+1592
+</td>
+<td style="text-align:center;width: 5cms; ">
+6605
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30891
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31191
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6498
+</td>
+<td style="text-align:center;width: 5cms; ">
+1572
+</td>
+<td style="text-align:center;width: 5cms; ">
+29740
+</td>
+<td style="text-align:center;width: 5cms; ">
+138024
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963457793227651
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8065-PBS-EOI
+</td>
+<td style="text-align:center;">
+5291
+</td>
+<td style="text-align:center;width: 5cms; ">
+28901
+</td>
+<td style="text-align:center;width: 5cms; ">
+1985
+</td>
+<td style="text-align:center;width: 5cms; ">
+8262
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29934
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30139
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+8087
+</td>
+<td style="text-align:center;width: 5cms; ">
+1949
+</td>
+<td style="text-align:center;width: 5cms; ">
+28688
+</td>
+<td style="text-align:center;width: 5cms; ">
+137968
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963066892830468
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8838-PBS-EOI
+</td>
+<td style="text-align:center;">
+5326
+</td>
+<td style="text-align:center;width: 5cms; ">
+29871
+</td>
+<td style="text-align:center;width: 5cms; ">
+1672
+</td>
+<td style="text-align:center;width: 5cms; ">
+6665
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30764
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31037
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6677
+</td>
+<td style="text-align:center;width: 5cms; ">
+1635
+</td>
+<td style="text-align:center;width: 5cms; ">
+29595
+</td>
+<td style="text-align:center;width: 5cms; ">
+137933
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962822580082229
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D627-ICI-Myo
+</td>
+<td style="text-align:center;">
+5590
+</td>
+<td style="text-align:center;width: 5cms; ">
+30646
+</td>
+<td style="text-align:center;width: 5cms; ">
+1324
+</td>
+<td style="text-align:center;width: 5cms; ">
+5379
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31497
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+31832
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5354
+</td>
+<td style="text-align:center;width: 5cms; ">
+1280
+</td>
+<td style="text-align:center;width: 5cms; ">
+30342
+</td>
+<td style="text-align:center;width: 5cms; ">
+137669
+</td>
+<td style="text-align:center;">
+96.10%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960979763924082
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D753-ICI-Myo
+</td>
+<td style="text-align:center;">
+5551
+</td>
+<td style="text-align:center;width: 5cms; ">
+30118
+</td>
+<td style="text-align:center;width: 5cms; ">
+1548
+</td>
+<td style="text-align:center;width: 5cms; ">
+6262
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+30856
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31244
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6270
+</td>
+<td style="text-align:center;width: 5cms; ">
+1522
+</td>
+<td style="text-align:center;width: 5cms; ">
+29873
+</td>
+<td style="text-align:center;width: 5cms; ">
+137708
+</td>
+<td style="text-align:center;">
+96.13%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961251998129262
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D920-PBS-Myo
+</td>
+<td style="text-align:center;">
+5856
+</td>
+<td style="text-align:center;width: 5cms; ">
+29240
+</td>
+<td style="text-align:center;width: 5cms; ">
+1798
+</td>
+<td style="text-align:center;width: 5cms; ">
+7151
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+30533
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30855
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+7008
+</td>
+<td style="text-align:center;width: 5cms; ">
+1703
+</td>
+<td style="text-align:center;width: 5cms; ">
+29092
+</td>
+<td style="text-align:center;width: 5cms; ">
+137403
+</td>
+<td style="text-align:center;">
+95.91%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.959122987037464
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1650-ICI-SICK
+</td>
+<td style="text-align:center;">
+5710
+</td>
+<td style="text-align:center;width: 5cms; ">
+29213
+</td>
+<td style="text-align:center;width: 5cms; ">
+1758
+</td>
+<td style="text-align:center;width: 5cms; ">
+7330
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30423
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+30752
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+7213
+</td>
+<td style="text-align:center;width: 5cms; ">
+1768
+</td>
+<td style="text-align:center;width: 5cms; ">
+29068
+</td>
+<td style="text-align:center;width: 5cms; ">
+137549
+</td>
+<td style="text-align:center;">
+96.01%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960142120215833
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7167-ICI-EOI
+</td>
+<td style="text-align:center;">
+5386
+</td>
+<td style="text-align:center;width: 5cms; ">
+30147
+</td>
+<td style="text-align:center;width: 5cms; ">
+1558
+</td>
+<td style="text-align:center;width: 5cms; ">
+6150
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31036
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31390
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6143
+</td>
+<td style="text-align:center;width: 5cms; ">
+1527
+</td>
+<td style="text-align:center;width: 5cms; ">
+29901
+</td>
+<td style="text-align:center;width: 5cms; ">
+137873
+</td>
+<td style="text-align:center;">
+96.24%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962403758228104
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7448-ICI-EOI
+</td>
+<td style="text-align:center;">
+5467
+</td>
+<td style="text-align:center;width: 5cms; ">
+28301
+</td>
+<td style="text-align:center;width: 5cms; ">
+2270
+</td>
+<td style="text-align:center;width: 5cms; ">
+9148
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29207
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+29493
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+9004
+</td>
+<td style="text-align:center;width: 5cms; ">
+2180
+</td>
+<td style="text-align:center;width: 5cms; ">
+28164
+</td>
+<td style="text-align:center;width: 5cms; ">
+137792
+</td>
+<td style="text-align:center;">
+96.18%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961838348725036
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8151-PBS-EOI
+</td>
+<td style="text-align:center;">
+5367
+</td>
+<td style="text-align:center;width: 5cms; ">
+29234
+</td>
+<td style="text-align:center;width: 5cms; ">
+1797
+</td>
+<td style="text-align:center;width: 5cms; ">
+7573
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+30376
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30554
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+7458
+</td>
+<td style="text-align:center;width: 5cms; ">
+1849
+</td>
+<td style="text-align:center;width: 5cms; ">
+29027
+</td>
+<td style="text-align:center;width: 5cms; ">
+137892
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962536385148577
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8842-PBS-EOI
+</td>
+<td style="text-align:center;">
+5423
+</td>
+<td style="text-align:center;width: 5cms; ">
+29891
+</td>
+<td style="text-align:center;width: 5cms; ">
+1638
+</td>
+<td style="text-align:center;width: 5cms; ">
+6501
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30873
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31252
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6416
+</td>
+<td style="text-align:center;width: 5cms; ">
+1495
+</td>
+<td style="text-align:center;width: 5cms; ">
+29751
+</td>
+<td style="text-align:center;width: 5cms; ">
+137836
+</td>
+<td style="text-align:center;">
+96.21%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962145484751394
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D644-ICI-EOI
+</td>
+<td style="text-align:center;">
+5452
+</td>
+<td style="text-align:center;width: 5cms; ">
+29157
+</td>
+<td style="text-align:center;width: 5cms; ">
+1928
+</td>
+<td style="text-align:center;width: 5cms; ">
+7879
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29965
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30333
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7653
+</td>
+<td style="text-align:center;width: 5cms; ">
+1792
+</td>
+<td style="text-align:center;width: 5cms; ">
+29071
+</td>
+<td style="text-align:center;width: 5cms; ">
+137807
+</td>
+<td style="text-align:center;">
+96.19%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961943054188568
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D762-ICI-Myo
+</td>
+<td style="text-align:center;">
+5492
+</td>
+<td style="text-align:center;width: 5cms; ">
+29182
+</td>
+<td style="text-align:center;width: 5cms; ">
+1923
+</td>
+<td style="text-align:center;width: 5cms; ">
+7786
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30049
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30350
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7576
+</td>
+<td style="text-align:center;width: 5cms; ">
+1859
+</td>
+<td style="text-align:center;width: 5cms; ">
+29026
+</td>
+<td style="text-align:center;width: 5cms; ">
+137767
+</td>
+<td style="text-align:center;">
+96.17%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961663839619151
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1063-PBS-Myo
+</td>
+<td style="text-align:center;">
+5726
+</td>
+<td style="text-align:center;width: 5cms; ">
+28166
+</td>
+<td style="text-align:center;width: 5cms; ">
+2233
+</td>
+<td style="text-align:center;width: 5cms; ">
+9162
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+29304
+</td>
+<td style="text-align:center;width: 5cms; ">
+10
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+29569
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+8863
+</td>
+<td style="text-align:center;width: 5cms; ">
+2138
+</td>
+<td style="text-align:center;width: 5cms; ">
+28067
+</td>
+<td style="text-align:center;width: 5cms; ">
+137533
+</td>
+<td style="text-align:center;">
+96.00%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.960030434388066
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1655-ICI-Myo
+</td>
+<td style="text-align:center;">
+5821
+</td>
+<td style="text-align:center;width: 5cms; ">
+30935
+</td>
+<td style="text-align:center;width: 5cms; ">
+1157
+</td>
+<td style="text-align:center;width: 5cms; ">
+4597
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32029
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+32383
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+4583
+</td>
+<td style="text-align:center;width: 5cms; ">
+1086
+</td>
+<td style="text-align:center;width: 5cms; ">
+30654
+</td>
+<td style="text-align:center;width: 5cms; ">
+137438
+</td>
+<td style="text-align:center;">
+95.94%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.959367299785703
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7174-ICI-EOI
+</td>
+<td style="text-align:center;">
+5395
+</td>
+<td style="text-align:center;width: 5cms; ">
+30225
+</td>
+<td style="text-align:center;width: 5cms; ">
+1589
+</td>
+<td style="text-align:center;width: 5cms; ">
+6160
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31038
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31356
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5963
+</td>
+<td style="text-align:center;width: 5cms; ">
+1463
+</td>
+<td style="text-align:center;width: 5cms; ">
+30055
+</td>
+<td style="text-align:center;width: 5cms; ">
+137864
+</td>
+<td style="text-align:center;">
+96.23%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962340934949986
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8600-PBS-EOI
+</td>
+<td style="text-align:center;">
+5523
+</td>
+<td style="text-align:center;width: 5cms; ">
+29963
+</td>
+<td style="text-align:center;width: 5cms; ">
+1579
+</td>
+<td style="text-align:center;width: 5cms; ">
+6642
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+30799
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30978
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6467
+</td>
+<td style="text-align:center;width: 5cms; ">
+1612
+</td>
+<td style="text-align:center;width: 5cms; ">
+29682
+</td>
+<td style="text-align:center;width: 5cms; ">
+137736
+</td>
+<td style="text-align:center;">
+96.14%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961447448327854
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D241-PBS-SICK
+</td>
+<td style="text-align:center;">
+5480
+</td>
+<td style="text-align:center;width: 5cms; ">
+30042
+</td>
+<td style="text-align:center;width: 5cms; ">
+1574
+</td>
+<td style="text-align:center;width: 5cms; ">
+6360
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31022
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31248
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+6057
+</td>
+<td style="text-align:center;width: 5cms; ">
+1481
+</td>
+<td style="text-align:center;width: 5cms; ">
+29980
+</td>
+<td style="text-align:center;width: 5cms; ">
+137779
+</td>
+<td style="text-align:center;">
+96.17%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.961747603989976
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gender-summary-by-sample" class="section level3">
+<h3>Gender Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Provided.Sex
+</th>
+<th style="text-align:center;">
+Inferred.Sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D497-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D645-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D764-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1090-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1656-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7185-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7787-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8623-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D501-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D647-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D772-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1100-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1729-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7277-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7796-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8625-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D533-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D652-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D789-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1168-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D133-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7278-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7800-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D561-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D665-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D827-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1224-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6197-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7328-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7801-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8609-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D564-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D683-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D828-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1244-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6200-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7334-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7907-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8610-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D578-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D690-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D854-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1266-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6410-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7337-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7909-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8614-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D589-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D695-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D877-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1267-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6868-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7341-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7920-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8618-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D602-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D706-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D884-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1299-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6869-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7349-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7929-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8620-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D604-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D721-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D896-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1628-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6870-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7442-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8059-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8835-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D605-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D722-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D914-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1630-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6881-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7445-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8065-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8838-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D627-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D753-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D920-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1650-ICI-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+7167-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+F
+</td>
+<td style="text-align:center;width: 3cm; color: white !important;background-color: blue !important;">
+M
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7448-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8151-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8842-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D644-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D762-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1063-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1655-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7174-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8600-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D241-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="phenotype-summary-by-sample" class="section level3">
+<h3>Phenotype Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+sex_pheno
+</th>
+<th style="text-align:center;">
+Inferred.Sex_pheno
+</th>
+<th style="text-align:center;">
+Myocarditis.Status
+</th>
+<th style="text-align:center;">
+age.of.clinical.phenotype..weeks.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D497-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D645-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D764-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1090-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1656-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7185-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7787-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8623-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D501-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D647-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D772-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1100-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+35.14285714
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1729-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7277-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7796-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8625-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D533-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D652-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D789-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1168-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D133-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7278-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7800-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D561-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D665-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D827-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1224-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6197-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7328-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7801-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8609-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D564-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D683-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D828-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1244-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+31
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6200-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7334-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7907-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8610-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D578-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D690-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D854-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1266-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+31.14285714
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6410-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7337-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7909-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8614-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D589-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D695-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D877-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1267-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6868-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7341-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7920-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8618-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D602-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D706-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D884-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1299-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+3.142857143
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6869-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7349-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7929-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8620-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D604-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D721-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D896-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+31.42857143
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1628-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6870-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7442-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8059-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8835-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D605-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+39.14285714
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D722-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D914-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1630-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13.57142857
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+6881-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7445-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8065-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8838-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D627-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D753-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D920-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1650-ICI-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7167-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+M
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7448-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8151-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8842-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D644-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D762-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1063-PBS-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+34.85714286
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1655-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7174-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+8600-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D241-PBS-SICK
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-problematic-samples" class="section level3">
+<h3>All Problematic Samples</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+no_pheno
+</th>
+<th style="text-align:center;">
+low_call.rate
+</th>
+<th style="text-align:center;">
+different_sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7167-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span
+style="     color: blue !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: blue !important;">XX</span>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur ... 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tibble_3.1.8      readxl_1.4.1      cluster_2.1.4     dplyr_1.0.10     
+ [5] optparse_1.7.3    rhdf5_2.40.0      mclust_6.0.0      tidyr_1.2.1      
+ [9] data.table_1.14.6 knitr_1.41        kableExtra_1.3.4  workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.0   xfun_0.35          bslib_0.4.1        purrr_0.3.5       
+ [5] colorspace_2.0-3   vctrs_0.5.1        generics_0.1.3     getopt_1.20.3     
+ [9] htmltools_0.5.3    viridisLite_0.4.1  yaml_2.3.6         utf8_1.2.2        
+[13] rlang_1.0.6        jquerylib_0.1.4    later_1.3.0        pillar_1.8.1      
+[17] withr_2.5.0        DBI_1.1.3          glue_1.6.2         lifecycle_1.0.3   
+[21] stringr_1.5.0      cellranger_1.1.0   munsell_0.5.0      rvest_1.0.3       
+[25] evaluate_0.18      callr_3.7.3        fastmap_1.1.0      httpuv_1.6.6      
+[29] ps_1.7.2           fansi_1.0.3        Rcpp_1.0.9         promises_1.2.0.1  
+[33] scales_1.2.1       cachem_1.0.6       webshot_0.5.4      jsonlite_1.8.4    
+[37] fs_1.5.2           systemfonts_1.0.4  digest_0.6.30      stringi_1.7.8     
+[41] processx_3.8.0     getPass_0.2-2      rprojroot_2.0.3    rhdf5filters_1.8.0
+[45] cli_3.4.1          tools_4.2.2        magrittr_2.0.3     sass_0.4.4        
+[49] whisker_0.4.1      pkgconfig_2.0.3    ellipsis_0.3.2     xml2_1.3.3        
+[53] assertthat_0.2.1   rmarkdown_2.18     svglite_2.1.0      httr_1.4.4        
+[57] rstudioapi_0.14    Rhdf5lib_1.18.2    R6_2.5.1           git2r_0.30.1      
+[61] compiler_4.2.2    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

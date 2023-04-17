@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-04-13" />
+
+<title>Samples [Batch: MURGIGV01_20230313]</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Samples [Batch: MURGIGV01_20230313]</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-04-13</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#genotype-summary-by-sample"
+id="toc-genotype-summary-by-sample">Genotype Summary by Sample</a></li>
+<li><a href="#gender-summary-by-sample"
+id="toc-gender-summary-by-sample">Gender Summary by Sample</a></li>
+<li><a href="#phenotype-summary-by-sample"
+id="toc-phenotype-summary-by-sample">Phenotype Summary by
+Sample</a></li>
+<li><a href="#all-problematic-samples"
+id="toc-all-problematic-samples">All Problematic Samples</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-13
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.R
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230124.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230225.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230313.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.R
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.R
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_misd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/debugging_comparing_old_Rmd/
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/index_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  data/GM_covar_4.batches_myo.csv
+    Untracked:  data/GM_covar_7.batches_myo.csv
+    Untracked:  data/bad_markers_all_4.batches_myo.RData
+    Untracked:  data/bad_markers_all_7.batches_myo.RData
+    Untracked:  data/e_4.batches_myo.RData
+    Untracked:  data/e_7.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_4.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_7.batches_myo.RData
+    Untracked:  data/errors_ind_4.batches_myo.RData
+    Untracked:  data/errors_ind_7.batches_myo.RData
+    Untracked:  data/genetic_map_4.batches_myo.csv
+    Untracked:  data/genetic_map_7.batches_myo.csv
+    Untracked:  data/genotype_errors_marker_4.batches_myo.RData
+    Untracked:  data/genotype_errors_marker_7.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_4.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_7.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo_mis.RData
+    Untracked:  data/gm_allqc_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_4.batches_myo.RData
+    Untracked:  data/gm_samqc_7.batches_myo.RData
+    Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/gm_serreze.BC366.RData
+    Untracked:  data/gm_serreze_7.batches_myo.RData
+    Untracked:  data/gm_serreze_bc_7.batches_myo.RData
+    Untracked:  data/percent_missing_id_4.batches_myo.RData
+    Untracked:  data/percent_missing_id_7.batches_myo.RData
+    Untracked:  data/percent_missing_marker_4.batches_myo.RData
+    Untracked:  data/percent_missing_marker_7.batches_myo.RData
+    Untracked:  data/pheno_4.batches_myo.csv
+    Untracked:  data/pheno_7.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo.csv
+    Untracked:  data/physical_map_7.batches_myo.csv
+    Untracked:  data/probs_36state_bc_7.batches_myo.rds
+    Untracked:  data/probs_8state_bc_7.batches_myo.rds
+    Untracked:  data/qc_info_bad_sample_4.batches_myo.RData
+    Untracked:  data/qc_info_bad_sample_7.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_4.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo.csv
+    Untracked:  data/serreze_probs_4.batches_myo.rds
+    Untracked:  data/serreze_probs_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo_mis.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo_mis.rds
+    Untracked:  data/summary.cg_4.batches_myo.RData
+    Untracked:  data/summary.cg_7.batches_myo.RData
+    Untracked:  output/Percent_missing_genotype_data_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_7.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_7.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_4.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_7.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_7.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_7.batches_myo.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="genotype-summary-by-sample" class="section level3">
+<h3>Genotype Summary by Sample</h3>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Missing
+</th>
+<th style="text-align:center;">
+AA
+</th>
+<th style="text-align:center;">
+AC
+</th>
+<th style="text-align:center;">
+AG
+</th>
+<th style="text-align:center;">
+AT
+</th>
+<th style="text-align:center;">
+CC
+</th>
+<th style="text-align:center;">
+CG
+</th>
+<th style="text-align:center;">
+GC
+</th>
+<th style="text-align:center;">
+GG
+</th>
+<th style="text-align:center;">
+TA
+</th>
+<th style="text-align:center;">
+TC
+</th>
+<th style="text-align:center;">
+TG
+</th>
+<th style="text-align:center;">
+TT
+</th>
+<th style="text-align:center;">
+Total_Genotyped
+</th>
+<th style="text-align:center;">
+Percent_Genotyped
+</th>
+<th style="text-align:center;">
+MURGIGV01_SNP.Count
+</th>
+<th style="text-align:center;">
+cr
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+D928-ICI-Myo
+</td>
+<td style="text-align:center;">
+5355
+</td>
+<td style="text-align:center;width: 5cms; ">
+29098
+</td>
+<td style="text-align:center;width: 5cms; ">
+1897
+</td>
+<td style="text-align:center;width: 5cms; ">
+7859
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+30153
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30454
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7741
+</td>
+<td style="text-align:center;width: 5cms; ">
+1792
+</td>
+<td style="text-align:center;width: 5cms; ">
+28879
+</td>
+<td style="text-align:center;width: 5cms; ">
+137904
+</td>
+<td style="text-align:center;">
+96.26%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962620149519402
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D266-PBS-EOI
+</td>
+<td style="text-align:center;">
+5327
+</td>
+<td style="text-align:center;width: 5cms; ">
+28883
+</td>
+<td style="text-align:center;width: 5cms; ">
+2078
+</td>
+<td style="text-align:center;width: 5cms; ">
+8242
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+29861
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30129
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+8064
+</td>
+<td style="text-align:center;width: 5cms; ">
+1939
+</td>
+<td style="text-align:center;width: 5cms; ">
+28720
+</td>
+<td style="text-align:center;width: 5cms; ">
+137932
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962815599717993
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D947-PBS-EOI
+</td>
+<td style="text-align:center;">
+5312
+</td>
+<td style="text-align:center;width: 5cms; ">
+29644
+</td>
+<td style="text-align:center;width: 5cms; ">
+1725
+</td>
+<td style="text-align:center;width: 5cms; ">
+6939
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30660
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30960
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+6856
+</td>
+<td style="text-align:center;width: 5cms; ">
+1759
+</td>
+<td style="text-align:center;width: 5cms; ">
+29385
+</td>
+<td style="text-align:center;width: 5cms; ">
+137947
+</td>
+<td style="text-align:center;">
+96.29%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962920305181524
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D268-PBS-EOI
+</td>
+<td style="text-align:center;">
+5321
+</td>
+<td style="text-align:center;width: 5cms; ">
+30037
+</td>
+<td style="text-align:center;width: 5cms; ">
+1520
+</td>
+<td style="text-align:center;width: 5cms; ">
+6316
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31105
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+31409
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6238
+</td>
+<td style="text-align:center;width: 5cms; ">
+1504
+</td>
+<td style="text-align:center;width: 5cms; ">
+29789
+</td>
+<td style="text-align:center;width: 5cms; ">
+137938
+</td>
+<td style="text-align:center;">
+96.29%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962857481903406
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D948-PBS-EOI
+</td>
+<td style="text-align:center;">
+5293
+</td>
+<td style="text-align:center;width: 5cms; ">
+30376
+</td>
+<td style="text-align:center;width: 5cms; ">
+1443
+</td>
+<td style="text-align:center;width: 5cms; ">
+5815
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31312
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31702
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5744
+</td>
+<td style="text-align:center;width: 5cms; ">
+1397
+</td>
+<td style="text-align:center;width: 5cms; ">
+30164
+</td>
+<td style="text-align:center;width: 5cms; ">
+137966
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963052932101997
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D271-PBS-EOI
+</td>
+<td style="text-align:center;">
+5256
+</td>
+<td style="text-align:center;width: 5cms; ">
+28019
+</td>
+<td style="text-align:center;width: 5cms; ">
+2301
+</td>
+<td style="text-align:center;width: 5cms; ">
+9672
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+29157
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+29314
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+9325
+</td>
+<td style="text-align:center;width: 5cms; ">
+2248
+</td>
+<td style="text-align:center;width: 5cms; ">
+27943
+</td>
+<td style="text-align:center;width: 5cms; ">
+138003
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963311205578707
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1706-ICI-Myo
+</td>
+<td style="text-align:center;">
+5290
+</td>
+<td style="text-align:center;width: 5cms; ">
+30287
+</td>
+<td style="text-align:center;width: 5cms; ">
+1417
+</td>
+<td style="text-align:center;width: 5cms; ">
+5824
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31406
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31720
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5721
+</td>
+<td style="text-align:center;width: 5cms; ">
+1447
+</td>
+<td style="text-align:center;width: 5cms; ">
+30130
+</td>
+<td style="text-align:center;width: 5cms; ">
+137969
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963073873194703
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D307-ICI-EOI
+</td>
+<td style="text-align:center;">
+5282
+</td>
+<td style="text-align:center;width: 5cms; ">
+29700
+</td>
+<td style="text-align:center;width: 5cms; ">
+1702
+</td>
+<td style="text-align:center;width: 5cms; ">
+6816
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+30733
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31091
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6694
+</td>
+<td style="text-align:center;width: 5cms; ">
+1599
+</td>
+<td style="text-align:center;width: 5cms; ">
+29611
+</td>
+<td style="text-align:center;width: 5cms; ">
+137977
+</td>
+<td style="text-align:center;">
+96.31%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963129716108587
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1708-ICI-Myo
+</td>
+<td style="text-align:center;">
+5245
+</td>
+<td style="text-align:center;width: 5cms; ">
+30442
+</td>
+<td style="text-align:center;width: 5cms; ">
+1400
+</td>
+<td style="text-align:center;width: 5cms; ">
+5737
+</td>
+<td style="text-align:center;width: 5cms; ">
+8
+</td>
+<td style="text-align:center;width: 5cms; ">
+31452
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31734
+</td>
+<td style="text-align:center;width: 5cms; ">
+0
+</td>
+<td style="text-align:center;width: 5cms; ">
+5566
+</td>
+<td style="text-align:center;width: 5cms; ">
+1361
+</td>
+<td style="text-align:center;width: 5cms; ">
+30304
+</td>
+<td style="text-align:center;width: 5cms; ">
+138014
+</td>
+<td style="text-align:center;">
+96.34%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963387989585297
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D308-ICI-EOI
+</td>
+<td style="text-align:center;">
+5263
+</td>
+<td style="text-align:center;width: 5cms; ">
+30105
+</td>
+<td style="text-align:center;width: 5cms; ">
+1568
+</td>
+<td style="text-align:center;width: 5cms; ">
+6195
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+31030
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31430
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+6218
+</td>
+<td style="text-align:center;width: 5cms; ">
+1490
+</td>
+<td style="text-align:center;width: 5cms; ">
+29942
+</td>
+<td style="text-align:center;width: 5cms; ">
+137996
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963262343029059
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1737-ICI-Myo
+</td>
+<td style="text-align:center;">
+5233
+</td>
+<td style="text-align:center;width: 5cms; ">
+30084
+</td>
+<td style="text-align:center;width: 5cms; ">
+1552
+</td>
+<td style="text-align:center;width: 5cms; ">
+6305
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31050
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+31393
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+6262
+</td>
+<td style="text-align:center;width: 5cms; ">
+1462
+</td>
+<td style="text-align:center;width: 5cms; ">
+29887
+</td>
+<td style="text-align:center;width: 5cms; ">
+138026
+</td>
+<td style="text-align:center;">
+96.35%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963471753956121
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D322-PBS-EOI
+</td>
+<td style="text-align:center;">
+5217
+</td>
+<td style="text-align:center;width: 5cms; ">
+29406
+</td>
+<td style="text-align:center;width: 5cms; ">
+1750
+</td>
+<td style="text-align:center;width: 5cms; ">
+7424
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30458
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30733
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+7286
+</td>
+<td style="text-align:center;width: 5cms; ">
+1720
+</td>
+<td style="text-align:center;width: 5cms; ">
+29246
+</td>
+<td style="text-align:center;width: 5cms; ">
+138042
+</td>
+<td style="text-align:center;">
+96.36%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963583439783888
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1731-ICI-Myo
+</td>
+<td style="text-align:center;">
+5338
+</td>
+<td style="text-align:center;width: 5cms; ">
+30217
+</td>
+<td style="text-align:center;width: 5cms; ">
+1505
+</td>
+<td style="text-align:center;width: 5cms; ">
+6000
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31143
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31549
+</td>
+<td style="text-align:center;width: 5cms; ">
+2
+</td>
+<td style="text-align:center;width: 5cms; ">
+5968
+</td>
+<td style="text-align:center;width: 5cms; ">
+1491
+</td>
+<td style="text-align:center;width: 5cms; ">
+30028
+</td>
+<td style="text-align:center;width: 5cms; ">
+137921
+</td>
+<td style="text-align:center;">
+96.27%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962738815711404
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1739-ICI-Myo
+</td>
+<td style="text-align:center;">
+5376
+</td>
+<td style="text-align:center;width: 5cms; ">
+31119
+</td>
+<td style="text-align:center;width: 5cms; ">
+1123
+</td>
+<td style="text-align:center;width: 5cms; ">
+4567
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+32071
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+32416
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+4533
+</td>
+<td style="text-align:center;width: 5cms; ">
+1071
+</td>
+<td style="text-align:center;width: 5cms; ">
+30969
+</td>
+<td style="text-align:center;width: 5cms; ">
+137883
+</td>
+<td style="text-align:center;">
+96.25%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962473561870458
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1771-ICI-Myo
+</td>
+<td style="text-align:center;">
+5329
+</td>
+<td style="text-align:center;width: 5cms; ">
+29744
+</td>
+<td style="text-align:center;width: 5cms; ">
+1668
+</td>
+<td style="text-align:center;width: 5cms; ">
+6679
+</td>
+<td style="text-align:center;width: 5cms; ">
+6
+</td>
+<td style="text-align:center;width: 5cms; ">
+30844
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+31221
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+6581
+</td>
+<td style="text-align:center;width: 5cms; ">
+1536
+</td>
+<td style="text-align:center;width: 5cms; ">
+29638
+</td>
+<td style="text-align:center;width: 5cms; ">
+137930
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962801638989522
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D1774-ICI-Myo
+</td>
+<td style="text-align:center;">
+5330
+</td>
+<td style="text-align:center;width: 5cms; ">
+30321
+</td>
+<td style="text-align:center;width: 5cms; ">
+1403
+</td>
+<td style="text-align:center;width: 5cms; ">
+5918
+</td>
+<td style="text-align:center;width: 5cms; ">
+7
+</td>
+<td style="text-align:center;width: 5cms; ">
+31382
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31596
+</td>
+<td style="text-align:center;width: 5cms; ">
+1
+</td>
+<td style="text-align:center;width: 5cms; ">
+5774
+</td>
+<td style="text-align:center;width: 5cms; ">
+1434
+</td>
+<td style="text-align:center;width: 5cms; ">
+30085
+</td>
+<td style="text-align:center;width: 5cms; ">
+137929
+</td>
+<td style="text-align:center;">
+96.28%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.962794658625287
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7451-ICI-EOI
+</td>
+<td style="text-align:center;">
+5299
+</td>
+<td style="text-align:center;width: 5cms; ">
+30207
+</td>
+<td style="text-align:center;width: 5cms; ">
+1587
+</td>
+<td style="text-align:center;width: 5cms; ">
+6126
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+31139
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+5
+</td>
+<td style="text-align:center;width: 5cms; ">
+31450
+</td>
+<td style="text-align:center;width: 5cms; ">
+3
+</td>
+<td style="text-align:center;width: 5cms; ">
+5934
+</td>
+<td style="text-align:center;width: 5cms; ">
+1453
+</td>
+<td style="text-align:center;width: 5cms; ">
+30049
+</td>
+<td style="text-align:center;width: 5cms; ">
+137960
+</td>
+<td style="text-align:center;">
+96.30%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963011049916585
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5264
+</td>
+<td style="text-align:center;width: 5cms; ">
+29060
+</td>
+<td style="text-align:center;width: 5cms; ">
+1924
+</td>
+<td style="text-align:center;width: 5cms; ">
+7934
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30101
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30367
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7782
+</td>
+<td style="text-align:center;width: 5cms; ">
+1862
+</td>
+<td style="text-align:center;width: 5cms; ">
+28937
+</td>
+<td style="text-align:center;width: 5cms; ">
+137995
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963031991009291
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5264
+</td>
+<td style="text-align:center;width: 5cms; ">
+29060
+</td>
+<td style="text-align:center;width: 5cms; ">
+1924
+</td>
+<td style="text-align:center;width: 5cms; ">
+7934
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30101
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30367
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7782
+</td>
+<td style="text-align:center;width: 5cms; ">
+1862
+</td>
+<td style="text-align:center;width: 5cms; ">
+28937
+</td>
+<td style="text-align:center;width: 5cms; ">
+137995
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963255362664824
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5264
+</td>
+<td style="text-align:center;width: 5cms; ">
+29060
+</td>
+<td style="text-align:center;width: 5cms; ">
+1924
+</td>
+<td style="text-align:center;width: 5cms; ">
+7934
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30101
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30367
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7782
+</td>
+<td style="text-align:center;width: 5cms; ">
+1862
+</td>
+<td style="text-align:center;width: 5cms; ">
+28937
+</td>
+<td style="text-align:center;width: 5cms; ">
+137995
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963255362664824
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;">
+5264
+</td>
+<td style="text-align:center;width: 5cms; ">
+29060
+</td>
+<td style="text-align:center;width: 5cms; ">
+1924
+</td>
+<td style="text-align:center;width: 5cms; ">
+7934
+</td>
+<td style="text-align:center;width: 5cms; ">
+9
+</td>
+<td style="text-align:center;width: 5cms; ">
+30101
+</td>
+<td style="text-align:center;width: 5cms; ">
+11
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+30367
+</td>
+<td style="text-align:center;width: 5cms; ">
+4
+</td>
+<td style="text-align:center;width: 5cms; ">
+7782
+</td>
+<td style="text-align:center;width: 5cms; ">
+1862
+</td>
+<td style="text-align:center;width: 5cms; ">
+28937
+</td>
+<td style="text-align:center;width: 5cms; ">
+137995
+</td>
+<td style="text-align:center;">
+96.33%
+</td>
+<td style="text-align:center;">
+143259
+</td>
+<td style="text-align:center;">
+0.963031991009291
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gender-summary-by-sample" class="section level3">
+<h3>Gender Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+Provided.Sex
+</th>
+<th style="text-align:center;">
+Inferred.Sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D928-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D266-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D947-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D268-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D948-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D271-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1706-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D307-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1708-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D308-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1737-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D322-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1731-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1739-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1771-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1774-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7451-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="phenotype-summary-by-sample" class="section level3">
+<h3>Phenotype Summary by Sample</h3>
+<table class="table table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+sex_pheno
+</th>
+<th style="text-align:center;">
+Inferred.Sex_pheno
+</th>
+<th style="text-align:center;">
+Myocarditis.Status
+</th>
+<th style="text-align:center;">
+age.of.clinical.phenotype..weeks.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D928-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D266-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D947-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D268-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D948-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D271-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1706-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D307-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1708-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D308-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1737-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D322-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1731-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1739-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1771-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D1774-ICI-Myo
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+YES
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+7451-ICI-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 3cm; ">
+D249-PBS-EOI
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;width: 3cm; ">
+F
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:center;">
+–
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-problematic-samples" class="section level3">
+<h3>All Problematic Samples</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Neogen_Sample_ID
+</th>
+<th style="text-align:center;">
+no_pheno
+</th>
+<th style="text-align:center;">
+low_call.rate
+</th>
+<th style="text-align:center;">
+different_sex
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur ... 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tibble_3.1.8      readxl_1.4.1      cluster_2.1.4     dplyr_1.0.10     
+ [5] optparse_1.7.3    rhdf5_2.40.0      mclust_6.0.0      tidyr_1.2.1      
+ [9] data.table_1.14.6 knitr_1.41        kableExtra_1.3.4  workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.0   xfun_0.35          bslib_0.4.1        purrr_0.3.5       
+ [5] colorspace_2.0-3   vctrs_0.5.1        generics_0.1.3     getopt_1.20.3     
+ [9] htmltools_0.5.3    viridisLite_0.4.1  yaml_2.3.6         utf8_1.2.2        
+[13] rlang_1.0.6        jquerylib_0.1.4    later_1.3.0        pillar_1.8.1      
+[17] withr_2.5.0        DBI_1.1.3          glue_1.6.2         lifecycle_1.0.3   
+[21] stringr_1.5.0      cellranger_1.1.0   munsell_0.5.0      rvest_1.0.3       
+[25] evaluate_0.18      callr_3.7.3        fastmap_1.1.0      httpuv_1.6.6      
+[29] ps_1.7.2           fansi_1.0.3        Rcpp_1.0.9         promises_1.2.0.1  
+[33] scales_1.2.1       cachem_1.0.6       webshot_0.5.4      jsonlite_1.8.4    
+[37] fs_1.5.2           systemfonts_1.0.4  digest_0.6.30      stringi_1.7.8     
+[41] processx_3.8.0     getPass_0.2-2      rprojroot_2.0.3    rhdf5filters_1.8.0
+[45] cli_3.4.1          tools_4.2.2        magrittr_2.0.3     sass_0.4.4        
+[49] whisker_0.4.1      pkgconfig_2.0.3    ellipsis_0.3.2     xml2_1.3.3        
+[53] assertthat_0.2.1   rmarkdown_2.18     svglite_2.1.0      httr_1.4.4        
+[57] rstudioapi_0.14    Rhdf5lib_1.18.2    R6_2.5.1           git2r_0.30.1      
+[61] compiler_4.2.2    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

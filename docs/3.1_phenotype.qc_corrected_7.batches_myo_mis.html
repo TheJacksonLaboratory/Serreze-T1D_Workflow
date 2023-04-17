@@ -1,0 +1,2476 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-04-13" />
+
+<title>Phenotype QC [Continious Phenotype - Age of Onset]</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Phenotype QC [Continious Phenotype - Age of
+Onset]</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-04-13</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#loading-data" id="toc-loading-data">Loading Data</a></li>
+<li><a href="#ici-sick-vs-ici-eoi" id="toc-ici-sick-vs-ici-eoi">ICI Sick
+vs ICI EOI</a></li>
+<li><a href="#ici-vs-pbs" id="toc-ici-vs-pbs">ICI vs PBS</a></li>
+<li><a href="#ici-myocarditis-yes-vs-ici-myocarditis-no"
+id="toc-ici-myocarditis-yes-vs-ici-myocarditis-no">ICI Myocarditis Yes
+vs ICI Myocarditis No</a></li>
+<li><a href="#pbs-myocarditis-yes-vs-pbs-myocarditis-no"
+id="toc-pbs-myocarditis-yes-vs-pbs-myocarditis-no">PBS Myocarditis Yes
+vs PBS Myocarditis No</a></li>
+<li><a href="#myocarditis-yes-vs-myocarditis-no"
+id="toc-myocarditis-yes-vs-myocarditis-no">Myocarditis Yes vs
+Myocarditis No</a></li>
+<li><a href="#hetero-ici-vs-pbs" id="toc-hetero-ici-vs-pbs">Hetero: ICI
+vs PBS</a></li>
+<li><a href="#hetero-ici-myocarditis-yes-vs-ici-myocarditis-no"
+id="toc-hetero-ici-myocarditis-yes-vs-ici-myocarditis-no">Hetero: ICI
+Myocarditis Yes vs ICI Myocarditis No</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-13
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.R
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230124.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230225.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230313.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.R
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.R
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_misd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/debugging_comparing_old_Rmd/
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/index_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  data/GM_covar_4.batches_myo.csv
+    Untracked:  data/GM_covar_7.batches_myo.csv
+    Untracked:  data/bad_markers_all_4.batches_myo.RData
+    Untracked:  data/bad_markers_all_7.batches_myo.RData
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/e_4.batches_myo.RData
+    Untracked:  data/e_7.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_4.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_7.batches_myo.RData
+    Untracked:  data/errors_ind_4.batches_myo.RData
+    Untracked:  data/errors_ind_7.batches_myo.RData
+    Untracked:  data/genetic_map_4.batches_myo.csv
+    Untracked:  data/genetic_map_7.batches_myo.csv
+    Untracked:  data/genotype_errors_marker_4.batches_myo.RData
+    Untracked:  data/genotype_errors_marker_7.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_4.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_7.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo_mis.RData
+    Untracked:  data/gm_allqc_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_4.batches_myo.RData
+    Untracked:  data/gm_samqc_7.batches_myo.RData
+    Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/gm_serreze.BC366.RData
+    Untracked:  data/gm_serreze_7.batches_myo.RData
+    Untracked:  data/gm_serreze_bc_7.batches_myo.RData
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici-sick.vs.ici-eoi_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/ici.vs.pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/percent_missing_id_4.batches_myo.RData
+    Untracked:  data/percent_missing_id_7.batches_myo.RData
+    Untracked:  data/percent_missing_marker_4.batches_myo.RData
+    Untracked:  data/percent_missing_marker_7.batches_myo.RData
+    Untracked:  data/pheno_4.batches_myo.csv
+    Untracked:  data/pheno_7.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo.csv
+    Untracked:  data/physical_map_7.batches_myo.csv
+    Untracked:  data/probs_36state_bc_7.batches_myo.rds
+    Untracked:  data/probs_8state_bc_7.batches_myo.rds
+    Untracked:  data/qc_info_bad_sample_4.batches_myo.RData
+    Untracked:  data/qc_info_bad_sample_7.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_4.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo_orig.id.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo_orig.id.csv
+    Untracked:  data/serreze_probs_4.batches_myo.rds
+    Untracked:  data/serreze_probs_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo_mis.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo_mis.rds
+    Untracked:  data/summary.cg_4.batches_myo.RData
+    Untracked:  data/summary.cg_7.batches_myo.RData
+    Untracked:  output/Percent_missing_genotype_data_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_7.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_7.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_4.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_7.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_7.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_7.batches_myo.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="loading-data" class="section level3">
+<h3>Loading Data</h3>
+<pre class="r"><code>load(&quot;data/gm_allqc_7.batches_myo_mis.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               357
+No. genotyped individuals       357
+No. phenotyped individuals      357
+No. with both geno &amp; pheno      357
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr &lt;- readRDS(&quot;data/serreze_probs_allqc_7.batches_myo_mis.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)</code></pre>
+</div>
+<div id="ici-sick-vs-ici-eoi" class="section level3">
+<h3>ICI Sick vs ICI EOI</h3>
+<ul>
+<li>Myocarditis Status: Yes</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Drug Treatment(s): ICI</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score, Age of Clinical Phenotype – if Null,
+either use 40 age at which surviving mice were end of incidence without
+clinical symptoms )</li>
+</ul>
+<pre class="r"><code>##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HOM&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+133 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+133 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI 
+133 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  26  107 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+mice.ids.original &lt;- as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7])
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               133
+No. genotyped individuals       133
+No. phenotyped individuals      133
+No. with both geno &amp; pheno      133
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$ici.sick_vs_ici.eoi &lt;- ifelse(gm$covar$&quot;clinical pheno&quot; == &quot;EOI&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution11-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici.sick_vs_ici.eoi&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution11-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution12-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici.sick_vs_ici.eoi&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution12-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+<p>That is, those that have a grey square were removed for that
+particular phenotype in the QTL mapping.</p>
+</div>
+<div id="ici-vs-pbs" class="section level3">
+<h3>ICI vs PBS</h3>
+<ul>
+<li>Myocarditis Status: Yes</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Drug Treatment(s): ICI, PBS</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score, Age of Clinical Phenotype – if Null,
+use 40 age at which surviving mice were end of incidence without
+clinical symptoms)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HOM&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot; | miceinfo$&quot;Drug Treatment&quot; == &quot;PBS&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+212 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+212 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+133  79 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  74  138 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               212
+No. genotyped individuals       212
+No. phenotyped individuals      212
+No. with both geno &amp; pheno      212
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$ici_vs_pbs &lt;- ifelse(gm$covar$&quot;Drug Treatment&quot; == &quot;PBS&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+#if(0 %in% unique(gm$covar$age.of.onset)){
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+#}
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution21-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici_vs_pbs&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution21-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution22-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici_vs_pbs&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution22-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_ici.vs.pbs_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+</div>
+<div id="ici-myocarditis-yes-vs-ici-myocarditis-no"
+class="section level3">
+<h3>ICI Myocarditis Yes vs ICI Myocarditis No</h3>
+<ul>
+<li>Myocarditis Status: Yes, No</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Drug Treatment(s): ICI</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot; | gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HOM&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 12 133 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+145 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI 
+145 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  31  114 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               145
+No. genotyped individuals       145
+No. phenotyped individuals      145
+No. with both geno &amp; pheno      145
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$ici.myo.yes_vs_ici.myo.no &lt;- ifelse(gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution31-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici.myo.yes_vs_ici.myo.no&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution31-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution32-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;ici.myo.yes_vs_ici.myo.no&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution32-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+</div>
+<div id="pbs-myocarditis-yes-vs-pbs-myocarditis-no"
+class="section level3">
+<h3>PBS Myocarditis Yes vs PBS Myocarditis No</h3>
+<ul>
+<li>Myocarditis Status: Yes, No</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Drug Treatment(s): PBS</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot; | gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HOM&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;PBS&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 17  79 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+ 96 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+PBS 
+ 96 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  64   32 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals                96
+No. genotyped individuals        96
+No. phenotyped individuals       96
+No. with both geno &amp; pheno       96
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$pbs.myo.yes_vs_pbs.myo.no &lt;- ifelse(gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution41-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;pbs.myo.yes_vs_pbs.myo.no&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution41-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution24-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;pbs.myo.yes_vs_pbs.myo.no&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution24-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+The_Jackson_Lab_Serreze_MURGIGV01_20221006_6872-PBS-Myo_D11
+</td>
+<td style="text-align:center;">
+<span
+style="     color: gray !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: gray !important;">XX</span>
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+The_Jackson_Lab_Serreze_MURGIGV01_20221006_D993-PBS-Myo_F1
+</td>
+<td style="text-align:center;">
+<span
+style="     color: gray !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: gray !important;">XX</span>
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+The_Jackson_Lab_Serreze_MURGIGV01_20230225_D1168-PBS-SICK_D3
+</td>
+<td style="text-align:center;">
+<span
+style="     color: gray !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: gray !important;">XX</span>
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+The_Jackson_Lab_Serreze_MURGIGV01_20230225_D1299-PBS-Myo_D8
+</td>
+<td style="text-align:center;">
+<span
+style="     color: gray !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: gray !important;">XX</span>
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+</div>
+<div id="myocarditis-yes-vs-myocarditis-no" class="section level3">
+<h3>Myocarditis Yes vs Myocarditis No</h3>
+<ul>
+<li>Myocarditis Status: Yes, No</li>
+<li>Murine MHC KO Status: Homo</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot; | gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HOM&quot;,]
+#Drug Treatment
+#miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;PBS&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 29 212 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HOM 
+241 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+145  96 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  95  146 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               241
+No. genotyped individuals       241
+No. phenotyped individuals      241
+No. with both geno &amp; pheno      241
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$myo.yes_vs_myo.no &lt;- ifelse(gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution5-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;myo.yes_vs_myo.no&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution5-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution25-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;myo.yes_vs_myo.no&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution25-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+</div>
+<div id="hetero-ici-vs-pbs" class="section level3">
+<h3>Hetero: ICI vs PBS</h3>
+<ul>
+<li>Myocarditis Status: Yes</li>
+<li>Murine MHC KO Status: Het</li>
+<li>Drug Treatment(s): ICI, PBS</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score, Age of Clinical Phenotype – if Null,
+use 40 age at which surviving mice were end of incidence without
+clinical symptoms)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HET&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;PBS&quot; | miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals                13
+No. genotyped individuals        13
+No. phenotyped individuals       13
+No. with both geno &amp; pheno       13
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$het.ici_vs_het.pbs &lt;- ifelse(gm$covar$&quot;Drug Treatment&quot; == &quot;PBS&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution6-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;het.ici_vs_het.pbs&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution6-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution26-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;het.ici_vs_het.pbs&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution26-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+</div>
+<div id="hetero-ici-myocarditis-yes-vs-ici-myocarditis-no"
+class="section level3">
+<h3>Hetero: ICI Myocarditis Yes vs ICI Myocarditis No</h3>
+<ul>
+<li>Myocarditis Status: Yes, No</li>
+<li>Murine MHC KO Status: Het</li>
+<li>Drug Treatment(s): ICI</li>
+<li>Clinical Phenotype(s): Sick, EOI</li>
+<li>Covariates (Myocarditis Score)</li>
+</ul>
+<pre class="r"><code>gm=gm_allqc
+
+##extracting animals 
+#Myocarditis Status
+miceinfo &lt;- gm$covar[gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot; | gm$covar$&quot;Myocarditis Status&quot; == &quot;NO&quot;,]
+#table(miceinfo$group)
+#MMurine MHC KO Status
+miceinfo &lt;- miceinfo[miceinfo$&quot;Murine MHC KO Status&quot; == &quot;HET&quot;,]
+#Drug Treatment
+miceinfo &lt;- miceinfo[miceinfo$&quot;Drug Treatment&quot; == &quot;ICI&quot;,]
+#Clinical Phenotype
+miceinfo &lt;- miceinfo[miceinfo$&quot;clinical pheno&quot; == &quot;SICK&quot; | miceinfo$&quot;clinical pheno&quot; == &quot;EOI&quot;,]
+
+table(miceinfo$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+ NO YES 
+ 32   7 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 39 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI 
+ 39 </code></pre>
+<pre class="r"><code>table(miceinfo$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+  25   14 </code></pre>
+<pre class="r"><code>mice.ids &lt;- rownames(miceinfo)
+
+##removing X samples
+x.samples = c(&quot;NM00179-ICI-EOI&quot;,&quot;NM00186-ICI-EOI&quot;,&quot;D22-ICI-EOI&quot;,&quot;D39-ICI-Myo&quot;,&quot;D67-ICI-Myo&quot;,&quot;D111-PBS-Myo&quot;,&quot;D120-ICI-Myo&quot;,&quot;6895-PBS-Myo&quot;,&quot;D704-ICI-Myo&quot;)
+mice.ids = mice.ids[!as.character(do.call(rbind.data.frame, strsplit(mice.ids, &quot;_&quot;))[,7]) %in% x.samples]
+
+#removing duplicates
+dup.samples = c(&quot;The_Jackson_Lab_Serreze_MURGIGV01_20230225_D249-PBS-EOI_H3&quot;)
+mice.ids = mice.ids[!mice.ids %in% dup.samples]
+
+gm &lt;- gm[mice.ids]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals                39
+No. genotyped individuals        39
+No. phenotyped individuals       39
+No. with both geno &amp; pheno       39
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                130890
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+9927 9959 7817 7558 7564 7722 7374 6434 6686 6356 7128 6091 6053 5944 5322 5003 
+  17   18   19    X 
+5053 4590 3547 4762 </code></pre>
+<pre class="r"><code>pr.qc &lt;- pr
+for (i in 1:20){pr.qc[[i]] = pr.qc[[i]][mice.ids,,]}
+
+gm$covar$het.ici.myo.yes_vs_het.ici.myo.no &lt;- ifelse(gm$covar$&quot;Myocarditis Status&quot; == &quot;YES&quot;, 0, 1)
+names(gm$covar)[6] &lt;- c(&quot;age.of.onset&quot;)
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+gm$covar[gm$covar$age.of.onset==0 | is.na(gm$covar$age.of.onset) | gm$covar$age.of.onset==&quot;NA&quot; ,]$age.of.onset = &quot;&quot;
+gm$covar[gm$covar$age.of.onset==&#39;&#39; ,]$age.of.onset &lt;- 40
+gm$covar$age.of.onset &lt;- as.numeric(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(age.of.onset))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution7-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;het.ici.myo.yes_vs_het.ici.myo.no&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution7-2.png" width="912" style="display: block; margin: auto;" />
+QTL analysis requires variables follow normal distribution, from the
+above distributions, we need to ranknorm the data.</p>
+<pre class="r"><code>##ranknorm
+rz.transform &lt;- function(y) {
+  rankY=rank(y, ties.method=&quot;average&quot;, na.last=&quot;keep&quot;)
+  rzT=qnorm(rankY/(length(na.exclude(rankY))+1))
+  return(rzT)
+}
+
+gm$covar$rz.age &lt;- rz.transform(gm$covar$age.of.onset)
+
+p &lt;- ggplot(gm$covar, aes(x=as.numeric(rz.age))) + geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;)
+p</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution27-1.png" width="912" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>phenos.covars.lg &lt;- gm$covar %&gt;% gather(variable, value, -c(&quot;id&quot;,&quot;sex&quot;,&quot;sex_pheno&quot;,&quot;Inferred.Sex&quot;,&quot;Myocarditis Status&quot;,&quot;clinical pheno&quot;,&quot;Drug Treatment&quot;,&quot;Histology Score&quot;,&quot;Murine MHC KO Status&quot;,&quot;id_corrected&quot;,&quot;het.ici.myo.yes_vs_het.ici.myo.no&quot;,&quot;age.of.onset&quot;))
+
+box1 &lt;-  ggplot(data=phenos.covars.lg, aes(x=variable, y=as.numeric(value), color=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;), fill=interaction(&quot;Myocarditis Status&quot;,&quot;Drug Treatment&quot;,&quot;clinical pheno&quot;))) +
+         geom_boxplot(position = position_dodge(width=0.9)) +
+         #ggtitle(paste0(&quot;Values of &quot;,v,&quot; [random dataframe: &quot;,r,&quot;]&quot;)) +
+         #labs(y = v) +
+         theme(strip.text.x = element_text(size=13),
+               axis.text.x = element_text(size = 13, angle = 0),
+               axis.text.y = element_text(size = 13, angle = 0),  
+               axis.title.x=element_blank(),
+               axis.title.y=element_blank(),
+               plot.title = element_text(size = 13, face = &quot;bold&quot;,hjust = 0.5),
+                  #legend.position = &quot;none&quot;
+             )
+box1</code></pre>
+<p><img src="figure/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd/Phenotype%20distribution27-2.png" width="912" style="display: block; margin: auto;" /></p>
+<p>And then remove any samples that are 3 standard deviations from the
+mean.</p>
+<pre class="r"><code>#outliers
+#des.3 &lt;- Hmisc::describe(df_phenos[,c(&quot;R_AVG&quot;,&quot;L_AVG&quot;,&quot;Both_AVG&quot;)]) 
+des.1 &lt;- pastecs::stat.desc(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+des.2 &lt;- psych::describe(gm$covar[,c(&quot;age.of.onset&quot; ,&quot;rz.age&quot;)]) 
+
+#scale(df_phenos[,c(&quot;R_AVG&quot;)])
+
+gm$covar$out.age.of.onset &lt;- ifelse(gm$covar[,c(&quot;age.of.onset&quot;)] &gt; (des.1[9,1] + 3*des.1[13,1])  | gm$covar[,c(&quot;age.of.onset&quot;)] &lt; (des.1[9,1] - 3*des.1[13,1]), &#39;Outlier&#39;,&#39;Keep&#39;)
+gm$covar$out.rz.age &lt;- ifelse(gm$covar[,c(&quot;rz.age&quot;)] &gt; (des.1[9,2] + 3*des.1[13,2])  | gm$covar[,c(&quot;rz.age&quot;)] &lt; (des.1[9,2] - 3*des.1[13,2]), &#39;Outlier&#39;,&#39;Keep&#39;)
+
+bad &lt;- NULL
+bad$Mouse.ID &lt;- rownames(gm$covar)
+bad$age.of.onset &lt;- ifelse(gm$covar$out.age.of.onset ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad$rz.age &lt;- ifelse(gm$covar$out.rz.age ==&quot;Outlier&quot;, &#39;XX&#39;, &#39;&#39;)
+bad[is.na(bad)] &lt;- &quot;&quot;
+bad[bad==&#39;NA&#39;] &lt;- &quot;&quot;
+df &lt;- do.call(cbind, bad)
+bad &lt;- as.data.frame(df)
+
+badind &lt;- subset(bad, 
+         bad$age.of.onset == &#39;XX&#39;|
+         bad$rz.age == &#39;XX&#39;)
+
+
+#badind &lt;- bad[bad$no_pheno == &#39;XX&#39;,]
+
+badind[] &lt;- lapply(badind, as.character)
+#badind$Thaiss_ID &lt;- ifelse(badind$Thaiss == 994 | badind$Thaiss == 995 | badind$Thaiss == 996 |badind$Thaiss == 997 | badind$Thaiss == 998 | badind$Thaiss == 999, &quot;--&quot;, bad$Thaiss_ID)
+
+rownames(badind) &lt;- NULL
+
+badind[] %&gt;% 
+   dplyr::mutate(
+     age.of.onset = ifelse(age.of.onset == &#39;XX&#39;,
+                  cell_spec(age.of.onset, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;),
+     rz.age = ifelse(rz.age == &#39;XX&#39;,
+                  cell_spec(rz.age, color = &#39;gray&#39;,background = &#39;gray&#39;),
+                  &#39;&#39;)
+     ) %&gt;%
+   kable(escape = F,align = c(&quot;ccccccccc&quot;),linesep =&quot;\\hline&quot;) %&gt;%
+   kable_styling(&quot;striped&quot;, full_width = F) #%&gt;%</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Mouse.ID
+</th>
+<th style="text-align:center;">
+age.of.onset
+</th>
+<th style="text-align:center;">
+rz.age
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   column_spec(1:3, width = &quot;3cm&quot;) 
+
+
+##removing outliers
+gm$covar$Mouse.ID &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)
+
+gm$covar$age.of.onset[gm$covar$out.age.of.onset == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+gm$covar$rz.age[gm$covar$out.rz.age == &quot;Outlier&quot;] &lt;- &#39;&#39; 
+
+#gm$covar &lt;- gm$covar[c(1:15)]
+#gm$covar$id &lt;- rownames(gm$covar)
+write.csv(gm$covar,&quot;data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv&quot;, row.names=T, quote=F)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur ... 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] pastecs_1.3.21    abind_1.4-5       qtl2_0.30         reshape2_1.4.4   
+ [5] ggplot2_3.4.0     tibble_3.1.8      psych_2.2.9       readxl_1.4.1     
+ [9] cluster_2.1.4     dplyr_1.0.10      optparse_1.7.3    rhdf5_2.40.0     
+[13] mclust_6.0.0      tidyr_1.2.1       data.table_1.14.6 knitr_1.41       
+[17] kableExtra_1.3.4  workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.4         sass_0.4.4         bit64_4.0.5        jsonlite_1.8.4    
+ [5] viridisLite_0.4.1  bslib_0.4.1        assertthat_0.2.1   getPass_0.2-2     
+ [9] highr_0.9          blob_1.2.3         cellranger_1.1.0   yaml_2.3.6        
+[13] pillar_1.8.1       RSQLite_2.2.19     lattice_0.20-45    glue_1.6.2        
+[17] digest_0.6.30      promises_1.2.0.1   rvest_1.0.3        colorspace_2.0-3  
+[21] htmltools_0.5.3    httpuv_1.6.6       plyr_1.8.8         pkgconfig_2.0.3   
+[25] purrr_0.3.5        scales_1.2.1       webshot_0.5.4      processx_3.8.0    
+[29] svglite_2.1.0      whisker_0.4.1      getopt_1.20.3      later_1.3.0       
+[33] git2r_0.30.1       farver_2.1.1       generics_0.1.3     ellipsis_0.3.2    
+[37] cachem_1.0.6       withr_2.5.0        cli_3.4.1          mnormt_2.1.1      
+[41] magrittr_2.0.3     memoise_2.0.1      evaluate_0.18      ps_1.7.2          
+[45] fs_1.5.2           fansi_1.0.3        nlme_3.1-161       xml2_1.3.3        
+[49] tools_4.2.2        lifecycle_1.0.3    stringr_1.5.0      Rhdf5lib_1.18.2   
+[53] munsell_0.5.0      callr_3.7.3        compiler_4.2.2     jquerylib_0.1.4   
+[57] systemfonts_1.0.4  rlang_1.0.6        grid_4.2.2         rhdf5filters_1.8.0
+[61] rstudioapi_0.14    labeling_0.4.2     rmarkdown_2.18     boot_1.3-28       
+[65] gtable_0.3.1       DBI_1.1.3          R6_2.5.1           bit_4.0.5         
+[69] fastmap_1.1.0      utf8_1.2.2         rprojroot_2.0.3    stringi_1.7.8     
+[73] parallel_4.2.2     Rcpp_1.0.9         vctrs_0.5.1        tidyselect_1.2.0  
+[77] xfun_0.35         </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

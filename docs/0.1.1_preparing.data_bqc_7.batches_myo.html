@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Belinda Cornes" />
+
+<meta name="date" content="2023-04-13" />
+
+<title>Preparing data for QC</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Serreze Autoimmune Workflow</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Preparing data for QC</h1>
+<h4 class="author">Belinda Cornes</h4>
+<h4 class="date">2023-04-13</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#loading-data" id="toc-loading-data">Loading data</a></li>
+<li><a href="#preparing-files" id="toc-preparing-files">preparing
+files</a></li>
+<li><a href="#genoprobs-for-qchaplotype-phasing"
+id="toc-genoprobs-for-qchaplotype-phasing">Genoprobs for QC/Haplotype
+Phasing</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-13
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220210code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220210)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220210code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220210)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomTheJacksonLaboratorySerrezeT1DWorkflowtree51e3845997bafb634294c1746dc74344f9838d41targetblank51e3845a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/tree/51e3845997bafb634294c1746dc74344f9838d41" target="_blank">51e3845</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.R
+    Untracked:  analysis/0.1.1_preparing.data_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230124.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230225.Rmd
+    Untracked:  analysis/0.1_samples_batch_20230313.Rmd
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.R
+    Untracked:  analysis/0.2_haplotype_comparison_bqc_7.batches_myo_minprob.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.R
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.1_sample_bqc_7.batches_myo.Rmd.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo.Rmd
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.R
+    Untracked:  analysis/2.2.1_snp_qc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_mis.Rmd
+    Untracked:  analysis/2.4_preparing.data_aqc_7.batches_myo_misd.R
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo.Rmd
+    Untracked:  analysis/3.1_phenotype.qc_corrected_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici-myo-yes.vs.het-ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_het-ici.vs.het-pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-myo-yes.vs.ici-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici-sick.vs.ici-eoi_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_ici.vs.pbs_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_myo-yes.vs.myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.R
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo.Rmd
+    Untracked:  analysis/4.1.1_qtl.analysis_binary_pbs-myo-yes.vs.pbs-myo-no_snpsqc_dis_no-x_updated_7.batches_myo_mis.Rmd
+    Untracked:  analysis/debugging_comparing_old_Rmd/
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_ici.vs.pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/genotype.frequencies_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/index_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_het-ici.vs.het-pbs_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici-sick.vs.ici-eoi_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_ici.vs.pbs_7batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_myo-yes.vs.myo-no_7.batches_myo_mis.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.Rmd
+    Untracked:  analysis/power.analysis_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.Rmd
+    Untracked:  data/GM_covar_4.batches_myo.csv
+    Untracked:  data/GM_covar_7.batches_myo.csv
+    Untracked:  data/bad_markers_all_4.batches_myo.RData
+    Untracked:  data/bad_markers_all_7.batches_myo.RData
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected.cleaned_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici-myo-yes.vs.het-ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-myo-yes.vs.ici-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici-sick.vs.ici-eoi_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo.csv
+    Untracked:  data/covar_corrected_ici.vs.pbs_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_myo-yes.vs.myo-no_7.batches_myo_mis.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo.csv
+    Untracked:  data/covar_corrected_pbs-myo-yes.vs.pbs-myo-no_7.batches_myo_mis.csv
+    Untracked:  data/e_4.batches_myo.RData
+    Untracked:  data/e_7.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_4.batches_myo.RData
+    Untracked:  data/e_snpg_samqc_7.batches_myo.RData
+    Untracked:  data/errors_ind_4.batches_myo.RData
+    Untracked:  data/errors_ind_7.batches_myo.RData
+    Untracked:  data/genetic_map_4.batches_myo.csv
+    Untracked:  data/genetic_map_7.batches_myo.csv
+    Untracked:  data/genotype_errors_marker_4.batches_myo.RData
+    Untracked:  data/genotype_errors_marker_7.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_4.batches_myo.RData
+    Untracked:  data/genotype_freq_marker_7.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo.RData
+    Untracked:  data/gm_allqc_4.batches_myo_mis.RData
+    Untracked:  data/gm_allqc_7.batches_myo.RData
+    Untracked:  data/gm_allqc_7.batches_myo_mis.RData
+    Untracked:  data/gm_samqc_4.batches_myo.RData
+    Untracked:  data/gm_samqc_7.batches_myo.RData
+    Untracked:  data/gm_serreze.BC312.RData
+    Untracked:  data/gm_serreze.BC366.RData
+    Untracked:  data/gm_serreze_7.batches_myo.RData
+    Untracked:  data/gm_serreze_bc_7.batches_myo.RData
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici-myo-yes.vs.het-ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/ici-myo-yes.vs.ici-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/myo-yes.vs.myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo_mis.csv
+    Untracked:  data/pbs-myo-yes.vs.pbs-myo-no_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo_mis.csv
+    Untracked:  data/percent_missing_id_4.batches_myo.RData
+    Untracked:  data/percent_missing_id_7.batches_myo.RData
+    Untracked:  data/percent_missing_marker_4.batches_myo.RData
+    Untracked:  data/percent_missing_marker_7.batches_myo.RData
+    Untracked:  data/pheno_4.batches_myo.csv
+    Untracked:  data/pheno_7.batches_myo.csv
+    Untracked:  data/physical_map_4.batches_myo.csv
+    Untracked:  data/physical_map_7.batches_myo.csv
+    Untracked:  data/probs_36state_bc_7.batches_myo.rds
+    Untracked:  data/probs_8state_bc_7.batches_myo.rds
+    Untracked:  data/qc_info_bad_sample_4.batches_myo.RData
+    Untracked:  data/qc_info_bad_sample_7.batches_myo.RData
+    Untracked:  data/sample_geno_AHB_4.batches_myo.csv
+    Untracked:  data/sample_geno_AHB_7.batches_myo_orig.id.csv
+    Untracked:  data/sample_geno_bc_4.batches_myo.csv
+    Untracked:  data/sample_geno_bc_7.batches_myo_orig.id.csv
+    Untracked:  data/serreze_probs_4.batches_myo.rds
+    Untracked:  data/serreze_probs_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_4.batches_myo_mis.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo.rds
+    Untracked:  data/serreze_probs_allqc_7.batches_myo_mis.rds
+    Untracked:  data/summary.cg_4.batches_myo.RData
+    Untracked:  data/summary.cg_7.batches_myo.RData
+    Untracked:  output/Percent_missing_genotype_data_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_7.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_4.batches_myo.pdf
+    Untracked:  output/Percent_missing_genotype_data_per_marker_7.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_4.batches_myo.pdf
+    Untracked:  output/Proportion_matching_genotypes_before_removal_of_bad_samples_7.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_error_marker_7.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_4.batches_myo.pdf
+    Untracked:  output/genotype_frequency_marker_7.batches_myo.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="loading-data" class="section level3">
+<h3>Loading data</h3>
+<pre class="r"><code>##remember to run haplotype reconstruction (pre processing) to get out sample_inventory and hdf5 file
+sample_inventory &lt;- read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/DODB_inventory_serreze_myo_7.batches_DO.csv&quot;, stringsAsFactors=FALSE, colClasses = c(&quot;character&quot;))
+hdf5_filename &lt;- &quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/hdf5_serreze_myo_7.batches_DO.h5&quot;
+
+##marker file
+markers_v1 = read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/support.files/MUGAarrays/UWisc/gm_uwisc_v1.csv&quot;, as.is=T)
+dim(markers_v1)</code></pre>
+<pre><code>[1] 143259     13</code></pre>
+<pre class="r"><code>markers_v2 = read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/support.files/MUGAarrays/UWisc/gm_uwisc_v2.csv&quot;, as.is=T)
+
+markers_v1$index &lt;- 1:nrow(markers_v1)
+# Filter to retain markers with one unique position in GRCm38.
+markers_v1 = subset(markers_v1, !is.na(chr) &amp; !is.na(bp_mm10))
+dim(markers_v1)</code></pre>
+<pre><code>[1] 137359     14</code></pre>
+<pre class="r"><code>##merging updated allele codes (from v2)
+markers &lt;- merge(markers_v1, markers_v2[c(&quot;marker&quot;,&quot;snp&quot;)], by=c(&quot;marker&quot;), all.x=T)
+names(markers)[c(7,15)] &lt;- c(&quot;snps_v1&quot;,&quot;snps_v2&quot;)
+markers &lt;- markers[order(markers$index),]
+
+##using only unique markers
+markers_unique &lt;- markers[markers$unique == TRUE, ]
+
+##creating a code list for encoding markers for qtl2 (bc)
+markers_1 &lt;- markers_unique[,c(&quot;marker&quot;,&quot;chr&quot;,&quot;snps_v2&quot;)]
+markers_1$A &lt;- substr(markers_1$snps_v2, 1, 1)
+markers_1$B &lt;- substr(markers_1$snps_v2, 2, 2)
+dim(markers_1)</code></pre>
+<pre><code>[1] 137359      5</code></pre>
+<pre class="r"><code>codes &lt;- markers_1[,c(&quot;marker&quot;,&quot;chr&quot;,&quot;A&quot;,&quot;B&quot;)]
+
+markers_2 &lt;- markers_unique[markers_unique$chr %in% c(1:19, &quot;X&quot;), ]
+markers_2$chr &lt;- sub(&quot;^chr&quot;, &quot;&quot;, markers_2$chr)  ###remove prefix &quot;chr&quot;
+colnames(markers_2)[colnames(markers_2)==&quot;bp_mm10&quot;] &lt;- &quot;pos&quot; 
+colnames(markers_2)[colnames(markers_2)==&quot;cM_cox&quot;] &lt;- &quot;cM&quot;
+markers_2 &lt;- markers_2 %&gt;% drop_na(chr, marker) 
+markers_2$pos &lt;- as.numeric(markers_2$pos) * 1e-6
+rownames(markers_2) &lt;- markers_2$marker
+colnames(markers_2)[c(1:4)] &lt;- c(&quot;marker&quot;, &quot;chr&quot;, &quot;pos&quot;, &quot;pos&quot;)
+#codes &lt;- markers_1[markers_1$marker %in% markers_2$marker,]
+#codes &lt;- codes[,c(&quot;marker&quot;,&quot;chr&quot;,&quot;A&quot;,&quot;B&quot;)]
+
+##keeping only markers in code list for chromosome 1:10,X
+codes &lt;- codes[codes$marker %in% markers_2$marker,]
+dim(markers_2)</code></pre>
+<pre><code>[1] 137302     15</code></pre>
+<pre class="r"><code>dim(codes)</code></pre>
+<pre><code>[1] 137302      4</code></pre>
+</div>
+<div id="preparing-files" class="section level3">
+<h3>preparing files</h3>
+<pre class="r"><code>h5_info &lt;- h5ls(hdf5_filename)
+h5_info &lt;- h5_info[h5_info$group == &quot;/G&quot;,]
+h5_info &lt;- h5_info[order(as.numeric(h5_info$name)),]
+num_samples &lt;- strsplit(h5_info$dim, &quot; x &quot;)  ##num of samples per project
+n=length(num_samples)
+num_rows &lt;- as.numeric(num_samples[[1]][1])
+num_samples &lt;- c(0, as.numeric(sapply(num_samples, &quot;[&quot;, 2)))  
+rn &lt;- h5read(hdf5_filename, &quot;rownames/1&quot;)
+geno &lt;- matrix(&quot;&quot;, nrow = num_rows, ncol = sum(num_samples),dimnames = list(rn, rep(&quot;&quot;, sum(num_samples))))
+for(i in 1:n) {
+    G  &lt;- h5read(hdf5_filename, paste0(&quot;G/&quot;, i))
+    cn &lt;- h5read(hdf5_filename, paste0(&quot;colnames/&quot;, i))
+    colnames(G) &lt;- cn
+    rng  &lt;- (sum(num_samples[1:i]) + 1):sum(num_samples[1:(i+1)])
+    geno[,rng] &lt;- G
+    colnames(geno)[rng] &lt;- colnames(G)
+} 
+# Remove samples that should not be included.
+idx2 &lt;- intersect(colnames(geno), sample_inventory$Original.Mouse.ID)
+geno &lt;- geno[ ,colnames(geno) %in% idx2, drop=FALSE]
+dim(geno)</code></pre>
+<pre><code>[1] 143259    366</code></pre>
+<pre class="r"><code>geno &lt;- geno[ ,sample_inventory$Original.Mouse.ID]  
+colnames(geno) &lt;- sample_inventory$Unique.Sample.ID
+
+# Keep only the good SNPs.
+geno &lt;- geno[rownames(markers_2),]
+dim(geno)</code></pre>
+<pre><code>[1] 137302    366</code></pre>
+<pre class="r"><code>#codes &lt;- codes[codes$marker %in% rownames(geno),]
+#codes &lt;- codes[rownames(geno),]
+
+##encdoing markers for qtl2
+geno.1 &lt;- qtl2convert::encode_geno(geno, as.matrix(codes[,c(&quot;A&quot;,&quot;B&quot;)]))
+
+#encoding markers for backcross
+geno.1[geno.1 == &quot;A&quot;] &lt;- &quot;AA&quot;
+geno.1[geno.1 == &quot;H&quot;] &lt;- &quot;AB&quot;
+geno.1[geno.1 == &quot;B&quot;] &lt;- &quot;AA&quot;
+
+geno.2 &lt;- qtl2convert::encode_geno(geno, as.matrix(codes[,c(&quot;A&quot;,&quot;B&quot;)]))
+
+##saving files--------------------
+
+##reording markers file
+#names(markers)[3:4] &lt;- c(&quot;bp_mm10&quot;,&quot;cM_cox&quot;)
+#markers_2 &lt;- markers_2[order(markers_2$chr, markers_2$pos), ]
+#markers_2 &lt;- markers_2[mixedorder(markers_2$chr), ]
+
+
+##physical map
+write.csv(markers_2[,1:3], file = &quot;data/physical_map_7.batches_myo.csv&quot;,row.names = FALSE, quote = FALSE)
+
+
+##genetic map
+write.csv(markers_2[,c(1,2,4)], file = &quot;data/genetic_map_7.batches_myo.csv&quot;,row.names = FALSE, col.names =c(&quot;marker&quot;, &quot;chr&quot;, &quot;pos&quot;), quote = FALSE)  
+
+##sample genotypes
+marker.names &lt;- markers_2[,&quot;marker&quot;]
+sample.geno.2 &lt;- data.frame(marker = marker.names, geno.2[marker.names,], stringsAsFactors = F, check.names=F)
+write.csv(sample.geno.2, file = &quot;data/sample_geno_AHB_7.batches_myo.csv&quot;,row.names = F, quote = F)
+
+sample.geno.1 &lt;- data.frame(marker = marker.names, geno.1[marker.names,], stringsAsFactors = F, check.names=F)
+write.csv(sample.geno.1, file = &quot;data/sample_geno_bc_7.batches_myo.csv&quot;,row.names = F, quote = F)
+
+
+# Write out temp covariates
+# Write out covariates
+#covar &lt;- data.frame(id = sample_inventory$Unique.Sample.ID, sex = sample_inventory$Sex,generation = sample_inventory$DO.Generation)
+#rownames(covar) &lt;- covar$id
+covar &lt;- read.csv(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/qtl2/GM_covar_pheno_myo_7.batches.csv&quot;)
+rownames(covar) &lt;- covar[,1]
+covar &lt;- covar[,-1]
+write.csv(covar, file &lt;- &quot;data/GM_covar_7.batches_myo.csv&quot;, quote = FALSE, row.names = TRUE)
+
+# Write out phenotypes  
+pheno &lt;- matrix(rnorm(ncol(geno)), nrow = ncol(geno), ncol = 1, dimnames =
+                   list(colnames(geno), &quot;pheno&quot;)) 
+rownames(pheno) &lt;- make.unique(rownames(pheno))
+write.csv(pheno, file &lt;- &quot;data/pheno_7.batches_myo.csv&quot;, row.names = TRUE, quote = FALSE)</code></pre>
+</div>
+<div id="genoprobs-for-qchaplotype-phasing" class="section level3">
+<h3>Genoprobs for QC/Haplotype Phasing</h3>
+<pre class="r"><code>gm &lt;- read_cross2(&quot;/Users/corneb/Documents/MyJax/CS/Projects/Serreze/haplotype.reconstruction/output_7.batches_myo/gm_bc_7.batches_myo_BC366.json&quot;)
+
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               366
+No. genotyped individuals       366
+No. phenotyped individuals      366
+No. with both geno &amp; pheno      366
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                137302
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+10423 10441  8206  7955  8030  8130  7760  6717  6984  6631  7433  6444  6327 
+   14    15    16    17    18    19     X 
+ 6230  5534  5179  5323  4787  3676  5092 </code></pre>
+<pre class="r"><code>#Let’s omit markers without any genotype data
+gm &lt;- drop_nullmarkers(gm)</code></pre>
+<pre><code>Dropping 3586 markers with no data</code></pre>
+<pre class="r"><code>gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               366
+No. genotyped individuals       366
+No. phenotyped individuals      366
+No. with both geno &amp; pheno      366
+
+No. phenotypes                    1
+No. covariates                   11
+No. phenotype covariates          0
+
+No. chromosomes                  20
+Total markers                133716
+
+No. markers by chr:
+    1     2     3     4     5     6     7     8     9    10    11    12    13 
+10159 10172  7987  7736  7778  7911  7548  6561  6823  6471  7276  6226  6177 
+   14    15    16    17    18    19     X 
+ 6082  5421  5075  5162  4682  3612  4857 </code></pre>
+<pre class="r"><code>save(gm, file = &quot;data/gm_serreze_bc_7.batches_myo.RData&quot;)
+probs &lt;- calc_genoprob(gm, quiet = TRUE)
+saveRDS(probs, file = &quot;data/probs_36state_bc_7.batches_myo.rds&quot;)
+aprobs &lt;- genoprob_to_alleleprob(probs, quiet=TRUE)
+saveRDS(aprobs, file = &quot;data/probs_8state_bc_7.batches_myo.rds&quot;)
+
+
+e &lt;- calc_errorlod(gm, probs, cores=20)
+e &lt;- do.call(&quot;cbind&quot;, e)
+save(e, file = &quot;data/e_7.batches_myo.RData&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur ... 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] gtools_3.9.4      abind_1.4-5       qtl2_0.30         reshape2_1.4.4   
+ [5] ggplot2_3.4.0     tibble_3.1.8      psych_2.2.9       readxl_1.4.1     
+ [9] cluster_2.1.4     dplyr_1.0.10      optparse_1.7.3    rhdf5_2.40.0     
+[13] mclust_6.0.0      tidyr_1.2.1       data.table_1.14.6 knitr_1.41       
+[17] kableExtra_1.3.4  workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.4         sass_0.4.4         bit64_4.0.5        jsonlite_1.8.4    
+ [5] viridisLite_0.4.1  bslib_0.4.1        assertthat_0.2.1   getPass_0.2-2     
+ [9] highr_0.9          blob_1.2.3         cellranger_1.1.0   yaml_2.3.6        
+[13] pillar_1.8.1       RSQLite_2.2.19     lattice_0.20-45    glue_1.6.2        
+[17] digest_0.6.30      promises_1.2.0.1   rvest_1.0.3        colorspace_2.0-3  
+[21] htmltools_0.5.3    httpuv_1.6.6       plyr_1.8.8         pkgconfig_2.0.3   
+[25] purrr_0.3.5        scales_1.2.1       webshot_0.5.4      processx_3.8.0    
+[29] svglite_2.1.0      qtl_1.54           whisker_0.4.1      getopt_1.20.3     
+[33] later_1.3.0        git2r_0.30.1       generics_0.1.3     ellipsis_0.3.2    
+[37] cachem_1.0.6       withr_2.5.0        cli_3.4.1          mnormt_2.1.1      
+[41] magrittr_2.0.3     memoise_2.0.1      evaluate_0.18      ps_1.7.2          
+[45] fs_1.5.2           fansi_1.0.3        nlme_3.1-161       xml2_1.3.3        
+[49] tools_4.2.2        qtl2convert_0.28   lifecycle_1.0.3    stringr_1.5.0     
+[53] Rhdf5lib_1.18.2    munsell_0.5.0      callr_3.7.3        compiler_4.2.2    
+[57] jquerylib_0.1.4    systemfonts_1.0.4  rlang_1.0.6        grid_4.2.2        
+[61] rhdf5filters_1.8.0 rstudioapi_0.14    rmarkdown_2.18     gtable_0.3.1      
+[65] DBI_1.1.3          R6_2.5.1           bit_4.0.5          fastmap_1.1.0     
+[69] utf8_1.2.2         rprojroot_2.0.3    stringi_1.7.8      parallel_4.2.2    
+[73] Rcpp_1.0.9         vctrs_0.5.1        tidyselect_1.2.0   xfun_0.35         </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

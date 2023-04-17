@@ -11,9 +11,9 @@
 
 <meta name="author" content="Belinda Cornes" />
 
-<meta name="date" content="2023-04-17" />
+<meta name="date" content="2023-04-16" />
 
-<title>ICI induced autoimmune complications</title>
+<title>Genotype Frequencies - Hetero: ICI vs PBS</title>
 
 <script src="site_libs/header-attrs-2.21.2/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -283,16 +283,27 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">ICI induced autoimmune complications</h1>
+<h1 class="title toc-ignore">Genotype Frequencies - Hetero: ICI vs
+PBS</h1>
 <h4 class="author">Belinda Cornes</h4>
-<h4 class="date">2023-04-17</h4>
+<h4 class="date">2023-04-16</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#t1d" id="toc-t1d">T1D</a></li>
-<li><a href="#myocarditis" id="toc-myocarditis">Myocarditis</a></li>
+<li><a href="#allele-frequencies" id="toc-allele-frequencies">Allele
+Frequencies</a>
+<ul>
+<li><a href="#all-variants-before-snp-qc"
+id="toc-all-variants-before-snp-qc">All variants (before snp
+qc)</a></li>
+<li><a href="#after-snp-qc" id="toc-after-snp-qc">After SNP QC</a></li>
+</ul></li>
+<li><a href="#with-sample-outliers" id="toc-with-sample-outliers">with
+sample outliers</a></li>
+<li><a href="#sample-outliers-removed"
+id="toc-sample-outliers-removed">sample outliers removed</a></li>
 </ul>
 </div>
 
@@ -320,13 +331,13 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-04-17
+<strong>Last updated:</strong> 2023-04-16
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 2
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Serreze-T1D_Workflow/</code>
@@ -358,10 +369,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -439,15 +450,41 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/corneb/Documents/MyJax/CS/Projects/Serreze/qc/workflowr/Serreze-T1D_Workflow
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -994,9 +1031,6 @@ Untracked files:
     Untracked:  output/genotype_frequency_marker_4.batches_myo.pdf
     Untracked:  output/genotype_frequency_marker_7.batches_myo.pdf
 
-Unstaged changes:
-    Modified:   analysis/index.Rmd
-
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -1010,632 +1044,438 @@ have uncommitted changes.
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML
-(<code>docs/index.html</code>) files. If you’ve configured a remote Git
-repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
-in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/51e3845997bafb634294c1746dc74344f9838d41/analysis/index.Rmd" target="_blank">51e3845</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-04-13
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/4dd59b750642ac38e73c94af9b2058650ac20266/docs/index.html" target="_blank">4dd59b7</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-25
-</td>
-<td>
-myocarditis html files
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/1da01c0e066ff048d09a68201fa9a532612204a1/analysis/index.Rmd" target="_blank">1da01c0</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-09
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/b3853795c951d6f294ff8b842c1012a4eac765d6/analysis/index.Rmd" target="_blank">b385379</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2023-01-08
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/409c35e24ef526c6edda04c2f572d66927fa06f4/docs/index.html" target="_blank">409c35e</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-10
-</td>
-<td>
-analysis for 5 batches htmls + figures
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/2d6f369c360d10a3e761153630d549f01d8a8d8c/analysis/index.Rmd" target="_blank">2d6f369</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-04-05
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d43c91c3c0e49a9e6581e3b5fe00404444526a0f/analysis/index.Rmd" target="_blank">d43c91c</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-31
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/bc33efa4086948a5373f3b859e84c9250ff20a46/analysis/index.Rmd" target="_blank">bc33efa</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-29
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/a4d66b5837f0d4280e6a6432b7729823280d79eb/docs/index.html" target="_blank">a4d66b5</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/93afca974c725ed32e4334b49d66f0ceb20f1141/analysis/index.Rmd" target="_blank">93afca9</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-15
-</td>
-<td>
-updated binary qtl
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/c9102b8a9edf329ae1d5803488af6f6e32be35cb/docs/index.html" target="_blank">c9102b8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/46d3df11fc7b922ae2056bea76235251014c0201/analysis/index.Rmd" target="_blank">46d3df1</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-no xcovar or kinship
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/ce47ff8e1cfea72de68e02996aa93f5e9384b70b/analysis/index.Rmd" target="_blank">ce47ff8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-03-09
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/analysis/index.Rmd" target="_blank">2d3ed78</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-25
-</td>
-<td>
-removing disproportionate markers
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/2d3ed781665b81b43906ff4e0cbf52a55a9bcd8f/docs/index.html" target="_blank">2d3ed78</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-25
-</td>
-<td>
-removing disproportionate markers
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/76519c3eb46183b09fea4d08de6a5a60e5dfac74/docs/index.html" target="_blank">76519c3</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/11af5dab835cd421b1d2e4e419b40f0d10e09014/analysis/index.Rmd" target="_blank">11af5da</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/b41bf38bcdb164fbd82bf722f6ca03864153c65f/docs/index.html" target="_blank">b41bf38</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/a6d6f05b25f6a6412f9f516debc8d8efdd1690c7/analysis/index.Rmd" target="_blank">a6d6f05</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/e1e81a899e6bcbaff391978b6059f10f3354e35f/docs/index.html" target="_blank">e1e81a8</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/c62f852efd4f9fc36e604057b884cea7b454d871/analysis/index.Rmd" target="_blank">c62f852</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-updating geno freq calculation and correcting phenotypes
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/80fa7b166df4e6dd1646fa72d6bf2d0ab20bde69/analysis/index.Rmd" target="_blank">80fa7b1</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-23
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/982969fac870b2061949d2d1bc3245a16c15a357/docs/index.html" target="_blank">982969f</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/fc177220882c02dc9e81a8830807393d9b78ad73/analysis/index.Rmd" target="_blank">fc17722</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-QTL Mapping correcting MAF cutoff
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/14f643ad7493837c160bea6ec5606f9c1113e51b/docs/index.html" target="_blank">14f643a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/676cb2e5f4becd33c72b3bff5126ab355461d032/analysis/index.Rmd" target="_blank">676cb2e</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/d3acccec1f041a57c45adac12f48e7b11a6dce77/docs/index.html" target="_blank">d3accce</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/e325cf0326da1086c35abb4dbabc2b68b747e74a/analysis/index.Rmd" target="_blank">e325cf0</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/1218e08b8c97bf94c226de2b9e27e5c1a553443d/docs/index.html" target="_blank">1218e08</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/8427b219958fbe80c98a7966a5a973d0557c9b7c/analysis/index.Rmd" target="_blank">8427b21</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-11
-</td>
-<td>
-QTL Mapping after snp qc
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/TheJacksonLaboratory/Serreze-T1D_Workflow/7b05d4190b4bb1cedc1cf1b5cf0c1becbc09c1f1/docs/index.html" target="_blank">7b05d41</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/d199bd46f7ccd3ca5f11371d4fe63dbdd7f2ab93/analysis/index.Rmd" target="_blank">d199bd4</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-QC analysis
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/TheJacksonLaboratory/Serreze-T1D_Workflow/blob/131508afea94a594c794d7dfbce523100520f63b/analysis/index.Rmd" target="_blank">131508a</a>
-</td>
-<td>
-Belinda Cornes
-</td>
-<td>
-2022-02-10
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<p>Mapping and identifying genes uniquely contributing to immune check
-point inhibitor (ICI) induced autoimmunity complications</p>
-<div id="t1d" class="section level3">
-<h3>T1D</h3>
-<ul>
-<li><a href="index_3.batches.html">3 neogen batches - september 2021</a>
-<ul>
-<li>some results are also in <a href="index_4.batches.html">4 neogen
-batches</a></li>
-</ul></li>
-<li><a href="index_4.batches.html">4 neogen batches - march
-2022</a></li>
-<li><a href="index_5.batches.html">5 neogen batches - april 2022</a>
-<ul>
-<li>additional runs are included <a
-href="index_5.batches_additional.html">here</a></li>
-</ul></li>
-</ul>
+<div id="allele-frequencies" class="section level2">
+<h2>Allele Frequencies</h2>
+<div id="all-variants-before-snp-qc" class="section level3">
+<h3>All variants (before snp qc)</h3>
+<p><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20all%20figures-1.png" width="100%" height="100%" style="display: block; margin: auto;" /><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20all%20figures-2.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="myocarditis" class="section level3">
-<h3>Myocarditis</h3>
-<ul>
-<li><a href="index_4.batches_myo.html">4 neogen batches (3 groups) -
-november 2022</a><br />
-</li>
-<li><a href="index_7.batches_myo.html">7 neogen batches (6 groups) -
-march 2023</a></li>
-</ul>
+<div id="after-snp-qc" class="section level3">
+<h3>After SNP QC</h3>
+<p><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20qc%20figures-1.png" width="100%" height="100%" style="display: block; margin: auto;" /><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20qc%20figures-2.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="with-sample-outliers" class="section level2">
+<h2>with sample outliers</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_7.batches_myo.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals              357
+No. genotyped individuals      357
+No. phenotyped individuals     357
+No. with both geno &amp; pheno     357
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>pr &lt;- readRDS(&quot;data/serreze_probs_allqc_7.batches_myo.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+geno &lt;- read.csv(&quot;data/sample_geno_bc_7.batches_myo.csv&quot;, as.is=T, check.names=FALSE)
+#names(geno) &lt;- gsub(&quot;^X&quot;,&quot;&quot;,names(geno))
+#names(geno) &lt;- gsub(&quot;\.&quot;,&quot;-&quot;,names(geno))
+#names(geno)[2:ncol(geno)] &lt;- samples$Unique.Sample.ID
+rownames(geno) &lt;- geno$marker</code></pre>
+<pre class="r"><code>## extracting animals with ici and pbs group status
+#miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+#table(miceinfo$group)
+#mice.ids &lt;- rownames(miceinfo)
+
+#gm &lt;- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars &lt;- read_csv(&quot;data/covar_corrected_het-ici.vs.het-pbs_7.batches_myo.csv&quot;)
+# removing any missing info
+#covars &lt;- subset(covars, covars$age.of.onset!=&#39;&#39;)
+nrow(covars)</code></pre>
+<pre><code>[1] 13</code></pre>
+<pre class="r"><code>table(covars$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(covars$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(covars$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(covars$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code># keeping only informative mice
+gm &lt;- gm[covars$Mouse.ID]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               13
+No. genotyped individuals       13
+No. phenotyped individuals      13
+No. with both geno &amp; pheno      13
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code>pr.qc.ids &lt;- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno &lt;- geno[,covars$Mouse.ID]
+geno &lt;- geno[marker_names(gm),]
+dim(geno)</code></pre>
+<pre><code>[1] 32660    13</code></pre>
+<pre class="r"><code>## calculating genotype frequencies
+### from geno genotypes
+g &lt;- do.call(&quot;cbind&quot;, gm$geno)
+gf_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw&lt;- gf_mar_raw[gf_mar_raw[,2] != &quot;NaN&quot;,]
+colnames(gf_mar_geno) &lt;- c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)
+colnames(gn_mar_geno) &lt;- c(&quot;count_missing_geno_table&quot;,&quot;count_AA_geno_table&quot;,&quot;count_AB_geno_table&quot;)
+gfn_mar_geno &lt;- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by=&quot;row.names&quot;)
+rownames(gfn_mar_geno) &lt;- gfn_mar_geno[,1]
+gfn_mar_geno &lt;- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl &lt;- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi &lt;- geno[i,]
+#    freqf &lt;- table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;)))
+#    genoi$count_AA_raw_rowSums &lt;- rowSums(genoi == &quot;AA&quot;)
+#    genoi$count_AB_raw_rowSums &lt;- rowSums(genoi == &quot;AB&quot;)
+#    genoi$count_missing_raw_rowSums &lt;- rowSums(genoi == &quot;-&quot;)
+#    freqf &lt;- t(table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))))
+#    freqf &lt;- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) &lt;- rownames(genoi)
+#    colnames(freqf) &lt;- c(&quot;count_missing_raw_table&quot;,&quot;count_AA_raw_table&quot;,&quot;count_AB_raw_table&quot;)
+#    genoif &lt;- cbind(freqf,genoi[c(&quot;count_AA_raw_rowSums&quot;,&quot;count_AB_raw_rowSums&quot;,&quot;count_missing_raw_rowSums&quot;)])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw &lt;- do.call(&quot;rbind&quot;,genosl)
+#gf_mar_raw &lt;- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index &lt;- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 &lt;- calc_geno_freq(pr.qc.ids, by = &quot;marker&quot;, omit_x = FALSE)
+#gn_mar_probs &lt;- calc_geno_freq(probs, by = &quot;individual&quot;, omit_x = FALSE)
+gf_mar_probs &lt;- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) &lt;- paste0(&quot;freq_&quot;,colnames(gf_mar_probs),&quot;_probs&quot;)
+gf_mar_probs &lt;- as.data.frame(gf_mar_probs)
+gf_mar_probs$index &lt;- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 &lt;- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by=&quot;row.names&quot;)
+#rownames(gf_mar.1) &lt;- gf_mar.1[,1]
+#gf_mar.1 &lt;- gf_mar.1[-1]
+#gf_mar &lt;- merge(gf_mar.1,as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+gf_mar &lt;- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+rownames(gf_mar) &lt;- gf_mar[,1]
+gf_mar &lt;- gf_mar[-1]
+gf_mar &lt;- gf_mar[order(gf_mar$index),]
+dim(gf_mar)</code></pre>
+<pre><code>[1] 32660     8</code></pre>
+<pre class="r"><code># Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio &gt;= 0.90 &amp; gf_mar$ratio &lt;= 1.10, TRUE,FALSE)
+table(gf_mar$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+32533   127 </code></pre>
+<pre class="r"><code>## filtering out &lt;= 0.05
+gf_mar$count.geno &lt;- rowSums(gf_mar[c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)] &lt;=0.05)
+filtered_gf_mar_geno &lt;- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno &lt;- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_geno)</code></pre>
+<pre><code>[1] 26427     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_geno$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+26300   127 </code></pre>
+<pre class="r"><code>gf_mar$count.probs &lt;- rowSums(gf_mar[c(&quot;freq_AA_probs&quot;,&quot;freq_AB_probs&quot;)] &lt;=0.05)
+filtered_gf_mar_probs &lt;- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs &lt;- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_probs)</code></pre>
+<pre><code>[1] 27221     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_probs$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+27095   126 </code></pre>
+<pre class="r"><code>## merging with sample_genos
+filtered_gf_mar_geno_sample &lt;- merge(geno,filtered_gf_mar_geno, by=&quot;row.names&quot;, all.y=T, sort=F)
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+names(filtered_gf_mar_geno_sample)[1] &lt;- c(&quot;marker&quot;)
+dim(filtered_gf_mar_geno_sample)</code></pre>
+<pre><code>[1] 26427    23</code></pre>
+<pre class="r"><code>filtered_gf_mar_probs_sample &lt;- merge(geno,filtered_gf_mar_probs, by=&quot;row.names&quot;, all.y=T, sort=F)
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+names(filtered_gf_mar_probs_sample)[1] &lt;- c(&quot;marker&quot;)
+dim(filtered_gf_mar_probs_sample)</code></pre>
+<pre><code>[1] 27221    23</code></pre>
+<pre class="r"><code>## saving files
+write.csv(filtered_gf_mar_geno_sample, &quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_7.batches_myo.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs_sample, &quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_7.batches_myo.csv&quot;, quote=F)
+
+write.csv(filtered_gf_mar_geno, &quot;data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_geno.ratio_7.batches_myo.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs, &quot;data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_geno.ratio_7.batches_myo.csv&quot;, quote=F)</code></pre>
+<p><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20figures%20dismark-1.png" width="100%" height="100%" style="display: block; margin: auto;" /><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20figures%20dismark-2.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="sample-outliers-removed" class="section level2">
+<h2>sample outliers removed</h2>
+<pre class="r"><code>load(&quot;data/gm_allqc_7.batches_myo.RData&quot;)
+
+#gm_allqc
+gm=gm_allqc
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals              357
+No. genotyped individuals      357
+No. phenotyped individuals     357
+No. with both geno &amp; pheno     357
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>pr &lt;- readRDS(&quot;data/serreze_probs_allqc_7.batches_myo.rds&quot;)
+#pr &lt;- readRDS(&quot;data/serreze_probs.rds&quot;)
+
+geno &lt;- read.csv(&quot;data/sample_geno_bc_7.batches_myo.csv&quot;, as.is=T, check.names=FALSE)
+#names(geno) &lt;- gsub(&quot;^X&quot;,&quot;&quot;,names(geno))
+#names(geno) &lt;- gsub(&quot;\.&quot;,&quot;-&quot;,names(geno))
+#names(geno)[2:ncol(geno)] &lt;- samples$Unique.Sample.ID
+rownames(geno) &lt;- geno$marker</code></pre>
+<pre class="r"><code>## extracting animals with ici and pbs group status
+#miceinfo &lt;- gm$covar[gm$covar$group == &quot;PBS&quot; | gm$covar$group == &quot;ICI&quot;,]
+#table(miceinfo$group)
+#mice.ids &lt;- rownames(miceinfo)
+
+#gm &lt;- gm[mice.ids]
+#gm
+#table(gm$covar$group)
+
+covars &lt;- read_csv(&quot;data/covar_corrected.cleaned_het-ici.vs.het-pbs_7.batches_myo.csv&quot;)
+# removing any missing info
+covars &lt;- subset(covars, covars$out.age.of.onset==&#39;Keep&#39; &amp; covars$out.rz.age==&#39;Keep&#39;)
+nrow(covars)</code></pre>
+<pre><code>[1] 13</code></pre>
+<pre class="r"><code>table(covars$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(covars$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(covars$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(covars$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code># keeping only informative mice
+gm &lt;- gm[covars$Mouse.ID]
+gm</code></pre>
+<pre><code>Object of class cross2 (crosstype &quot;bc&quot;)
+
+Total individuals               13
+No. genotyped individuals       13
+No. phenotyped individuals      13
+No. with both geno &amp; pheno      13
+
+No. phenotypes                   1
+No. covariates                  11
+No. phenotype covariates         0
+
+No. chromosomes                 20
+Total markers                32660
+
+No. markers by chr:
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+2482 2412 1742 1772 1648 1842 1541 1517 1769 1092 1754 1230 1441 1505 1128  842 
+  17   18   19    X 
+ 655  820  945 4523 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Myocarditis Status&quot;)</code></pre>
+<pre><code>
+YES 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Murine MHC KO Status&quot;)</code></pre>
+<pre><code>
+HET 
+ 13 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;Drug Treatment&quot;)</code></pre>
+<pre><code>
+ICI PBS 
+  7   6 </code></pre>
+<pre class="r"><code>table(gm$covar$&quot;clinical pheno&quot;)</code></pre>
+<pre><code>
+ EOI SICK 
+   6    7 </code></pre>
+<pre class="r"><code>pr.qc.ids &lt;- pr
+for (i in 1:20){pr.qc.ids[[i]] = pr.qc.ids[[i]][covars$Mouse.ID,,]}
+
+geno &lt;- geno[,covars$Mouse.ID]
+geno &lt;- geno[marker_names(gm),]
+dim(geno)</code></pre>
+<pre><code>[1] 32660    13</code></pre>
+<pre class="r"><code>## calculating genotype frequencies
+### from geno genotypes
+g &lt;- do.call(&quot;cbind&quot;, gm$geno)
+gf_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 1:2))/sum(a != 0)))
+gn_mar_geno &lt;- t(apply(g, 2, function(a) table(factor(a, 0:2))))
+#gf_mar_raw&lt;- gf_mar_raw[gf_mar_raw[,2] != &quot;NaN&quot;,]
+colnames(gf_mar_geno) &lt;- c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)
+colnames(gn_mar_geno) &lt;- c(&quot;count_missing_geno_table&quot;,&quot;count_AA_geno_table&quot;,&quot;count_AB_geno_table&quot;)
+gfn_mar_geno &lt;- merge(as.data.frame(gn_mar_geno), as.data.frame(gf_mar_geno), by=&quot;row.names&quot;)
+rownames(gfn_mar_geno) &lt;- gfn_mar_geno[,1]
+gfn_mar_geno &lt;- gfn_mar_geno[-1]
+
+### from raw using table function in R
+#genosl &lt;- list()
+#for(i in 1:nrow(geno)){
+##for(i in 1:3){
+#    genoi &lt;- geno[i,]
+#    freqf &lt;- table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;)))
+#    genoi$count_AA_raw_rowSums &lt;- rowSums(genoi == &quot;AA&quot;)
+#    genoi$count_AB_raw_rowSums &lt;- rowSums(genoi == &quot;AB&quot;)
+#    genoi$count_missing_raw_rowSums &lt;- rowSums(genoi == &quot;-&quot;)
+#    freqf &lt;- t(table(factor(geno[i,], c(&quot;-&quot;,&quot;AA&quot;,&quot;AB&quot;))))
+#    freqf &lt;- as.data.frame(t(freqf[1,]))
+#    rownames(freqf) &lt;- rownames(genoi)
+#    colnames(freqf) &lt;- c(&quot;count_missing_raw_table&quot;,&quot;count_AA_raw_table&quot;,&quot;count_AB_raw_table&quot;)
+#    genoif &lt;- cbind(freqf,genoi[c(&quot;count_AA_raw_rowSums&quot;,&quot;count_AB_raw_rowSums&quot;,&quot;count_missing_raw_rowSums&quot;)])
+#    genosl[[i]] = genoif
+#}
+#gf_mar_raw &lt;- do.call(&quot;rbind&quot;,genosl)
+#gf_mar_raw &lt;- gf_mar_raw[,c(1:3,6,4:5)]
+#gf_mar_raw$index &lt;- 1:nrow(gf_mar_raw)
+
+### from probabilities
+gf_mar_probs.1 &lt;- calc_geno_freq(pr.qc.ids, by = &quot;marker&quot;, omit_x = FALSE)
+#gn_mar_probs &lt;- calc_geno_freq(probs, by = &quot;individual&quot;, omit_x = FALSE)
+gf_mar_probs &lt;- rbind(gf_mar_probs.1$A[,1:2], gf_mar_probs.1$X[,1:2])
+colnames(gf_mar_probs) &lt;- paste0(&quot;freq_&quot;,colnames(gf_mar_probs),&quot;_probs&quot;)
+gf_mar_probs &lt;- as.data.frame(gf_mar_probs)
+gf_mar_probs$index &lt;- 1:nrow(gf_mar_probs)
+
+### merging all genotype frequecies for all markers
+#gf_mar.1 &lt;- merge(as.data.frame(gf_mar_raw), as.data.frame(gfn_mar_geno), by=&quot;row.names&quot;)
+#rownames(gf_mar.1) &lt;- gf_mar.1[,1]
+#gf_mar.1 &lt;- gf_mar.1[-1]
+#gf_mar &lt;- merge(gf_mar.1,as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+gf_mar &lt;- merge(as.data.frame(gfn_mar_geno),as.data.frame(gf_mar_probs), by=&quot;row.names&quot;)
+rownames(gf_mar) &lt;- gf_mar[,1]
+gf_mar &lt;- gf_mar[-1]
+gf_mar &lt;- gf_mar[order(gf_mar$index),]
+dim(gf_mar)</code></pre>
+<pre><code>[1] 32660     8</code></pre>
+<pre class="r"><code># Calculating ratio and flagging informative marker
+gf_mar$ratio = as.numeric(gf_mar$freq_AA_geno_table)/as.numeric(gf_mar$freq_AB_geno_table)
+gf_mar$Include = ifelse(gf_mar$ratio &gt;= 0.90 &amp; gf_mar$ratio &lt;= 1.10, TRUE,FALSE)
+table(gf_mar$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+32533   127 </code></pre>
+<pre class="r"><code>## filtering out &lt;= 0.05
+gf_mar$count.geno &lt;- rowSums(gf_mar[c(&quot;freq_AA_geno_table&quot;,&quot;freq_AB_geno_table&quot;)] &lt;=0.05)
+filtered_gf_mar_geno &lt;- gf_mar[gf_mar$count.geno != 1,]
+filtered_gf_mar_geno &lt;- filtered_gf_mar_geno[,-which(names(filtered_gf_mar_geno) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_geno)</code></pre>
+<pre><code>[1] 26427     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_geno$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+26300   127 </code></pre>
+<pre class="r"><code>gf_mar$count.probs &lt;- rowSums(gf_mar[c(&quot;freq_AA_probs&quot;,&quot;freq_AB_probs&quot;)] &lt;=0.05)
+filtered_gf_mar_probs &lt;- gf_mar[gf_mar$count.probs != 1,]
+filtered_gf_mar_probs &lt;- filtered_gf_mar_probs[,-which(names(filtered_gf_mar_probs) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+dim(filtered_gf_mar_probs)</code></pre>
+<pre><code>[1] 27221     9</code></pre>
+<pre class="r"><code>table(filtered_gf_mar_probs$Include)</code></pre>
+<pre><code>
+FALSE  TRUE 
+27095   126 </code></pre>
+<pre class="r"><code>## merging with sample_genos
+filtered_gf_mar_geno_sample &lt;- merge(geno,filtered_gf_mar_geno, by=&quot;row.names&quot;, all.y=T, sort=F)
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[order(filtered_gf_mar_geno_sample$index),]     
+#filtered_gf_mar_geno_sample &lt;- filtered_gf_mar_geno_sample[,-which(names(filtered_gf_mar_geno_sample) %in% c(&quot;count.geno&quot;,&quot;index&quot;))]
+names(filtered_gf_mar_geno_sample)[1] &lt;- c(&quot;marker&quot;)
+dim(filtered_gf_mar_geno_sample)</code></pre>
+<pre><code>[1] 26427    23</code></pre>
+<pre class="r"><code>filtered_gf_mar_probs_sample &lt;- merge(geno,filtered_gf_mar_probs, by=&quot;row.names&quot;, all.y=T, sort=F)
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[order(filtered_gf_mar_probs_sample$index),]
+#filtered_gf_mar_probs_sample &lt;- filtered_gf_mar_probs_sample[,-which(names(filtered_gf_mar_probs_sample) %in% c(&quot;count.geno&quot;,&quot;count.probs&quot;,&quot;index&quot;))]
+names(filtered_gf_mar_probs_sample)[1] &lt;- c(&quot;marker&quot;)
+dim(filtered_gf_mar_probs_sample)</code></pre>
+<pre><code>[1] 27221    23</code></pre>
+<pre class="r"><code>## saving files
+write.csv(filtered_gf_mar_geno_sample, &quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.geno.freq.removed_sample.outliers.removed_7.batches_myo.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs_sample, &quot;data/het-ici.vs.het-pbs_sample.genos_marker.freq_low.probs.freq.removed_sample.outliers.removed_7.batches_myo.csv&quot;, quote=F)
+
+write.csv(filtered_gf_mar_geno, &quot;data/het-ici.vs.het-pbs_marker.freq_low.geno.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv&quot;, quote=F)
+write.csv(filtered_gf_mar_probs, &quot;data/het-ici.vs.het-pbs_marker.freq_low.probs.freq.removed_sample.outliers.removed_geno.ratio_7.batches_myo.csv&quot;, quote=F)</code></pre>
+<p><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20figures%20dismark%20out-1.png" width="100%" height="100%" style="display: block; margin: auto;" /><img src="figure/genotype.frequencies_het-ici.vs.het-pbs_freq_7.batches_myo.Rmd/pbs%20figures%20dismark%20out-2.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1659,29 +1499,33 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggrepel_0.9.2     qtlcharts_0.16    qtl2_0.30         broman_0.80      
- [5] ggplot2_3.4.0     tibble_3.1.8      readxl_1.4.1      cluster_2.1.4    
- [9] dplyr_1.0.10      optparse_1.7.3    mclust_6.0.0      tidyr_1.2.1      
-[13] data.table_1.14.6 knitr_1.42        kableExtra_1.3.4  workflowr_1.7.0  
+ [1] ggdark_0.2.1      ggthemes_4.2.4    cowplot_1.1.1     ggnewscale_0.4.8 
+ [5] abind_1.4-5       qtl2_0.30         reshape2_1.4.4    ggplot2_3.4.0    
+ [9] tibble_3.1.8      psych_2.2.9       readxl_1.4.1      cluster_2.1.4    
+[13] dplyr_1.0.10      optparse_1.7.3    rhdf5_2.40.0      mclust_6.0.0     
+[17] tidyr_1.2.1       data.table_1.14.6 knitr_1.42        kableExtra_1.3.4 
+[21] workflowr_1.7.0  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9        svglite_2.1.0     getPass_0.2-2     ps_1.7.2         
- [5] assertthat_0.2.1  rprojroot_2.0.3   digest_0.6.31     utf8_1.2.2       
- [9] R6_2.5.1          cellranger_1.1.0  RSQLite_2.2.19    evaluate_0.20    
-[13] httr_1.4.4        pillar_1.8.1      rlang_1.1.0       rstudioapi_0.14  
-[17] blob_1.2.3        whisker_0.4.1     callr_3.7.3       jquerylib_0.1.4  
-[21] rmarkdown_2.21.2  qtl_1.54          webshot_0.5.4     stringr_1.5.0    
-[25] bit_4.0.5         munsell_0.5.0     compiler_4.2.2    httpuv_1.6.6     
-[29] xfun_0.38         pkgconfig_2.0.3   systemfonts_1.0.4 htmltools_0.5.5  
-[33] tidyselect_1.2.0  fansi_1.0.3       viridisLite_0.4.1 withr_2.5.0      
-[37] later_1.3.0       grid_4.2.2        jsonlite_1.8.4    gtable_0.3.1     
-[41] lifecycle_1.0.3   DBI_1.1.3         git2r_0.30.1      magrittr_2.0.3   
-[45] scales_1.2.1      cli_3.6.1         stringi_1.7.12    cachem_1.0.7     
-[49] fs_1.6.1          promises_1.2.0.1  getopt_1.20.3     xml2_1.3.3       
-[53] bslib_0.4.2       generics_0.1.3    vctrs_0.6.1       tools_4.2.2      
-[57] bit64_4.0.5       glue_1.6.2        purrr_0.3.5       parallel_4.2.2   
-[61] processx_3.8.0    fastmap_1.1.1     yaml_2.3.7        colorspace_2.0-3 
-[65] rvest_1.0.3       memoise_2.0.1     sass_0.4.5       </code></pre>
+ [1] httr_1.4.4         sass_0.4.5         bit64_4.0.5        jsonlite_1.8.4    
+ [5] viridisLite_0.4.1  bslib_0.4.2        assertthat_0.2.1   getPass_0.2-2     
+ [9] highr_0.10         blob_1.2.3         cellranger_1.1.0   yaml_2.3.7        
+[13] pillar_1.8.1       RSQLite_2.2.19     lattice_0.20-45    glue_1.6.2        
+[17] digest_0.6.31      promises_1.2.0.1   rvest_1.0.3        colorspace_2.0-3  
+[21] htmltools_0.5.5    httpuv_1.6.6       plyr_1.8.8         pkgconfig_2.0.3   
+[25] purrr_0.3.5        scales_1.2.1       webshot_0.5.4      processx_3.8.0    
+[29] svglite_2.1.0      whisker_0.4.1      getopt_1.20.3      later_1.3.0       
+[33] git2r_0.30.1       farver_2.1.1       generics_0.1.3     cachem_1.0.7      
+[37] withr_2.5.0        cli_3.6.1          mnormt_2.1.1       magrittr_2.0.3    
+[41] memoise_2.0.1      evaluate_0.20      ps_1.7.2           fs_1.6.1          
+[45] fansi_1.0.3        nlme_3.1-161       xml2_1.3.3         tools_4.2.2       
+[49] lifecycle_1.0.3    stringr_1.5.0      Rhdf5lib_1.18.2    munsell_0.5.0     
+[53] callr_3.7.3        compiler_4.2.2     jquerylib_0.1.4    systemfonts_1.0.4 
+[57] rlang_1.1.0        grid_4.2.2         rhdf5filters_1.8.0 rstudioapi_0.14   
+[61] rmarkdown_2.21.2   gtable_0.3.1       DBI_1.1.3          R6_2.5.1          
+[65] bit_4.0.5          fastmap_1.1.1      utf8_1.2.2         rprojroot_2.0.3   
+[69] stringi_1.7.12     parallel_4.2.2     Rcpp_1.0.9         vctrs_0.6.1       
+[73] tidyselect_1.2.0   xfun_0.38         </code></pre>
 </div>
 </div>
 
